@@ -1,0 +1,17 @@
+# Credentials & tokens OAuth
+client_secret.json
+token.json
+
+# Données (source de vérité locale, ne pas versionner)
+data.json
+
+# Config locale
+terminal.txt
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# macOS
+.DS_Store

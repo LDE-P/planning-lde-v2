@@ -1,0 +1,155 @@
+{"action": "add-project", "id": "nouveau-projet", "name": "Nouveau Projet", "ts": "2026-05-14T16:07:17"}
+{"action": "add-project", "id": "nouveau-projet", "name": "Nouveau Projet", "ts": "2026-05-14T16:07:17"}
+{"action": "add-project", "id": "projet-vide", "name": "Projet Vide", "ts": "2026-05-14T16:07:17"}
+{"action": "add-project", "id": "nouveau-projet", "name": "Nouveau Projet", "ts": "2026-05-14T16:07:17"}
+{"action": "add-project", "id": "nouveau-projet-2", "name": "Nouveau Projet", "ts": "2026-05-14T16:07:17"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "nouvelle-tache", "name": "Nouvelle tâche", "ts": "2026-05-14T16:07:17"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "migration-gitlab", "name": "Migration GitLab", "ts": "2026-05-14T16:07:17"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "test-etapes", "name": "Test Étapes", "ts": "2026-05-14T16:07:17"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "analyse-seule", "name": "Analyse seule", "ts": "2026-05-14T16:07:17"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "avec-qualif", "name": "Avec qualif", "ts": "2026-05-14T16:07:17"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "migration-gitlab", "name": "Migration GitLab", "ts": "2026-05-14T16:07:17"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "migration-gitlab-2", "name": "Migration GitLab", "ts": "2026-05-14T16:07:17"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "edition-generale", "name": "Édition Générale", "ts": "2026-05-14T16:07:17"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "sans-qualif", "name": "Sans qualif", "ts": "2026-05-14T16:07:17"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:07:17"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:07:17"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:07:17"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:07:17"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:07:17"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:07:17"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:07:17"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:07:17"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:07:17"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:07:17"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:07:17"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:07:17"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:07:17"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:07:17"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:07:17"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:07:17"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:07:17"}
+{"action": "add-project", "id": "nouveau-projet", "name": "Nouveau Projet", "ts": "2026-05-14T16:10:40"}
+{"action": "add-project", "id": "nouveau-projet", "name": "Nouveau Projet", "ts": "2026-05-14T16:10:40"}
+{"action": "add-project", "id": "projet-vide", "name": "Projet Vide", "ts": "2026-05-14T16:10:40"}
+{"action": "add-project", "id": "nouveau-projet", "name": "Nouveau Projet", "ts": "2026-05-14T16:10:40"}
+{"action": "add-project", "id": "nouveau-projet-2", "name": "Nouveau Projet", "ts": "2026-05-14T16:10:40"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "nouvelle-tache", "name": "Nouvelle tâche", "ts": "2026-05-14T16:10:40"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "migration-gitlab", "name": "Migration GitLab", "ts": "2026-05-14T16:10:40"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "test-etapes", "name": "Test Étapes", "ts": "2026-05-14T16:10:40"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "analyse-seule", "name": "Analyse seule", "ts": "2026-05-14T16:10:40"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "avec-qualif", "name": "Avec qualif", "ts": "2026-05-14T16:10:40"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "migration-gitlab", "name": "Migration GitLab", "ts": "2026-05-14T16:10:40"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "migration-gitlab-2", "name": "Migration GitLab", "ts": "2026-05-14T16:10:40"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "edition-generale", "name": "Édition Générale", "ts": "2026-05-14T16:10:40"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "sans-qualif", "name": "Sans qualif", "ts": "2026-05-14T16:10:40"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:10:40"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:10:40"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:10:40"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:10:40"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:10:40"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:10:40"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:10:40"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:10:40"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:10:40"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:10:40"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:10:40"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:10:40"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:10:40"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:10:40"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:10:40"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:10:40"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:10:40"}
+{"action": "add-project", "id": "nouveau-projet", "name": "Nouveau Projet", "ts": "2026-05-14T16:23:05"}
+{"action": "add-project", "id": "nouveau-projet", "name": "Nouveau Projet", "ts": "2026-05-14T16:23:05"}
+{"action": "add-project", "id": "projet-vide", "name": "Projet Vide", "ts": "2026-05-14T16:23:05"}
+{"action": "add-project", "id": "nouveau-projet", "name": "Nouveau Projet", "ts": "2026-05-14T16:23:05"}
+{"action": "add-project", "id": "nouveau-projet-2", "name": "Nouveau Projet", "ts": "2026-05-14T16:23:05"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "nouvelle-tache", "name": "Nouvelle tâche", "ts": "2026-05-14T16:23:05"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "migration-gitlab", "name": "Migration GitLab", "ts": "2026-05-14T16:23:05"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "test-etapes", "name": "Test Étapes", "ts": "2026-05-14T16:23:05"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "analyse-seule", "name": "Analyse seule", "ts": "2026-05-14T16:23:05"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "avec-qualif", "name": "Avec qualif", "ts": "2026-05-14T16:23:05"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "migration-gitlab", "name": "Migration GitLab", "ts": "2026-05-14T16:23:05"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "migration-gitlab-2", "name": "Migration GitLab", "ts": "2026-05-14T16:23:05"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "edition-generale", "name": "Édition Générale", "ts": "2026-05-14T16:23:05"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "sans-qualif", "name": "Sans qualif", "ts": "2026-05-14T16:23:05"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:23:05"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:23:05"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:23:05"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:23:05"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:23:05"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:23:05"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:23:05"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:23:05"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:23:05"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:23:05"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:23:05"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:23:05"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:23:05"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:23:05"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:23:05"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:23:05"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:23:05"}
+{"action": "add-project", "id": "nouveau-projet", "name": "Nouveau Projet", "ts": "2026-05-14T16:25:38"}
+{"action": "add-project", "id": "nouveau-projet", "name": "Nouveau Projet", "ts": "2026-05-14T16:25:38"}
+{"action": "add-project", "id": "projet-vide", "name": "Projet Vide", "ts": "2026-05-14T16:25:38"}
+{"action": "add-project", "id": "nouveau-projet", "name": "Nouveau Projet", "ts": "2026-05-14T16:25:38"}
+{"action": "add-project", "id": "nouveau-projet-2", "name": "Nouveau Projet", "ts": "2026-05-14T16:25:38"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "nouvelle-tache", "name": "Nouvelle tâche", "ts": "2026-05-14T16:25:38"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "migration-gitlab", "name": "Migration GitLab", "ts": "2026-05-14T16:25:38"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "test-etapes", "name": "Test Étapes", "ts": "2026-05-14T16:25:38"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "analyse-seule", "name": "Analyse seule", "ts": "2026-05-14T16:25:38"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "avec-qualif", "name": "Avec qualif", "ts": "2026-05-14T16:25:38"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "migration-gitlab", "name": "Migration GitLab", "ts": "2026-05-14T16:25:38"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "migration-gitlab-2", "name": "Migration GitLab", "ts": "2026-05-14T16:25:38"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "edition-generale", "name": "Édition Générale", "ts": "2026-05-14T16:25:38"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "sans-qualif", "name": "Sans qualif", "ts": "2026-05-14T16:25:38"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:25:38"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:25:38"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:25:38"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:25:38"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:25:38"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:25:38"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:25:38"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:25:38"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:25:38"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:25:38"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:25:38"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:25:38"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:25:38"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:25:38"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:25:38"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:25:38"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T16:25:38"}
+{"action": "add-project", "id": "nouveau-projet", "name": "Nouveau Projet", "ts": "2026-05-14T14:28:54"}
+{"action": "add-project", "id": "nouveau-projet", "name": "Nouveau Projet", "ts": "2026-05-14T14:28:54"}
+{"action": "add-project", "id": "projet-vide", "name": "Projet Vide", "ts": "2026-05-14T14:28:54"}
+{"action": "add-project", "id": "nouveau-projet", "name": "Nouveau Projet", "ts": "2026-05-14T14:28:54"}
+{"action": "add-project", "id": "nouveau-projet-2", "name": "Nouveau Projet", "ts": "2026-05-14T14:28:54"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "nouvelle-tache", "name": "Nouvelle tâche", "ts": "2026-05-14T14:28:54"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "migration-gitlab", "name": "Migration GitLab", "ts": "2026-05-14T14:28:54"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "test-etapes", "name": "Test Étapes", "ts": "2026-05-14T14:28:54"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "analyse-seule", "name": "Analyse seule", "ts": "2026-05-14T14:28:54"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "avec-qualif", "name": "Avec qualif", "ts": "2026-05-14T14:28:54"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "migration-gitlab", "name": "Migration GitLab", "ts": "2026-05-14T14:28:54"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "migration-gitlab-2", "name": "Migration GitLab", "ts": "2026-05-14T14:28:54"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "edition-generale", "name": "Édition Générale", "ts": "2026-05-14T14:28:54"}
+{"action": "add-subproject", "project": "projet-alpha", "id": "sans-qualif", "name": "Sans qualif", "ts": "2026-05-14T14:28:54"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T14:28:54"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T14:28:54"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T14:28:54"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T14:28:54"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T14:28:54"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T14:28:54"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T14:28:54"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T14:28:54"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T14:28:54"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T14:28:54"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T14:28:54"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T14:28:54"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T14:28:54"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T14:28:54"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T14:28:54"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T14:28:54"}
+{"action": "save-subproject", "project": "projet-alpha", "subproject": "sp-existant", "ts": "2026-05-14T14:28:54"}
