@@ -8,21 +8,21 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #1a1a2e;
-      --bg2: #16213e;
-      --bg3: #0f3460;
-      --accent: #e94560;
-      --text: #eaeaea;
-      --text-dim: #9ca3af;
-      --done: #22c55e;
-      --wip: #3b82f6;
-      --review: #a855f7;
-      --spec: #f59e0b;
-      --todo: #6b7280;
-      --blocked: #ef4444;
-      --na: #4b5563;
-      --border: #2d3748;
-      --hover: #1e2a3a;
+      --bg: #f8fafc;
+      --bg2: #ffffff;
+      --bg3: #f1f5f9;
+      --accent: #3b82f6;
+      --text: #1e293b;
+      --text-dim: #64748b;
+      --done: #16a34a;
+      --wip: #2563eb;
+      --review: #7c3aed;
+      --spec: #d97706;
+      --todo: #475569;
+      --blocked: #dc2626;
+      --na: #9ca3af;
+      --border: #e2e8f0;
+      --hover: #f1f5f9;
       --radius: 6px;
     }
 
@@ -44,6 +44,7 @@
       justify-content: space-between;
       gap: 16px;
       flex-wrap: wrap;
+      box-shadow: 0 1px 3px rgba(0,0,0,.08);
     }
 
     header h1 {
@@ -109,6 +110,21 @@
     .btn.primary { background: var(--accent); border-color: var(--accent); }
     .btn:disabled { opacity: 0.4; cursor: default; }
 
+    /* Spinner ring (actions GSheet) */
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .btn-spinner {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border: 2px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      vertical-align: middle;
+      margin-right: 5px;
+      flex-shrink: 0;
+    }
+
     #gsheet-status {
       font-size: 12px;
       color: var(--text-dim);
@@ -161,6 +177,16 @@
     .project-stack {
       font-size: 11px;
       color: var(--text-dim);
+    }
+
+    .proj-alias {
+      font-size: 10px;
+      padding: 1px 6px;
+      border-radius: 3px;
+      background: var(--bg3);
+      color: var(--text-dim);
+      border: 1px solid var(--border);
+      white-space: nowrap;
     }
 
     .project-progress {
@@ -255,7 +281,7 @@
       cursor: pointer;
     }
 
-    .sp-name:hover { color: #93c5fd; }
+    .sp-name:hover { color: var(--accent); }
 
     .sp-titre {
       font-size: 12px;
@@ -377,7 +403,7 @@
       display: none;
       flex-direction: column;
       gap: 2px;
-      box-shadow: 0 8px 24px rgba(0,0,0,.5);
+      box-shadow: 0 8px 24px rgba(0,0,0,.15);
       min-width: 130px;
     }
 
@@ -414,7 +440,7 @@
       padding: 20px;
       width: 100%;
       max-width: 480px;
-      box-shadow: 0 16px 48px rgba(0,0,0,.6);
+      box-shadow: 0 16px 48px rgba(0,0,0,.12);
     }
 
     .modal h2 { font-size: 16px; margin-bottom: 16px; }
@@ -484,11 +510,25 @@
       opacity: 0;
       transition: all 0.25s;
       pointer-events: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     #toast.show { transform: translateY(0); opacity: 1; }
     #toast.success { border-color: var(--done); color: var(--done); }
-    #toast.error   { border-color: var(--blocked); color: var(--blocked); }
+    #toast.error   { border-color: var(--blocked); color: var(--blocked); pointer-events: auto; }
+    #toast .toast-close {
+      background: none;
+      border: none;
+      color: inherit;
+      cursor: pointer;
+      font-size: 13px;
+      padding: 0;
+      line-height: 1;
+      opacity: 0.8;
+    }
+    #toast .toast-close:hover { opacity: 1; }
 
     /* ── Loading ── */
     #loading {
@@ -516,12 +556,187 @@
       gap: 6px;
       width: fit-content;
     }
+
+    /* ── View tabs (Projets / Docs) ── */
+    #view-tabs {
+      display: flex;
+      gap: 4px;
+    }
+
+    .view-tab {
+      padding: 5px 14px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-dim);
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      transition: all 0.15s;
+    }
+
+    .view-tab:hover { background: var(--hover); color: var(--text); }
+    .view-tab.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+    /* ── Docs filters bar ── */
+    #docs-filters {
+      padding: 12px 20px 4px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+      font-size: 12px;
+    }
+
+    #docs-filters .filter-group {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    #docs-filters .filter-group-label {
+      color: var(--text-dim);
+      margin-right: 4px;
+    }
+
+    #docs-filters .toggle-empty {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      color: var(--text-dim);
+    }
+
+    #docs-actions {
+      padding: 0 20px 12px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    /* ── Doc card ── */
+    .doc-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin: 8px 14px;
+      padding: 10px 14px;
+      transition: background 0.15s;
+    }
+
+    .doc-card:hover { background: var(--hover); }
+
+    .doc-card.archived { opacity: 0.7; }
+
+    .doc-title-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 4px;
+    }
+
+    .doc-type-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 1px 7px;
+      border-radius: 10px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      border: 1px solid transparent;
+    }
+
+    .doc-type-spec   { background: rgba(59,130,246,.15);  color: var(--accent); border-color: rgba(59,130,246,.3); }
+    .doc-type-audit  { background: rgba(245,158,11,.15);  color: var(--spec);   border-color: rgba(245,158,11,.3); }
+    .doc-type-tests  { background: rgba(168,85,247,.15);  color: var(--review); border-color: rgba(168,85,247,.3); }
+    .doc-type-bilan  { background: rgba(34,197,94,.15);   color: var(--done);   border-color: rgba(34,197,94,.3); }
+    .doc-type-notes  { background: rgba(107,114,128,.15); color: var(--todo);   border-color: rgba(107,114,128,.3); }
+    .doc-type-autre  { background: rgba(148,163,184,.15); color: var(--na);     border-color: rgba(148,163,184,.3); }
+
+    .doc-status-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 1px 8px;
+      border-radius: 10px;
+      font-size: 10px;
+      font-weight: 600;
+      border: 1px solid transparent;
+    }
+
+    .doc-status-draft    { background: rgba(245,158,11,.15); color: var(--spec);  border-color: rgba(245,158,11,.3); }
+    .doc-status-final    { background: rgba(34,197,94,.15);  color: var(--done);  border-color: rgba(34,197,94,.3); }
+    .doc-status-archived { background: rgba(148,163,184,.15);color: var(--na);    border-color: rgba(148,163,184,.3); }
+
+    .doc-title {
+      font-weight: 600;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .doc-date {
+      font-size: 11px;
+      color: var(--text-dim);
+      white-space: nowrap;
+    }
+
+    .doc-desc {
+      font-size: 12px;
+      color: var(--text-dim);
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+
+    .doc-sp-link {
+      font-size: 11px;
+      color: var(--accent);
+      cursor: pointer;
+      text-decoration: none;
+      border-bottom: 1px dashed transparent;
+    }
+
+    .doc-sp-link:hover { border-color: var(--accent); }
+    .doc-sp-link.orphan { color: var(--text-dim); cursor: default; pointer-events: none; }
+
+    .doc-actions {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      justify-content: flex-end;
+      margin-top: 6px;
+      flex-wrap: wrap;
+    }
+
+    .doc-actions a, .doc-actions button {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 3px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-dim);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+
+    .doc-actions a:hover, .doc-actions button:hover { background: var(--hover); color: var(--text); }
+
+    .doc-empty {
+      padding: 20px;
+      color: var(--text-dim);
+      font-size: 12px;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
 
 <header>
   <h1>Planning LDE — V2</h1>
+  <div id="view-tabs">
+    <button class="view-tab active" data-view="projects">Projets</button>
+    <button class="view-tab" data-view="docs">Docs <span id="docs-count-badge" style="opacity:.7"></span></button>
+    <button class="view-tab" data-view="archives">Archives <span id="archives-count-badge" style="opacity:.7"></span></button>
+  </div>
   <div id="stats-bar">
     <span>Sous-projets : <strong id="stat-total">—</strong></span>
     <span>En cours : <strong id="stat-wip" style="color:var(--wip)">—</strong></span>
@@ -534,18 +749,53 @@
     <button class="filter-btn" data-filter="spec">Spec</button>
     <button class="filter-btn" data-filter="review">Revue</button>
     <button class="filter-btn active" data-filter="all">Tous</button>
+    <span style="color:var(--border);padding:0 2px">|</span>
+    <button class="filter-btn" id="btn-open-all">Tout ouvrir</button>
+    <button class="filter-btn" id="btn-close-all">Tout fermer</button>
   </div>
   <div id="gsheet-bar">
     <span id="gsheet-status">GSheet : —</span>
+    <button class="btn" id="btn-init-gsheet">Init</button>
+    <button class="btn" id="btn-format-gsheet" title="Configure les menus déroulants Type et Avanc.">Format</button>
+    <button class="btn" id="btn-save-template" title="Sauvegarde la mise en forme des 3 onglets comme modèles (_modèle_*)">⊡ Modèles</button>
     <button class="btn" id="btn-pull-tcd">← Pull TCD</button>
     <button class="btn" id="btn-pull-gsheet">← Pull Tâches</button>
-    <button class="btn primary" id="btn-push-gsheet">Push →</button>
+    <button class="btn" id="btn-push-gsheet">Push →</button>
   </div>
 </header>
+
+<div id="docs-filters" style="display:none">
+  <div class="filter-group">
+    <span class="filter-group-label">Type :</span>
+    <button class="filter-btn active" data-doc-type="all">Tous</button>
+    <button class="filter-btn" data-doc-type="spec">Spec</button>
+    <button class="filter-btn" data-doc-type="audit">Audit</button>
+    <button class="filter-btn" data-doc-type="tests">Tests</button>
+    <button class="filter-btn" data-doc-type="bilan">Bilan</button>
+    <button class="filter-btn" data-doc-type="notes">Notes</button>
+    <button class="filter-btn" data-doc-type="autre">Autre</button>
+  </div>
+  <div class="filter-group">
+    <span class="filter-group-label">Statut :</span>
+    <button class="filter-btn active" data-doc-status="draft">Brouillon</button>
+    <button class="filter-btn active" data-doc-status="final">Final</button>
+    <button class="filter-btn" data-doc-status="archived">Archivé</button>
+  </div>
+  <label class="toggle-empty">
+    <input type="checkbox" id="toggle-empty-projects">
+    Afficher projets sans docs
+  </label>
+</div>
+
+<div id="docs-actions" style="display:none">
+  <button class="btn primary" id="btn-add-doc">+ Ajouter un doc</button>
+</div>
 
 <main>
   <div id="loading">Chargement…</div>
   <div id="projects-container" style="display:none"></div>
+  <div id="docs-container" style="display:none"></div>
+  <div id="archives-container" style="display:none"></div>
   <button class="btn" id="add-project-btn" style="display:none">+ Nouveau projet</button>
 </main>
 
@@ -613,6 +863,106 @@
     <div class="modal-actions">
       <button class="btn" id="modal-proj-cancel">Annuler</button>
       <button class="btn primary" id="modal-proj-save">Créer</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: Confirm suppression -->
+<div class="modal-overlay" id="modal-confirm">
+  <div class="modal">
+    <h2 id="modal-confirm-title">Supprimer ?</h2>
+    <p id="modal-confirm-msg" style="font-size:13px;color:var(--text-dim);margin-bottom:16px"></p>
+    <div class="modal-actions">
+      <button class="btn" id="modal-confirm-cancel">Annuler</button>
+      <button class="btn" id="modal-confirm-ok" style="background:var(--blocked);border-color:var(--blocked);color:#fff">Supprimer</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: Résultats push/pull -->
+<div class="modal-overlay" id="modal-results">
+  <div class="modal">
+    <h2 id="modal-results-title">Résultats</h2>
+    <div id="modal-results-body" style="font-size:13px;max-height:300px;overflow-y:auto;margin-bottom:8px"></div>
+    <div class="modal-actions">
+      <button class="btn primary" id="modal-results-close">Fermer</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: Renommer alias projet -->
+<div class="modal-overlay" id="modal-rename-alias">
+  <div class="modal">
+    <h2>Renommer l'alias GSheet</h2>
+    <p id="modal-rename-alias-desc" style="font-size:12px;color:var(--text-dim);margin-bottom:12px"></p>
+    <div class="form-group">
+      <label>Alias (nom court affiché dans la GSheet, colonne A)</label>
+      <input type="text" id="modal-rename-alias-input" autocomplete="off">
+    </div>
+    <div class="modal-actions">
+      <button class="btn" id="modal-rename-alias-cancel">Annuler</button>
+      <button class="btn primary" id="modal-rename-alias-save">Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: Add / Edit doc -->
+<div class="modal-overlay" id="modal-doc">
+  <div class="modal" style="max-width:540px">
+    <h2 id="modal-doc-title">Nouveau document</h2>
+    <input type="hidden" id="modal-doc-id-existing">
+    <div class="form-group">
+      <label>Projet *</label>
+      <select id="modal-doc-project"></select>
+    </div>
+    <div class="form-group">
+      <label>Chemin du fichier (depuis GIT/) *</label>
+      <input type="text" id="modal-doc-file" placeholder="ex : planning-lde-v2/SPEC-DOCS-MD.md" autocomplete="off">
+    </div>
+    <div class="form-group">
+      <label>Titre *</label>
+      <input type="text" id="modal-doc-title-input" placeholder="ex : Spécification Vue Docs" autocomplete="off">
+    </div>
+    <div class="form-group">
+      <label>Description</label>
+      <textarea id="modal-doc-desc" placeholder="Une phrase décrivant le contenu."></textarea>
+    </div>
+    <div style="display:flex;gap:10px">
+      <div class="form-group" style="flex:1">
+        <label>Type *</label>
+        <select id="modal-doc-type">
+          <option value="spec">Spec</option>
+          <option value="audit">Audit</option>
+          <option value="tests">Tests</option>
+          <option value="bilan">Bilan</option>
+          <option value="notes">Notes</option>
+          <option value="autre">Autre</option>
+        </select>
+      </div>
+      <div class="form-group" style="flex:1">
+        <label>Statut *</label>
+        <select id="modal-doc-status">
+          <option value="draft">Brouillon</option>
+          <option value="final">Final</option>
+          <option value="archived">Archivé</option>
+        </select>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px">
+      <div class="form-group" style="flex:1">
+        <label>Date (YYYY-MM-DD)</label>
+        <input type="text" id="modal-doc-date" placeholder="2026-05-15" autocomplete="off">
+      </div>
+      <div class="form-group" style="flex:1">
+        <label>Sous-projet associé</label>
+        <select id="modal-doc-sp">
+          <option value="">— aucun —</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn" id="modal-doc-cancel">Annuler</button>
+      <button class="btn primary" id="modal-doc-save">Enregistrer</button>
     </div>
   </div>
 </div>

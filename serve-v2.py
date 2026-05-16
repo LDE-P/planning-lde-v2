@@ -15,8 +15,10 @@ from datetime import date, datetime, timedelta
 from pathlib import Path
 
 BASE_DIR = Path(__file__).parent
+GIT_ROOT = BASE_DIR.parent.resolve()
 HTML_FILE = BASE_DIR / 'DASHBOARD-V2.html'
 DATA_FILE = BASE_DIR / 'data.json'
+ARCHIVES_FILE = BASE_DIR / 'data-archives.json'
 CONF_FILE = BASE_DIR / 'serve-v2.conf.json'
 HISTORY_FILE = BASE_DIR / 'history.jsonl'
 CLIENT_SECRET = BASE_DIR / 'client_secret.json'
@@ -27,6 +29,11 @@ PORT = 8001
 
 _VALID_STATUSES = {'done', 'wip', 'review', 'spec', 'todo', 'blocked'}
 _VALID_STEP_STATUSES = _VALID_STATUSES | {'na'}
+
+_DOC_TYPES = {'spec', 'audit', 'tests', 'bilan', 'notes', 'autre'}
+_DOC_STATUSES = {'draft', 'final', 'archived'}
+_DOC_DATE_RE = re.compile(r'^\d{4}-\d{2}-\d{2}$')
+_DOC_PATCH_FIELDS = {'file', 'title', 'desc', 'type', 'status', 'date', 'subproject'}
 
 _STATUS_TO_GS = {
     'done': 'TERMINÉ', 'wip': 'EN COURS', 'review': 'REVUE',
@@ -65,6 +72,22 @@ def _load_data() -> dict:
 
 def _save_data(data: dict):
     DATA_FILE.write_text(
+        json.dumps(data, indent=2, ensure_ascii=False),
+        encoding='utf-8',
+    )
+
+
+def _load_archives() -> dict:
+    if not ARCHIVES_FILE.exists():
+        return {'projects': []}
+    try:
+        return json.loads(ARCHIVES_FILE.read_text(encoding='utf-8'))
+    except json.JSONDecodeError:
+        raise ValueError('data-archives.json corrompu (JSON invalide)')
+
+
+def _save_archives(data: dict):
+    ARCHIVES_FILE.write_text(
         json.dumps(data, indent=2, ensure_ascii=False),
         encoding='utf-8',
     )
@@ -129,7 +152,15 @@ _TACHES_HEADERS = [
     'Charge (h)', 'RAF (h)', 'Titre', 'Avanc.', 'Commentaire',
     'Semaine', 'Année',
 ]
-_TCD_HEADERS = ['Projet/Sous-projet', 'Total RAF', 'S-1', 'S0', 'S+1', 'S+2', 'S+3']
+def _tcd_headers() -> list:
+    """Headers dynamiques C1-G1 avec numéro de semaine ISO réel, calculés à l'appel."""
+    today = date.today()
+    prev_week = (today - timedelta(weeks=1)).isocalendar()[1]
+    cols = ['Projet/Sous-projet', 'Total RAF', f'S{prev_week:02d}']
+    for i, prio in enumerate(['P0', 'P1', 'P2', 'P3']):
+        w = (today + timedelta(weeks=i)).isocalendar()[1]
+        cols.append(f'S{w:02d} ({prio})')
+    return cols
 
 
 def _to_float(val) -> float:
@@ -218,73 +249,100 @@ def _f_semaines_week(row: int, offset: int) -> str:
         wk = f'(ISOWEEKNUM(AUJOURDHUI()){offset})'
     else:
         wk = f'(ISOWEEKNUM(AUJOURDHUI())+{offset})'
+    r = str(row)
     return (
-        f"=SI(REGEXMATCH(A{row};\"^- \");"
-        f"SIERREUR(SOMME(FILTER('Tâches'!G:G;"
-        f"'Tâches'!B:B=SUBSTITUE(A{row};\"- \";\"\");"
-        f"'Tâches'!K:K=\"S\"&{wk}));\"\")\";\"\")"
+        '=SI(REGEXMATCH(A' + r + ';"^- ");'
+        'SIERREUR(SOMME(FILTER(\'Tâches\'!G:G;'
+        '\'Tâches\'!B:B=SUBSTITUE(A' + r + ';"- ";"");'
+        '\'Tâches\'!K:K="S"&' + wk + '));"");"")'
     )
 
 
 # ── Initialisation GSheet ──────────────────────────────────────────────────────
 
-def _gs_get_or_create(sh, title: str, rows: int = 1000, cols: int = 14):
-    """Retourne un worksheet existant ou le crée."""
+def _gs_delete_if_exists(sh, title: str) -> None:
+    """Supprime un onglet s'il existe (ignore si absent)."""
     import gspread
     try:
-        return sh.worksheet(title)
+        sh.del_worksheet(sh.worksheet(title))
     except gspread.WorksheetNotFound:
-        return sh.add_worksheet(title=title, rows=rows, cols=cols)
+        pass
 
 
-def _gs_init(spreadsheet_id: str) -> str:
-    """Initialise les 3 onglets (Tâches, Semaines, TCD Projets).
+def _gs_set_hidden(sh, ws, hidden: bool) -> None:
+    """Masque ou démasque un onglet via l'API Sheets."""
+    sh.batch_update({'requests': [{'updateSheetProperties': {
+        'properties': {'sheetId': ws.id, 'hidden': hidden},
+        'fields': 'hidden',
+    }}]})
 
-    Retourne un message de résumé.
+
+def _gs_init(spreadsheet_id: str) -> dict:
+    """Réinitialise les 3 onglets (Tâches, Semaines, TCD Projets) — reset complet.
+
+    Si un onglet modèle (_modèle_<nom>) existe, duplique depuis le modèle pour
+    préserver la mise en forme (largeurs, MFC, filtres). Sinon, recrée à blanc
+    (comportement historique) et ajoute un warning dans la réponse.
+
+    Retourne {'message': str, 'warnings': list[str]}
     """
     gc = _get_gspread_client()
     sh = gc.open_by_key(spreadsheet_id)
+    import gspread
+
+    warnings = []
+
+    def _get_modele(title):
+        try:
+            return sh.worksheet(f'_modèle_{title}')
+        except gspread.WorksheetNotFound:
+            return None
+
+    # GSheet refuse de supprimer le dernier onglet — s'assurer qu'un onglet
+    # temporaire existe avant de supprimer les 3 cibles.
+    tmp_title = '__init_tmp__'
+    try:
+        tmp = sh.worksheet(tmp_title)
+    except gspread.WorksheetNotFound:
+        tmp = sh.add_worksheet(title=tmp_title, rows=1, cols=1)
+
+    for title in ('Tâches', 'Semaines', 'TCD Projets'):
+        _gs_delete_if_exists(sh, title)
 
     # ── Onglet Tâches ──
-    ws_t = _gs_get_or_create(sh, 'Tâches', rows=1000, cols=12)
-    ws_t.update('A1:L1', [_TACHES_HEADERS], raw=False)
+    modele_t = _get_modele('Tâches')
+    if modele_t:
+        ws_t = sh.duplicate_sheet(source_sheet_id=modele_t.id, new_sheet_name='Tâches')
+        _gs_set_hidden(sh, ws_t, False)       # le duplicata hérite hidden=True — forcer visible
+        _gs_set_hidden(sh, modele_t, True)    # la duplication peut démasquer la source — remasquer
+        # NE PAS réécrire A1:L1 : le modèle contient déjà les en-têtes avec leur mise en forme
+        ws_t.batch_clear(['A2:L1000'])
+    else:
+        warnings.append('_modèle_Tâches absent — onglet recréé sans mise en forme')
+        ws_t = sh.add_worksheet(title='Tâches', rows=1000, cols=12)
+        ws_t.update('A1:L1', [_TACHES_HEADERS], raw=False)
 
     # ── Onglet Semaines ──
-    ws_s = _gs_get_or_create(sh, 'Semaines', rows=200, cols=7)
-    ws_s.update('A1:G1', [_TCD_HEADERS], raw=False)
+    modele_s = _get_modele('Semaines')
+    if modele_s:
+        ws_s = sh.duplicate_sheet(source_sheet_id=modele_s.id, new_sheet_name='Semaines')
+        _gs_set_hidden(sh, ws_s, False)
+        _gs_set_hidden(sh, modele_s, True)
+    else:
+        warnings.append('_modèle_Semaines absent — onglet recréé sans mise en forme')
+        ws_s = sh.add_worksheet(title='Semaines', rows=200, cols=7)
 
-    # Ligne 2 : totaux heures
-    row2 = [
-        '',
-        _f_semaines_b2(),
-        _f_semaines_col2('C'),
-        _f_semaines_col2('D'),
-        _f_semaines_col2('E'),
-        _f_semaines_col2('F'),
-        _f_semaines_col2('G'),
-    ]
+    # Formules toujours réécrites (modèle ou non) : le modèle apporte la mise en forme,
+    # pas les données — les formules doivent être fraîches après chaque init.
+    ws_s.update('A1:G1', [_tcd_headers()], raw=False)
+    row2 = ['', _f_semaines_b2()] + [_f_semaines_col2(c) for c in 'CDEFG']
+    row3 = ['', _f_semaines_b3()] + [_f_semaines_col3(c) for c in 'CDEFG']
     ws_s.update('A2:G2', [row2], raw=False)
-
-    # Ligne 3 : totaux jours
-    row3 = [
-        '',
-        _f_semaines_b3(),
-        _f_semaines_col3('C'),
-        _f_semaines_col3('D'),
-        _f_semaines_col3('E'),
-        _f_semaines_col3('F'),
-        _f_semaines_col3('G'),
-    ]
     ws_s.update('A3:G3', [row3], raw=False)
-
-    # A4 : QUERY/REDUCE (spilling)
     ws_s.update('A4', [[_f_semaines_a4()]], raw=False)
-
-    # B4:G100 : formules par ligne
     formulas_bg = []
     for r in range(4, _SEMAINES_MAX_ROWS + 1):
         formulas_bg.append([
-            '',  # A : géré par QUERY spilling
             _f_semaines_b_row(r),
             _f_semaines_week(r, -1),
             _f_semaines_week(r, 0),
@@ -292,16 +350,79 @@ def _gs_init(spreadsheet_id: str) -> str:
             _f_semaines_week(r, 2),
             _f_semaines_week(r, 3),
         ])
-    ws_s.update(f'A4:G{_SEMAINES_MAX_ROWS}', formulas_bg, raw=False)
+    ws_s.update(f'B4:G{_SEMAINES_MAX_ROWS}', formulas_bg, raw=False)
 
     # ── Onglet TCD Projets ──
-    ws_tcd = _gs_get_or_create(sh, 'TCD Projets', rows=200, cols=7)
-    ws_tcd.update('A1:G1', [_TCD_HEADERS], raw=False)
+    modele_tcd = _get_modele('TCD Projets')
+    if modele_tcd:
+        ws_tcd = sh.duplicate_sheet(source_sheet_id=modele_tcd.id, new_sheet_name='TCD Projets')
+        _gs_set_hidden(sh, ws_tcd, False)
+        _gs_set_hidden(sh, modele_tcd, True)
+        ws_tcd.update('A1:G1', [_tcd_headers()], raw=False)
+        ws_tcd.batch_clear(['A2:G1000'])
+    else:
+        warnings.append('_modèle_TCD Projets absent — onglet recréé sans mise en forme')
+        ws_tcd = sh.add_worksheet(title='TCD Projets', rows=200, cols=7)
+        ws_tcd.update('A1:G1', [_tcd_headers()], raw=False)
 
-    return f'Init terminée — onglets Tâches, Semaines, TCD Projets créés/mis à jour.'
+    # Supprime l'onglet temporaire
+    sh.del_worksheet(tmp)
+
+    if warnings:
+        msg = 'Init terminée — certains onglets recréés sans modèle (mise en forme non restaurée).'
+    else:
+        msg = 'Init terminée — onglets recréés depuis les modèles, mise en forme restaurée.'
+    return {'message': msg, 'warnings': warnings}
 
 
 # ── Push data.json → Tâches, puis Semaines → TCD ──────────────────────────────
+
+def _build_tcd_rows(data: dict) -> list:
+    """Construit les lignes TCD (row 2+) depuis data.json — sans dépendre des formules Semaines.
+
+    Col B est une FORMULE (mêmes formules que Semaines) pour que les éditions team
+    en C-G recalculent automatiquement le total RAF de la ligne. Cols A et C-G sont
+    écrites en valeurs statiques (calculées depuis data.json).
+    """
+    today_week = date.today().isocalendar()[1]
+    window = [today_week + offset for offset in _WEEK_OFFSETS]
+
+    def sp_target_week(sp: dict):
+        t = sp.get('target', '')
+        if not t:
+            return None
+        try:
+            return datetime.strptime(t, '%Y-%m-%d').date().isocalendar()[1]
+        except ValueError:
+            return None
+
+    body: list = []
+    row_idx = 4  # première ligne de données (1-indexé, GSheet)
+
+    for proj in data.get('projects', []):
+        if not proj.get('subprojects'):
+            continue
+        alias = proj.get('alias') or proj['name']
+        body.append([alias, _f_semaines_b_row(row_idx), '', '', '', '', ''])
+        row_idx += 1
+        for sp in proj.get('subprojects', []):
+            raf = sp.get('raf', 0.0) or 0.0
+            wk = sp_target_week(sp)
+            row = [f"- {sp['name']}", _f_semaines_b_row(row_idx), '', '', '', '', '']
+            if wk is not None and raf:
+                for i, target_w in enumerate(window):
+                    if wk == target_w:
+                        row[2 + i] = raf
+                        break
+            body.append(row)
+            row_idx += 1
+
+    # Rows 2 et 3 : formules Semaines (locale-aware — GSheet calcule en français).
+    # Évite l'erreur "Impossible d'analyser 0.9" quand VALUE() voit un point au lieu d'une virgule.
+    row2 = ['', _f_semaines_b2()] + [_f_semaines_col2(c) for c in 'CDEFG']
+    row3 = ['', _f_semaines_b3()] + [_f_semaines_col3(c) for c in 'CDEFG']
+    return [row2, row3] + body
+
 
 def _gs_build_taches_rows(data: dict) -> list:
     """Construit la liste des lignes (A:L) à pousser dans l'onglet Tâches."""
@@ -313,14 +434,14 @@ def _gs_build_taches_rows(data: dict) -> list:
             rows.append([
                 alias,
                 sp['name'],
-                '',                                       # C: Type (GSheet only)
+                sp.get('type', ''),                      # C: Type
                 sp.get('qualif', ''),                    # D: Prio.
                 sp.get('target', ''),                    # E: Cible
                 sp.get('charge', 0.0),                   # F: Charge (h)
                 sp.get('raf', 0.0),                      # G: RAF (h)
                 sp.get('titre', ''),                     # H: Titre
                 _STATUS_TO_GS.get(sp.get('status', 'todo'), 'À FAIRE'),  # I: Avanc.
-                '',                                       # J: Commentaire (GSheet only)
+                sp.get('commentaire', ''),               # J: Commentaire
                 _f_taches_k(row_num),                    # K: Semaine (formule)
                 _f_taches_l(row_num),                    # L: Année (formule)
             ])
@@ -341,20 +462,30 @@ def _gs_push(spreadsheet_id: str) -> dict:
     rows = _gs_build_taches_rows(data)
     n = len(rows)
 
-    # Efface les données existantes (hors header)
-    ws_t.batch_clear([f'A2:L1000'])
+    # Met à jour les libellés semaines dynamiques dans Semaines et TCD Projets
+    dyn_headers = _tcd_headers()
+    ws_s.update('A1:G1', [dyn_headers], raw=False)
+    ws_tcd.update('A1:G1', [dyn_headers], raw=False)
+
+    # Tâches : préserve C (Type) et J (Commentaire) — édités directement en GSheet.
+    # On clear et écrit uniquement les colonnes que data.json gouverne : A-B, D-I, K-L.
+    ws_t.batch_clear(['A2:B1000', 'D2:I1000', 'K2:L1000'])
     if rows:
-        ws_t.update(f'A2:L{n + 1}', rows, raw=False)
+        last = n + 1
+        ws_t.batch_update([
+            {'range': f'A2:B{last}', 'values': [[r[0], r[1]] for r in rows]},
+            {'range': f'D2:I{last}', 'values': [r[3:9] for r in rows]},
+            {'range': f'K2:L{last}', 'values': [r[10:12] for r in rows]},
+        ], value_input_option='USER_ENTERED')
 
-    # Lit les valeurs calculées de Semaines (après recalcul automatique GSheet)
-    semaines_vals = ws_s.get_all_values()
-
-    # Copie Semaines → TCD Projets (valeurs brutes, pas de formules)
+    # TCD Projets : construit directement depuis data.json (pas via les formules Semaines
+    # qui recalculent de façon asynchrone — évite la race condition et garantit que TCD
+    # reflète immédiatement l'état après push, alias renommés inclus).
+    tcd_rows = _build_tcd_rows(data)
     ws_tcd.batch_clear(['A2:G1000'])
-    if len(semaines_vals) > 1:
-        # rows 2+ de Semaines (index 1+) → TCD à partir de row 2
-        tcd_data = semaines_vals[1:]  # saute la ligne d'entête
-        ws_tcd.update(f'A2:G{len(tcd_data) + 1}', tcd_data, raw=True)
+    if tcd_rows:
+        # raw=False (USER_ENTERED) : les formules de col B sont interprétées par GSheet
+        ws_tcd.update(f'A2:G{len(tcd_rows) + 1}', tcd_rows, raw=False)
 
     _log([{'action': 'push-to-gsheet', 'subprojects': n}])
     return {'ok': True, 'pushed': n}
@@ -378,23 +509,127 @@ def _gs_push_preview(data: dict) -> dict:
     return {'ok': True, 'count': len(preview), 'rows': preview}
 
 
+# ── Mise en forme GSheet (manuelle, une seule fois) ───────────────────────────
+
+_TYPE_OPTIONS = ['Feature', 'BugFix', 'Récurrent', 'Support', 'Autre']
+_QUALIF_OPTIONS = ['P0', 'P1', 'P2', 'P3']
+_STATUT_OPTIONS = ['TERMINÉ', 'EN COURS', 'REVUE', 'SPEC', 'À FAIRE', 'STAND BY']
+
+
+def _gs_format(spreadsheet_id: str) -> dict:
+    """Configure les menus déroulants (data validation) sur Tâches.
+
+    Col C (Type)  : Feature/BugFix/Récurrent/Support/Autre
+    Col D (Prio.) : P0/P1/P2/P3
+    Col I (Avanc.) : TERMINÉ/EN COURS/REVUE/SPEC/À FAIRE/STAND BY
+
+    Appelé manuellement seulement — jamais lors du push/pull.
+    """
+    gc = _get_gspread_client()
+    sh = gc.open_by_key(spreadsheet_id)
+    ws_t = sh.worksheet('Tâches')
+
+    def _validation_request(col_index: int, values: list) -> dict:
+        return {
+            'setDataValidation': {
+                'range': {
+                    'sheetId': ws_t.id,
+                    'startRowIndex': 1,
+                    'endRowIndex': 1000,
+                    'startColumnIndex': col_index,
+                    'endColumnIndex': col_index + 1,
+                },
+                'rule': {
+                    'condition': {
+                        'type': 'ONE_OF_LIST',
+                        'values': [{'userEnteredValue': v} for v in values],
+                    },
+                    'showCustomUi': True,
+                    'strict': False,
+                },
+            },
+        }
+
+    sh.batch_update({
+        'requests': [
+            _validation_request(2, _TYPE_OPTIONS),
+            _validation_request(3, _QUALIF_OPTIONS),
+            _validation_request(8, _STATUT_OPTIONS),
+        ],
+    })
+    return {'ok': True, 'type_options': _TYPE_OPTIONS, 'qualif_options': _QUALIF_OPTIONS, 'statut_options': _STATUT_OPTIONS}
+
+
+# ── Sauvegarde des onglets modèles ────────────────────────────────────────────
+
+_MODELE_SOURCES = ['Tâches', 'Semaines', 'TCD Projets']
+
+
+def _gs_save_template(spreadsheet_id: str) -> dict:
+    """Duplique les 3 onglets courants en onglets modèles masqués.
+
+    Pour chaque onglet source dans _MODELE_SOURCES :
+    - Supprime l'ancien _modèle_<nom> s'il existe
+    - Duplique l'onglet source sous le nom _modèle_<nom>
+    - Masque l'onglet modèle
+
+    Appelé manuellement seulement — jamais lors du push/pull/init.
+    """
+    gc = _get_gspread_client()
+    sh = gc.open_by_key(spreadsheet_id)
+
+    saved = []
+    for title in _MODELE_SOURCES:
+        ws = sh.worksheet(title)
+        modele_title = f'_modèle_{title}'
+
+        # Supprime l'ancien modèle s'il existe
+        _gs_delete_if_exists(sh, modele_title)
+
+        # Duplique l'onglet source (préserve largeurs, MFC, filtres, formats)
+        new_ws = sh.duplicate_sheet(
+            source_sheet_id=ws.id,
+            insert_sheet_index=len(sh.worksheets()),
+            new_sheet_name=modele_title,
+        )
+
+        # Masque l'onglet modèle
+        sh.batch_update({
+            'requests': [{
+                'updateSheetProperties': {
+                    'properties': {
+                        'sheetId': new_ws.id,
+                        'hidden': True,
+                    },
+                    'fields': 'hidden',
+                },
+            }],
+        })
+
+        saved.append(modele_title)
+
+    return {'ok': True, 'saved': saved}
+
+
 # ── Pull depuis Tâches ─────────────────────────────────────────────────────────
 
 def _find_sp(data: dict, alias: str, sp_name: str):
-    """Recherche un sous-projet par (alias de projet, nom de sous-projet)."""
+    """Retourne (proj, sp) si les deux existent, (proj, None) si le projet existe
+    mais pas le sous-projet, (None, None) si l'alias est introuvable."""
     for proj in data.get('projects', []):
         proj_alias = (proj.get('alias') or proj['name']).lower()
         if proj_alias == alias.lower():
             for sp in proj.get('subprojects', []):
                 if sp['name'].lower() == sp_name.lower():
                     return proj, sp
+            return proj, None  # projet trouvé, sous-projet absent
     return None, None
 
 
 def _gs_pull_taches(spreadsheet_id: str) -> dict:
-    """Tire depuis Tâches : charge, RAF, qualif, titre, target (col E) → data.json.
+    """Tire depuis Tâches : type, qualif, target, charge, RAF, titre, statut, commentaire → data.json.
 
-    Ne touche PAS aux statuts ni aux étapes.
+    Ne touche pas aux étapes.
     """
     gc = _get_gspread_client()
     sh = gc.open_by_key(spreadsheet_id)
@@ -408,22 +643,49 @@ def _gs_pull_taches(spreadsheet_id: str) -> dict:
     updated = 0
 
     for row in rows[1:]:  # saute header
-        if len(row) < 9:
+        if len(row) < 2:
             continue
         alias, sp_name = row[0].strip(), row[1].strip()
         if not alias or not sp_name:
             continue
 
         proj, sp = _find_sp(data, alias, sp_name)
+        if proj is None:
+            proj_ids = {p['id'] for p in data['projects']}
+            new_id = _unique_id(_slugify(alias), proj_ids)
+            proj = {
+                'id': new_id, 'name': alias, 'alias': alias,
+                'desc': '', 'stack': '', 'category': 'active',
+                'folder': '', 'docs': [], 'subprojects': [],
+            }
+            data['projects'].append(proj)
         if sp is None:
-            continue  # orpheline — ignorée
+            sp_ids = {s['id'] for s in proj.get('subprojects', [])}
+            sp_id = _unique_id(_slugify(sp_name), sp_ids)
+            sp = {
+                'id': sp_id, 'name': sp_name, 'status': 'todo',
+                'qualif': '', 'target': '', 'owner': None,
+                'charge': 0.0, 'raf': 0.0, 'titre': '',
+                'steps': [
+                    {'name': 'Spécification', 'status': 'todo', 'charge': 0.0, 'raf': 0.0},
+                    {'name': 'Développement', 'status': 'todo', 'charge': 0.0, 'raf': 0.0},
+                    {'name': 'Tests',         'status': 'todo', 'charge': 0.0, 'raf': 0.0},
+                    {'name': 'Mis en ligne',  'status': 'todo', 'charge': 0.0, 'raf': 0.0},
+                ],
+            }
+            proj.setdefault('subprojects', []).append(sp)
 
+        type_  = row[2].strip() if len(row) > 2 else ''
         qualif = row[3].strip() if len(row) > 3 else ''
         target = row[4].strip() if len(row) > 4 else ''
-        charge = _to_float(row[5]) if len(row) > 5 else None
-        raf    = _to_float(row[6]) if len(row) > 6 else None
+        charge = _to_float(row[5]) if len(row) > 5 and row[5].strip() else None
+        raf    = _to_float(row[6]) if len(row) > 6 and row[6].strip() else None
         titre  = row[7].strip() if len(row) > 7 else ''
+        statut = row[8].strip() if len(row) > 8 else ''
+        commentaire = row[9].strip() if len(row) > 9 else ''
 
+        if type_:
+            sp['type'] = type_
         if qualif and qualif != sp.get('qualif', ''):
             sp['qualif'] = qualif
             new_target = _target_from_qualif(qualif)
@@ -437,6 +699,10 @@ def _gs_pull_taches(spreadsheet_id: str) -> dict:
             sp['raf'] = raf
         if titre:
             sp['titre'] = titre
+        if statut and statut in _STATUS_FROM_GS:
+            sp['status'] = _STATUS_FROM_GS[statut]
+        if commentaire:
+            sp['commentaire'] = commentaire
         updated += 1
 
     _save_data(data)
@@ -459,11 +725,18 @@ def _gs_pull_taches_preview(spreadsheet_id: str) -> dict:
         alias, sp_name = row[0].strip(), row[1].strip()
         if not alias or not sp_name:
             continue
-        _, sp = _find_sp(data, alias, sp_name)
+        proj, sp = _find_sp(data, alias, sp_name)
+        if proj is None:
+            changes.append({'projet': alias, 'sous_projet': sp_name, 'action': 'nouveau-projet'})
+            continue
         if sp is None:
-            changes.append({'projet': alias, 'sous_projet': sp_name, 'action': 'orpheline'})
+            changes.append({'projet': alias, 'sous_projet': sp_name, 'action': 'nouveau-sous-projet'})
             continue
         diff = {}
+        if len(row) > 2 and row[2].strip():
+            new_t = row[2].strip()
+            if new_t != sp.get('type', ''):
+                diff['type'] = {'avant': sp.get('type', ''), 'apres': new_t}
         if len(row) > 5 and row[5].strip():
             new_c = _to_float(row[5])
             if new_c != sp.get('charge', 0.0):
@@ -472,6 +745,14 @@ def _gs_pull_taches_preview(spreadsheet_id: str) -> dict:
             new_r = _to_float(row[6])
             if new_r != sp.get('raf', 0.0):
                 diff['raf'] = {'avant': sp.get('raf'), 'apres': new_r}
+        if len(row) > 8 and row[8].strip() in _STATUS_FROM_GS:
+            new_s = _STATUS_FROM_GS[row[8].strip()]
+            if new_s != sp.get('status'):
+                diff['status'] = {'avant': sp.get('status'), 'apres': new_s}
+        if len(row) > 9 and row[9].strip():
+            new_co = row[9].strip()
+            if new_co != sp.get('commentaire', ''):
+                diff['commentaire'] = {'avant': sp.get('commentaire', ''), 'apres': new_co}
         if diff:
             changes.append({'projet': alias, 'sous_projet': sp_name, 'diff': diff})
     return {'ok': True, 'changes': changes}
@@ -630,13 +911,31 @@ def _resolve_project_path(project_id: str):
     rel = _PROJECT_FOLDERS.get(project_id)
     if not rel:
         return None
-    root = BASE_DIR.parent.resolve()
-    target = (root / rel).resolve()
-    if root != target and root not in target.parents:
+    target = (GIT_ROOT / rel).resolve()
+    if GIT_ROOT != target and GIT_ROOT not in target.parents:
         return None
     if not target.is_dir():
         return None
     return target
+
+
+def _validate_doc_file(rel_path):
+    """Valide qu'un chemin relatif désigne un fichier existant sous GIT_ROOT.
+
+    Retourne (abs_path, None) en cas de succès, (None, error_msg) sinon.
+    Anti-traversée : Path(GIT_ROOT, file).resolve() doit rester sous GIT_ROOT.
+    """
+    if not isinstance(rel_path, str) or not rel_path:
+        return None, 'file manquant ou vide'
+    try:
+        abs_path = (GIT_ROOT / rel_path).resolve()
+    except (OSError, ValueError) as e:
+        return None, f'Chemin invalide : {e}'
+    if not abs_path.is_relative_to(GIT_ROOT):
+        return None, f'Chemin hors GIT_ROOT : {rel_path}'
+    if not abs_path.is_file():
+        return None, f'Fichier introuvable : {rel_path}'
+    return abs_path, None
 
 
 # ── HTTP Handler ───────────────────────────────────────────────────────────────
@@ -668,6 +967,8 @@ class Handler(http.server.BaseHTTPRequestHandler):
             self._handle_gsheet_status()
         elif path == '/api/local-folders':
             self._handle_local_folders()
+        elif path == '/api/archives':
+            self._handle_archives()
         else:
             self._json_error('Not Found', 404)
 
@@ -683,6 +984,10 @@ class Handler(http.server.BaseHTTPRequestHandler):
             self._handle_open_folder()
         elif path == '/api/gsheet/init':
             self._handle_gsheet_init()
+        elif path == '/api/gsheet/format':
+            self._handle_gsheet_format()
+        elif path == '/api/gsheet/save-template':
+            self._handle_gsheet_save_template()
         elif path == '/api/sync-to-gsheet/preview':
             self._handle_sync_preview()
         elif path == '/api/sync-to-gsheet':
@@ -695,6 +1000,32 @@ class Handler(http.server.BaseHTTPRequestHandler):
             self._handle_pull_tcd_preview()
         elif path == '/api/pull-from-tcd':
             self._handle_pull_tcd()
+        elif path == '/api/save-project':
+            self._handle_save_project()
+        elif path == '/api/remove-subproject':
+            self._handle_remove_subproject()
+        elif path == '/api/remove-project':
+            self._handle_remove_project()
+        elif path == '/api/add-doc':
+            self._handle_add_doc()
+        elif path == '/api/save-doc':
+            self._handle_save_doc()
+        elif path == '/api/remove-doc':
+            self._handle_remove_doc()
+        elif path == '/api/open-file':
+            self._handle_open_file()
+        elif path == '/api/archive-subproject':
+            self._handle_archive_subproject()
+        elif path == '/api/archive-project':
+            self._handle_archive_project()
+        elif path == '/api/restore-subproject':
+            self._handle_restore_subproject()
+        elif path == '/api/restore-project':
+            self._handle_restore_project()
+        elif path == '/api/delete-archive-subproject':
+            self._handle_delete_archive_subproject()
+        elif path == '/api/delete-archive-project':
+            self._handle_delete_archive_project()
         else:
             self._json_error('Not Found', 404)
 
@@ -754,6 +1085,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
     def _handle_state(self):
         try:
             data = _load_data()
+            data['git_root'] = str(GIT_ROOT)
             self._json_ok(data)
         except ValueError as e:
             self._json_error(str(e), 500)
@@ -762,10 +1094,11 @@ class Handler(http.server.BaseHTTPRequestHandler):
 
     def _handle_gsheet_status(self):
         try:
-            _get_spreadsheet_id()
+            sid = _get_spreadsheet_id()
             gc = _get_gspread_client()
-            gc.open_by_key(_get_spreadsheet_id())
-            self._json_ok({'connected': True})
+            gc.open_by_key(sid)
+            url = f'https://docs.google.com/spreadsheets/d/{sid}/edit'
+            self._json_ok({'connected': True, 'url': url})
         except Exception:
             self._json_ok({'connected': False})
 
@@ -775,6 +1108,15 @@ class Handler(http.server.BaseHTTPRequestHandler):
             p = _resolve_project_path(pid)
             result[pid] = str(p) if p else None
         self._json_ok(result)
+
+    def _handle_archives(self):
+        try:
+            archives = _load_archives()
+            self._json_ok(archives)
+        except ValueError as e:
+            self._json_error(str(e), 500)
+        except Exception as e:
+            self._json_error(str(e), 500)
 
     # ── POST handlers — Phase 1 ───────────────────────────────────────────────
 
@@ -819,7 +1161,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
             self._json_error(f'Sous-projet inconnu : {sp_id!r}', 404)
             return
 
-        for field in ('status', 'qualif', 'target', 'owner', 'charge', 'raf', 'titre'):
+        for field in ('status', 'qualif', 'target', 'owner', 'charge', 'raf', 'titre', 'name'):
             if field in payload:
                 sp[field] = payload[field]
 
@@ -840,6 +1182,341 @@ class Handler(http.server.BaseHTTPRequestHandler):
         _save_data(data)
         _log([{'action': 'save-subproject', 'project': project_id, 'subproject': sp_id}])
         self._json_ok()
+
+    def _handle_save_project(self):
+        try:
+            payload = self._read_json_body()
+        except (OverflowError, json.JSONDecodeError, UnicodeDecodeError) as e:
+            self._json_error(str(e), 400)
+            return
+        project_id = payload.get('projectId', '')
+        if not project_id:
+            self._json_error('projectId requis', 400)
+            return
+        data = _load_data()
+        proj = next((p for p in data['projects'] if p['id'] == project_id), None)
+        if not proj:
+            self._json_error('Projet introuvable', 404)
+            return
+        for field in ('alias', 'name', 'desc', 'stack'):
+            if field in payload:
+                proj[field] = payload[field]
+        _save_data(data)
+        self._json_ok({'ok': True})
+
+    def _handle_remove_subproject(self):
+        try:
+            payload = self._read_json_body()
+        except (OverflowError, json.JSONDecodeError, UnicodeDecodeError) as e:
+            self._json_error(str(e), 400)
+            return
+        project_id = payload.get('projectId', '')
+        sp_id = payload.get('subprojectId', '')
+        if not project_id or not sp_id:
+            self._json_error('projectId et subprojectId requis', 400)
+            return
+        data = _load_data()
+        proj = next((p for p in data['projects'] if p['id'] == project_id), None)
+        if not proj:
+            self._json_error('Projet introuvable', 404)
+            return
+        before = len(proj.get('subprojects', []))
+        proj['subprojects'] = [s for s in proj.get('subprojects', []) if s['id'] != sp_id]
+        if len(proj['subprojects']) == before:
+            self._json_error('Sous-projet introuvable', 404)
+            return
+        _save_data(data)
+        self._json_ok({'ok': True})
+
+    def _handle_remove_project(self):
+        try:
+            payload = self._read_json_body()
+        except (OverflowError, json.JSONDecodeError, UnicodeDecodeError) as e:
+            self._json_error(str(e), 400)
+            return
+        project_id = payload.get('projectId', '')
+        if not project_id:
+            self._json_error('projectId requis', 400)
+            return
+        data = _load_data()
+        before = len(data['projects'])
+        data['projects'] = [p for p in data['projects'] if p['id'] != project_id]
+        if len(data['projects']) == before:
+            self._json_error('Projet introuvable', 404)
+            return
+        _save_data(data)
+        self._json_ok({'ok': True})
+
+    # ── POST handlers — Archives ─────────────────────────────────────────────
+
+    def _handle_archive_subproject(self):
+        try:
+            payload = self._read_json_body()
+        except OverflowError:
+            self._json_error('Payload trop grand (> 1 Mo)', 413)
+            return
+        except (json.JSONDecodeError, UnicodeDecodeError) as e:
+            self._json_error(f'JSON invalide : {e}', 400)
+            return
+
+        project_id = payload.get('projectId', '')
+        sp_id = payload.get('subprojectId', '')
+        if not project_id or not sp_id:
+            self._json_error('projectId et subprojectId requis', 400)
+            return
+
+        try:
+            data = _load_data()
+            archives = _load_archives()
+        except ValueError as e:
+            self._json_error(str(e), 500)
+            return
+
+        project = next((p for p in data['projects'] if p['id'] == project_id), None)
+        if not project:
+            self._json_error('Projet introuvable', 404)
+            return
+
+        sp = next((s for s in project.get('subprojects', []) if s['id'] == sp_id), None)
+        if not sp:
+            self._json_error('Sous-projet introuvable', 404)
+            return
+
+        arch_proj = next((p for p in archives.get('projects', []) if p['id'] == project_id), None)
+        if not arch_proj:
+            arch_proj = {
+                'id': project['id'],
+                'name': project.get('name', ''),
+                'alias': project.get('alias', ''),
+                'desc': project.get('desc', ''),
+                'stack': project.get('stack', ''),
+                'category': project.get('category', 'active'),
+                'folder': project.get('folder', ''),
+                'docs': [],
+                'subprojects': [],
+            }
+            archives.setdefault('projects', []).append(arch_proj)
+        arch_proj.setdefault('subprojects', []).append(sp)
+
+        project['subprojects'] = [s for s in project.get('subprojects', []) if s['id'] != sp_id]
+        project_empty = len(project.get('subprojects', [])) == 0
+
+        _save_data(data)
+        _save_archives(archives)
+        _log([{'action': 'archive-subproject', 'project': project_id, 'subproject': sp_id}])
+        self._json_ok({'ok': True, 'projectEmpty': project_empty})
+
+    def _handle_archive_project(self):
+        try:
+            payload = self._read_json_body()
+        except OverflowError:
+            self._json_error('Payload trop grand (> 1 Mo)', 413)
+            return
+        except (json.JSONDecodeError, UnicodeDecodeError) as e:
+            self._json_error(f'JSON invalide : {e}', 400)
+            return
+
+        project_id = payload.get('projectId', '')
+        if not project_id:
+            self._json_error('projectId requis', 400)
+            return
+
+        try:
+            data = _load_data()
+            archives = _load_archives()
+        except ValueError as e:
+            self._json_error(str(e), 500)
+            return
+
+        project = next((p for p in data['projects'] if p['id'] == project_id), None)
+        if not project:
+            self._json_error('Projet introuvable', 404)
+            return
+
+        arch_proj = next((p for p in archives.get('projects', []) if p['id'] == project_id), None)
+        if arch_proj:
+            # Fusion : ajouter les SP encore dans data à ceux déjà archivés
+            arch_proj.setdefault('subprojects', []).extend(project.get('subprojects', []))
+            if not arch_proj.get('docs'):
+                arch_proj['docs'] = project.get('docs', [])
+        else:
+            archives.setdefault('projects', []).append(dict(project))
+
+        data['projects'] = [p for p in data['projects'] if p['id'] != project_id]
+
+        _save_data(data)
+        _save_archives(archives)
+        _log([{'action': 'archive-project', 'project': project_id}])
+        self._json_ok({'ok': True})
+
+    def _handle_restore_subproject(self):
+        try:
+            payload = self._read_json_body()
+        except OverflowError:
+            self._json_error('Payload trop grand (> 1 Mo)', 413)
+            return
+        except (json.JSONDecodeError, UnicodeDecodeError) as e:
+            self._json_error(f'JSON invalide : {e}', 400)
+            return
+
+        project_id = payload.get('projectId', '')
+        sp_id = payload.get('subprojectId', '')
+        if not project_id or not sp_id:
+            self._json_error('projectId et subprojectId requis', 400)
+            return
+
+        try:
+            data = _load_data()
+            archives = _load_archives()
+        except ValueError as e:
+            self._json_error(str(e), 500)
+            return
+
+        arch_proj = next((p for p in archives.get('projects', []) if p['id'] == project_id), None)
+        if not arch_proj:
+            self._json_error('Projet introuvable', 404)
+            return
+
+        sp = next((s for s in arch_proj.get('subprojects', []) if s['id'] == sp_id), None)
+        if not sp:
+            self._json_error('Sous-projet introuvable', 404)
+            return
+
+        data_proj = next((p for p in data['projects'] if p['id'] == project_id), None)
+        if not data_proj:
+            data_proj = {
+                'id': arch_proj['id'],
+                'name': arch_proj.get('name', ''),
+                'alias': arch_proj.get('alias', ''),
+                'desc': arch_proj.get('desc', ''),
+                'stack': arch_proj.get('stack', ''),
+                'category': arch_proj.get('category', 'active'),
+                'folder': arch_proj.get('folder', ''),
+                'docs': [],
+                'subprojects': [],
+            }
+            data['projects'].append(data_proj)
+
+        data_proj.setdefault('subprojects', []).append(sp)
+
+        arch_proj['subprojects'] = [s for s in arch_proj.get('subprojects', []) if s['id'] != sp_id]
+        if not arch_proj.get('subprojects'):
+            archives['projects'] = [p for p in archives.get('projects', []) if p['id'] != project_id]
+
+        _save_data(data)
+        _save_archives(archives)
+        _log([{'action': 'restore-subproject', 'project': project_id, 'subproject': sp_id}])
+        self._json_ok({'ok': True})
+
+    def _handle_restore_project(self):
+        try:
+            payload = self._read_json_body()
+        except OverflowError:
+            self._json_error('Payload trop grand (> 1 Mo)', 413)
+            return
+        except (json.JSONDecodeError, UnicodeDecodeError) as e:
+            self._json_error(f'JSON invalide : {e}', 400)
+            return
+
+        project_id = payload.get('projectId', '')
+        if not project_id:
+            self._json_error('projectId requis', 400)
+            return
+
+        try:
+            data = _load_data()
+            archives = _load_archives()
+        except ValueError as e:
+            self._json_error(str(e), 500)
+            return
+
+        arch_proj = next((p for p in archives.get('projects', []) if p['id'] == project_id), None)
+        if not arch_proj:
+            self._json_error('Projet introuvable', 404)
+            return
+
+        if any(p['id'] == project_id for p in data['projects']):
+            self._json_error('Conflit : un projet avec cet id existe déjà dans data.json', 409)
+            return
+
+        data['projects'].append(arch_proj)
+        archives['projects'] = [p for p in archives.get('projects', []) if p['id'] != project_id]
+
+        _save_data(data)
+        _save_archives(archives)
+        _log([{'action': 'restore-project', 'project': project_id}])
+        self._json_ok({'ok': True})
+
+    def _handle_delete_archive_subproject(self):
+        try:
+            payload = self._read_json_body()
+        except OverflowError:
+            self._json_error('Payload trop grand (> 1 Mo)', 413)
+            return
+        except (json.JSONDecodeError, UnicodeDecodeError) as e:
+            self._json_error(f'JSON invalide : {e}', 400)
+            return
+
+        project_id = payload.get('projectId', '')
+        sp_id = payload.get('subprojectId', '')
+        if not project_id or not sp_id:
+            self._json_error('projectId et subprojectId requis', 400)
+            return
+
+        try:
+            archives = _load_archives()
+        except ValueError as e:
+            self._json_error(str(e), 500)
+            return
+
+        arch_proj = next((p for p in archives.get('projects', []) if p['id'] == project_id), None)
+        if not arch_proj:
+            self._json_error('Projet introuvable', 404)
+            return
+
+        before = len(arch_proj.get('subprojects', []))
+        arch_proj['subprojects'] = [s for s in arch_proj.get('subprojects', []) if s['id'] != sp_id]
+        if len(arch_proj['subprojects']) == before:
+            self._json_error('Sous-projet introuvable', 404)
+            return
+
+        if not arch_proj['subprojects']:
+            archives['projects'] = [p for p in archives.get('projects', []) if p['id'] != project_id]
+
+        _save_archives(archives)
+        _log([{'action': 'delete-archive-subproject', 'project': project_id, 'subproject': sp_id}])
+        self._json_ok({'ok': True})
+
+    def _handle_delete_archive_project(self):
+        try:
+            payload = self._read_json_body()
+        except OverflowError:
+            self._json_error('Payload trop grand (> 1 Mo)', 413)
+            return
+        except (json.JSONDecodeError, UnicodeDecodeError) as e:
+            self._json_error(f'JSON invalide : {e}', 400)
+            return
+
+        project_id = payload.get('projectId', '')
+        if not project_id:
+            self._json_error('projectId requis', 400)
+            return
+
+        try:
+            archives = _load_archives()
+        except ValueError as e:
+            self._json_error(str(e), 500)
+            return
+
+        before = len(archives.get('projects', []))
+        archives['projects'] = [p for p in archives.get('projects', []) if p['id'] != project_id]
+        if len(archives['projects']) == before:
+            self._json_error('Projet introuvable', 404)
+            return
+
+        _save_archives(archives)
+        _log([{'action': 'delete-archive-project', 'project': project_id}])
+        self._json_ok({'ok': True})
 
     def _handle_add_subproject(self):
         try:
@@ -878,6 +1555,14 @@ class Handler(http.server.BaseHTTPRequestHandler):
             return
 
         existing_ids = {s['id'] for s in project.get('subprojects', [])}
+        try:
+            archives = _load_archives()
+        except ValueError as e:
+            self._json_error(str(e), 500)
+            return
+        arch_proj = next((p for p in archives.get('projects', []) if p['id'] == project_id), None)
+        if arch_proj:
+            existing_ids |= {s['id'] for s in arch_proj.get('subprojects', [])}
         sp_id = _unique_id(base_id, existing_ids)
 
         qualif = payload.get('qualif', '')
@@ -926,6 +1611,12 @@ class Handler(http.server.BaseHTTPRequestHandler):
             return
 
         existing_ids = {p['id'] for p in data['projects']}
+        try:
+            archives = _load_archives()
+        except ValueError as e:
+            self._json_error(str(e), 500)
+            return
+        existing_ids |= {p['id'] for p in archives.get('projects', [])}
         base_id = _slugify(name)
         proj_id = _unique_id(base_id, existing_ids)
 
@@ -967,9 +1658,8 @@ class Handler(http.server.BaseHTTPRequestHandler):
                 data = _load_data()
                 proj = next((p for p in data['projects'] if p['id'] == project_id), None)
                 if proj and proj.get('folder'):
-                    root = BASE_DIR.parent.resolve()
-                    candidate = (root / proj['folder']).resolve()
-                    if (root == candidate or root in candidate.parents) and candidate.is_dir():
+                    candidate = (GIT_ROOT / proj['folder']).resolve()
+                    if (GIT_ROOT == candidate or GIT_ROOT in candidate.parents) and candidate.is_dir():
                         folder = candidate
             except Exception:
                 pass
@@ -981,6 +1671,250 @@ class Handler(http.server.BaseHTTPRequestHandler):
         try:
             subprocess.Popen(['open', str(folder)])
             self._json_ok({'path': str(folder)})
+        except Exception as e:
+            self._json_error(str(e), 500)
+
+    # ── POST handlers — Docs (SPEC-DOCS-MD.md §4) ─────────────────────────────
+
+    def _handle_add_doc(self):
+        try:
+            payload = self._read_json_body()
+        except OverflowError:
+            self._json_error('Payload trop grand (> 1 Mo)', 413)
+            return
+        except (json.JSONDecodeError, UnicodeDecodeError) as e:
+            self._json_error(f'JSON invalide : {e}', 400)
+            return
+
+        project_id = payload.get('project_id')
+        doc = payload.get('doc') if isinstance(payload.get('doc'), dict) else {}
+
+        if not project_id or not isinstance(project_id, str):
+            self._json_error('project_id manquant', 400)
+            return
+
+        file_rel = doc.get('file')
+        title_raw = doc.get('title')
+        title = title_raw.strip() if isinstance(title_raw, str) else ''
+        doc_type = doc.get('type')
+        status = doc.get('status')
+
+        if not isinstance(file_rel, str) or not file_rel:
+            self._json_error('file manquant', 400)
+            return
+        if not title:
+            self._json_error('title manquant ou vide', 400)
+            return
+        if doc_type not in _DOC_TYPES:
+            self._json_error(f'type invalide : {doc_type!r}', 400)
+            return
+        if status not in _DOC_STATUSES:
+            self._json_error(f'status invalide : {status!r}', 400)
+            return
+
+        doc_date = doc.get('date')
+        if doc_date not in (None, ''):
+            if not isinstance(doc_date, str) or not _DOC_DATE_RE.match(doc_date):
+                self._json_error(f'date invalide (format YYYY-MM-DD attendu) : {doc_date!r}', 400)
+                return
+
+        abs_path, err = _validate_doc_file(file_rel)
+        if err:
+            self._json_error(err, 400)
+            return
+
+        try:
+            data = _load_data()
+        except ValueError as e:
+            self._json_error(str(e), 500)
+            return
+
+        project = next((p for p in data['projects'] if p['id'] == project_id), None)
+        if project is None:
+            self._json_error(f'project_id inconnu : {project_id!r}', 400)
+            return
+
+        docs_list = project.setdefault('docs', [])
+
+        doc_id_raw = doc.get('id')
+        doc_id = doc_id_raw.strip() if isinstance(doc_id_raw, str) else ''
+        if not doc_id:
+            doc_id = _slugify(title)
+            if not doc_id:
+                self._json_error(
+                    'Impossible de générer un id depuis ce titre — fournis un id explicite',
+                    400,
+                )
+                return
+
+        existing_ids = {d['id'] for d in docs_list if isinstance(d, dict) and 'id' in d}
+        if doc_id in existing_ids:
+            self._json_error(
+                'id déjà existant dans ce projet — modifie le titre ou fournis un id explicite',
+                400,
+            )
+            return
+
+        new_doc = {
+            'id': doc_id,
+            'file': file_rel,
+            'title': title,
+            'type': doc_type,
+            'status': status,
+        }
+        if 'desc' in doc:
+            new_doc['desc'] = doc['desc']
+        if doc_date not in (None, ''):
+            new_doc['date'] = doc_date
+        if 'subproject' in doc:
+            new_doc['subproject'] = doc['subproject']
+
+        docs_list.append(new_doc)
+        _save_data(data)
+        _log([{'action': 'add-doc', 'project': project_id, 'id': doc_id, 'file': file_rel}])
+        self._json_ok({'ok': True, 'doc': new_doc})
+
+    def _handle_save_doc(self):
+        try:
+            payload = self._read_json_body()
+        except OverflowError:
+            self._json_error('Payload trop grand (> 1 Mo)', 413)
+            return
+        except (json.JSONDecodeError, UnicodeDecodeError) as e:
+            self._json_error(f'JSON invalide : {e}', 400)
+            return
+
+        project_id = payload.get('project_id')
+        doc_id = payload.get('doc_id')
+        patch = payload.get('patch') if isinstance(payload.get('patch'), dict) else {}
+
+        if not project_id or not isinstance(project_id, str):
+            self._json_error('project_id manquant', 400)
+            return
+        if not doc_id or not isinstance(doc_id, str):
+            self._json_error('doc_id manquant', 400)
+            return
+
+        # Revalidation symétrique à add-doc (§4.2 SPEC, P7)
+        if 'type' in patch and patch['type'] not in _DOC_TYPES:
+            self._json_error(f'type invalide : {patch["type"]!r}', 400)
+            return
+        if 'status' in patch and patch['status'] not in _DOC_STATUSES:
+            self._json_error(f'status invalide : {patch["status"]!r}', 400)
+            return
+        if 'date' in patch and patch['date'] != '':
+            d = patch['date']
+            if not isinstance(d, str) or not _DOC_DATE_RE.match(d):
+                self._json_error(f'date invalide (format YYYY-MM-DD attendu) : {d!r}', 400)
+                return
+        if 'title' in patch:
+            t = patch['title']
+            if not isinstance(t, str) or not t.strip():
+                self._json_error('title vide', 400)
+                return
+        if 'file' in patch:
+            _, err = _validate_doc_file(patch['file'])
+            if err:
+                self._json_error(err, 400)
+                return
+
+        try:
+            data = _load_data()
+        except ValueError as e:
+            self._json_error(str(e), 500)
+            return
+
+        project = next((p for p in data['projects'] if p['id'] == project_id), None)
+        if project is None:
+            self._json_error(f'project_id inconnu : {project_id!r}', 400)
+            return
+
+        doc = next(
+            (d for d in project.get('docs', [])
+             if isinstance(d, dict) and d.get('id') == doc_id),
+            None,
+        )
+        if doc is None:
+            self._json_error(f'doc_id inconnu dans ce projet : {doc_id!r}', 400)
+            return
+
+        # Champs inconnus dans patch → ignorés silencieusement (P4)
+        for field in _DOC_PATCH_FIELDS:
+            if field in patch:
+                doc[field] = patch[field]
+
+        _save_data(data)
+        _log([{'action': 'save-doc', 'project': project_id, 'doc': doc_id}])
+        self._json_ok({'ok': True})
+
+    def _handle_remove_doc(self):
+        try:
+            payload = self._read_json_body()
+        except OverflowError:
+            self._json_error('Payload trop grand (> 1 Mo)', 413)
+            return
+        except (json.JSONDecodeError, UnicodeDecodeError) as e:
+            self._json_error(f'JSON invalide : {e}', 400)
+            return
+
+        project_id = payload.get('project_id')
+        doc_id = payload.get('doc_id')
+
+        if not project_id or not isinstance(project_id, str):
+            self._json_error('project_id manquant', 400)
+            return
+        if not doc_id or not isinstance(doc_id, str):
+            self._json_error('doc_id manquant', 400)
+            return
+
+        try:
+            data = _load_data()
+        except ValueError as e:
+            self._json_error(str(e), 500)
+            return
+
+        project = next((p for p in data['projects'] if p['id'] == project_id), None)
+        if project is None:
+            self._json_error(f'project_id inconnu : {project_id!r}', 400)
+            return
+
+        docs_list = project.get('docs', [])
+        before = len(docs_list)
+        project['docs'] = [
+            d for d in docs_list
+            if not (isinstance(d, dict) and d.get('id') == doc_id)
+        ]
+        if len(project['docs']) == before:
+            self._json_error(f'doc_id inconnu dans ce projet : {doc_id!r}', 400)
+            return
+
+        _save_data(data)
+        _log([{'action': 'remove-doc', 'project': project_id, 'doc': doc_id}])
+        self._json_ok({'ok': True})
+
+    def _handle_open_file(self):
+        try:
+            payload = self._read_json_body()
+        except OverflowError:
+            self._json_error('Payload trop grand (> 1 Mo)', 413)
+            return
+        except (json.JSONDecodeError, UnicodeDecodeError) as e:
+            self._json_error(f'JSON invalide : {e}', 400)
+            return
+
+        file_rel = payload.get('file')
+        if not isinstance(file_rel, str) or not file_rel:
+            self._json_error('file manquant', 400)
+            return
+
+        abs_path, err = _validate_doc_file(file_rel)
+        if err:
+            self._json_error(err, 400)
+            return
+
+        try:
+            subprocess.Popen(['open', '-R', str(abs_path)])
+            self._json_ok({'ok': True})
         except Exception as e:
             self._json_error(str(e), 500)
 
@@ -1000,12 +1934,36 @@ class Handler(http.server.BaseHTTPRequestHandler):
             return
         try:
             sid = _get_spreadsheet_id()
-            msg = _gs_init(sid)
-            self._json_ok({'ok': True, 'message': msg})
+            result = _gs_init(sid)
+            self._json_ok({'ok': True, **result})
         except ValueError as e:
             self._json_error(str(e), 500)
         except Exception as e:
             self._json_error(f'Init GSheet échouée : {e}', 500)
+
+    def _handle_gsheet_format(self):
+        if not self._drain_body():
+            return
+        try:
+            sid = _get_spreadsheet_id()
+            result = _gs_format(sid)
+            self._json_ok(result)
+        except ValueError as e:
+            self._json_error(str(e), 500)
+        except Exception as e:
+            self._json_error(f'Mise en forme GSheet échouée : {e}', 500)
+
+    def _handle_gsheet_save_template(self):
+        if not self._drain_body():
+            return
+        try:
+            sid = _get_spreadsheet_id()
+            result = _gs_save_template(sid)
+            self._json_ok(result)
+        except ValueError as e:
+            self._json_error(str(e), 500)
+        except Exception as e:
+            self._json_error(f'Sauvegarde modèles GSheet échouée : {e}', 500)
 
     def _handle_sync_preview(self):
         if not self._drain_body():

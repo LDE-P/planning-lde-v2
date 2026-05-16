@@ -4,6 +4,7 @@ token.json
 
 # Données (source de vérité locale, ne pas versionner)
 data.json
+data-archives.json
 
 # Config locale
 terminal.txt
