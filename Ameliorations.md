@@ -6,6 +6,7 @@
 
 - [ ] **Spec Claude Code + data.json** : quand la spec confie à Claude Code une création/mise à jour de SP dans `data.json`, inclure explicitement les champs et valeurs attendus — pour éviter que Claude Code copie des valeurs du contexte voisin (ex : incident commentaire "URGENT !" sur `spinners-dashboard`, session 2026-05-16).
 - [ ] Enregistrement automatique des MD dans `data.json` docs — dès qu'un fichier `.md` est créé pour un sous-projet, l'enregistrer immédiatement (titre, desc, type, statut, subproject) plutôt qu'en fin de session via la checklist. Mettre à jour la règle 3bis du CLAUDE.md racine en conséquence.
+- [ ] **Import d'un projet ancien dans GIT** : quand un projet créé dans une session ancienne (avant les conventions actuelles du dépôt) est importé dans GIT, ouvrir une session Cowork dédiée pour vérifier la cohérence — noms canoniques, alias, entrées `data.json`, tables `CLAUDE.md`. Ne pas le faire « à la rache » en fin d'une autre session.
 
 ## UI Dashboard
 
