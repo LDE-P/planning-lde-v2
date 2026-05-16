@@ -152,8 +152,9 @@ La colonne `Cible Date` de la GSheet est **en lecture seule** (calculée). Si un
 | Commentaire | ✅ | GSheet uniquement — créé et modifié dans la GSheet, rapatrié au pull |
 | Date cible (`target`) depuis Tâches col E | ✅ | Via `pull-from-gsheet` — si modifiée manuellement dans Tâches col E |
 | Date cible (`target`) depuis TCD Projets | ✅ | Via `pull-from-tcd` — vendredi de la dernière semaine avec RAF non nul |
+| Statut du sous-projet (col I) | ✅ | Pullé depuis GSheet — converti via `_STATUS_FROM_GS` |
 | Statut d'une étape | ❌ | Source de vérité = dashboard uniquement |
-| Type (feature, bugfix, récurrent…) | ❌ | Champ GSheet uniquement — non pullé |
+| Type (feature, bugfix, récurrent…) | ✅ | GSheet souverain — stocké dans `data.json`, jamais réécrit au push |
 
 > **Acté :** `charge` et `raf` sont des **champs stockés** dans `data.json` au niveau sous-projet — ils alimentent la GSheet (colonnes F/G de l'onglet Tâches) et sont pullables depuis la GSheet. Dans le dashboard, la charge affichée est déduite de la somme des étapes à l'affichage ; mais la valeur stockée dans `data.json` sert de référence pour le sync GSheet.
 
@@ -252,6 +253,10 @@ Port : **8001**. Fichier serveur : `planning-lde-v2/serve-v2.py`.
 | `POST /api/pull-from-gsheet` | Existe | Adapté — lit Tâches (charge/RAF/qualif/commentaire/target col E) | ✅ Adapté |
 | `POST /api/pull-from-tcd/preview` | — | **Nouveau** | 🆕 Prévisualise le pull depuis TCD Projets |
 | `POST /api/pull-from-tcd` | — | **Nouveau** — lit TCD Projets (raf redistribué + target semaine) | 🆕 |
+| `POST /api/save-project` | — | **Nouveau** — patch alias, name, desc, stack d'un projet | 🆕 |
+| `POST /api/remove-subproject` | — | **Nouveau** — supprime un sous-projet par id | 🆕 |
+| `POST /api/remove-project` | — | **Nouveau** — supprime un projet par id | 🆕 |
+| `POST /api/gsheet/format` | — | **Nouveau** — pose les dropdowns col C et I (appel manuel uniquement) | 🆕 |
 | `POST /api/save-dates` | Existe | **Supprimé** | ❌ Fusionné dans save-subproject |
 | `POST /api/save-features` | Existe | **Supprimé** | ❌ Remplacé par save-subproject |
 | `POST /api/move-feature` | Existe | **Supprimé** | ❌ Pas de déplacement dans V2 |
@@ -481,12 +486,30 @@ Formule Python : `math.ceil((h / 7) * 10) / 10` (arrondi au 0,1 supérieur).
 
 **Toutes les formules GSheet insérées par le code Python (init, push) sont celles définies dans `planning-lde/formules.md`. Ce fichier est la référence absolue.**
 
-Règles :
+> ⛔ **INTERDICTION ABSOLUE de modifier la syntaxe des formules.**
+>
+> Les formules de `formules.md` doivent être reproduites **caractère par caractère**, sans aucune transformation. En particulier :
+>
+> - **Ne jamais traduire les noms de fonctions** (ex : `IF` → `SI`, `SUM` → `SOMME`, `IFERROR` → `SIERREUR`, `SUBSTITUTE` → `SUBSTITUE`, `TODAY` → `AUJOURDHUI`). Les formules du `formules.md` sont en syntaxe anglaise et doivent rester en syntaxe anglaise dans le code Python.
+> - **Ne jamais adapter les séparateurs** (`,` vs `;`) au-delà de ce qui est déjà dans `formules.md`.
+> - **Ne jamais "corriger" une formule** qui semblerait incorrecte — si elle est dans `formules.md`, elle a été testée et validée directement dans GSheet. Toute divergence doit être signalée à LDE.
+> - **Ne jamais reconstruire une formule de mémoire** ou depuis la spec — copier-coller uniquement depuis `formules.md`.
+>
+> Exemple de violation à ne JAMAIS commettre :
+> ```
+> # formules.md (référence)
+> =IF(REGEXMATCH(A5;"^- ");IFERROR(SUM(FILTER(...));"");"")
+>
+> # ❌ INTERDIT — version traduite en français
+> =SI(REGEXMATCH(A5;"^- ");SIERREUR(SOMME(FILTER(...));"");"")
+> ```
+
+Règles complémentaires :
 - Ne jamais convertir une formule depuis l'xlsx ni la réécrire à partir de la spec — utiliser uniquement la formule GSheet du `formules.md`.
 - Si une formule du `formules.md` semble incohérente avec la spec, signaler à LDE plutôt qu'improviser.
 - `formules.md` fait foi sur toute autre source (spec, xlsx, mémoire de session).
 
-> Ce fichier documente les formules testées et validées directement dans GSheet (syntaxe locale FR, séparateurs `;`).
+> Ce fichier documente les formules testées et validées directement dans GSheet (syntaxe anglaise, séparateurs `;`).
 
 ### 5.6 Règle : non-intervention sur la mise en forme
 

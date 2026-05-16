@@ -53,6 +53,11 @@ Les tests se trouvent dans `tests-e2e-python/planning-lde/` (style pytest, port 
       "id": "...",
       "name": "...",
       "alias": "...",
+      "desc": "...",
+      "stack": "...",
+      "category": "active|infra|legacy|editorial",
+      "folder": "...",
+      "docs": ["..."],
       "subprojects": [
         {
           "id": "...",
@@ -63,6 +68,9 @@ Les tests se trouvent dans `tests-e2e-python/planning-lde/` (style pytest, port 
           "owner": "laurent|micka|elie|team|null",
           "charge": 0.0,
           "raf": 0.0,
+          "titre": "...",
+          "type": "Feature|BugFix|Récurrent|Support|Autre",
+          "commentaire": "...",
           "steps": [
             { "name": "...", "status": "todo|...|na", "charge": 0.0, "raf": 0.0 }
           ]
@@ -72,6 +80,11 @@ Les tests se trouvent dans `tests-e2e-python/planning-lde/` (style pytest, port 
   ]
 }
 ```
+
+Notes :
+- `type` et `commentaire` sont **GSheet-only** : lus au pull, jamais réécrits au push
+- `folder` et `docs` peuvent être absents pour les projets créés via le pull (initialisés à vide)
+- Au pull, si l'alias (col A) ou le nom SP (col B) n'existent pas dans `data.json`, le projet/sp est créé avec les 4 étapes par défaut
 
 ## Correspondance statuts
 
@@ -97,14 +110,55 @@ Les tests se trouvent dans `tests-e2e-python/planning-lde/` (style pytest, port 
 
 **Premier lancement avec GSheet :** le flow OAuth ouvre le navigateur — cliquer "Autoriser" **immédiatement** (le callback localhost a un timeout court). En cas de page d'erreur localhost, relancer une action GSheet pour obtenir un flow frais.
 
+## Sync GSheet ↔ data.json (onglet Tâches)
+
+| Col | Champ sp | Direction | Notes |
+|-----|----------|-----------|-------|
+| A | projet (alias) | dashboard → GSheet | identifie le projet |
+| B | `name` | dashboard → GSheet | identifie le sp |
+| C | `type` | **GSheet → data.json** | GSheet-only, jamais réécrit |
+| D | `qualif` | bidirectionnel | |
+| E | `target` | bidirectionnel | |
+| F | `charge` | bidirectionnel | cellule vide au pull = pas d'écrasement |
+| G | `raf` | bidirectionnel | cellule vide au pull = pas d'écrasement |
+| H | `titre` | bidirectionnel | |
+| I | `status` | bidirectionnel | converti via `_STATUS_TO_GS` / `_STATUS_FROM_GS` |
+| J | `commentaire` | **GSheet → data.json** | GSheet-only, jamais réécrit |
+| K, L | semaine / année | formules GSheet | calculées depuis E |
+
+- **Push** : `batch_clear` et `batch_update` ciblent `A-B`, `D-I`, `K-L` uniquement (préservation C et J)
+- **Pull** crée les projets/sp manquants si l'alias ou le nom n'existent pas dans `data.json`
+- **TCD Projets** est reconstruit au push depuis `data.json` directement (via `_build_tcd_rows()`), pas une copie de Semaines — évite la race condition de recalcul asynchrone
+- **TCD col B** + **rows 2/3 C-G** : formules Semaines réutilisées (`_f_semaines_b_row/b2/b3/col2/col3`) pour que les éditions team sur C-G recalculent automatiquement les totaux, et pour rester locale-aware (FR : virgules)
+
+## Endpoints HTTP
+
+GET :
+- `/api/state` — lit `data.json`
+- `/api/gsheet/status` — `{connected, url?}`
+- `/api/local-folders` — liste les sous-dossiers de `GIT/`
+
+POST (corps JSON) :
+- `/api/save-subproject` — patch sp (name, status, qualif, target, owner, charge, raf, titre, steps)
+- `/api/save-project` — patch projet (alias, name, desc, stack)
+- `/api/add-subproject`, `/api/add-project`
+- `/api/remove-subproject`, `/api/remove-project`
+- `/api/open-folder`
+- `/api/gsheet/init` — reset complet des 3 onglets
+- `/api/gsheet/format` — **manuel uniquement** : pose les dropdowns col C et col I
+- `/api/sync-to-gsheet[/preview]` — push
+- `/api/pull-from-gsheet[/preview]` — pull Tâches
+- `/api/pull-from-tcd[/preview]` — pull TCD (RAF + target par sp)
+
 ## Règles de développement
 
-- Ne jamais écrire dans l'onglet TCD Projets ni Semaines côté Python (Phase 2)
-- Formules GSheet : référence absolue = `planning-lde/formules.md`
+- Formules GSheet : référence absolue = `planning-lde/formules.md` (jamais réinventer, recopier caractère par caractère — §5.5 SPEC)
 - Bibliothèque GSheet : `gspread` (pas `google-api-python-client`)
 - `data.json` : lecture/écriture atomique via `_load_data()` / `_save_data()`
 - CORS : tous les endpoints renvoient `Access-Control-Allow-Origin: *`
 - Payload max : 1 Mo (413 si dépassé)
+- **APIs de mise en forme GSheet** (`setDataValidation`, formatting, conditional rules) : **uniquement** via `/api/gsheet/format`, appel manuel — interdit dans push/pull (§5.6 SPEC)
+- Push et pull réécrivent les libellés C1–G1 des onglets Semaines et TCD avec `_tcd_headers()` (S-1 = `S<nn>`, S0→S+3 = `S<nn> (P0)`→`(P3)`, ISO week réel)
 
 ## Fin de session
 
