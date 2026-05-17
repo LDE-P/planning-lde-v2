@@ -150,17 +150,24 @@ _WEEK_OFFSETS = [-1, 0, 1, 2, 3]  # S-1 à S+3
 _TACHES_HEADERS = [
     'Projet', 'Sous-projet', 'Type', 'Prio.', 'Cible',
     'Charge (h)', 'RAF (h)', 'Titre', 'Avanc.', 'Commentaire',
-    'Semaine', 'Année',
+    'Semaine', 'Année', 'ID',
 ]
 def _tcd_headers() -> list:
-    """Headers dynamiques C1-G1 avec numéro de semaine ISO réel, calculés à l'appel."""
-    today = date.today()
-    prev_week = (today - timedelta(weeks=1)).isocalendar()[1]
-    cols = ['Projet/Sous-projet', 'Total RAF', f'S{prev_week:02d}']
-    for i, prio in enumerate(['P0', 'P1', 'P2', 'P3']):
-        w = (today + timedelta(weeks=i)).isocalendar()[1]
-        cols.append(f'S{w:02d} ({prio})')
-    return cols
+    """Headers C1-G1 : formules GSheet auto-recalculées à l'ouverture (AUJOURDHUI()).
+
+    Formules de référence : planning-lde/formules.md §"Ligne 1 (C1-G1)".
+    Décalage en jours (±7) plutôt que ISOWEEKNUM()-1 pour gérer correctement
+    les fins d'année (ISOWEEKNUM()-1 retourne 0 en semaine 1 au lieu de 52).
+    """
+    return [
+        'Projet/Sous-projet',
+        'Total RAF',
+        '="S"&TEXTE(ISOWEEKNUM(AUJOURDHUI()-7);"00")',
+        '="S"&TEXTE(ISOWEEKNUM(AUJOURDHUI());"00")&" (P0)"',
+        '="S"&TEXTE(ISOWEEKNUM(AUJOURDHUI()+7);"00")&" (P1)"',
+        '="S"&TEXTE(ISOWEEKNUM(AUJOURDHUI()+14);"00")&" (P2)"',
+        '="S"&TEXTE(ISOWEEKNUM(AUJOURDHUI()+21);"00")&" (P3)"',
+    ]
 
 
 def _to_float(val) -> float:
@@ -218,7 +225,7 @@ def _f_semaines_a4() -> str:
 
 def _f_semaines_b2() -> str:
     """Cellule B2 Semaines — total RAF heures (formules.md §TCD/B2)."""
-    return '=SUM(ARRAYFORMULA(VALUE(SUBSTITUTE(C2:G2;" h.";""))))&" h."'
+    return '=SUM(ARRAYFORMULA(VALUE(SUBSTITUTE(C2:H2;" h.";""))))&" h."'
 
 
 def _f_semaines_col2(col: str) -> str:
@@ -228,7 +235,7 @@ def _f_semaines_col2(col: str) -> str:
 
 def _f_semaines_b3() -> str:
     """Cellule B3 Semaines — total RAF jours (formules.md §TCD/B3)."""
-    return '=SUM(ARRAYFORMULA(VALUE(SUBSTITUTE(C3:G3;" j.";""))))&" j."'
+    return '=SUM(ARRAYFORMULA(VALUE(SUBSTITUTE(C3:H3;" j.";""))))&" j."'
 
 
 def _f_semaines_col3(col: str) -> str:
@@ -237,18 +244,26 @@ def _f_semaines_col3(col: str) -> str:
 
 
 def _f_semaines_b_row(row: int) -> str:
-    """Colonne B Semaines ligne row — somme C:G si sous-projet (formules.md §TCD/B4)."""
-    return f'=IF(AND(A{row}<>"";LEFT(A{row};2)="- ");SUM(C{row}:G{row});"")'
+    """Colonne B Semaines ligne row — somme C:H si sous-projet (formules.md §TCD/B4).
+
+    Note : col H = "Autre" (RAF des SPs sans date cible) — incluse dans le total.
+    """
+    return f'=IF(AND(A{row}<>"";LEFT(A{row};2)="- ");SUM(C{row}:H{row});"")'
 
 
 def _f_semaines_week(row: int, offset: int) -> str:
-    """Colonne semaine Semaines ligne row — RAF semaine (formules.md §TCD/C4-G4)."""
-    if offset == 0:
-        wk = 'ISOWEEKNUM(AUJOURDHUI())'
-    elif offset < 0:
-        wk = f'(ISOWEEKNUM(AUJOURDHUI()){offset})'
+    """Colonne semaine Semaines ligne row — RAF semaine (formules.md §TCD/C4-G4).
+
+    Décalage en jours (±7j) + TEXTE "00" pour matcher col K Tâches (qui produit
+    "S"&TEXTE(xx;"00")). Sans TEXTE/padding, mismatch pour les semaines 1–9.
+    """
+    day_offset = offset * 7
+    if day_offset == 0:
+        wk = 'TEXTE(ISOWEEKNUM(AUJOURDHUI());"00")'
+    elif day_offset < 0:
+        wk = f'TEXTE(ISOWEEKNUM(AUJOURDHUI(){day_offset});"00")'
     else:
-        wk = f'(ISOWEEKNUM(AUJOURDHUI())+{offset})'
+        wk = f'TEXTE(ISOWEEKNUM(AUJOURDHUI()+{day_offset});"00")'
     r = str(row)
     return (
         '=SI(REGEXMATCH(A' + r + ';"^- ");'
@@ -256,6 +271,22 @@ def _f_semaines_week(row: int, offset: int) -> str:
         '\'Tâches\'!B:B=SUBSTITUE(A' + r + ';"- ";"");'
         '\'Tâches\'!K:K="S"&' + wk + '));"");"")'
     )
+
+
+def _f_semaines_autre(row: int) -> str:
+    """Colonne H Semaines ligne row — RAF des SPs sans date cible (col K Tâches = "")."""
+    r = str(row)
+    return (
+        '=SI(REGEXMATCH(A' + r + ';"^- ");'
+        'SIERREUR(SOMME(FILTER(\'Tâches\'!G:G;'
+        '\'Tâches\'!B:B=SUBSTITUE(A' + r + ';"- ";"");'
+        '\'Tâches\'!K:K=""));"");"")'
+    )
+
+
+def _semaines_headers() -> list:
+    """Headers A1:H1 pour l'onglet Semaines — 8 colonnes (A–G comme TCD + H=Autre)."""
+    return _tcd_headers() + ['Autre']
 
 
 # ── Initialisation GSheet ──────────────────────────────────────────────────────
@@ -315,12 +346,12 @@ def _gs_init(spreadsheet_id: str) -> dict:
         ws_t = sh.duplicate_sheet(source_sheet_id=modele_t.id, new_sheet_name='Tâches')
         _gs_set_hidden(sh, ws_t, False)       # le duplicata hérite hidden=True — forcer visible
         _gs_set_hidden(sh, modele_t, True)    # la duplication peut démasquer la source — remasquer
-        # NE PAS réécrire A1:L1 : le modèle contient déjà les en-têtes avec leur mise en forme
-        ws_t.batch_clear(['A2:L1000'])
+        # NE PAS réécrire A1:M1 : le modèle contient déjà les en-têtes avec leur mise en forme
+        ws_t.batch_clear(['A2:M1000'])
     else:
         warnings.append('_modèle_Tâches absent — onglet recréé sans mise en forme')
-        ws_t = sh.add_worksheet(title='Tâches', rows=1000, cols=12)
-        ws_t.update('A1:L1', [_TACHES_HEADERS], raw=False)
+        ws_t = sh.add_worksheet(title='Tâches', rows=1000, cols=13)
+        ws_t.update('A1:M1', [_TACHES_HEADERS], raw=False)
 
     # ── Onglet Semaines ──
     modele_s = _get_modele('Semaines')
@@ -330,15 +361,15 @@ def _gs_init(spreadsheet_id: str) -> dict:
         _gs_set_hidden(sh, modele_s, True)
     else:
         warnings.append('_modèle_Semaines absent — onglet recréé sans mise en forme')
-        ws_s = sh.add_worksheet(title='Semaines', rows=200, cols=7)
+        ws_s = sh.add_worksheet(title='Semaines', rows=200, cols=8)
 
     # Formules toujours réécrites (modèle ou non) : le modèle apporte la mise en forme,
     # pas les données — les formules doivent être fraîches après chaque init.
-    ws_s.update('A1:G1', [_tcd_headers()], raw=False)
-    row2 = ['', _f_semaines_b2()] + [_f_semaines_col2(c) for c in 'CDEFG']
-    row3 = ['', _f_semaines_b3()] + [_f_semaines_col3(c) for c in 'CDEFG']
-    ws_s.update('A2:G2', [row2], raw=False)
-    ws_s.update('A3:G3', [row3], raw=False)
+    ws_s.update('A1:H1', [_semaines_headers()], raw=False)
+    row2 = ['', _f_semaines_b2()] + [_f_semaines_col2(c) for c in 'CDEFGH']
+    row3 = ['', _f_semaines_b3()] + [_f_semaines_col3(c) for c in 'CDEFGH']
+    ws_s.update('A2:H2', [row2], raw=False)
+    ws_s.update('A3:H3', [row3], raw=False)
     ws_s.update('A4', [[_f_semaines_a4()]], raw=False)
     formulas_bg = []
     for r in range(4, _SEMAINES_MAX_ROWS + 1):
@@ -349,8 +380,9 @@ def _gs_init(spreadsheet_id: str) -> dict:
             _f_semaines_week(r, 1),
             _f_semaines_week(r, 2),
             _f_semaines_week(r, 3),
+            _f_semaines_autre(r),
         ])
-    ws_s.update(f'B4:G{_SEMAINES_MAX_ROWS}', formulas_bg, raw=False)
+    ws_s.update(f'B4:H{_SEMAINES_MAX_ROWS}', formulas_bg, raw=False)
 
     # ── Onglet TCD Projets ──
     modele_tcd = _get_modele('TCD Projets')
@@ -400,6 +432,8 @@ def _build_tcd_rows(data: dict) -> list:
     row_idx = 4  # première ligne de données (1-indexé, GSheet)
 
     for proj in data.get('projects', []):
+        if proj.get('gsheet_hidden'):
+            continue
         if not proj.get('subprojects'):
             continue
         alias = proj.get('alias') or proj['name']
@@ -417,18 +451,22 @@ def _build_tcd_rows(data: dict) -> list:
             body.append(row)
             row_idx += 1
 
-    # Rows 2 et 3 : formules Semaines (locale-aware — GSheet calcule en français).
-    # Évite l'erreur "Impossible d'analyser 0.9" quand VALUE() voit un point au lieu d'une virgule.
-    row2 = ['', _f_semaines_b2()] + [_f_semaines_col2(c) for c in 'CDEFG']
-    row3 = ['', _f_semaines_b3()] + [_f_semaines_col3(c) for c in 'CDEFG']
+    # Rows 2 et 3 : formules locale-aware (TCD à 7 colonnes — C:G, pas C:H).
+    # NB : _f_semaines_b2/b3 ont été étendues à C:H pour l'onglet Semaines (col H = Autre).
+    # Le TCD reste à 7 colonnes (Hors scope SPEC-RAF-OPTION-B) — on inline les formules
+    # C:G ici pour ne pas hériter de la plage H qui ferait planter VALUE("") sur cellule vide.
+    row2 = ['', '=SUM(ARRAYFORMULA(VALUE(SUBSTITUTE(C2:G2;" h.";""))))&" h."'] + [_f_semaines_col2(c) for c in 'CDEFG']
+    row3 = ['', '=SUM(ARRAYFORMULA(VALUE(SUBSTITUTE(C3:G3;" j.";""))))&" j."'] + [_f_semaines_col3(c) for c in 'CDEFG']
     return [row2, row3] + body
 
 
 def _gs_build_taches_rows(data: dict) -> list:
-    """Construit la liste des lignes (A:L) à pousser dans l'onglet Tâches."""
+    """Construit la liste des lignes (A:M) à pousser dans l'onglet Tâches."""
     rows = []
     row_num = 2
     for proj in data.get('projects', []):
+        if proj.get('gsheet_hidden'):
+            continue
         alias = proj.get('alias') or proj['name']
         for sp in proj.get('subprojects', []):
             rows.append([
@@ -444,6 +482,7 @@ def _gs_build_taches_rows(data: dict) -> list:
                 sp.get('commentaire', ''),               # J: Commentaire
                 _f_taches_k(row_num),                    # K: Semaine (formule)
                 _f_taches_l(row_num),                    # L: Année (formule)
+                sp.get('id', ''),                        # M: ID (clé stable pour le pull)
             ])
             row_num += 1
     return rows
@@ -462,20 +501,50 @@ def _gs_push(spreadsheet_id: str) -> dict:
     rows = _gs_build_taches_rows(data)
     n = len(rows)
 
-    # Met à jour les libellés semaines dynamiques dans Semaines et TCD Projets
-    dyn_headers = _tcd_headers()
-    ws_s.update('A1:G1', [dyn_headers], raw=False)
-    ws_tcd.update('A1:G1', [dyn_headers], raw=False)
+    # Met à jour les libellés semaines dynamiques dans Semaines (8 cols : A–G + H=Autre)
+    # et dans TCD Projets (7 cols inchangé).
+    ws_s.update('A1:H1', [_semaines_headers()], raw=False)
+    ws_tcd.update('A1:G1', [_tcd_headers()], raw=False)
 
-    # Tâches : préserve C (Type) et J (Commentaire) — édités directement en GSheet.
-    # On clear et écrit uniquement les colonnes que data.json gouverne : A-B, D-I, K-L.
-    ws_t.batch_clear(['A2:B1000', 'D2:I1000', 'K2:L1000'])
+    # Préservation C (Type) et J (Commentaire) — read-before-clear (SPEC-GSHEET-HIDDEN §5.2).
+    # Lecture de l'état actuel avant clear pour pouvoir réécrire C/J au bon emplacement
+    # (sinon : décalage silencieux dès qu'un projet ou SP du milieu disparaît).
+    existing = ws_t.get_all_values()
+    hidden_aliases = {
+        (p.get('alias') or p['name']).lower()
+        for p in data.get('projects', [])
+        if p.get('gsheet_hidden')
+    }
+    preserved_cj = {}  # (alias_lower, sp_name_lower) → (type, commentaire)
+    for r in existing[1:]:  # skip header
+        if len(r) < 2 or not r[0].strip() or not r[1].strip():
+            continue
+        alias_l = r[0].strip().lower()
+        if alias_l in hidden_aliases:
+            continue  # lignes d'un projet masqué : ne pas préserver
+        sp_l = r[1].strip().lower()
+        type_ = r[2] if len(r) > 2 else ''
+        commentaire = r[9] if len(r) > 9 else ''
+        preserved_cj[(alias_l, sp_l)] = (type_, commentaire)
+
+    # batch_clear étendu : on efface aussi C et J (réécrites ensuite via preserved_cj)
+    # Col M (sp.id) : effacée et réécrite à chaque push pour permettre le matching pull stable.
+    ws_t.batch_clear(['A2:B1000', 'C2:C1000', 'D2:I1000', 'J2:J1000', 'K2:L1000', 'M2:M1000'])
     if rows:
         last = n + 1
         ws_t.batch_update([
             {'range': f'A2:B{last}', 'values': [[r[0], r[1]] for r in rows]},
             {'range': f'D2:I{last}', 'values': [r[3:9] for r in rows]},
             {'range': f'K2:L{last}', 'values': [r[10:12] for r in rows]},
+            {'range': f'M2:M{last}', 'values': [[r[12]] for r in rows]},
+        ], value_input_option='USER_ENTERED')
+
+        # Restauration C et J pour les lignes pushées (projets visibles uniquement)
+        c_col = [[preserved_cj.get((r[0].lower(), r[1].lower()), ('', ''))[0]] for r in rows]
+        j_col = [[preserved_cj.get((r[0].lower(), r[1].lower()), ('', ''))[1]] for r in rows]
+        ws_t.batch_update([
+            {'range': f'C2:C{last}', 'values': c_col},
+            {'range': f'J2:J{last}', 'values': j_col},
         ], value_input_option='USER_ENTERED')
 
     # TCD Projets : construit directement depuis data.json (pas via les formules Semaines
@@ -487,8 +556,13 @@ def _gs_push(spreadsheet_id: str) -> dict:
         # raw=False (USER_ENTERED) : les formules de col B sont interprétées par GSheet
         ws_tcd.update(f'A2:G{len(tcd_rows) + 1}', tcd_rows, raw=False)
 
-    _log([{'action': 'push-to-gsheet', 'subprojects': n}])
-    return {'ok': True, 'pushed': n}
+    hidden_projects = [
+        (p.get('alias') or p['name'])
+        for p in data.get('projects', [])
+        if p.get('gsheet_hidden')
+    ]
+    _log([{'action': 'push-to-gsheet', 'subprojects': n, 'hidden': len(hidden_projects)}])
+    return {'ok': True, 'pushed': n, 'hidden_projects': hidden_projects}
 
 
 def _gs_push_preview(data: dict) -> dict:
@@ -506,7 +580,17 @@ def _gs_push_preview(data: dict) -> dict:
             'titre': r[7],
             'statut': r[8],
         })
-    return {'ok': True, 'count': len(preview), 'rows': preview}
+    hidden_projects = [
+        (p.get('alias') or p['name'])
+        for p in data.get('projects', [])
+        if p.get('gsheet_hidden')
+    ]
+    return {
+        'ok': True,
+        'count': len(preview),
+        'rows': preview,
+        'hidden_projects': hidden_projects,
+    }
 
 
 # ── Mise en forme GSheet (manuelle, une seule fois) ───────────────────────────
@@ -626,8 +710,31 @@ def _find_sp(data: dict, alias: str, sp_name: str):
     return None, None
 
 
+def _find_sp_by_id(data: dict, project_id: str, sp_id: str):
+    """Retourne (proj, sp) en cherchant par project.id + sp.id.
+
+    Utilisé par l'endpoint /api/gsheet/write-sp-field (SPEC-RAF-OPTION-B §11).
+    Retourne (proj, None) si le projet existe mais pas le sp, (None, None) si introuvable.
+    """
+    for proj in data.get('projects', []):
+        if proj.get('id') == project_id:
+            for sp in proj.get('subprojects', []):
+                if sp.get('id') == sp_id:
+                    return proj, sp
+            return proj, None
+    return None, None
+
+
 def _gs_pull_taches(spreadsheet_id: str) -> dict:
     """Tire depuis Tâches : type, qualif, target, charge, RAF, titre, statut, commentaire → data.json.
+
+    Matching :
+    - Priorité à col M (sp.id stable) — permet le renommage de col B (sp.name)
+      sans casser la correspondance. Si col M trouvée et sp.name diffère, propage.
+    - Fallback nom (col B) si col M absente (transition avant premier push post-déploiement).
+
+    Diagnostic : retourne created_projects/created_subprojects pour signaler les
+    créations à la volée dues à un alias/nom inconnu (SPEC-RAF-OPTION-B §12).
 
     Ne touche pas aux étapes.
     """
@@ -637,10 +744,22 @@ def _gs_pull_taches(spreadsheet_id: str) -> dict:
     rows = ws.get_all_values()
 
     if len(rows) < 2:
-        return {'ok': True, 'updated': 0}
+        return {
+            'ok': True, 'updated': 0,
+            'ignored_projects': [],
+            'created_projects': [], 'created_subprojects': [],
+        }
 
     data = _load_data()
     updated = 0
+    hidden_aliases = {
+        (p.get('alias') or p['name']).lower()
+        for p in data.get('projects', [])
+        if p.get('gsheet_hidden')
+    }
+    ignored: list = []
+    created_projects: list = []
+    created_subprojects: list = []
 
     for row in rows[1:]:  # saute header
         if len(row) < 2:
@@ -649,7 +768,23 @@ def _gs_pull_taches(spreadsheet_id: str) -> dict:
         if not alias or not sp_name:
             continue
 
-        proj, sp = _find_sp(data, alias, sp_name)
+        # Filtre « masqué gagne » avant _find_sp : un alias correspondant
+        # à un projet masqué est ignoré indépendamment de l'ordre des projets.
+        if alias.lower() in hidden_aliases:
+            if alias not in ignored:
+                ignored.append(alias)
+            continue
+
+        # Col M : sp.id stable (transition supportée : col M peut être vide pour les
+        # lignes ajoutées dans GSheet avant le premier push post-déploiement).
+        sp_id_from_sheet = row[12].strip() if len(row) > 12 else ''
+
+        # Recherche projet via alias (toujours).
+        proj = next(
+            (p for p in data.get('projects', [])
+             if (p.get('alias') or p['name']).lower() == alias.lower()),
+            None,
+        )
         if proj is None:
             proj_ids = {p['id'] for p in data['projects']}
             new_id = _unique_id(_slugify(alias), proj_ids)
@@ -659,6 +794,23 @@ def _gs_pull_taches(spreadsheet_id: str) -> dict:
                 'folder': '', 'docs': [], 'subprojects': [],
             }
             data['projects'].append(proj)
+            created_projects.append(alias)
+
+        # Recherche sp : priorité id (col M), fallback nom.
+        sp = None
+        if sp_id_from_sheet:
+            sp = next(
+                (s for s in proj.get('subprojects', []) if s.get('id') == sp_id_from_sheet),
+                None,
+            )
+            if sp and sp_name and sp_name != sp.get('name', ''):
+                sp['name'] = sp_name  # renommage propagé
+        if sp is None:
+            # Fallback nom (col M vide, ou id non trouvé) — comportement historique.
+            sp = next(
+                (s for s in proj.get('subprojects', []) if s['name'].lower() == sp_name.lower()),
+                None,
+            )
         if sp is None:
             sp_ids = {s['id'] for s in proj.get('subprojects', [])}
             sp_id = _unique_id(_slugify(sp_name), sp_ids)
@@ -674,6 +826,7 @@ def _gs_pull_taches(spreadsheet_id: str) -> dict:
                 ],
             }
             proj.setdefault('subprojects', []).append(sp)
+            created_subprojects.append(sp_name)
 
         type_  = row[2].strip() if len(row) > 2 else ''
         qualif = row[3].strip() if len(row) > 3 else ''
@@ -706,8 +859,16 @@ def _gs_pull_taches(spreadsheet_id: str) -> dict:
         updated += 1
 
     _save_data(data)
-    _log([{'action': 'pull-from-gsheet', 'updated': updated}])
-    return {'ok': True, 'updated': updated}
+    _log([{'action': 'pull-from-gsheet', 'updated': updated, 'ignored': len(ignored),
+           'created_projects': len(created_projects),
+           'created_subprojects': len(created_subprojects)}])
+    return {
+        'ok': True,
+        'updated': updated,
+        'ignored_projects': ignored,
+        'created_projects': created_projects,
+        'created_subprojects': created_subprojects,
+    }
 
 
 def _gs_pull_taches_preview(spreadsheet_id: str) -> dict:
@@ -718,12 +879,22 @@ def _gs_pull_taches_preview(spreadsheet_id: str) -> dict:
     rows = ws.get_all_values()
 
     data = _load_data()
+    hidden_aliases = {
+        (p.get('alias') or p['name']).lower()
+        for p in data.get('projects', [])
+        if p.get('gsheet_hidden')
+    }
+    ignored: list = []
     changes = []
     for row in rows[1:]:
         if len(row) < 2:
             continue
         alias, sp_name = row[0].strip(), row[1].strip()
         if not alias or not sp_name:
+            continue
+        if alias.lower() in hidden_aliases:
+            if alias not in ignored:
+                ignored.append(alias)
             continue
         proj, sp = _find_sp(data, alias, sp_name)
         if proj is None:
@@ -755,7 +926,47 @@ def _gs_pull_taches_preview(spreadsheet_id: str) -> dict:
                 diff['commentaire'] = {'avant': sp.get('commentaire', ''), 'apres': new_co}
         if diff:
             changes.append({'projet': alias, 'sous_projet': sp_name, 'diff': diff})
-    return {'ok': True, 'changes': changes}
+    return {'ok': True, 'changes': changes, 'ignored_projects': ignored}
+
+
+# ── Écriture ciblée d'un champ SP dans la GSheet (write-sp-field) ─────────────
+
+_WRITE_SP_FIELD_TO_COL = {'charge': 'F', 'raf': 'G'}
+
+
+def _gs_write_sp_field(spreadsheet_id: str, sp_id: str, sp_name: str, alias: str,
+                      field: str, value) -> dict:
+    """Écrit une cellule (col F=charge, col G=raf) directement dans Tâches sans push global.
+
+    Identifie la ligne : col M (sp.id) en priorité, fallback alias (col A) + nom (col B).
+    Retourne {'ok': True, 'row': N} ou un dict d'erreur. SPEC-RAF-OPTION-B §11.
+    """
+    gc = _get_gspread_client()
+    sh = gc.open_by_key(spreadsheet_id)
+    ws = sh.worksheet('Tâches')
+    rows = ws.get_all_values()
+
+    target_row = None
+    for i, row in enumerate(rows[1:], start=2):  # ligne GSheet = i (1-indexed, header=1)
+        # Priorité col M (sp.id stable)
+        if len(row) > 12 and row[12].strip() and row[12].strip() == sp_id:
+            target_row = i
+            break
+    if target_row is None:
+        # Fallback alias + nom
+        for i, row in enumerate(rows[1:], start=2):
+            if (len(row) > 1
+                    and row[0].strip().lower() == alias.lower()
+                    and row[1].strip().lower() == sp_name.lower()):
+                target_row = i
+                break
+
+    if target_row is None:
+        return {'ok': False, 'error': 'Ligne GSheet introuvable pour ce SP'}
+
+    col = _WRITE_SP_FIELD_TO_COL[field]
+    ws.update(f'{col}{target_row}', [[value]], value_input_option='USER_ENTERED')
+    return {'ok': True, 'row': target_row}
 
 
 # ── Pull depuis TCD Projets ────────────────────────────────────────────────────
@@ -899,13 +1110,6 @@ def _target_from_qualif(qualif: str) -> str | None:
     return d.isoformat()
 
 
-def _recalc_charges(sp: dict):
-    """Recalcule charge/raf du sous-projet comme somme des étapes non-na."""
-    active = [s for s in sp.get('steps', []) if s.get('status') != 'na']
-    sp['charge'] = sum(s.get('charge', 0.0) for s in active)
-    sp['raf'] = sum(s.get('raf', 0.0) for s in active)
-
-
 def _resolve_project_path(project_id: str):
     """Retourne le chemin absolu du dossier du projet, ou None."""
     rel = _PROJECT_FOLDERS.get(project_id)
@@ -1000,12 +1204,16 @@ class Handler(http.server.BaseHTTPRequestHandler):
             self._handle_pull_tcd_preview()
         elif path == '/api/pull-from-tcd':
             self._handle_pull_tcd()
+        elif path == '/api/gsheet/write-sp-field':
+            self._handle_gsheet_write_sp_field()
         elif path == '/api/save-project':
             self._handle_save_project()
         elif path == '/api/remove-subproject':
             self._handle_remove_subproject()
         elif path == '/api/remove-project':
             self._handle_remove_project()
+        elif path == '/api/toggle-gsheet-hidden':
+            self._handle_toggle_gsheet_hidden()
         elif path == '/api/add-doc':
             self._handle_add_doc()
         elif path == '/api/save-doc':
@@ -1177,7 +1385,6 @@ class Handler(http.server.BaseHTTPRequestHandler):
                     existing_by_name[name].update(step)
                 else:
                     sp['steps'].append(dict(step))
-            _recalc_charges(sp)
 
         _save_data(data)
         _log([{'action': 'save-subproject', 'project': project_id, 'subproject': sp_id}])
@@ -1246,6 +1453,38 @@ class Handler(http.server.BaseHTTPRequestHandler):
             return
         _save_data(data)
         self._json_ok({'ok': True})
+
+    def _handle_toggle_gsheet_hidden(self):
+        try:
+            payload = self._read_json_body()
+        except OverflowError:
+            self._json_error('Payload trop grand (> 1 Mo)', 413)
+            return
+        except (json.JSONDecodeError, UnicodeDecodeError) as e:
+            self._json_error(f'JSON invalide : {e}', 400)
+            return
+
+        project_id = payload.get('projectId', '')
+        if not project_id:
+            self._json_error('projectId requis', 400)
+            return
+
+        try:
+            data = _load_data()
+        except ValueError as e:
+            self._json_error(str(e), 500)
+            return
+
+        proj = next((p for p in data['projects'] if p['id'] == project_id), None)
+        if not proj:
+            self._json_error('Projet introuvable', 404)
+            return
+
+        new_value = not proj.get('gsheet_hidden', False)
+        proj['gsheet_hidden'] = new_value
+        _save_data(data)
+        _log([{'action': 'toggle-gsheet-hidden', 'project': project_id, 'gsheet_hidden': new_value}])
+        self._json_ok({'ok': True, 'gsheet_hidden': new_value})
 
     # ── POST handlers — Archives ─────────────────────────────────────────────
 
@@ -2012,28 +2251,86 @@ class Handler(http.server.BaseHTTPRequestHandler):
             self._json_error(f'Pull Tâches échoué : {e}', 500)
 
     def _handle_pull_tcd_preview(self):
+        # Désactivé — refonte prévue dans un sprint dédié (SPEC-RAF-OPTION-B §8).
+        # _gs_pull_tcd_preview reste défini pour réactivation future.
         if not self._drain_body():
             return
-        try:
-            sid = _get_spreadsheet_id()
-            result = _gs_pull_tcd_preview(sid)
-            self._json_ok(result)
-        except ValueError as e:
-            self._json_error(str(e), 500)
-        except Exception as e:
-            self._json_error(f'Preview pull TCD échoué : {e}', 500)
+        self._json_ok({
+            'ok': False,
+            'disabled': True,
+            'message': 'Pull TCD désactivé — refonte prévue (sprint suivant).',
+        })
 
     def _handle_pull_tcd(self):
+        # Désactivé — refonte prévue dans un sprint dédié (SPEC-RAF-OPTION-B §8).
+        # _gs_pull_tcd reste défini pour réactivation future.
         if not self._drain_body():
             return
+        self._json_ok({
+            'ok': False,
+            'disabled': True,
+            'message': 'Pull TCD désactivé — refonte prévue (sprint suivant).',
+        })
+
+    def _handle_gsheet_write_sp_field(self):
+        """Écriture ciblée d'un champ SP (raf|charge) dans GSheet (SPEC-RAF-OPTION-B §11).
+
+        Réutilise le squelette de _handle_save_subproject : CORS (via _json_ok),
+        MAX_PAYLOAD (via _read_json_body), validation payload, sanitisation, métier, JSON.
+        """
         try:
-            sid = _get_spreadsheet_id()
-            result = _gs_pull_tcd(sid)
-            self._json_ok(result)
+            payload = self._read_json_body()
+        except OverflowError:
+            self._json_error('Payload trop grand (> 1 Mo)', 413)
+            return
+        except (json.JSONDecodeError, UnicodeDecodeError) as e:
+            self._json_error(f'JSON invalide : {e}', 400)
+            return
+
+        project_id = payload.get('projectId')
+        sp_id = payload.get('subprojectId')
+        field = payload.get('field')
+        value = payload.get('value')
+
+        if not project_id:
+            self._json_error('projectId manquant', 400)
+            return
+        if not sp_id:
+            self._json_error('subprojectId manquant', 400)
+            return
+        if field not in _WRITE_SP_FIELD_TO_COL:
+            self._json_error(
+                f'field non autorisé : {field!r} (attendu : raf|charge)', 400,
+            )
+            return
+        if value is None:
+            self._json_error('value manquant', 400)
+            return
+
+        try:
+            data = _load_data()
         except ValueError as e:
             self._json_error(str(e), 500)
+            return
+
+        proj, sp = _find_sp_by_id(data, project_id, sp_id)
+        if proj is None or sp is None:
+            self._json_ok({'ok': False, 'error': 'SP introuvable'})
+            return
+
+        alias = proj.get('alias') or proj.get('name', '')
+        sp_name = sp.get('name', '')
+
+        try:
+            sid = _get_spreadsheet_id()
+            result = _gs_write_sp_field(sid, sp_id, sp_name, alias, field, value)
+            self._json_ok(result)
+        except ValueError as e:
+            # spreadsheet_id absent — config GSheet incomplète
+            self._json_ok({'ok': False, 'gsheet_unavailable': True, 'error': str(e)})
         except Exception as e:
-            self._json_error(f'Pull TCD échoué : {e}', 500)
+            # GSheet non joignable (token expiré, réseau, etc.) → non bloquant
+            self._json_ok({'ok': False, 'gsheet_unavailable': True, 'error': str(e)})
 
 
 # ── Entrypoint ─────────────────────────────────────────────────────────────────

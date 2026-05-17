@@ -72,12 +72,20 @@ export async function pullFromTcd() {
   return _post('/api/pull-from-tcd', {});
 }
 
+export async function writeSpField(payload) {
+  return _post('/api/gsheet/write-sp-field', payload);
+}
+
 export async function removeSubproject(payload) {
   return _post('/api/remove-subproject', payload);
 }
 
 export async function removeProject(projectId) {
   return _post('/api/remove-project', { projectId });
+}
+
+export async function toggleGsheetHidden(projectId) {
+  return _post('/api/toggle-gsheet-hidden', { projectId });
 }
 
 // ── Docs (SPEC-DOCS-MD.md §4) ──────────────────────────────────────────────────

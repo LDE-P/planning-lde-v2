@@ -1,6 +1,35 @@
 // Rendu, interactions, événements
 
-import { saveSubproject, addSubproject, addProject, saveProject, openFolder, initGsheet, formatGsheet, saveGsheetTemplate, pushToGsheet, pullFromGsheet, pullFromTcd, removeSubproject, removeProject, addDoc, saveDoc, removeDoc, openFile, fetchArchives, archiveSubproject, archiveProject, restoreSubproject, restoreProject, deleteArchiveSubproject, deleteArchiveProject } from './api.js';
+import { saveSubproject, addSubproject, addProject, saveProject, openFolder, initGsheet, formatGsheet, saveGsheetTemplate, pushToGsheet, pullFromGsheet, pullFromTcd, removeSubproject, removeProject, addDoc, saveDoc, removeDoc, openFile, fetchArchives, archiveSubproject, archiveProject, restoreSubproject, restoreProject, deleteArchiveSubproject, deleteArchiveProject, toggleGsheetHidden, writeSpField } from './api.js';
+
+// ── Tracking push/pull (SPEC-RAF-OPTION-B §2) — persistés en localStorage ────
+// Pour survivre aux reloads : un reload sans persistance bypasserait la modale.
+const LS_LAST_PULL  = 'planning_lastPullTime';
+const LS_LAST_PUSH  = 'planning_lastPushTime';
+const LS_LOCAL_EDIT = 'planning_localEditSinceLastPull';
+
+let _lastPullTime  = localStorage.getItem(LS_LAST_PULL)  ? new Date(localStorage.getItem(LS_LAST_PULL))  : null;
+let _lastPushTime  = localStorage.getItem(LS_LAST_PUSH)  ? new Date(localStorage.getItem(LS_LAST_PUSH))  : null;
+let _localEditSinceLastPull = localStorage.getItem(LS_LOCAL_EDIT) === 'true';
+
+function _markPull() {
+  _lastPullTime = new Date();
+  localStorage.setItem(LS_LAST_PULL, _lastPullTime.toISOString());
+  _localEditSinceLastPull = false;
+  localStorage.setItem(LS_LOCAL_EDIT, 'false');
+}
+function _markPush() {
+  _lastPushTime = new Date();
+  localStorage.setItem(LS_LAST_PUSH, _lastPushTime.toISOString());
+}
+function _markLocalEdit() {
+  _localEditSinceLastPull = true;
+  localStorage.setItem(LS_LOCAL_EDIT, 'true');
+}
+function _needsPushConfirm() {
+  return _localEditSinceLastPull ||
+    (_lastPushTime !== null && (_lastPullTime === null || _lastPullTime < _lastPushTime));
+}
 
 // ── État global ────────────────────────────────────────────────────────────────
 
@@ -138,8 +167,9 @@ function renderProject(proj) {
       <button class="icon-btn btn-open-folder" title="Ouvrir le dossier">📁</button>
       <button class="icon-btn btn-add-sp" title="Nouveau sous-projet">＋</button>
       <button class="icon-btn btn-rename-alias" title="Renommer l'alias GSheet">✎</button>
+      <button class="icon-btn btn-toggle-gsheet${proj.gsheet_hidden ? '' : ' gsheet-visible'}" title="${proj.gsheet_hidden ? 'Ce projet est exclu de la GSheet — cliquer pour le réinclure' : 'Ce projet est inclus dans la GSheet — cliquer pour l’exclure'}">👁</button>
       <button class="icon-btn btn-archive-proj" title="Archiver le projet">🗃</button>
-      <button class="icon-btn btn-del-proj" title="Supprimer le projet">🗑</button>
+      <button class="icon-btn icon-btn-danger btn-del-proj" title="Supprimer le projet">🗑</button>
     </div>
   `;
   card.appendChild(hdr);
@@ -157,6 +187,25 @@ function renderProject(proj) {
   hdr.querySelector('.btn-rename-alias').addEventListener('click', e => {
     e.stopPropagation();
     openRenameAliasModal(proj);
+  });
+
+  hdr.querySelector('.btn-toggle-gsheet').addEventListener('click', e => {
+    e.stopPropagation();
+    const isHidden = !!proj.gsheet_hidden;
+    const title = isHidden ? 'Réinclure dans la GSheet ?' : 'Exclure de la GSheet ?';
+    const msg = isHidden
+      ? `"${proj.name}" sera à nouveau inclus dans les push et les pull. Il réapparaîtra dans l'onglet Tâches au prochain push.`
+      : `"${proj.name}" ne sera plus inclus dans les push ni les pull. Le prochain push supprimera ses lignes existantes dans l'onglet Tâches.`;
+    const okLabel = isHidden ? 'Réinclure' : 'Exclure';
+    openConfirm(title, msg, () => {
+      toggleGsheetHidden(proj.id)
+        .then(r => {
+          proj.gsheet_hidden = !!r.gsheet_hidden;
+          toast(r.gsheet_hidden ? `"${proj.name}" exclu de la GSheet.` : `"${proj.name}" réinclus dans la GSheet.`);
+          renderAll();
+        })
+        .catch(err => toast(err.message, 'error'));
+    }, okLabel);
   });
 
   hdr.querySelector('.btn-archive-proj').addEventListener('click', e => {
@@ -250,7 +299,7 @@ function renderSubproject(projectId, sp) {
 
   const renameBtn = document.createElement('button');
   renameBtn.className = 'icon-btn';
-  renameBtn.title = 'Renommer';
+  renameBtn.title = 'Renommer ce sous-projet';
   renameBtn.textContent = '✎';
   renameBtn.style.cssText = 'font-size:11px;opacity:0;transition:opacity 0.15s;';
   renameBtn.addEventListener('click', e => {
@@ -258,6 +307,7 @@ function renderSubproject(projectId, sp) {
     startInlineEdit(nameEl, sp.name, newName => {
       sp.name = newName;
       nameEl.textContent = newName;
+      _markLocalEdit();
       saveSubproject({ projectId, subprojectId: sp.id, name: newName })
         .then(() => toast('Sous-projet renommé.'))
         .catch(err => toast(err.message, 'error'));
@@ -267,8 +317,9 @@ function renderSubproject(projectId, sp) {
 
   const archBtn = document.createElement('button');
   archBtn.className = 'icon-btn';
-  archBtn.title = 'Archiver';
+  archBtn.title = 'Archiver ce sous-projet';
   archBtn.textContent = '🗃';
+  archBtn.className = 'icon-btn';
   archBtn.style.cssText = 'font-size:11px;opacity:0;transition:opacity 0.15s;';
   archBtn.addEventListener('click', e => {
     e.stopPropagation();
@@ -323,8 +374,9 @@ function renderSubproject(projectId, sp) {
 
   const delBtn = document.createElement('button');
   delBtn.className = 'icon-btn';
-  delBtn.title = 'Supprimer';
+  delBtn.title = 'Supprimer ce sous-projet';
   delBtn.textContent = '🗑';
+  delBtn.className = 'icon-btn icon-btn-danger';
   delBtn.style.cssText = 'font-size:11px;opacity:0;transition:opacity 0.15s;';
   delBtn.addEventListener('click', e => {
     e.stopPropagation();
@@ -355,6 +407,7 @@ function renderSubproject(projectId, sp) {
       sp.status = newStatus;
       badge.className = `status-badge status-${newStatus}`;
       badge.textContent = STATUS_LABELS[newStatus];
+      _markLocalEdit();
       saveSubproject({ projectId, subprojectId: sp.id, status: newStatus })
         .then(() => { toast('Statut mis à jour.'); updateStats(); renderAll(); })
         .catch(err => toast(err.message, 'error'));
@@ -385,9 +438,14 @@ function renderSubproject(projectId, sp) {
   if (sp.charge !== undefined || sp.raf !== undefined) {
     const charges = document.createElement('span');
     charges.className = 'sp-charges';
-    const charge = sp.charge ?? '?';
-    const raf = sp.raf ?? '?';
-    charges.innerHTML = `${charge}h / <span class="raf">${raf}h</span>`;
+    charges.title = 'Cliquer pour modifier charge / RAF';
+    const renderCharges = () => {
+      const charge = sp.charge ?? '?';
+      const raf = sp.raf ?? '?';
+      charges.innerHTML = `${charge}h / <span class="raf">${raf}h</span>`;
+    };
+    renderCharges();
+    charges.addEventListener('click', () => startInlineEditCharges(charges, sp, projectId, renderCharges));
     meta.appendChild(charges);
   }
 
@@ -399,6 +457,7 @@ function renderSubproject(projectId, sp) {
     targetEl.addEventListener('click', () => startInlineEdit(targetEl, sp.target, newVal => {
       sp.target = newVal;
       targetEl.textContent = newVal;
+      _markLocalEdit();
       saveSubproject({ projectId, subprojectId: sp.id, target: newVal })
         .then(() => toast('Date mise à jour.'))
         .catch(err => toast(err.message, 'error'));
@@ -441,6 +500,7 @@ function renderStep(projectId, sp, step) {
       badge.className = `step-status-badge status-${newStatus}`;
       badge.textContent = STATUS_LABELS[newStatus];
       nameEl.className = `step-name${newStatus === 'done' ? ' done' : ''}`;
+      _markLocalEdit();
       saveSubproject({ projectId, subprojectId: sp.id, steps: [{ name: step.name, status: newStatus }] })
         .then(() => toast('Étape mise à jour.'))
         .catch(err => toast(err.message, 'error'));
@@ -516,6 +576,27 @@ function openConfirm(title, msg, onConfirm, okLabel = 'Supprimer') {
   cancel.onclick = close;
 }
 
+// Promise-based variante pour la confirmation push (SPEC-RAF-OPTION-B §3).
+function openPushConfirm() {
+  return new Promise(resolve => {
+    document.getElementById('modal-confirm-title').textContent = 'Confirmer le push ?';
+    document.getElementById('modal-confirm-msg').textContent =
+      "Attention : vous n'avez pas fait de pull depuis votre dernier push ou depuis vos dernières modifications locales. Des données saisies dans la GSheet pourraient être écrasées. Continuer le push ?";
+    document.getElementById('modal-confirm').classList.add('open');
+    const ok = document.getElementById('modal-confirm-ok');
+    const cancel = document.getElementById('modal-confirm-cancel');
+    const close = () => document.getElementById('modal-confirm').classList.remove('open');
+    const okClone = ok.cloneNode(true);
+    okClone.textContent = 'Continuer';
+    okClone.style.background = '';
+    okClone.style.borderColor = '';
+    okClone.style.color = '';
+    ok.replaceWith(okClone);
+    okClone.addEventListener('click', () => { close(); resolve(true); }, { once: true });
+    cancel.onclick = () => { close(); resolve(false); };
+  });
+}
+
 function showResults(title, lines) {
   document.getElementById('modal-results-title').textContent = title;
   const body = document.getElementById('modal-results-body');
@@ -557,6 +638,122 @@ function startInlineEdit(el, current, onSave) {
   });
 }
 
+// SPEC-RAF-OPTION-B §1 (ui.js) — édition inline charge/raf avec automatisme GSheet.
+function startInlineEditCharges(el, sp, projectId, renderCharges) {
+  const initialCharge = sp.charge ?? 0;
+  const initialRaf = sp.raf ?? 0;
+
+  const wrapper = document.createElement('span');
+  wrapper.className = 'sp-charges-edit';
+
+  const inCharge = document.createElement('input');
+  inCharge.className = 'inline-edit';
+  inCharge.value = String(initialCharge);
+  inCharge.style.width = '50px';
+  inCharge.title = 'Charge (h)';
+
+  const sep = document.createElement('span');
+  sep.textContent = ' h / ';
+
+  const inRaf = document.createElement('input');
+  inRaf.className = 'inline-edit';
+  inRaf.value = String(initialRaf);
+  inRaf.style.width = '50px';
+  inRaf.title = 'RAF (h)';
+
+  const suffix = document.createElement('span');
+  suffix.textContent = ' h';
+
+  wrapper.append(inCharge, sep, inRaf, suffix);
+  el.replaceWith(wrapper);
+  inCharge.focus();
+  inCharge.select();
+
+  let committed = false;
+  const parse = v => {
+    const s = String(v).trim().replace(',', '.');
+    if (s === '') return null;
+    const n = parseFloat(s);
+    if (Number.isNaN(n) || n < 0) return NaN;
+    return n;
+  };
+
+  const cancel = () => {
+    if (committed) return;
+    committed = true;
+    wrapper.replaceWith(el);
+  };
+
+  const commit = async () => {
+    if (committed) return;
+    const newCharge = parse(inCharge.value);
+    const newRaf = parse(inRaf.value);
+    if (Number.isNaN(newCharge) || Number.isNaN(newRaf)) {
+      // Saisie invalide (non numérique ou négative) — feedback inline, pas de sauvegarde.
+      inCharge.style.borderColor = Number.isNaN(newCharge) ? 'var(--blocked)' : '';
+      inRaf.style.borderColor = Number.isNaN(newRaf) ? 'var(--blocked)' : '';
+      toast('Valeur invalide : nombre positif attendu (virgule ou point).', 'error');
+      return;
+    }
+    committed = true;
+    const charge = newCharge ?? initialCharge;
+    const raf = newRaf ?? initialRaf;
+
+    // Restitue l'affichage avant les appels réseau pour ne pas bloquer l'UI.
+    sp.charge = charge;
+    sp.raf = raf;
+    wrapper.replaceWith(el);
+    renderCharges();
+
+    try {
+      await saveSubproject({ projectId, subprojectId: sp.id, charge, raf });
+    } catch (err) {
+      toast(err.message || 'Erreur sauvegarde locale', 'error');
+      return;
+    }
+
+    // Écriture GSheet ciblée — non bloquante : une erreur ne casse pas la sauvegarde locale.
+    try {
+      const rc = await writeSpField({ projectId, subprojectId: sp.id, field: 'charge', value: charge });
+      if (rc && rc.gsheet_unavailable) {
+        toast("Sauvegarde GSheet échouée — valeur enregistrée en local, pensez à pusher.", 'warning');
+      }
+    } catch (_) {
+      toast("Sauvegarde GSheet échouée — valeur enregistrée en local, pensez à pusher.", 'warning');
+    }
+    try {
+      const rr = await writeSpField({ projectId, subprojectId: sp.id, field: 'raf', value: raf });
+      if (rr && rr.gsheet_unavailable) {
+        toast("Sauvegarde GSheet échouée — valeur enregistrée en local, pensez à pusher.", 'warning');
+      }
+    } catch (_) {
+      toast("Sauvegarde GSheet échouée — valeur enregistrée en local, pensez à pusher.", 'warning');
+    }
+
+    fetchStateAndRefresh();
+  };
+
+  let blurTimer = null;
+  const onBlur = () => {
+    // blur peut être déclenché par le passage d'un input à l'autre — laisser une frame.
+    clearTimeout(blurTimer);
+    blurTimer = setTimeout(() => {
+      if (document.activeElement !== inCharge && document.activeElement !== inRaf) {
+        commit();
+      }
+    }, 50);
+  };
+  inCharge.addEventListener('blur', onBlur);
+  inRaf.addEventListener('blur', onBlur);
+
+  const onKey = e => {
+    if (e.key === 'Enter') { e.preventDefault(); commit(); }
+    if (e.key === 'Escape') { e.preventDefault(); cancel(); }
+  };
+  inCharge.addEventListener('keydown', onKey);
+  inRaf.addEventListener('keydown', onKey);
+}
+
 // ── Modals ─────────────────────────────────────────────────────────────────────
 
 function openRenameAliasModal(proj) {
@@ -575,6 +772,7 @@ function openRenameAliasModal(proj) {
     if (!newAlias) return;
     document.getElementById('modal-rename-alias').classList.remove('open');
     proj.alias = newAlias;
+    _markLocalEdit();
     saveProject({ projectId: proj.id, alias: newAlias })
       .then(() => { toast('Alias mis à jour.'); renderAll(); })
       .catch(err => toast(err.message, 'error'));
@@ -825,6 +1023,7 @@ function renderDocCard(proj, doc) {
   const delBtn = document.createElement('button');
   delBtn.textContent = '🗑';
   delBtn.title = 'Supprimer';
+  delBtn.className = 'icon-btn icon-btn-danger';
   delBtn.addEventListener('click', () => {
     openConfirm(
       'Supprimer le document ?',
@@ -932,7 +1131,7 @@ function renderArchivedProject(proj) {
     <div style="flex:1"></div>
     <div class="project-actions">
       <button class="icon-btn btn-restore-proj" title="Restaurer le projet">↩</button>
-      <button class="icon-btn btn-delete-archive-proj" title="Supprimer définitivement">🗑</button>
+      <button class="icon-btn icon-btn-danger btn-delete-archive-proj" title="Supprimer définitivement">🗑</button>
     </div>
   `;
   card.appendChild(hdr);
@@ -1068,6 +1267,7 @@ function renderArchivedSubproject(projectId, sp) {
   delBtn.className = 'icon-btn';
   delBtn.title = 'Supprimer définitivement';
   delBtn.textContent = '🗑';
+  delBtn.className = 'icon-btn icon-btn-danger';
   delBtn.style.cssText = 'font-size:11px;opacity:0;transition:opacity 0.15s;';
   delBtn.addEventListener('click', e => {
     e.stopPropagation();
@@ -1368,12 +1568,22 @@ export function init(state) {
 
   document.getElementById('btn-push-gsheet').addEventListener('click', async () => {
     const btn = document.getElementById('btn-push-gsheet');
+    if (_needsPushConfirm()) {
+      const ok = await openPushConfirm();
+      if (!ok) return;
+    }
     setLoading(btn, true);
     gsBtns.forEach(id => { if (id !== 'btn-push-gsheet') document.getElementById(id).disabled = true; });
     try {
       const r = await pushToGsheet();
+      _markPush();
       const lines = [`${r.pushed ?? '?'} sous-projets poussés vers GSheet.`];
       if (r.rows) r.rows.forEach(row => lines.push(`  • ${row.projet} — ${row.sous_projet}`));
+      if (r.hidden_projects && r.hidden_projects.length) {
+        lines.push('');
+        lines.push(`⚠ Projets exclus de la GSheet (leurs lignes ont été supprimées) :`);
+        r.hidden_projects.forEach(name => lines.push(`  • ${name}`));
+      }
       showResults('Push GSheet', lines);
     } catch(err) { toast(err.message, 'error'); }
     finally {
@@ -1388,7 +1598,24 @@ export function init(state) {
     gsBtns.forEach(id => { if (id !== 'btn-pull-gsheet') document.getElementById(id).disabled = true; });
     try {
       const r = await pullFromGsheet();
-      showResults('Pull Tâches', [`${r.updated ?? '?'} sous-projets mis à jour.`]);
+      _markPull();
+      const lines = [`${r.updated ?? '?'} sous-projets mis à jour.`];
+      if (r.ignored_projects && r.ignored_projects.length) {
+        lines.push('');
+        lines.push(`ℹ ${r.ignored_projects.length} alias ignoré(s) (projets exclus de la GSheet) :`);
+        r.ignored_projects.forEach(name => lines.push(`  • ${name}`));
+      }
+      if (r.created_projects?.length) {
+        lines.push('');
+        lines.push(`⚠ ${r.created_projects.length} projet(s) créé(s) à la volée (alias inconnu) :`);
+        r.created_projects.forEach(a => lines.push(`  • ${a}`));
+      }
+      if (r.created_subprojects?.length) {
+        lines.push('');
+        lines.push(`⚠ ${r.created_subprojects.length} SP créé(s) à la volée (nom inconnu) :`);
+        r.created_subprojects.forEach(n => lines.push(`  • ${n}`));
+      }
+      showResults('Pull Tâches', lines);
       fetchStateAndRefresh();
     } catch(err) { toast(err.message, 'error'); }
     finally {
@@ -1397,14 +1624,22 @@ export function init(state) {
     }
   });
 
-  document.getElementById('btn-pull-tcd').addEventListener('click', async () => {
+  // Pull TCD désactivé (SPEC-RAF-OPTION-B §8) — refonte prévue dans un sprint dédié.
+  const btnPullTcd = document.getElementById('btn-pull-tcd');
+  btnPullTcd.disabled = true;
+  btnPullTcd.title = 'Désactivé — refonte en cours (sprint suivant)';
+  btnPullTcd.addEventListener('click', async () => {
     const btn = document.getElementById('btn-pull-tcd');
     setLoading(btn, true);
     gsBtns.forEach(id => { if (id !== 'btn-pull-tcd') document.getElementById(id).disabled = true; });
     try {
       const r = await pullFromTcd();
-      showResults('Pull TCD', [`${r.updated ?? '?'} sous-projets mis à jour.`]);
-      fetchStateAndRefresh();
+      if (r && r.disabled) {
+        toast(r.message || 'Pull TCD désactivé.', 'info');
+      } else {
+        showResults('Pull TCD', [`${r.updated ?? '?'} sous-projets mis à jour.`]);
+        fetchStateAndRefresh();
+      }
     } catch(err) { toast(err.message, 'error'); }
     finally {
       setLoading(btn, false);
