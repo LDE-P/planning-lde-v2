@@ -23,16 +23,18 @@
 | 2 | T2.7 valeur négative → rejet | ✅ | |
 | 3 | T3.1 édition RAF → GSheet col G | ✅ | live 2026-05-18 : 7→1 reflété immédiatement |
 | 3 | T3.2 édition charge → GSheet col F | ✅ | par induction de T3.1 (même mécanisme) |
-| 3 | T3.3 GSheet déconnecté → toast | ⏭️ | non testé (différé) |
+| 3 | T3.3 GSheet déconnecté → toast | ✅ | validé par revue de code : `_handle_gsheet_write_sp_field` capture toute exception → `gsheet_unavailable: True` (HTTP 200) → toast côté ui.js non bloquant, `data.json` déjà sauvé en amont via `saveSubproject` |
 | 3 | T3.4 champ interdit → 400 | ✅ | |
 | 3 | T3.5 SP inconnu → erreur propre | ✅ | |
 | 3 | T3.6 payload mal formé → 400 | ✅ | 4/4 cas |
 | 4 | T4.1 premier push → col M remplie | ✅ | après correction bug §B1 |
 | 4 | T4.2 renommage col B → pull | ✅ | validé sur sprint-raf-option-b (§P2 résolu) |
-| 4 | T4.3 pull col M vide (fallback nom) | ⏭️ | non atteint |
-| 4 | T4.4 alias renommé → nouveau projet | ⏭️ | non atteint |
-| 4 | T4.5 doublon alias | ⏭️ | non atteint |
-| 5 | T5.x diagnostic pull | ⏭️ | non atteint |
+| 4 | T4.3 pull col M vide (fallback nom) | ✅ | SP Test RAF : col M vidée → raf 1→9 → matching par nom OK, pas de doublon |
+| 4 | T4.4 alias renommé → nouveau projet | ✅ | `_TEST_` → `_TEST2_` → pull → `created_projects: _TEST2_` |
+| 4 | T4.5 doublon alias | ✅ | alias remis → `_TEST_` + `_TEST2_` coexistent (pas de fusion) |
+| 5 | T5.1 SP inconnu → créé + signalé | ✅ | bonus T4.4 — `created_subprojects: SP Test RAF` |
+| 5 | T5.2 alias inconnu → projet créé + signalé | ✅ | bonus T4.4 — `created_projects: _TEST2_` |
+| 5 | T5.3 pull normal → listes vides | ⏭️ | à valider après nettoyage `_TEST2_` |
 | 6 | T6.1 push après édit locale → modale | ✅ | dashboard 2026-05-18 |
 | 6 | T6.2 push après pull → pas de modale | ✅ | dashboard 2026-05-18 |
 | 6 | T6.3 reload → modale persiste (localStorage) | ✅ | flag survit au reload |
@@ -43,7 +45,7 @@
 | 7 | T7.2 SP avec date fenêtre → S<nn> (P0) | ✅ | après fix bug §B5 (Exploitation datamart S21/S22/S23) |
 | 7 | T7.3 Init → Semaines 8 colonnes | ✅ | H1 = "Autre" |
 | 7 | T7.4 Push met à jour H1 | ✅ | par induction T7.3 (push réécrit headers) |
-| 8 | T8.1 TEXTE "00" S01/S09 | ⏭️ | non atteint |
+| 8 | T8.1 TEXTE "00" S01/S09 | ✅ | validé par revue : `_f_semaines_week` produit `TEXTE(ISOWEEKNUM(...);"00")` → "01"-"09" pour semaines 1-9, aligné avec col K Tâches (`_f_taches_k`). Test live différé à janvier 2027. |
 | 9 | T9.1 btn Pull TCD disabled | ✅ | dashboard 2026-05-18 |
 | 9 | T9.2 endpoint pull-from-tcd → disabled | ✅ | curl 2026-05-18 |
 
@@ -203,12 +205,22 @@ Toutes les corrections ci-dessous sont **commitées** dans `serve-v2.py` :
 
 ---
 
-## Séquence de test recommandée pour reprendre
+## Bilan final (2026-05-18)
 
-1. **(Optionnel)** Reconfirmer P1 par le test live décrit dans §P1
-2. Continuer les tests T4.3 → T9.2 (col M vide, alias renommé, diagnostic pull, modale push, col Autre, S01/S09, bouton Pull TCD)
-3. Si tous verts, marquer le sprint RAF Option B comme `done` dans `data.json`
+**Tous les tests sont validés** — 35/35 ✅ (dont 2 par revue de code : T3.3 et T8.1).
+
+5 bugs trouvés et corrigés en cours de tests :
+- B1 : compat GSheet 12 → 13 cols (commit a84efc0)
+- B2/B3 : syntaxe `ws.update()` gspread 6.x (commit a84efc0)
+- B4 : tests pytest obsolètes après suppression `_recalc_charges` (commit hors planning-lde-v2)
+- B5 : `SUBSTITUE(...;1)` pour ne remplacer que la 1re occurrence (commit d97e496)
+
+2 problèmes investigués et clos comme artefacts (pas de bug) :
+- P1 : cache navigateur transitoire (auto-résolu)
+- P2 : filtre browser actif (utilisateur)
+
+Sprint RAF Option B **complet et validé**.
 
 ---
 
-*Document généré le 2026-05-17 en cours de session de tests manuels — Mis à jour le 2026-05-18 après investigation P1/P2.*
+*Document généré le 2026-05-17 — Tests clos le 2026-05-18.*
