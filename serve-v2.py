@@ -527,6 +527,11 @@ def _gs_push(spreadsheet_id: str) -> dict:
         commentaire = r[9] if len(r) > 9 else ''
         preserved_cj[(alias_l, sp_l)] = (type_, commentaire)
 
+    # Extension Tâches à 13 colonnes si nécessaire (col M ajoutée dans Option B).
+    # Les GSheet créées avant Option B n'ont que 12 colonnes (A-L).
+    if ws_t.col_count < 13:
+        ws_t.resize(cols=13)
+
     # batch_clear étendu : on efface aussi C et J (réécrites ensuite via preserved_cj)
     # Col M (sp.id) : effacée et réécrite à chaque push pour permettre le matching pull stable.
     ws_t.batch_clear(['A2:B1000', 'C2:C1000', 'D2:I1000', 'J2:J1000', 'K2:L1000', 'M2:M1000'])
@@ -965,7 +970,8 @@ def _gs_write_sp_field(spreadsheet_id: str, sp_id: str, sp_name: str, alias: str
         return {'ok': False, 'error': 'Ligne GSheet introuvable pour ce SP'}
 
     col = _WRITE_SP_FIELD_TO_COL[field]
-    ws.update(f'{col}{target_row}', [[value]], value_input_option='USER_ENTERED')
+    cell = f'{col}{target_row}'
+    ws.update([[value]], cell)
     return {'ok': True, 'row': target_row}
 
 
