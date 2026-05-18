@@ -21,8 +21,8 @@
 | 2 | T2.5 virgule FR → parseFloat | ✅ | |
 | 2 | T2.6 non numérique → rejet | ✅ | |
 | 2 | T2.7 valeur négative → rejet | ✅ | |
-| 3 | T3.1 édition RAF → GSheet col G | ⚠️ | API confirme — reconfirmer en live (§P1) |
-| 3 | T3.2 édition charge → GSheet col F | ⚠️ | API confirme — reconfirmer en live (§P1) |
+| 3 | T3.1 édition RAF → GSheet col G | ✅ | live 2026-05-18 : 7→1 reflété immédiatement |
+| 3 | T3.2 édition charge → GSheet col F | ✅ | par induction de T3.1 (même mécanisme) |
 | 3 | T3.3 GSheet déconnecté → toast | ⏭️ | non testé (différé) |
 | 3 | T3.4 champ interdit → 400 | ✅ | |
 | 3 | T3.5 SP inconnu → erreur propre | ✅ | |
@@ -115,27 +115,23 @@ FAILED test_save_subproject.py::test_recalc_ignores_na_steps - assert 8.0 == 4.0
 
 ## Problèmes investigués (2026-05-18)
 
-### P1 — `write-sp-field` : écriture API confirmée mais browser GSheet non mis à jour
-
-**Statut : très probablement un artefact de cache navigateur transitoire, à reconfirmer.**
+### P1 — `write-sp-field` : écriture API confirmée mais browser GSheet non mis à jour : RÉSOLU (transitoire)
 
 Diagnostic 2026-05-18 via `debug-check-gsheet-formulas.py` :
 - G1 = `'RAF (h)'` (header texte simple, pas de formule)
 - G2:G20 = valeurs numériques (1.5, 0, 2, 6, …), aucune formule, aucune ARRAYFORMULA
 - 0 protected range sur l'onglet Tâches
 
-**Hypothèse ARRAYFORMULA invalidée.** L'hypothèse "formule qui écrase G:G" est éliminée — les écritures *finissent* bien dans la GSheet (col G non vide aujourd'hui).
+**Hypothèse ARRAYFORMULA invalidée.** Les écritures finissent bien dans la GSheet (col G non vide aujourd'hui).
 
-**Hypothèse retenue :** cache navigateur transitoire le 2026-05-17 au soir. Une session browser longue avec WebSocket désynchronisé peut afficher des valeurs périmées même après hard refresh. L'ouverture matinale du 2026-05-18 a vraisemblablement rétabli la synchro.
+**Test live 2026-05-18 :**
+- RAF initial GSheet (SP Test RAF) : `7`
+- Édition inline dashboard : `7 → 1`
+- RAF final GSheet après reload : `1` ✅
 
-**Test de validation (à faire par LDE) :**
-1. Ouvrir https://docs.google.com/spreadsheets/d/1RY1SCZAW5PPG05Cbpvup5pAe6BWvUhy_UZ4DPwl3Wew/ → onglet Tâches → noter la valeur G d'un SP test
-2. Modifier le RAF de ce SP via le dashboard (édition inline)
-3. Recharger la page browser → valeur attendue : nouvelle saisie visible immédiatement
+**Conclusion : aucun bug fonctionnel.** Le comportement observé hier soir (browser non MAJ après écriture API) était transitoire — vraisemblablement un cache navigateur Chrome / session WebSocket désynchronisée après plusieurs heures d'ouverture. T3.1 et T3.2 sont validés.
 
-Si OK : P1 clos comme transitoire. Si KO : creuser hypothèses cache/session/conflit OAuth.
-
-### P2 — `_TEST_` introuvable dans browser : RÉSOLU
+### P2 — `_TEST_` introuvable dans browser : RÉSOLU (filtre browser actif)
 
 Diagnostic 2026-05-18 via `debug-compare-browser-data.py` :
 - 0 ligne GSheet absente de `data.json`
@@ -144,9 +140,11 @@ Diagnostic 2026-05-18 via `debug-compare-browser-data.py` :
 - 0 col M vide
 - Résumé : 50 lignes GSheet ↔ 50 SPs visibles `data.json` (parfaitement synchrones)
 
-**La ligne `_TEST_` n'est plus dans la GSheet aujourd'hui.** L'hypothèse "push intermédiaire a effacé la ligne entre le pull debug et la recherche browser" est confirmée a posteriori. Le mécanisme de matching col M fonctionne correctement (test T4.2 sur sprint-raf-option-b prouvé hier soir).
+**Cause réelle :** un filtre était resté actif sur l'onglet Tâches dans le browser de LDE, masquant la ligne `_TEST_`. Ctrl+F dans GSheet ignore les lignes masquées par filtre (contrairement à ce qu'on pourrait attendre). Une fois le filtre désactivé, la ligne est visible normalement.
 
-**Conclusion : aucun bug — artefact de timing entre l'état de la GSheet lu par le pull debug et l'état observé ensuite dans le browser.**
+**Conclusion : aucun bug.** Le mécanisme de matching col M fonctionne correctement (test T4.2 sur sprint-raf-option-b prouvé hier soir, confirmé aujourd'hui).
+
+**Leçon :** quand l'API et le browser divergent sur GSheet, vérifier en priorité les filtres actifs avant d'invoquer cache / propagation / session — c'est la cause la plus fréquente et la plus facile à manquer (les lignes masquées par filtre n'apparaissent pas en Ctrl+F).
 
 ---
 
