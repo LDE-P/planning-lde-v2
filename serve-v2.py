@@ -256,6 +256,12 @@ def _f_semaines_week(row: int, offset: int) -> str:
 
     Décalage en jours (±7j) + TEXTE "00" pour matcher col K Tâches (qui produit
     "S"&TEXTE(xx;"00")). Sans TEXTE/padding, mismatch pour les semaines 1–9.
+
+    `SUBSTITUE(A;"- ";"";1)` : 4e argument = 1 → remplace seulement la PREMIÈRE
+    occurrence du préfixe "- ". Sans ça, un nom de SP contenant " - " interne
+    (ex. "Exploitation du datamart - S21") perdait aussi son " - " interne
+    (SUBSTITUE remplace toutes les occurrences par défaut) et ne matchait
+    plus col B Tâches → FILTER vide → SUM=0.
     """
     day_offset = offset * 7
     if day_offset == 0:
@@ -268,18 +274,21 @@ def _f_semaines_week(row: int, offset: int) -> str:
     return (
         '=SI(REGEXMATCH(A' + r + ';"^- ");'
         'SIERREUR(SOMME(FILTER(\'Tâches\'!G:G;'
-        '\'Tâches\'!B:B=SUBSTITUE(A' + r + ';"- ";"");'
+        '\'Tâches\'!B:B=SUBSTITUE(A' + r + ';"- ";"";1);'
         '\'Tâches\'!K:K="S"&' + wk + '));"");"")'
     )
 
 
 def _f_semaines_autre(row: int) -> str:
-    """Colonne H Semaines ligne row — RAF des SPs sans date cible (col K Tâches = "")."""
+    """Colonne H Semaines ligne row — RAF des SPs sans date cible (col K Tâches = "").
+
+    Voir _f_semaines_week pour la note sur SUBSTITUE(...;1) (instance=1).
+    """
     r = str(row)
     return (
         '=SI(REGEXMATCH(A' + r + ';"^- ");'
         'SIERREUR(SOMME(FILTER(\'Tâches\'!G:G;'
-        '\'Tâches\'!B:B=SUBSTITUE(A' + r + ';"- ";"");'
+        '\'Tâches\'!B:B=SUBSTITUE(A' + r + ';"- ";"";1);'
         '\'Tâches\'!K:K=""));"");"")'
     )
 

@@ -7,6 +7,7 @@
 - [ ] **Spec Claude Code + data.json** : quand la spec confie à Claude Code une création/mise à jour de SP dans `data.json`, inclure explicitement les champs et valeurs attendus — pour éviter que Claude Code copie des valeurs du contexte voisin (ex : incident commentaire "URGENT !" sur `spinners-dashboard`, session 2026-05-16).
 - [ ] Enregistrement automatique des MD dans `data.json` docs — dès qu'un fichier `.md` est créé pour un sous-projet, l'enregistrer immédiatement (titre, desc, type, statut, subproject) plutôt qu'en fin de session via la checklist. Mettre à jour la règle 3bis du CLAUDE.md racine en conséquence.
 - [ ] **Import d'un projet ancien dans GIT** : quand un projet créé dans une session ancienne (avant les conventions actuelles du dépôt) est importé dans GIT, ouvrir une session Cowork dédiée pour vérifier la cohérence — noms canoniques, alias, entrées `data.json`, tables `CLAUDE.md`. Ne pas le faire « à la rache » en fin d'une autre session.
+- [ ] **Projet sans répertoire au moment de la création** : la procédure « Création d'un nouveau projet » du `CLAUDE.md` racine présuppose qu'un projet GIT a un dossier dès le départ. Cas observé en session 2026-05-17 (`Notification Front`) : l'outil a été créé d'abord dans Cowork (artifact sous `~/Documents/Claude/Artifacts/`, tâche planifiée sous `~/Documents/Claude/Scheduled/`), puis rattaché à un dossier `projets-divers/notifications-front` créé a posteriori. Soit autoriser explicitement l'absence de `folder` dans `data.json` (et documenter le cas), soit imposer la création d'un dossier vide dans GIT dès l'apparition du projet — pour qu'aucun projet ne vive entièrement hors du périmètre versionné. Statuer et mettre à jour la section « Création d'un nouveau projet » en conséquence.
 
 ## UI Dashboard
 
@@ -22,7 +23,9 @@
 
 ## GSheet
 
+- [x] **Check intégrité — docs orphelins** : le script de check (CLAUDE.md racine) ne cherche le SP référencé par un doc que dans `data['projects'][x]['subprojects']`. Si le SP est archivé (`data-archives.json`), le doc est faussement signalé comme orphelin. Corrigé le 2026-05-17 — le script vérifie maintenant aussi dans les archives avant de lever l'alerte.
 - [ ] Init : restaurer les onglets dans le bon ordre (Tâches, Semaines, TCD Projets) — `duplicate_sheet` les insère en fin de liste. Utiliser `insert_sheet_index` pour contrôler la position.
+- [ ] **Modale de confirmation avant Init GSheet** : l'init recrée les onglets à blanc (perte des col C/J GSheet-only non préservées si pas pushées avant). Demander confirmation explicite avant exécution. Constaté 2026-05-18 lors des tests RAF Option B.
 
 - [x] Quand la connexion GSheet est active, le texte `#gsheet-status` devient un lien vers la GSheet (ouvert en `target="_blank"`)
 - [x] Au push et au pull : afficher un état d'avancement animé ("En cours…") puis une modale de résultats listant ce qui a été pushé / pullé

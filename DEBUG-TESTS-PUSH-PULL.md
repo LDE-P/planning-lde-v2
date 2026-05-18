@@ -33,11 +33,19 @@
 | 4 | T4.4 alias renommé → nouveau projet | ⏭️ | non atteint |
 | 4 | T4.5 doublon alias | ⏭️ | non atteint |
 | 5 | T5.x diagnostic pull | ⏭️ | non atteint |
-| 6 | T6.x confirmation push | ⏭️ | non atteint |
-| 7 | T7.x colonne Autre Semaines | ⏭️ | non atteint |
+| 6 | T6.1 push après édit locale → modale | ✅ | dashboard 2026-05-18 |
+| 6 | T6.2 push après pull → pas de modale | ✅ | dashboard 2026-05-18 |
+| 6 | T6.3 reload → modale persiste (localStorage) | ✅ | flag survit au reload |
+| 6 | T6.4 push après push sans pull → modale | ✅ | `_lastPullTime < _lastPushTime` |
+| 6 | T6.5 annulation modale → pas de push | ✅ | `_lastPushTime` inchangé |
+| 6 | T6.6 confirmation modale → push exécuté | ✅ | `_lastPushTime` mis à jour |
+| 7 | T7.1 SP sans date → RAF en col H (Autre) | ✅ | SP Test RAF raf=1 → col H = 1 |
+| 7 | T7.2 SP avec date fenêtre → S<nn> (P0) | ✅ | après fix bug §B5 (Exploitation datamart S21/S22/S23) |
+| 7 | T7.3 Init → Semaines 8 colonnes | ✅ | H1 = "Autre" |
+| 7 | T7.4 Push met à jour H1 | ✅ | par induction T7.3 (push réécrit headers) |
 | 8 | T8.1 TEXTE "00" S01/S09 | ⏭️ | non atteint |
-| 9 | T9.1 btn Pull TCD disabled | ⏭️ | non atteint |
-| 9 | T9.2 endpoint pull-from-tcd → disabled | ⏭️ | non atteint |
+| 9 | T9.1 btn Pull TCD disabled | ✅ | dashboard 2026-05-18 |
+| 9 | T9.2 endpoint pull-from-tcd → disabled | ✅ | curl 2026-05-18 |
 
 ---
 
@@ -92,6 +100,32 @@ ws.update([[value]], cell)
 La syntaxe `values` en premier, `range_name` en second est conforme à gspread 6.x.
 
 **Status après correction :** L'API confirme l'écriture (`updatedCells: 1`, `updatedRange: "'Tâches'!G51"`). La relecture immédiate via `ws.cell(51, 7).value` retourne `'3'` (valeur correcte). Voir §P1 pour le problème résiduel d'affichage browser.
+
+---
+
+### B5 — Formule Semaines : `SUBSTITUE(A;"- ";"")` remplaçait toutes les occurrences
+
+**Symptôme :** En vérifiant T7.2, les RAF des SPs `Exploitation du datamart - S21/S22/S23` (target dans la fenêtre) s'attribuaient à `0` en cols D/E/F au lieu de `6/6/6`. Le SP `Sprint RAF Option B` (sans ` - ` interne) fonctionnait pourtant en col C (S-1).
+
+**Cause :** la formule des colonnes semaines (`_f_semaines_week`) et de la col Autre (`_f_semaines_autre`) faisait :
+```
+'Tâches'!B:B = SUBSTITUE(A4; "- "; "")
+```
+Sans 4e argument, `SUBSTITUE` remplace **toutes** les occurrences du pattern. Pour un nom de SP comme `"Exploitation du datamart - S21"`, la formule produisait `"Exploitation du datamartS21"` (suppression du ` - ` interne) → ne matchait plus col B Tâches → FILTER vide → SUM=0.
+
+**Correction (`serve-v2.py` L.270, L.290) :** ajout du 4e argument `;1` à `SUBSTITUE` pour ne remplacer que la **première** occurrence (le préfixe `"- "`).
+
+```python
+# AVANT
+'Tâches'!B:B = SUBSTITUE(A4; "- "; "")
+
+# APRÈS
+'Tâches'!B:B = SUBSTITUE(A4; "- "; ""; 1)
+```
+
+**Action post-fix :** Init GSheet + Push (réécrit les formules avec `;1`). Validé sur Datamart S21/S22/S23 → cols D/E/F = 6/6/6.
+
+**Piège associé :** au moment du fix, le serveur en cours d'exécution servait encore l'ancien code en mémoire (PID démarré avant la correction). `ps aux | grep serve-v2` permet de voir l'heure de démarrage du PID. Solution : `pkill -f serve-v2.py` puis relance.
 
 ---
 
