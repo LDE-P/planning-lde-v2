@@ -225,10 +225,15 @@ def _f_taches_l(row: int) -> str:
 
 
 def _f_semaines_a4() -> str:
-    """Cellule A4 Semaines — QUERY/REDUCE (formules.md §TCD/A4)."""
+    """Cellule A4 Semaines — QUERY/REDUCE (formules.md §TCD/A4).
+
+    Préfixe "• " (puce + espace) pour les lignes de sous-projets — distingue
+    visuellement des lignes de projet (alias seul). Pattern utilisé en miroir
+    par toutes les formules `_f_semaines_*` qui filtrent les SP via "^• ".
+    """
     return (
         """=QUERY(REDUCE("" ; UNIQUE(FILTER('Tâches'!A2:A ; 'Tâches'!A2:A<>"")) ; """
-        """LAMBDA(acc ; p ; VSTACK(acc ; p ; ARRAYFORMULA("- "&FILTER('Tâches'!B2:B ; """
+        """LAMBDA(acc ; p ; VSTACK(acc ; p ; ARRAYFORMULA("• "&FILTER('Tâches'!B2:B ; """
         """'Tâches'!A2:A=p))))) ; "where Col1 is not null" ; 0)"""
     )
 
@@ -240,7 +245,7 @@ def _f_semaines_b2() -> str:
 
 def _f_semaines_col2(col: str) -> str:
     """Cellule {col}2 Semaines — somme sous-projets heures (formules.md §TCD/C2)."""
-    return f'=SOMME(FILTER(N({col}4:{col}) ; REGEXMATCH(A4:A ; "^- ")))&" h."'
+    return f'=SOMME(FILTER(N({col}4:{col}) ; REGEXMATCH(A4:A ; "^• ")))&" h."'
 
 
 def _f_semaines_b3() -> str:
@@ -257,8 +262,9 @@ def _f_semaines_b_row(row: int) -> str:
     """Colonne B Semaines ligne row — somme C:H si sous-projet (formules.md §TCD/B4).
 
     Note : col H = "Autre" (RAF des SPs sans date cible) — incluse dans le total.
+    Le préfixe "• " (puce + espace) marque les lignes de sous-projet.
     """
-    return f'=IF(AND(A{row}<>"";LEFT(A{row};2)="- ");SUM(C{row}:H{row});"")'
+    return f'=IF(AND(A{row}<>"";LEFT(A{row};2)="• ");SUM(C{row}:H{row});"")'
 
 
 def _f_semaines_week(row: int, offset: int) -> str:
@@ -267,11 +273,11 @@ def _f_semaines_week(row: int, offset: int) -> str:
     Décalage en jours (±7j) + TEXTE "00" pour matcher col K Tâches (qui produit
     "S"&TEXTE(xx;"00")). Sans TEXTE/padding, mismatch pour les semaines 1–9.
 
-    `SUBSTITUE(A;"- ";"";1)` : 4e argument = 1 → remplace seulement la PREMIÈRE
-    occurrence du préfixe "- ". Sans ça, un nom de SP contenant " - " interne
-    (ex. "Exploitation du datamart - S21") perdait aussi son " - " interne
-    (SUBSTITUE remplace toutes les occurrences par défaut) et ne matchait
-    plus col B Tâches → FILTER vide → SUM=0.
+    Préfixe lignes SP : "• " (puce + espace). `SUBSTITUE(A;"• ";"";1)` avec
+    4e argument = 1 ne supprime que la PREMIÈRE occurrence (le préfixe).
+    Historique : avant 2026-05-18, le préfixe était "- " (tiret + espace) ;
+    sans `;1` un nom comme "Exploitation du datamart - S21" perdait aussi
+    son " - " interne → FILTER vide → SUM=0 (bug B5).
     """
     day_offset = offset * 7
     if day_offset == 0:
@@ -282,9 +288,9 @@ def _f_semaines_week(row: int, offset: int) -> str:
         wk = f'TEXTE(ISOWEEKNUM(AUJOURDHUI()+{day_offset});"00")'
     r = str(row)
     return (
-        '=SI(REGEXMATCH(A' + r + ';"^- ");'
+        '=SI(REGEXMATCH(A' + r + ';"^• ");'
         'SIERREUR(SOMME(FILTER(\'Tâches\'!G:G;'
-        '\'Tâches\'!B:B=SUBSTITUE(A' + r + ';"- ";"";1);'
+        '\'Tâches\'!B:B=SUBSTITUE(A' + r + ';"• ";"";1);'
         '\'Tâches\'!K:K="S"&' + wk + '));"");"")'
     )
 
@@ -292,13 +298,13 @@ def _f_semaines_week(row: int, offset: int) -> str:
 def _f_semaines_autre(row: int) -> str:
     """Colonne H Semaines ligne row — RAF des SPs sans date cible (col K Tâches = "").
 
-    Voir _f_semaines_week pour la note sur SUBSTITUE(...;1) (instance=1).
+    Voir _f_semaines_week pour la note sur le préfixe "• " et SUBSTITUE(...;1).
     """
     r = str(row)
     return (
-        '=SI(REGEXMATCH(A' + r + ';"^- ");'
+        '=SI(REGEXMATCH(A' + r + ';"^• ");'
         'SIERREUR(SOMME(FILTER(\'Tâches\'!G:G;'
-        '\'Tâches\'!B:B=SUBSTITUE(A' + r + ';"- ";"";1);'
+        '\'Tâches\'!B:B=SUBSTITUE(A' + r + ';"• ";"";1);'
         '\'Tâches\'!K:K=""));"");"")'
     )
 
@@ -461,7 +467,7 @@ def _build_tcd_rows(data: dict) -> list:
         for sp in proj.get('subprojects', []):
             raf = sp.get('raf', 0.0) or 0.0
             wk = sp_target_week(sp)
-            row = [f"- {sp['name']}", _f_semaines_b_row(row_idx), '', '', '', '', '']
+            row = [f"• {sp['name']}", _f_semaines_b_row(row_idx), '', '', '', '', '']
             if wk is not None and raf:
                 for i, target_w in enumerate(window):
                     if wk == target_w:
