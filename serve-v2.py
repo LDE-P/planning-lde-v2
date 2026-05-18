@@ -205,13 +205,23 @@ def _friday_from_week_offset(offset: int) -> str:
 # ── Constructeurs de formules (depuis formules.md — référence absolue) ─────────
 
 def _f_taches_k(row: int) -> str:
-    """Colonne K Tâches — Semaine (formules.md §Tâches/K)."""
-    return f'=SI(E{row}="";"";\"S\"&TEXTE(ISOWEEKNUM(E{row});\"00\"))'
+    """Colonne K Tâches — Semaine (formules.md §Tâches/K).
+
+    SIERREUR autour de ISOWEEKNUM : si E{row} contient du texte non parsable
+    comme date, affiche "S??" au lieu de #VALUE!. Permet de détecter
+    visuellement une date invalide (sinon les formules Semaines retournent
+    0 silencieusement — symptôme identique au bug B5).
+    """
+    return f'=SI(E{row}="";"";SIERREUR(\"S\"&TEXTE(ISOWEEKNUM(E{row});\"00\");\"S??\"))'
 
 
 def _f_taches_l(row: int) -> str:
-    """Colonne L Tâches — Année (formules.md §Tâches/L)."""
-    return f'=SI(E{row}="";"";ANNEE(E{row}))'
+    """Colonne L Tâches — Année (formules.md §Tâches/L).
+
+    SIERREUR autour de ANNEE : dégradation propre si E{row} non parsable.
+    Cellule vide en cas d'erreur (visuellement neutre).
+    """
+    return f'=SI(E{row}="";"";SIERREUR(ANNEE(E{row});\"\"))'
 
 
 def _f_semaines_a4() -> str:
