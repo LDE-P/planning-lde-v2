@@ -150,6 +150,11 @@ POST (corps JSON) :
 - `/api/pull-from-gsheet[/preview]` — pull Tâches
 - `/api/pull-from-tcd[/preview]` — pull TCD (RAF + target par sp)
 
+## Conventions UI
+
+- **Boutons de suppression** (🗑) : toujours utiliser la classe `icon-btn-danger` — garantit la couleur rouge (`var(--blocked)`) au repos et au survol. Implémenté via `color: transparent; text-shadow: 0 0 0 var(--blocked)` car `color` n'a aucun effet sur les emoji.
+- **Boutons d'archivage** (🗃) : utiliser `icon-btn` seul (couleur neutre) — l'archivage est réversible, pas une action destructive au sens rouge.
+
 ## Règles de développement
 
 - Formules GSheet : référence absolue = `planning-lde/formules.md` (jamais réinventer, recopier caractère par caractère — §5.5 SPEC)

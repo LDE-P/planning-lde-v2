@@ -34,7 +34,7 @@
 | 4 | T4.5 doublon alias | ✅ | alias remis → `_TEST_` + `_TEST2_` coexistent (pas de fusion) |
 | 5 | T5.1 SP inconnu → créé + signalé | ✅ | bonus T4.4 — `created_subprojects: SP Test RAF` |
 | 5 | T5.2 alias inconnu → projet créé + signalé | ✅ | bonus T4.4 — `created_projects: _TEST2_` |
-| 5 | T5.3 pull normal → listes vides | ⏭️ | à valider après nettoyage `_TEST2_` |
+| 5 | T5.3 pull normal → listes vides | ✅ | 2026-05-18 : `created_projects: []`, `created_subprojects: []` après nettoyage `_TEST2_` |
 | 6 | T6.1 push après édit locale → modale | ✅ | dashboard 2026-05-18 |
 | 6 | T6.2 push après pull → pas de modale | ✅ | dashboard 2026-05-18 |
 | 6 | T6.3 reload → modale persiste (localStorage) | ✅ | flag survit au reload |
@@ -207,7 +207,7 @@ Toutes les corrections ci-dessous sont **commitées** dans `serve-v2.py` :
 
 ## Bilan final (2026-05-18)
 
-**Tous les tests sont validés** — 35/35 ✅ (dont 2 par revue de code : T3.3 et T8.1).
+**Tous les tests sont validés** — 36/36 ✅ (dont 2 par revue de code : T3.3 et T8.1).
 
 5 bugs trouvés et corrigés en cours de tests :
 - B1 : compat GSheet 12 → 13 cols (commit a84efc0)
@@ -223,4 +223,4 @@ Sprint RAF Option B **complet et validé**.
 
 ---
 
-*Document généré le 2026-05-17 — Tests clos le 2026-05-18.*
+*Document généré le 2026-05-17 — Tests clos le 2026-05-18 (T5.3 validé le 2026-05-18).*
