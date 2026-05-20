@@ -272,13 +272,14 @@
 - Chaque en-tête de projet affiche un bouton `btn-toggle-gsheet` avec l'icône `👁`
 - Le bouton est positionné **avant** les boutons archiver et supprimer dans `.project-actions`
 
-### E2 — Classe CSS selon l'état du projet
+### E2 — Classe CSS et couleur selon l'état du projet
 
 **Prérequis :** P-visible (`gsheet_hidden` absent), P-masqué (`gsheet_hidden: true`).
 
 **Attendu :**
-- Bouton de P-visible : possède la classe `gsheet-visible` → icône barrée (`text-decoration: line-through`)
-- Bouton de P-masqué : **ne possède pas** la classe `gsheet-visible` → icône non barrée
+- Bouton de P-visible : possède la classe `gsheet-visible` → icône `👁` repeinte en **vert** (`var(--done)`, #16a34a)
+- Bouton de P-masqué : **ne possède pas** la classe `gsheet-visible` → icône `👁` repeinte en **rouge** (`var(--blocked)`, #dc2626)
+- Technique CSS : `color: transparent` + `text-shadow: 0 0 0 <couleur>` (même mécanisme que `.icon-btn-danger`)
 
 ### E3 — Tooltip correct selon l'état
 
@@ -309,7 +310,7 @@
 
 **Attendu :**
 - Appel `POST /api/toggle-gsheet-hidden`
-- Classe `gsheet-visible` retirée du bouton → icône non barrée
+- Classe `gsheet-visible` retirée du bouton → icône `👁` passe du vert au **rouge**
 - Tooltip mis à jour : `"Ce projet est exclu de la GSheet — cliquer pour le réinclure"`
 - Modale fermée
 
@@ -327,7 +328,7 @@
 **Action :** clic sur `[Réinclure]`
 
 **Attendu :**
-- Classe `gsheet-visible` ajoutée au bouton → icône barrée
+- Classe `gsheet-visible` ajoutée au bouton → icône `👁` passe du rouge au **vert**
 - Tooltip mis à jour : `"Ce projet est inclus dans la GSheet — cliquer pour l'exclure"`
 
 ### E9 — Modale push preview : avertissement si projets masqués

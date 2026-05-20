@@ -237,7 +237,17 @@
       text-shadow: 0 0 0 var(--blocked);
     }
 
-    .btn-toggle-gsheet.gsheet-visible { text-decoration: line-through; }
+    /* 👁 toggle GSheet : rouge si exclu, vert si inclus.
+       Même technique que .icon-btn-danger pour repeindre l'emoji couleur. */
+    .btn-toggle-gsheet,
+    .btn-toggle-gsheet:hover {
+      color: transparent;
+      text-shadow: 0 0 0 var(--blocked);
+    }
+    .btn-toggle-gsheet.gsheet-visible,
+    .btn-toggle-gsheet.gsheet-visible:hover {
+      text-shadow: 0 0 0 var(--done);
+    }
 
     /* ── Subprojects list ── */
     .subprojects-list {

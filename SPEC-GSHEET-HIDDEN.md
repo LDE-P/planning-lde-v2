@@ -42,16 +42,24 @@ Aucune migration nécessaire : les projets existants sans ce champ continuent à
 
 Un bouton `icon-btn btn-toggle-gsheet` est ajouté dans `.project-actions` de chaque projet, **avant** les boutons archiver/supprimer :
 
-| État | Icône | Style | Tooltip |
-|------|-------|-------|---------|
-| Projet visible dans GSheet (`gsheet_hidden` absent ou `false`) | `👁` | `text-decoration: line-through` | "Ce projet est inclus dans la GSheet — cliquer pour l'exclure" |
-| Projet exclu (`gsheet_hidden: true`) | `👁` | aucun | "Ce projet est exclu de la GSheet — cliquer pour le réinclure" |
+| État | Icône | Couleur | Tooltip |
+|------|-------|---------|---------|
+| Projet visible dans GSheet (`gsheet_hidden` absent ou `false`) | `👁` | vert (`var(--done)`) | "Ce projet est inclus dans la GSheet — cliquer pour l'exclure" |
+| Projet exclu (`gsheet_hidden: true`) | `👁` | rouge (`var(--blocked)`) | "Ce projet est exclu de la GSheet — cliquer pour le réinclure" |
 
-**Implémentation CSS :** `text-decoration: line-through` s'applique directement sur l'élément bouton contenant l'emoji — fonctionne sur tous les navigateurs modernes sans trick supplémentaire. Ajouter/retirer la classe `gsheet-visible` selon l'état :
+**Implémentation CSS :** la couleur est repeinte sur l'emoji avec la même technique que `.icon-btn-danger` (`color: transparent` + `text-shadow: 0 0 0 <couleur>`), nécessaire parce que les glyphes emoji ignorent `color:`. La classe `gsheet-visible` bascule du rouge (état par défaut, exclu) vers le vert :
 
 ```css
 /* dans DASHBOARD-V2.html */
-.btn-toggle-gsheet.gsheet-visible { text-decoration: line-through; }
+.btn-toggle-gsheet,
+.btn-toggle-gsheet:hover {
+  color: transparent;
+  text-shadow: 0 0 0 var(--blocked);
+}
+.btn-toggle-gsheet.gsheet-visible,
+.btn-toggle-gsheet.gsheet-visible:hover {
+  text-shadow: 0 0 0 var(--done);
+}
 ```
 
 **Tooltip enrichissement** : profiter de ce passage dans `ui.js` pour enrichir tous les `title` courts existants (`'Renommer'` → `'Renommer ce sous-projet'`, `'Archiver'` → `'Archiver ce sous-projet'`, etc.).
@@ -257,7 +265,7 @@ Si `r.ignored_projects` est non vide, ajouter dans la modale après le compteur 
 | Fichier | Modification |
 |---------|-------------|
 | `data.json` | Nouveau champ `gsheet_hidden: true` sur les projets concernés |
-| `DASHBOARD-V2.html` | Règle CSS `.btn-toggle-gsheet.gsheet-visible { text-decoration: line-through; }` |
+| `DASHBOARD-V2.html` | Règles CSS `.btn-toggle-gsheet` : rouge (`var(--blocked)`) par défaut, vert (`var(--done)`) avec la classe `.gsheet-visible` — même technique `text-shadow` que `.icon-btn-danger` |
 | `ui.js` | Icône toggle + modale + affichage dans modales push/pull preview/result + enrichissement tooltips |
 | `api.js` | Nouveau wrapper `toggleGsheetHidden(projectId)` |
 | `serve-v2.py` | Endpoint `/api/toggle-gsheet-hidden` + filtres dans `_gs_build_taches_rows()` et `_build_tcd_rows()` + read-before-clear + restauration C/J dans `_gs_push()` + `hidden_projects` dans preview push + `ignored_projects` dans pull (et pull preview) |
