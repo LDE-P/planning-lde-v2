@@ -157,7 +157,7 @@ POST (corps JSON) :
 
 ## Règles de développement
 
-- Formules GSheet : référence absolue = `planning-lde/formules.md` (jamais réinventer, recopier caractère par caractère — §5.5 SPEC)
+- Formules GSheet : référence absolue = `planning-lde-v2/formules.md` (jamais réinventer, recopier caractère par caractère — §5.5 SPEC)
 - Bibliothèque GSheet : `gspread` (pas `google-api-python-client`)
 - `data.json` : lecture/écriture atomique via `_load_data()` / `_save_data()`
 - CORS : tous les endpoints renvoient `Access-Control-Allow-Origin: *`
