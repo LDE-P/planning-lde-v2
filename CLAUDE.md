@@ -11,6 +11,24 @@ Nouveau système de suivi des projets LDE — modèle Projet → Sous-projet →
 - En cas de corruption : `git checkout data.json` (ne touche pas la GSheet — sync toujours manuelle)
 - ⚠️ Après un revert de `data.json`, ne pas faire de push GSheet sans vérifier que l'état est cohérent
 
+### Commit et push depuis Cowork (sandbox)
+
+**Cowork peut commit ET push directement** — authentification configurée via token OAuth dans `.git/config` (jamais versionné).
+
+Pattern standard à utiliser dans chaque bash git :
+
+```bash
+cd /sessions/<session>/mnt/GIT/planning-lde-v2
+rm -f .git/HEAD.lock .git/index.lock 2>/dev/null   # nettoie les locks résiduels
+git add <fichiers>
+git commit -m "..."
+git push
+```
+
+**Si `rm .git/HEAD.lock` échoue** (Operation not permitted) : appeler `allow_cowork_file_delete` sur le chemin `.git/HEAD.lock` avant de relancer.
+
+**Hook pre-push** : les tests e2e sont ignorés automatiquement si pytest est absent ou si le serveur n'est pas joignable (comportement sandbox normal). Sur le Mac de LDE avec le serveur en cours, ils s'exécutent normalement.
+
 ## Stack
 
 - HTML/JS vanilla (3 fichiers : `app.js`, `ui.js`, `api.js`) pour le dashboard
