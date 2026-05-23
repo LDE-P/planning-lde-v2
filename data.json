@@ -1092,6 +1092,66 @@
           "type": "audit",
           "status": "final",
           "date": "2026-05-19"
+        },
+        {
+          "id": "spec-planning-v2",
+          "file": "planning-lde-v2/SPEC-PLANNING-V2.md",
+          "title": "Spécification Planning LDE V2",
+          "desc": "Spec fondatrice de la V2 : architecture data.json, modèle Projet→SP→Étape, endpoints API, stack technique.",
+          "type": "spec",
+          "status": "final",
+          "date": "2026-05-13",
+          "subproject": "simplification-v2"
+        },
+        {
+          "id": "tests-v2",
+          "file": "planning-lde-v2/TESTS-V2.md",
+          "title": "Tests Planning LDE V2 (serve-v2.py)",
+          "desc": "Cas de test fonctionnels pour serve-v2.py — rédigés pendant la spec avant implémentation.",
+          "type": "tests",
+          "status": "final",
+          "date": "2026-05-14",
+          "subproject": "simplification-v2"
+        },
+        {
+          "id": "audit-v2-2026-05-14",
+          "file": "planning-lde-v2/AUDIT-2026-05-14.md",
+          "title": "Audit Planning LDE V2 (2026-05-14)",
+          "desc": "Audit complet architecture, robustesse, maintenabilité, perfs, sécurité — 3 P0, 4 P1, 12 P2 identifiés.",
+          "type": "audit",
+          "status": "final",
+          "date": "2026-05-14",
+          "subproject": "audit-v2-2026-05-14"
+        },
+        {
+          "id": "audit-v1-2026-05-14",
+          "file": "planning-lde-v2/V1-AUDIT-2026-05-14.md",
+          "title": "Audit Planning LDE V1 (2026-05-14)",
+          "desc": "Audit comparatif V1 — même grille que V2. 3 P0 prioritaires identifiés avant migration.",
+          "type": "audit",
+          "status": "final",
+          "date": "2026-05-14",
+          "subproject": "audit-v1-2026-05-14"
+        },
+        {
+          "id": "spec-fix-entetes-semaines-tcd",
+          "file": "planning-lde-v2/SPEC-FIX-ENTETES-SEMAINES-TCD.md",
+          "title": "Spec En-têtes dynamiques Semaines & TCD",
+          "desc": "Spec d'implémentation des en-têtes C1-G1 en formules GSheet AUJOURDHUI() pour recalcul auto au changement de semaine.",
+          "type": "spec",
+          "status": "final",
+          "date": "2026-05-16",
+          "subproject": "fix-entetes-semaines-tcd"
+        },
+        {
+          "id": "deploiement-v2",
+          "file": "planning-lde-v2/deploiement-V2.md",
+          "title": "Déploiement V2 — Mise en place opérationnelle",
+          "desc": "Spec et notes du basculement V1→V2 : checklist de transfert, process de déploiement opérationnel.",
+          "type": "spec",
+          "status": "final",
+          "date": "2026-05-15",
+          "subproject": "mise-en-place-operationnelle"
         }
       ],
       "subprojects": [
@@ -1168,7 +1228,7 @@
           "id": "mise-en-place-operationnelle",
           "name": "Fix en-têtes dynamiques Semaines & TCD",
           "titre": "En-têtes C1-G1 en formules GSheet AUJOURDHUI() — recalcul auto au changement de semaine",
-          "status": "done",
+          "status": "wip",
           "qualif": "P1",
           "target": "17/05/2026",
           "owner": "laurent",
@@ -1497,6 +1557,39 @@
           "raf": 0.0,
           "titre": "Déploiement du dashboard V2 sur GitLab CI + Clever Cloud",
           "steps": []
+        },
+        {
+          "id": "charge-previsionnelle",
+          "name": "Charge prévisionnelle",
+          "titre": "Afficher complexité et risque de régression sur chaque SP (badges dashboard, non synchronisés GSheet).",
+          "status": "todo",
+          "qualif": "P2",
+          "target": "",
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "type": "Feature",
+          "commentaire": "Nouveaux champs optionnels data.json : complexite (faible/moyenne/élevée) et risque (faible/moyen/élevé). Ignorés par push/pull GSheet par construction. Badges colorés dans la carte SP.",
+          "steps": [
+            {
+              "name": "Spec",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Implémentation (data.json + serve-v2.py + ui.js)",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests manuels",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ]
         },
         {
           "id": "suivi-et-maintenance",

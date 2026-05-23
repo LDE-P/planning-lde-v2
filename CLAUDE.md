@@ -4,6 +4,13 @@ Nouveau système de suivi des projets LDE — modèle Projet → Sous-projet →
 
 > **⚠️ Les règles « Garde-fous avant implémentation » du CLAUDE.md racine s'appliquent ici.**
 
+## Remote Git
+
+- **URL** : https://github.com/LDE-P/planning-lde-v2 (repo privé, compte LDE-P)
+- `data.json` et `data-archives.json` sont **versionnés** — commiter à chaque fin de session
+- En cas de corruption : `git checkout data.json` (ne touche pas la GSheet — sync toujours manuelle)
+- ⚠️ Après un revert de `data.json`, ne pas faire de push GSheet sans vérifier que l'état est cohérent
+
 ## Stack
 
 - HTML/JS vanilla (3 fichiers : `app.js`, `ui.js`, `api.js`) pour le dashboard
