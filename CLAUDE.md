@@ -96,6 +96,7 @@ Notes :
 | `spec` | SPEC |
 | `todo` | À FAIRE |
 | `blocked` | STAND BY |
+| `récurrent` | RÉCURRENT |
 | `na` | N/A (étapes uniquement) |
 
 ## Google Sheets V2 — Configuration

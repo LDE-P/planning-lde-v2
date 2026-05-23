@@ -21,6 +21,7 @@
       --todo: #475569;
       --blocked: #dc2626;
       --na: #9ca3af;
+      --récurrent: #0891b2;
       --border: #e2e8f0;
       --hover: #f1f5f9;
       --radius: 6px;
@@ -331,8 +332,9 @@
     .status-review  { background: rgba(168,85,247,.15); color: var(--review);  border-color: rgba(168,85,247,.3); }
     .status-spec    { background: rgba(245,158,11,.15); color: var(--spec);    border-color: rgba(245,158,11,.3); }
     .status-todo    { background: rgba(107,114,128,.15);color: var(--todo);    border-color: rgba(107,114,128,.3); }
-    .status-blocked { background: rgba(239,68,68,.15);  color: var(--blocked); border-color: rgba(239,68,68,.3); }
-    .status-na      { background: rgba(75,85,99,.15);   color: var(--na);      border-color: rgba(75,85,99,.3); }
+    .status-blocked   { background: rgba(239,68,68,.15);  color: var(--blocked);   border-color: rgba(239,68,68,.3); }
+    .status-na        { background: rgba(75,85,99,.15);   color: var(--na);        border-color: rgba(75,85,99,.3); }
+    .status-récurrent { background: rgba(8,145,178,.15);  color: var(--récurrent); border-color: rgba(8,145,178,.3); }
 
     /* ── Meta row ── */
     .sp-meta {
@@ -761,9 +763,11 @@
     <span>En cours : <strong id="stat-wip" style="color:var(--wip)">—</strong></span>
     <span>À faire : <strong id="stat-todo">—</strong></span>
     <span>Done : <strong id="stat-done" style="color:var(--done)">—</strong></span>
+    <span>Récurrents : <strong id="stat-récurrent" style="color:var(--récurrent)">—</strong></span>
   </div>
   <div id="filters">
     <button class="filter-btn" data-filter="wip">En cours</button>
+    <button class="filter-btn" data-filter="récurrent">Récurrent</button>
     <button class="filter-btn" data-filter="todo">À faire</button>
     <button class="filter-btn" data-filter="spec">Spec</button>
     <button class="filter-btn" data-filter="review">Revue</button>

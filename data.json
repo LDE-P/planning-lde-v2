@@ -1,0 +1,2839 @@
+{
+  "projects": [
+    {
+      "id": "dashboard-datamart",
+      "name": "Dashboard Datamart",
+      "alias": "Datamart",
+      "desc": "Dashboard de suivi des examens et formations.",
+      "stack": "JS · Chart.js · Python proxy",
+      "category": "active",
+      "folder": "dashbord-datamart-V1/dashboard-datamart",
+      "docs": [
+        {
+          "id": "doc-preparatoire-amelioration-quiz",
+          "file": "dashbord-datamart-V1/dashboard-datamart/exploitation/doc-preparatoire.md",
+          "title": "Document préparatoire — Amélioration des Quiz",
+          "desc": "Notes préparatoires pour la phase d exploitation du datamart en vue d améliorer les quiz training et examen Opquast.",
+          "type": "notes",
+          "status": "draft",
+          "date": "2026-05-17"
+        },
+        {
+          "id": "spec-bilans-hebdo",
+          "file": "dashbord-datamart-V1/dashboard-datamart/exploitation/SPEC-bilans-hebdo.md",
+          "title": "SPEC — Bilans hebdomadaires équipe",
+          "desc": "Spec de la feature : bouton de génération automatique d'un prompt Gamma Point d'avancement (snapshot JSON + prompt .md horodaté).",
+          "type": "spec",
+          "status": "draft",
+          "date": "2026-05-17",
+          "subproject": "process-validation-push-prod"
+        },
+        {
+          "id": "inventaire-dashbord-datamart-v1",
+          "file": "dashbord-datamart-V1/inventaire-dashbord-datamart-V1.html",
+          "title": "Inventaire dashbord-datamart-V1 — Sprint 2 en attente",
+          "desc": "Analyse complète du répertoire dashbord-datamart-V1 : orphelins identifiés, proposition d arborescence docs/data/tools/. Sprint 2 non encore exécuté.",
+          "type": "audit",
+          "status": "draft",
+          "date": "2026-05-19"
+        },
+        {
+          "id": "spec-api-pull",
+          "file": "dashbord-datamart-V1/dashboard-datamart/SPEC-API-PULL.md",
+          "title": "SPEC — API Pull WpProQuiz → Dashboard Training",
+          "desc": "Spec complète du pull manuel depuis WordPress : plugin oq-dashboard-api (3 endpoints GET), proxy Python, UI dashboard, flux premier pull avec comparaison CSV, reset localStorage.",
+          "type": "spec",
+          "status": "draft",
+          "date": "2026-05-20",
+          "subproject": "api-pull-wpproquiz"
+        },
+        {
+          "id": "tests-api-pull",
+          "file": "dashbord-datamart-V1/dashboard-datamart/TESTS-API-PULL.md",
+          "title": "TESTS — API Pull WpProQuiz → Dashboard Training",
+          "desc": "Tests fonctionnels et E2E pour le pull WpProQuiz : plugin WP (auth, endpoints GET, désérialisation), proxy (relais, sauvegarde JSON, diff), dashboard (chargement, UI pull, modale comparaison, reset localStorage), 7 scénarios E2E, checklist de validation PROD.",
+          "type": "tests",
+          "status": "draft",
+          "date": "2026-05-20",
+          "subproject": "api-pull-wpproquiz"
+        }
+      ],
+      "subprojects": [
+        {
+          "id": "onglet-cas-pratiques",
+          "name": "Onglet Cas Pratiques",
+          "titre": "Intégration du module Cas Pratiques dans le dashboard.",
+          "status": "todo",
+          "qualif": "P0",
+          "target": "22/05/2026",
+          "owner": "laurent",
+          "charge": 2.0,
+          "raf": 1.5,
+          "steps": [
+            {
+              "name": "Spécification",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Développement",
+              "status": "wip",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Mis en ligne",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "commentaire": "",
+          "type": "Feature"
+        },
+        {
+          "id": "migration-gitlab",
+          "name": "Migration GitLab",
+          "titre": "Migration du dépôt vers GitLab Opquast.",
+          "status": "blocked",
+          "qualif": "P1",
+          "target": "22/05/2026",
+          "owner": "laurent",
+          "charge": 0.5,
+          "raf": 0.0,
+          "steps": [
+            {
+              "name": "Spécification",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Développement",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Mis en ligne",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "commentaire": "Push effectué le 2026-05-19 — remote git@gitlab.com:opquast/datamart-dashboard.git",
+          "type": "Feature"
+        },
+        {
+          "id": "s5-optimisation-appels-claude",
+          "name": "S5 Optimisation appels Claude",
+          "titre": "Optimisation des appels API Claude (-51%).",
+          "status": "todo",
+          "qualif": "P2",
+          "target": "22/05/2026",
+          "owner": "laurent",
+          "charge": 2.0,
+          "raf": 2.0,
+          "steps": [
+            {
+              "name": "Spécification",
+              "status": "wip",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Développement",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Mis en ligne",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "commentaire": "",
+          "type": "Feature"
+        },
+        {
+          "id": "process-validation-push-prod",
+          "name": "Bilans hebdomadaires équipe",
+          "titre": "Bouton dans les onglets Documentation (Examen et Training) générant automatiquement un prompt Gamma — 2 slides Point d'avancement.",
+          "status": "spec",
+          "qualif": "P2",
+          "target": "25/05/2026",
+          "owner": "laurent",
+          "charge": 0.5,
+          "raf": 0.5,
+          "steps": [
+            {
+              "name": "Conception process (6 étapes, variante push individuel)",
+              "status": "wip",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Mécanisme de confirmation (à déterminer)",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Moyen d'application sur quiz source réel (import ?)",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Implémentation",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "commentaire": "Notes détaillées dans ANTIGRAVITY/datamart-proxy/CLAUDE.md. Variante push individuel : mini-quiz de test permanent.",
+          "type": "Feature"
+        },
+        {
+          "id": "exploitation-du-datamart-s20",
+          "name": "Exploitation du datamart - S20",
+          "status": "done",
+          "qualif": "P1",
+          "target": "15/05/2026",
+          "owner": null,
+          "charge": 5.0,
+          "raf": 0.0,
+          "titre": "Utilisation du datamart pour améliorer la qualité des quiz training et examen Opquast.",
+          "steps": [
+            {
+              "name": "Spécification",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Développement",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Mis en ligne",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "type": "Feature"
+        },
+        {
+          "id": "exploitation-du-datamart-s21-2",
+          "name": "Exploitation du datamart - S21",
+          "status": "wip",
+          "qualif": "P1",
+          "target": "22/05/2026",
+          "owner": null,
+          "charge": 14.0,
+          "raf": 12.0,
+          "titre": "Utilisation du datamart pour améliorer la qualité des quiz training et examen Opquast.",
+          "steps": [
+            {
+              "name": "Spécification",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Développement",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Mis en ligne",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ]
+        },
+        {
+          "id": "exploitation-du-datamart-s22-2",
+          "name": "Exploitation du datamart - S22",
+          "status": "wip",
+          "qualif": "P2",
+          "target": "29/05/2026",
+          "owner": null,
+          "charge": 14.0,
+          "raf": 14.0,
+          "titre": "Utilisation du datamart pour améliorer la qualité des quiz training et examen Opquast.",
+          "steps": [
+            {
+              "name": "Spécification",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Développement",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Mis en ligne",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ]
+        },
+        {
+          "id": "exploitation-du-datamart-s23-2",
+          "name": "Exploitation du datamart - S23",
+          "status": "wip",
+          "qualif": "P2",
+          "target": "05/06/2026",
+          "owner": null,
+          "charge": 14.0,
+          "raf": 14.0,
+          "titre": "Utilisation du datamart pour améliorer la qualité des quiz training et examen Opquast.",
+          "steps": [
+            {
+              "name": "Spécification",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Développement",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Mis en ligne",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ]
+        },
+        {
+          "id": "process-validation-push-prod-2",
+          "name": "Process validation push PROD",
+          "status": "done",
+          "qualif": "P1",
+          "target": "07/05/2026",
+          "owner": null,
+          "charge": 0.5,
+          "raf": 0.0,
+          "titre": "Conception du process de validation avant push en production sur la plateforme Examen (mode quiz) : clonage source test, 2 examens de test, mécanisme de confirmation.",
+          "steps": [
+            {
+              "name": "Spécification",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Développement",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Mis en ligne",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ]
+        },
+        {
+          "id": "api-pull-wpproquiz",
+          "name": "API Pull WpProQuiz → Training",
+          "status": "spec",
+          "qualif": "P1",
+          "target": "",
+          "owner": "laurent",
+          "charge": 6.0,
+          "raf": 6.0,
+          "titre": "Plugin WP REST (GET) + proxy + UI pull dashboard : remplace le CSV statique par des données live depuis training-v7",
+          "type": "Feature",
+          "commentaire": "Spec + tests écrits le 2026-05-20. Ping-Pong terminé. Prêt pour implémentation Claude Code.",
+          "steps": [
+            {
+              "name": "Plugin WP oq-dashboard-api (3 endpoints GET, auth, CORS)",
+              "status": "todo",
+              "charge": 1.5,
+              "raf": 1.5
+            },
+            {
+              "name": "fetchByUid() dans le fork WpProQuiz (opq-devcontainer)",
+              "status": "todo",
+              "charge": 0.5,
+              "raf": 0.5
+            },
+            {
+              "name": "Proxy Python — routes relais + POST /pull + diff + sauvegarde JSON",
+              "status": "todo",
+              "charge": 1.5,
+              "raf": 1.5
+            },
+            {
+              "name": "Dashboard — loadTrainingQuestions() + UI pull + modale comparaison CSV",
+              "status": "todo",
+              "charge": 1.5,
+              "raf": 1.5
+            },
+            {
+              "name": "Dashboard — flux pulls suivants + reset localStorage + indicateur source",
+              "status": "todo",
+              "charge": 0.5,
+              "raf": 0.5
+            },
+            {
+              "name": "Tests sur training-v7-dev (checklist TESTS-API-PULL.md)",
+              "status": "todo",
+              "charge": 0.5,
+              "raf": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "training-v7",
+      "name": "Training V7",
+      "alias": "Amélioration Training",
+      "desc": "Refonte du module de formation Opquast.",
+      "stack": "PHP 8 · WordPress · MySQL 8",
+      "category": "active",
+      "folder": "opq-devcontainer-MHO/training-domain/training-v7",
+      "docs": [],
+      "subprojects": [
+        {
+          "id": "nouvelles-modalites-meli-melo",
+          "name": "Nouvelles modalités (Méli-mélo)",
+          "titre": "Nouveau type de question Méli-mélo pour les formations.",
+          "status": "blocked",
+          "qualif": "P1",
+          "target": "05/06/2026",
+          "owner": "laurent",
+          "charge": 8.0,
+          "raf": 8.0,
+          "steps": [
+            {
+              "name": "Spécification",
+              "status": "wip",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Développement",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Mis en ligne",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "commentaire": "",
+          "type": "Feature"
+        },
+        {
+          "id": "textes-a-trous",
+          "name": "Textes à trous",
+          "titre": "Nouveau type de question textes à compléter (cloze_answer).",
+          "status": "todo",
+          "qualif": "P1",
+          "target": "22/05/2026",
+          "owner": "laurent",
+          "charge": 5.0,
+          "raf": 5.0,
+          "steps": [
+            {
+              "name": "Spécification",
+              "status": "wip",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Développement",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Mis en ligne",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "commentaire": "",
+          "type": "Feature"
+        },
+        {
+          "id": "unification-js-wpproquiz",
+          "name": "Unification JS WpProQuiz",
+          "titre": "Unification JS front (fr/en/es → fichier unique + i18n).",
+          "status": "blocked",
+          "qualif": "P2",
+          "target": "29/05/2026",
+          "owner": "laurent",
+          "charge": 0.5,
+          "raf": 0.5,
+          "steps": [
+            {
+              "name": "Spécification",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Développement",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Mis en ligne",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "commentaire": "",
+          "type": "BugFix"
+        },
+        {
+          "id": "nouvelles-modalites-analyse",
+          "name": "Nouvelles modalités — Analyse pédagogique",
+          "titre": "Document de cadrage pédagogique et technique pour les nouvelles modalités de questions (cloze + méli-mélo) : analyse Bloom, exploitation dashboard Training, priorisation.",
+          "status": "wip",
+          "qualif": "P1",
+          "target": "22/05/2026",
+          "owner": "laurent",
+          "charge": 2.0,
+          "raf": 1.0,
+          "steps": [
+            {
+              "name": "Analyse pédagogique (taxonomie Bloom, complémentarité QCM/cloze/méli-mélo)",
+              "status": "done",
+              "charge": 0.5,
+              "raf": 0.0
+            },
+            {
+              "name": "Exploitation dashboard Training (taxonomie quiz, requêtes d'analyse, filtre L70)",
+              "status": "done",
+              "charge": 1.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Priorisation technique (cloze d'abord) et rédaction document",
+              "status": "done",
+              "charge": 0.5,
+              "raf": 0.0
+            }
+          ],
+          "commentaire": "Livrable : nouvelles-modalites-questions.md (opq-devcontainer/training-domain/training-v7/)",
+          "type": "Feature"
+        },
+        {
+          "id": "audit-parcours-par-claude-avec-personna",
+          "name": "Audit parcours par Claude avec personna",
+          "titre": "Audit éditorial de Training/exam Opquast simulant 13 personas — cartographie, analyse par profil, synthèse comparative, audit examen final.",
+          "status": "wip",
+          "qualif": "P2",
+          "target": "29/05/2026",
+          "owner": "laurent",
+          "charge": 2.0,
+          "raf": 1.0,
+          "steps": [
+            {
+              "name": "Cartographie du Training",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Analyse par profils (13 personas)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Synthèse comparative",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Audit examen final de certification",
+              "status": "wip",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "commentaire": "",
+          "type": "Feature"
+        },
+        {
+          "id": "passe-ortho-simplification-rapide",
+          "name": "Passe ortho et simplification rapide",
+          "titre": "Correction orthographique des questions du quiz examen final (v5) — 288 questions, 18 catégories.",
+          "status": "done",
+          "qualif": "P2",
+          "target": "14/05/2026",
+          "owner": "laurent",
+          "charge": 0.5,
+          "raf": 0.0,
+          "steps": [
+            {
+              "name": "Copie du fichier source dans passe-ortho/",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Passe de correction orthographique (6 corrections)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Audit de cohérence du fichier corrigé",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "commentaire": "Livrable : amelioration-training/passe-ortho/examen-APRES-passe-ortho.csv",
+          "type": "Autre"
+        },
+        {
+          "id": "audit-examen-falc-par-claude-avec-personna",
+          "name": "Audit examen final FALC par Claude avec personna",
+          "titre": "Évaluation de la version FALC du quiz d'examen final Opquast — pertinence des questions/réponses/distracteurs, qualité orthotypographique, impact différentiel par profil.",
+          "status": "wip",
+          "qualif": "P0",
+          "target": "20/05/2026",
+          "owner": "laurent",
+          "charge": 2.0,
+          "raf": 1.5,
+          "steps": [
+            {
+              "name": "Prise en main du quiz et calibrage",
+              "status": "wip",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Audit des 288 questions",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Synthèse et recommandations",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "commentaire": ""
+        }
+      ]
+    },
+    {
+      "id": "examens-v7",
+      "name": "Examens V7",
+      "alias": "Examen",
+      "desc": "Refonte du module d'examen Opquast.",
+      "stack": "PHP 8.4 · WordPress · MySQL",
+      "category": "active",
+      "folder": "opq-devcontainer-MHO/examens-domain/examens-v7",
+      "docs": [],
+      "subprojects": [
+        {
+          "id": "uid-quiz-source-deploiement",
+          "name": "UIDs quiz source + chaîne déploiement examen",
+          "status": "wip",
+          "qualif": "P1",
+          "target": null,
+          "owner": "laurent",
+          "charge": 2.0,
+          "raf": 1.5,
+          "titre": "Préserver les UIDs dans les quiz de session (contrainte UNIQUE)",
+          "type": "BugFix",
+          "commentaire": "Chaîne import CSV→quiz source OK. Déploiement session test validé. Root cause UIDs NULL dans quiz session : contrainte UNIQUE sur oq_question_uid bloque INSERT silencieux. En attente décision schéma (UNIQUE scopé quiz_id ou post-deploy UPDATE). Court-terme : mise à jour PROD via ancienne méthode (import depuis quiz temporaire, sans UIDs).",
+          "steps": [
+            {
+              "name": "Import CSV → quiz source (devcontainer)",
+              "status": "done",
+              "charge": 0.5,
+              "raf": 0.0
+            },
+            {
+              "name": "SQL rename quiz_id → fix UNIQUE conflict",
+              "status": "done",
+              "charge": 0.5,
+              "raf": 0.0
+            },
+            {
+              "name": "Déploiement session test validé",
+              "status": "done",
+              "charge": 0.5,
+              "raf": 0.0
+            },
+            {
+              "name": "Root cause UIDs NULL identifiée",
+              "status": "done",
+              "charge": 0.5,
+              "raf": 0.0
+            },
+            {
+              "name": "Fix contrainte UNIQUE (schéma ou post-deploy)",
+              "status": "todo",
+              "charge": 1.0,
+              "raf": 1.0
+            },
+            {
+              "name": "Mise à jour quiz source PROD (méthode classique)",
+              "status": "todo",
+              "charge": 0.5,
+              "raf": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cas-pratiques-project",
+      "name": "Cas Pratiques",
+      "alias": "Cas Prat.",
+      "desc": "Module d'exercices pratiques Opquast.",
+      "stack": "HTML · JavaScript · Python · Bootstrap 5",
+      "category": "active",
+      "folder": "CAS-PRATIQUES",
+      "docs": [],
+      "subprojects": [
+        {
+          "id": "convertisseur-wpproquiz",
+          "name": "Convertisseur WpProQuiz (XML)",
+          "titre": "Outil de conversion de quiz vers le format WpProQuiz.",
+          "status": "blocked",
+          "qualif": "P2",
+          "target": "08/05/2026",
+          "owner": "laurent",
+          "charge": 2.0,
+          "raf": 0.0,
+          "steps": [
+            {
+              "name": "Spécification",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Développement",
+              "status": "wip",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests",
+              "status": "wip",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Mis en ligne",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "commentaire": "",
+          "type": "Feature"
+        },
+        {
+          "id": "cas-pratiques-lot-1-test-recap-training",
+          "name": "Cas pratiques - lot 1 (test récap training)",
+          "titre": "",
+          "status": "done",
+          "qualif": "P1",
+          "target": "15/05/2026",
+          "owner": null,
+          "charge": 21.0,
+          "raf": 0.0,
+          "steps": [
+            {
+              "name": "Spécification",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Développement",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Mis en ligne",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "type": "Feature"
+        },
+        {
+          "id": "cas-pratiques-lot-2-test-recap",
+          "name": "Cas pratiques - lot 2 (test récap)",
+          "status": "wip",
+          "qualif": "P1",
+          "target": "22/05/2026",
+          "owner": null,
+          "charge": 21.0,
+          "raf": 17.0,
+          "titre": "Validation et poussage",
+          "steps": [
+            {
+              "name": "Spécification",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Développement",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Mis en ligne",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "type": "Feature"
+        },
+        {
+          "id": "cas-pratiques-lot-3-exam-final",
+          "name": "Cas pratiques - lot 3 (exam final)",
+          "status": "todo",
+          "qualif": "P2",
+          "target": "29/05/2026",
+          "owner": null,
+          "charge": 21.0,
+          "raf": 21.0,
+          "titre": "Validation et poussage",
+          "steps": [
+            {
+              "name": "Spécification",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Développement",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Mis en ligne",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "type": "Feature"
+        }
+      ]
+    },
+    {
+      "id": "planning-lde-v2",
+      "name": "Planning LDE",
+      "alias": "Planning",
+      "desc": "Nouveau système de suivi V2 — modèle Projet → Sous-projet → Étape.",
+      "stack": "HTML · JS vanilla · Python",
+      "category": "active",
+      "folder": "planning-lde-v2",
+      "docs": [
+        {
+          "id": "spec-docs-md",
+          "file": "planning-lde-v2/SPEC-DOCS-MD.md",
+          "title": "Spécification Vue Docs",
+          "desc": "Vue catalogue des fichiers MD dans le dashboard V2 — endpoints, modèle de données, UI, intégration process Cowork.",
+          "type": "spec",
+          "status": "final",
+          "date": "2026-05-15",
+          "subproject": "gestion-des-md"
+        },
+        {
+          "id": "tests-docs-md",
+          "file": "planning-lde-v2/TESTS-DOCS-MD.md",
+          "title": "Tests Vue Docs",
+          "desc": "Cas de test pour les 4 endpoints docs + check d'intégrité + cas manuels UI. 89 tests automatisés verts.",
+          "type": "tests",
+          "status": "final",
+          "date": "2026-05-15",
+          "subproject": "gestion-des-md"
+        },
+        {
+          "id": "spec-archivage",
+          "file": "planning-lde-v2/SPEC-ARCHIVAGE.md",
+          "title": "Spécification Archivage",
+          "desc": "Spec complète de la feature archivage : data-archives.json, 7 endpoints, comportements spéciaux, UI (boutons, onglet Archives, badge).",
+          "type": "spec",
+          "status": "final",
+          "date": "2026-05-16",
+          "subproject": "archivage-projets-sous-projets"
+        },
+        {
+          "id": "tests-archivage",
+          "file": "planning-lde-v2/TESTS-ARCHIVAGE.md",
+          "title": "Tests Archivage",
+          "desc": "Cas de test fonctionnels pour la feature archivage : archivage SP/projet, restauration, suppression définitive, unicité IDs, UI/interactions, robustesse.",
+          "type": "tests",
+          "status": "final",
+          "date": "2026-05-16",
+          "subproject": "archivage-projets-sous-projets"
+        },
+        {
+          "id": "plan-mise-en-forme-gsheet",
+          "file": "planning-lde-v2/mise-en-forme-gsheet.md",
+          "title": "Plan Mise en forme GSheet",
+          "desc": "Plan d'avancement et notes techniques du sous-projet mise en forme GSheet — approche feuille modèle, comportements découverts (visibilité, protections, formules Semaines).",
+          "type": "spec",
+          "status": "final",
+          "date": "2026-05-16",
+          "subproject": "mise-en-forme-gsheet"
+        },
+        {
+          "id": "spec-monitoring-bilans",
+          "file": "planning-lde-v2/SPEC-MONITORING-BILANS.md",
+          "title": "Spec Monitoring Bilans",
+          "desc": "Spécification du monitoring automatique des bilans de session : extraction des sections prompt et suggestions, deux livrables MD, design de l'agent, tous les arbitrages fermés.",
+          "type": "spec",
+          "status": "final",
+          "date": "2026-05-16",
+          "subproject": "monitoring-bilans"
+        },
+        {
+          "id": "spec-spinners-dashboard",
+          "file": "planning-lde-v2/SPEC-SPINNERS.md",
+          "title": "Spec Spinners Dashboard",
+          "desc": "Spec d'implémentation du ring spinner CSS sur les 6 boutons GSheet — CSS, helper setLoading(), détail des 6 handlers.",
+          "type": "spec",
+          "status": "final",
+          "date": "2026-05-16",
+          "subproject": "spinners-dashboard"
+        },
+        {
+          "id": "spec-gsheet-hidden",
+          "file": "planning-lde-v2/SPEC-GSHEET-HIDDEN.md",
+          "title": "Spec Exclusion GSheet par projet",
+          "desc": "Spec complète du flag gsheet_hidden : schéma data.json, icône toggle UI, endpoint /api/toggle-gsheet-hidden, filtres push/pull, signalement dans les modales preview.",
+          "type": "spec",
+          "status": "final",
+          "date": "2026-05-16",
+          "subproject": "exclusion-gsheet"
+        },
+        {
+          "id": "tests-gsheet-hidden",
+          "file": "planning-lde-v2/TESTS-GSHEET-HIDDEN.md",
+          "title": "Tests Exclusion GSheet par projet",
+          "desc": "42 cas de test fonctionnels : endpoint toggle, push/TCD, pull, UI (icône, modales, CSS, tooltips), cas limites et rétrocompatibilité.",
+          "type": "tests",
+          "status": "final",
+          "date": "2026-05-16",
+          "subproject": "exclusion-gsheet"
+        },
+        {
+          "id": "spec-raf-option-b",
+          "title": "SPEC — Sprint RAF Option B",
+          "description": "Spec d'implémentation du sprint RAF Option B : charge/raf indépendants des étapes, automatisme GSheet, protection push/pull, col M clé stable.",
+          "type": "spec",
+          "status": "final",
+          "file": "planning-lde-v2/SPEC-RAF-OPTION-B.md",
+          "subproject": "sprint-raf-option-b"
+        },
+        {
+          "id": "tests-raf-option-b",
+          "title": "TESTS — Sprint RAF Option B",
+          "description": "Cas de test fonctionnels pour le sprint RAF Option B (35 cas, 9 sections, matrice de couverture).",
+          "type": "tests",
+          "status": "final",
+          "file": "planning-lde-v2/TESTS-RAF-OPTION-B.md",
+          "subproject": "sprint-raf-option-b"
+        },
+        {
+          "id": "debug-tests-push-pull",
+          "title": "DEBUG — Tests manuels push/pull RAF Option B",
+          "desc": "Journal de tests manuels RAF Option B — 36/36 ✅ (2026-05-18). 5 bugs corrigés (B1 cols 12→13, B2/B3 gspread 6.x, B4 pytest, B5 SUBSTITUE ;1). Sprint validé et clos.",
+          "file": "planning-lde-v2/DEBUG-TESTS-PUSH-PULL.md",
+          "type": "notes",
+          "status": "final",
+          "subproject": "sprint-raf-option-b"
+        },
+        {
+          "id": "spec-affichage-docs-vue-projet",
+          "file": "planning-lde-v2/SPEC-AFFICHAGE-DOCS-VUE-PROJET.md",
+          "title": "Spec Affichage docs Vue Projets et Archives",
+          "desc": "Spec d'affichage inline des docs : docs SP dans le panneau détail SP, docs sans SP et orphelins en bloc dépliable au niveau projet. Arbitrages LDE intégrés, questions ouvertes pour ping-pong.",
+          "type": "spec",
+          "status": "draft",
+          "date": "2026-05-20",
+          "subproject": "affichage-docs-vue-projet"
+        },
+        {
+          "id": "inventaire-git",
+          "file": "inventaire-GIT.html",
+          "title": "Inventaire GIT — Réorganisation 2026-05-19",
+          "desc": "Tableau complet des fichiers et répertoires GIT root : type, projet associé, déplaçabilité, orphelins. Toutes les actions de nettoyage tracées.",
+          "type": "audit",
+          "status": "final",
+          "date": "2026-05-19"
+        }
+      ],
+      "subprojects": [
+        {
+          "id": "ameliorations-ui",
+          "name": "Fix CSS icône toggle GSheet",
+          "titre": "L'icône 👁 ne perd pas son barré (text-decoration: line-through) après exclusion d'un projet.",
+          "status": "done",
+          "qualif": "P3",
+          "target": "2099-12-31",
+          "owner": "laurent",
+          "charge": 0.25,
+          "raf": 0.0,
+          "steps": [
+            {
+              "name": "Bouton retirer projet / sous-projet",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Bouton renommer sous-projet",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Charte graphique fond blanc style V1",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Filtres ouvrent les blocs affichés",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "#gsheet-status connecté → lien vers la GSheet (_blank)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Push/pull : spinner animé + modale résultats",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Bouton Push : harmoniser mise en forme avec boutons Pull",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Bugfix formule B2 TCD Projets (VALUE + locale française)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Spinner sur Init et ⊡ Modèles (cohérence avec push/pull)",
+              "status": "na",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "commentaire": "Tout ouvrir/fermer, rename alias modal, /api/gsheet/format (dropdowns C+I), TCD reconstruit depuis data.json, pull type/commentaire/statut, push préserve C+J, formules locale-aware en B2/B3/C2-G2/C3-G3 du TCD.",
+          "type": "BugFix"
+        },
+        {
+          "id": "mise-en-place-operationnelle",
+          "name": "Fix en-têtes dynamiques Semaines & TCD",
+          "titre": "En-têtes C1-G1 en formules GSheet AUJOURDHUI() — recalcul auto au changement de semaine",
+          "status": "done",
+          "qualif": "P1",
+          "target": "17/05/2026",
+          "owner": "laurent",
+          "charge": 0.5,
+          "raf": 0.0,
+          "steps": [
+            {
+              "name": "Analyse comparative V1 / V2 (projets migrés vs absents)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Mise à jour checklist fin de session CLAUDE.md",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Création deploiement-V2.md (process de transfert V1→V2)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Checklist fin de session — distinction pause / fin / session close + bilan",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Initialisation suivi-qualite/bilans/",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Intégration bilans de session dans CLAUDE.md (règles 5-9, check intégrité, 3bis, rappel horaire nuit, désambiguïsation dashboard, tests destructifs)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Utilisation opérationnelle V2 (validation en usage réel)",
+              "status": "wip",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "commentaire": "Session 2026-05-15. Les 8 projets MHO restent en V1 jusqu'à la prochaine session les concernant.",
+          "type": "Feature"
+        },
+        {
+          "id": "optimisation-claude-md",
+          "name": "Optimisation des CLAUDE.md",
+          "titre": "Optimisation et de consolidation des fichiers CLAUDE.md (racine + sous-projets).",
+          "status": "spec",
+          "qualif": "P2",
+          "target": "01/05/2026",
+          "owner": "laurent",
+          "charge": 2.0,
+          "raf": 0.0,
+          "steps": [],
+          "commentaire": "À planifier — scope et périmètre à définir.",
+          "type": "Feature"
+        },
+        {
+          "id": "monitoring-bilans",
+          "name": "Monitoring bilans de fin de session",
+          "status": "todo",
+          "qualif": "P2",
+          "target": "01/05/2026",
+          "owner": "laurent",
+          "charge": 1.0,
+          "raf": 0.0,
+          "titre": "Agent de monitoring automatique des bilans de session (synthèse prompts + suivi suggestions)",
+          "type": "Feature",
+          "commentaire": "",
+          "steps": [
+            {
+              "name": "Spec",
+              "status": "wip",
+              "charge": 0.5,
+              "raf": 0.0
+            },
+            {
+              "name": "Ping-Pong / arbitrages",
+              "status": "todo",
+              "charge": 0.5,
+              "raf": 0.5
+            },
+            {
+              "name": "Script monitor-bilans.py",
+              "status": "todo",
+              "charge": 2.5,
+              "raf": 2.5
+            },
+            {
+              "name": "Tests",
+              "status": "todo",
+              "charge": 1.0,
+              "raf": 1.0
+            },
+            {
+              "name": "Premier run + ajustements",
+              "status": "todo",
+              "charge": 0.5,
+              "raf": 0.5
+            }
+          ]
+        },
+        {
+          "id": "exclusion-gsheet",
+          "name": "Exclusion GSheet par projet",
+          "titre": "Flag gsheet_hidden pour exclure un projet de toute synchronisation GSheet (push et pull).",
+          "status": "done",
+          "qualif": "P2",
+          "target": "17/05/2026",
+          "owner": "laurent",
+          "charge": 5.35,
+          "raf": 0.0,
+          "type": "Feature",
+          "commentaire": "Livré le 2026-05-17. Tests e2e auto (A+F) : 10/10 ✅, 0 régression sur 162 tests. Tests manuels GSheet (B1, B2, B8, D1) + UI (E1–E8) : tous ✅. Bug CSS résiduel (icône toggle non barrée après exclusion) → SP séparé.",
+          "steps": [
+            {
+              "name": "Spec (SPEC-GSHEET-HIDDEN.md)",
+              "status": "done",
+              "charge": 0.5,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests fonctionnels (TESTS-GSHEET-HIDDEN.md)",
+              "status": "done",
+              "charge": 0.25,
+              "raf": 0.0
+            },
+            {
+              "name": "Implémentation Claude Code (serve-v2.py + ui.js + api.js + DASHBOARD-V2.html)",
+              "status": "done",
+              "charge": 3.85,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests manuels end-to-end",
+              "status": "done",
+              "charge": 0.75,
+              "raf": 0.0
+            }
+          ]
+        },
+        {
+          "id": "fix-css-toggle-gsheet",
+          "name": "Fix CSS icône toggle GSheet",
+          "titre": "Signalétique 👁 : vert si inclus, rouge si exclu (remplace l'ancien line-through qui n'était pas fiable sur emojis).",
+          "status": "done",
+          "qualif": "P3",
+          "target": "2026-05-20",
+          "owner": "laurent",
+          "charge": 0.25,
+          "raf": 0.0,
+          "type": "Feature",
+          "commentaire": "Le line-through sur emojis n'était pas fiable. Remplacé par color: transparent + text-shadow: 0 0 0 <couleur> (même technique que .icon-btn-danger) : rouge --blocked par défaut, vert --done avec .gsheet-visible. Spec et tests mis à jour.",
+          "steps": []
+        },
+        {
+          "id": "push-auto-apres-toggle-gsheet",
+          "name": "Push auto après toggle GSheet Hidden",
+          "titre": "Proposer un push automatique (avec confirmation) après exclusion ou réinclusion d'un projet.",
+          "status": "todo",
+          "qualif": "P3",
+          "target": "",
+          "owner": "laurent",
+          "charge": 0.5,
+          "raf": 0.0,
+          "type": "Feature",
+          "commentaire": "Suggestion LDE lors des tests du 2026-05-17 : quand on exclut/réinclut un projet, proposer immédiatement un push pour mettre la GSheet à jour.",
+          "steps": []
+        },
+        {
+          "id": "fix-entetes-semaines-tcd",
+          "name": "Mise en place Opérationnelle 1",
+          "titre": "Basculement opérationnel sur V2 : checklist de fin de session, process de transfert V1→V2, deploiement-V2.md.",
+          "status": "done",
+          "qualif": "P2",
+          "target": "01/05/2026",
+          "owner": "laurent",
+          "charge": 2.0,
+          "raf": 0.0,
+          "steps": [
+            {
+              "name": "Spec validée (SPEC-FIX-ENTETES-SEMAINES-TCD.md)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Formules ajoutées dans formules.md (§Ligne 1 C1-G1)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "_tcd_headers() retourne formules GSheet",
+              "status": "done",
+              "charge": 0.5,
+              "raf": 0.0
+            },
+            {
+              "name": "Test manuel push + vérif barre de formule GSheet",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "commentaire": "",
+          "type": "Feature"
+        },
+        {
+          "id": "sprint-raf-option-b",
+          "name": "Sprint RAF Option B",
+          "titre": "sp.charge/sp.raf indépendants des étapes, automatisme GSheet, col M clé stable, protection push/pull.",
+          "status": "done",
+          "qualif": "P1",
+          "target": "17/05/2026",
+          "owner": "laurent",
+          "charge": 4.0,
+          "raf": 0.0,
+          "steps": [
+            {
+              "name": "Spécification",
+              "status": "done",
+              "charge": 1.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests (spec)",
+              "status": "done",
+              "charge": 0.5,
+              "raf": 0.0
+            },
+            {
+              "name": "Implémentation",
+              "status": "done",
+              "charge": 2.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Init + push + vérif post-déploiement",
+              "status": "done",
+              "charge": 0.5,
+              "raf": 0.0
+            }
+          ],
+          "commentaire": "Sprint clos 2026-05-18. 35/35 tests ✅ (33 live + T3.3 et T8.1 par revue). 5 commits : 657b305 (feat) + a84efc0 (B1+B2/B3) + 93504c7 (diag) + 690b44f (P1/P2 clos) + d97e496 (B5). Voir DEBUG-TESTS-PUSH-PULL.md.",
+          "type": "Feature"
+        },
+        {
+          "id": "statut-récurrent",
+          "name": "Statut récurrent",
+          "titre": "Nouveau statut 'récurrent' pour les SP et étapes qui tournent en continu (jamais done).",
+          "status": "done",
+          "qualif": "P2",
+          "target": "2026-05-21",
+          "owner": "laurent",
+          "charge": 0.5,
+          "raf": 0.0,
+          "type": "Feature",
+          "commentaire": "Livré 2026-05-21. Cyan #0891b2. Exclu de la barre de progression done/total. Filtre + compteur stats bar ajoutés.",
+          "steps": []
+        },
+        {
+          "id": "affichage-docs-vue-projet",
+          "name": "Affichage docs dans Vue Projets et Archives",
+          "titre": "Liste inline dépliable des docs de projet et de sous-projet dans Vue Projets et Vue Archives du dashboard.",
+          "status": "spec",
+          "qualif": "P2",
+          "target": "2026-05-30",
+          "owner": "laurent",
+          "charge": 2.0,
+          "raf": 2.0,
+          "type": "Feature",
+          "commentaire": "",
+          "steps": [
+            {
+              "name": "Spec (SPEC-AFFICHAGE-DOCS-VUE-PROJET.md)",
+              "status": "done",
+              "charge": 0.5,
+              "raf": 0.0
+            },
+            {
+              "name": "Ping-Pong / arbitrages UI",
+              "status": "todo",
+              "charge": 0.25,
+              "raf": 0.25
+            },
+            {
+              "name": "Implémentation Claude Code (ui.js)",
+              "status": "todo",
+              "charge": 1.0,
+              "raf": 1.0
+            },
+            {
+              "name": "Tests manuels",
+              "status": "todo",
+              "charge": 0.25,
+              "raf": 0.25
+            }
+          ]
+        },
+        {
+          "id": "phase-6-cible-date-tcd",
+          "name": "Phase 6 — Souveraineté Cible Date + TCD Projets",
+          "status": "spec",
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "titre": "Autonomie de la colonne Cible Date et reconstruction TCD Projets",
+          "steps": []
+        },
+        {
+          "id": "deploiement-gitlab-clever-cloud",
+          "name": "Déploiement GitLab + Clever Cloud",
+          "status": "spec",
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "titre": "Déploiement du dashboard V2 sur GitLab CI + Clever Cloud",
+          "steps": []
+        },
+        {
+          "id": "suivi-et-maintenance",
+          "name": "Suivi et maintenance",
+          "titre": "Suivi opérationnel et maintenance courante du dashboard Planning LDE V2.",
+          "status": "récurrent",
+          "qualif": "P2",
+          "target": "",
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "type": "Récurrent",
+          "commentaire": "",
+          "steps": []
+        }
+      ],
+      "gsheet_hidden": true
+    },
+    {
+      "id": "optimisation-prompts-claude",
+      "name": "Optimisation Prompts Claude",
+      "alias": "OptiPrompts",
+      "desc": "Optimisation du contenu et des coûts des prompts Claude.",
+      "stack": "Markdown · éditorial",
+      "category": "active",
+      "folder": "optimisation-prompts-claude",
+      "docs": [],
+      "subprojects": [
+        {
+          "id": "politique-modele-par-tache",
+          "name": "Politique de choix du modèle par type de tâche",
+          "titre": "Définir quelle tâche utilise Haiku / Sonnet / Opus.",
+          "status": "todo",
+          "qualif": "P0",
+          "target": "05/06/2026",
+          "owner": "laurent",
+          "charge": 1.0,
+          "raf": 1.0,
+          "type": "BugFix",
+          "commentaire": "",
+          "steps": []
+        },
+        {
+          "id": "exemples-commentes-regles-editoriales",
+          "name": "Exemples commentés dans les prompts de règles éditoriales",
+          "titre": "Systématiser bons/mauvais exemples (10 à 20) avec explication du pourquoi.",
+          "status": "todo",
+          "qualif": "P0",
+          "target": "05/06/2026",
+          "owner": "laurent",
+          "charge": 2.0,
+          "raf": 2.0,
+          "type": "BugFix",
+          "commentaire": "",
+          "steps": []
+        }
+      ]
+    },
+    {
+      "id": "generateur-snippets-schmoll",
+      "name": "Cas Pratiques Schmoll",
+      "alias": "Schmoll",
+      "desc": "Générateur de cas pratiques web quality (snippets HTML/CSS/JS) depuis des référentiels Opquast/RGAA.",
+      "stack": "Node.js · Express · JS vanilla · Vite",
+      "category": "active",
+      "folder": "generateur-snippets-schmoll",
+      "docs": [],
+      "subprojects": [
+        {
+          "id": "extraction-referentiels",
+          "name": "Extraction référentiels",
+          "titre": "Extraction et enrichissement IA des critères depuis HTML local ou URL.",
+          "status": "blocked",
+          "qualif": "P1",
+          "target": "01/05/2026",
+          "owner": "laurent",
+          "charge": 5.0,
+          "raf": 0.0,
+          "type": "Feature",
+          "commentaire": "",
+          "steps": []
+        },
+        {
+          "id": "generation-cas-pratiques",
+          "name": "Génération cas pratiques",
+          "titre": "Génération de snippets HTML sandbox et bacs d'exercices depuis les critères sélectionnés.",
+          "status": "blocked",
+          "qualif": "P1",
+          "target": "01/05/2026",
+          "owner": "laurent",
+          "charge": 5.0,
+          "raf": 0.0,
+          "type": "Feature",
+          "commentaire": "",
+          "steps": []
+        }
+      ],
+      "gsheet_hidden": true
+    },
+    {
+      "id": "amelioration-training",
+      "name": "Amélioration Certification (training/exam)",
+      "alias": "AmelioCertif",
+      "desc": "Travail de planification et d'amélioration de la plateforme de formation Opquast V7 — plan d'amélioration, analyse plugins, accessibilité.",
+      "stack": "Markdown · PHP · WordPress",
+      "category": "active",
+      "folder": "amelioration-training",
+      "docs": [
+        {
+          "id": "plan-amelioration-v1",
+          "file": "amelioration-training/PLANIFICATION/plan-amelioration.md",
+          "title": "Plan d'amélioration Training V7",
+          "desc": "Plan complet d'amélioration — 7 axes, 33 tâches (technique, fonctionnel, ergonomie, plugins, accessibilité).",
+          "type": "spec",
+          "status": "draft",
+          "date": "2026-05-16",
+          "subproject": "metriques-tbd-certification"
+        },
+        {
+          "id": "sync-google-doc",
+          "file": "amelioration-training/PLANIFICATION/sync-google-doc.gs",
+          "title": "Script sync Google Doc",
+          "desc": "Script Apps Script pour synchroniser le Google Doc Training Plan avec le plan Markdown.",
+          "type": "autre",
+          "status": "final",
+          "date": "2026-05-16",
+          "subproject": "metriques-tbd-certification"
+        },
+        {
+          "id": "plan-amelioration-exam-v1",
+          "file": "amelioration-training/PLANIFICATION/plan-amelioration-exam.md",
+          "title": "Plan d'amélioration Exam V7",
+          "desc": "Plan complet d'amélioration — 4 axes, 16 tâches (proctoring, enrichissement questions, expérience candidat, technique).",
+          "type": "spec",
+          "status": "draft",
+          "date": "2026-05-16",
+          "subproject": "plan-amelioration-exam-v7"
+        }
+      ],
+      "subprojects": [
+        {
+          "id": "plan-amelioration-exam-v7",
+          "name": "Plan amélioration Exam V7",
+          "status": "wip",
+          "qualif": "P2",
+          "target": "05/06/2026",
+          "owner": "laurent",
+          "charge": 3.0,
+          "raf": 2.5,
+          "titre": "Établir le plan d'amélioration complet de l'Exam V7 (proctoring, Cas Pratiques, expérience candidat)",
+          "type": "Feature",
+          "commentaire": "",
+          "steps": [
+            {
+              "name": "Analyse du code source (Smowl, wp-pro-quiz, situations)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Rédaction du plan (axes PR, Q, E, T)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Validation et démarrage des premières tâches",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ]
+        },
+        {
+          "id": "metriques-tbd-certification",
+          "name": "Plan amélioration Training V1",
+          "titre": "Établir le plan d'amélioration complet de Training V7 (7 axes, 33 tâches)",
+          "status": "wip",
+          "qualif": "P2",
+          "target": "05/06/2026",
+          "owner": null,
+          "charge": 3.0,
+          "raf": 2.5,
+          "steps": [
+            {
+              "name": "Spécification",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Développement",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Mis en ligne",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "type": "Feature"
+        },
+        {
+          "id": "passe-falc",
+          "name": "Passe Falc",
+          "titre": "Simplification FALC/ELAN des questions et réponses du quiz examen final (v5) — 288 questions.",
+          "status": "done",
+          "qualif": "P2",
+          "target": "20/05/2026",
+          "owner": "laurent",
+          "charge": 1.5,
+          "raf": 0.0,
+          "steps": [
+            {
+              "name": "Copie du fichier source (examen-APRES-passe-ortho.csv)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Passe FALC sur la colonne Question (113 questions simplifiées)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Audit de cohérence questions (sens, réponses)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Passe FALC sur les Options (a) à (e) (17 options simplifiées)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Audit de cohérence options (sens, Answer/Options)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Variante mise en situation — restauration 42 questions + corrections manuelles",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Passe de variations de formulations (71 modifications, 9 groupes)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Passe de corrections diverses (lorsqu', afin de, il est nécessaire, il est question)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "commentaire": "Livrable final : amelioration-training/passe-falc/examen-APRES-passe-falc-full-mise-en-situations.csv",
+          "type": "Autre"
+        }
+      ]
+    },
+    {
+      "id": "formations-opquast",
+      "name": "Formations Opquast",
+      "alias": "Formations",
+      "desc": "Formations Référents, Formateurs, Experts",
+      "stack": "",
+      "category": "active",
+      "folder": "",
+      "docs": [],
+      "subprojects": [
+        {
+          "id": "formation-referent",
+          "name": "Formation Référent : Paris",
+          "titre": "Paris - 9 au 11 Juin 2026",
+          "status": "todo",
+          "qualif": "P2",
+          "target": "09/06/2026",
+          "owner": null,
+          "charge": 21.0,
+          "raf": 0.0,
+          "steps": [
+            {
+              "name": "Spécification",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Développement",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Mis en ligne",
+              "status": "na",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "type": "Autre"
+        },
+        {
+          "id": "formation-referents-paris",
+          "name": "Formation Référents - Préparation J2",
+          "titre": "Mise à Jour J2 IA / IA",
+          "status": "todo",
+          "qualif": "",
+          "target": "29/05/2026",
+          "owner": null,
+          "charge": 7.0,
+          "raf": 5.0,
+          "steps": [
+            {
+              "name": "Spécification",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Développement",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Mis en ligne",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "type": "Autre"
+        }
+      ]
+    },
+    {
+      "id": "sites-martyrs",
+      "name": "Sites martyrs",
+      "alias": "Sites Martyrs",
+      "desc": "",
+      "stack": "",
+      "category": "active",
+      "folder": "",
+      "docs": [],
+      "subprojects": [
+        {
+          "id": "sites-martyrs-lot-1",
+          "name": "Sites martyrs —  lot 1",
+          "titre": "Sites martirs lot 1",
+          "status": "todo",
+          "qualif": "P2",
+          "target": "05/06/2026",
+          "owner": null,
+          "charge": 21.0,
+          "raf": 21.0,
+          "steps": [
+            {
+              "name": "Spécification",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Développement",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Mis en ligne",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "type": "Feature"
+        },
+        {
+          "id": "sites-martyrs-lot-2",
+          "name": "Sites martyrs —  lot 2",
+          "titre": "Sites martirs lot 2",
+          "status": "todo",
+          "qualif": "P2",
+          "target": "12/06/2026",
+          "owner": null,
+          "charge": 21.0,
+          "raf": 0.0,
+          "steps": [
+            {
+              "name": "Spécification",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Développement",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Mis en ligne",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "type": "Feature",
+          "commentaire": "TEST"
+        }
+      ]
+    },
+    {
+      "id": "gt-formations",
+      "name": "GT formations",
+      "alias": "GT formations",
+      "desc": "Groupe de travail G2 — formations complémentaires Opquast par familles de métiers.",
+      "stack": "Markdown · DOCX · PPTX · Éditorial",
+      "category": "active",
+      "folder": "groupe-travail-G2-formations",
+      "docs": [],
+      "subprojects": [
+        {
+          "id": "transfert-git",
+          "name": "Transfert vers GIT",
+          "titre": "Déplacement du projet dans le dossier GIT et initialisation du dépôt.",
+          "status": "done",
+          "qualif": "P1",
+          "target": "12/05/2026",
+          "owner": "laurent",
+          "charge": 0.5,
+          "raf": 0.0,
+          "steps": [
+            {
+              "name": "Transfert fichiers vers groupe-travail-G2-formations/",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Initialisation dépôt git + .gitignore",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Initial commit",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "commentaire": "",
+          "type": "Autre"
+        },
+        {
+          "id": "expression-de-besoins",
+          "name": "Expression de besoins",
+          "titre": "Document formel d'expression de besoins pour le comité de direction (2 versions : rédigée et synthétique).",
+          "status": "done",
+          "qualif": "P1",
+          "target": "12/05/2026",
+          "owner": "laurent",
+          "charge": 1.0,
+          "raf": 0.0,
+          "steps": [
+            {
+              "name": "Version rédigée (V1)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Version synthétique bullet-points (V2)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "commentaire": "Livrables : Expression_de_besoins_Opquast.docx + _v2.docx (dans Downloads)",
+          "type": "Autre"
+        },
+        {
+          "id": "presentation-gamma",
+          "name": "Présentation Gamma G2",
+          "titre": "Présentation 29 slides pour les membres du GT G2, optimisée pour import Gamma.",
+          "status": "done",
+          "qualif": "P0",
+          "target": "12/05/2026",
+          "owner": "laurent",
+          "charge": 2.0,
+          "raf": 0.0,
+          "steps": [
+            {
+              "name": "Création structure 29 slides",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Remplacement pourcentages par nombres bruts",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Ajout sources et slide questions",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Enrichissement focus contributeurs éditoriaux",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "commentaire": "Livrable : Presentation_G2_source_Gamma.md",
+          "type": "Autre"
+        },
+        {
+          "id": "synthese-document-consolide",
+          "name": "Document consolidé G2",
+          "titre": "Consolidation de tous les documents du GT G2 en un document structuré unique (7 parties : constats, enquêtes, orientations, catalogue, focus métiers, benchmark, prochaines étapes).",
+          "status": "done",
+          "qualif": "P0",
+          "target": "12/05/2026",
+          "owner": "laurent",
+          "charge": 3.0,
+          "raf": 0.0,
+          "steps": [
+            {
+              "name": "Analyse enquête certification (2 vagues, 40 répondants)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Intégration CR séance 3 + notes séance 4",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Intégration analyse Perplexity (benchmark + catalogue)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Intégration cas tamo.bzh + prérequis PO IA",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Conversion Word (.docx)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "commentaire": "Livrables : Synthese_G2_document_consolide.md + .docx",
+          "type": "Autre"
+        }
+      ],
+      "gsheet_hidden": false
+    },
+    {
+      "id": "notification-front",
+      "name": "Notification Front",
+      "alias": "NotifFront",
+      "desc": "Page de statut « À mon attention aujourd'hui » — agrégation Front (compartiments + Subscribed + Assigné) et Google Drive, alimentée par un artifact Cowork et une tâche planifiée 30 min en lecture seule.",
+      "stack": "HTML · JS vanilla · Cowork artifact · Tâche planifiée",
+      "category": "active",
+      "folder": "projets-divers/notifications-front",
+      "docs": [],
+      "subprojects": [
+        {
+          "id": "mise-en-place",
+          "name": "Mise en place",
+          "titre": "Création de l'artifact Cowork et de la tâche planifiée 30 min en lecture seule sur Front.",
+          "status": "done",
+          "qualif": "P1",
+          "target": "17/05/2026",
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "steps": [
+            {
+              "name": "Spécification",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Développement",
+              "status": "wip",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Mis en ligne",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "commentaire": "",
+          "type": "Feature"
+        }
+      ],
+      "gsheet_hidden": true
+    },
+    {
+      "id": "livre-oq",
+      "name": "Livre OQ",
+      "alias": "Livre OQ",
+      "desc": "Relecture et contributions au livre Qualité & Conformité des services numériques (Eyrolles).",
+      "stack": "Éditorial",
+      "category": "active",
+      "folder": "le-livre-opquast/",
+      "docs": [],
+      "subprojects": [
+        {
+          "id": "revue-regles-glossaire",
+          "name": "Revue Règles et glossaire",
+          "titre": "Relecture sur le fond des règles 1–245 et du glossaire (édition 30/04/2026).",
+          "status": "done",
+          "qualif": "P1",
+          "target": "13/05/2026",
+          "owner": "laurent",
+          "charge": 2.0,
+          "raf": 0.0,
+          "steps": [],
+          "commentaire": "Livrable : relecture-glossaire-eyrolles.md",
+          "type": "Autre"
+        },
+        {
+          "id": "revue-tags",
+          "name": "Revue des nouveaux tags 1 (validation)",
+          "titre": "Attribution et justification des tags (Fonctionnel/Technique/Contenus) pour les 245 règles de la checklist Opquast 2025.",
+          "status": "done",
+          "qualif": "P0",
+          "target": "15/05/2026",
+          "owner": "laurent",
+          "charge": 1.0,
+          "raf": 0.0,
+          "steps": [],
+          "commentaire": "Livrable : checklist-opquast-tags-2025.csv. 244 Validé, 1 Discutable (R14).",
+          "type": "Autre"
+        },
+        {
+          "id": "revue-tags-2-objections",
+          "name": "Revue des tags 2 (objections)",
+          "status": "done",
+          "owner": "laurent",
+          "created": "2026-05-15",
+          "target": "15/05/2026",
+          "charge": 1.0,
+          "raf": 0.0,
+          "steps": [
+            {
+              "name": "Génération CSV objections (IA)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Revue humaine des objections",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Arbitrages et mise à jour des tags",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "qualif": "P0",
+          "type": "Autre"
+        },
+        {
+          "id": "revue-tags-existants",
+          "name": "Revue des tags déjà en place",
+          "titre": "Vérification de la pertinence des 5 tags existants (Accessibilité, Écoconception, Mobile, Privacy, SEO) pour les 245 règles de la checklist Opquast 2025.",
+          "status": "done",
+          "qualif": "P0",
+          "target": "15/05/2026",
+          "owner": "laurent",
+          "charge": 0.5,
+          "raf": 0.0,
+          "steps": [],
+          "commentaire": "168 règles taggées analysées (122 validées, 18 modifiées). 77 règles sans tag listées dans un CSV annexe. Livrables : validation-tags-existants.csv + regles-sans-tag-existant.csv.",
+          "type": "Autre"
+        },
+        {
+          "id": "excel-tags-pour-eyrolles",
+          "name": "Excel Tags pour Eyrolles",
+          "status": "done",
+          "qualif": "P0",
+          "target": "15/05/2026",
+          "owner": "laurent",
+          "charge": 0.5,
+          "raf": 0.0,
+          "titre": "Doc pour la mise à jour des tags dans le livre, pour E. Pasquier",
+          "steps": [
+            {
+              "name": "Spécification",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Développement",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Mis en ligne",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "commentaire": "Livrable : tags-eryolles.csv — 245 règles avec ligne de tags formatée (3 groupes séparés par |) + référence InDesign par règle.",
+          "type": "Autre"
+        }
+      ]
+    },
+    {
+      "id": "poids",
+      "name": "Suivi Poids",
+      "desc": "Application personnelle de suivi de poids mensuel (Excel + HTML autonome).",
+      "stack": "Node.js · Python · HTML",
+      "category": "perso",
+      "folder": "perso/POIDS/",
+      "docs": [],
+      "subprojects": [],
+      "gsheet_hidden": true
+    },
+    {
+      "id": "gestion-compte-personnel",
+      "name": "Gestion compte personnel",
+      "desc": "Simulateur de dépenses mensuelles multi-mois (BP BFC).",
+      "stack": "HTML · JS vanilla · Python (serveur local)",
+      "category": "perso",
+      "folder": "perso/gestion-compte-personnel/",
+      "docs": [
+        {
+          "id": "spec-serveur-simu",
+          "file": "perso/gestion-compte-personnel/SPEC-SERVEUR.md",
+          "title": "SPEC — Serveur local pour simulateur_depenses",
+          "desc": "Architecture du serveur Python local (port 8090) qui remplace localStorage. GET/POST /api/state, écriture atomique, écran d erreur si serveur absent, section How to Rollback.",
+          "type": "spec",
+          "status": "final",
+          "date": "2026-05-19",
+          "subproject": "migration-serveur-local"
+        },
+        {
+          "id": "tests-serveur-simu",
+          "file": "perso/gestion-compte-personnel/TESTS-SERVEUR.md",
+          "title": "TESTS — Serveur local simulateur_depenses",
+          "desc": "8 sections de tests (T1-T8) couvrant démarrage, endpoints GET/POST /api/state, comportement HTML, sauvegarde debounce, export/import et cohérence Mois prochain.",
+          "type": "tests",
+          "status": "final",
+          "date": "2026-05-19",
+          "subproject": "migration-serveur-local"
+        },
+        {
+          "id": "spec-corrections-simu",
+          "file": "perso/gestion-compte-personnel/SPEC-CORRECTIONS.md",
+          "title": "SPEC — Corrections export/import et mois courant",
+          "desc": "C1 : export/import exhaustif (toutes les clés de _stateCache). C2 : affichage automatique du mois courant au chargement.",
+          "type": "spec",
+          "status": "final",
+          "date": "2026-05-20",
+          "subproject": "corrections-ux"
+        }
+      ],
+      "subprojects": [
+        {
+          "id": "migration-serveur-local",
+          "name": "Migration localStorage → serveur Python local",
+          "titre": "Persistance via serveur HTTP Python stdlib (port 8090) au lieu de localStorage.",
+          "status": "done",
+          "qualif": "P2",
+          "target": "19/05/2026",
+          "owner": "laurent",
+          "charge": 1.0,
+          "raf": 0.0,
+          "steps": [
+            {
+              "name": "Spécification",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Développement",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Mis en ligne",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "commentaire": "",
+          "type": "Feature"
+        },
+        {
+          "id": "corrections-ux",
+          "name": "Corrections UX export/import et mois courant",
+          "titre": "Export/import exhaustif + affichage automatique du mois courant au chargement.",
+          "status": "done",
+          "qualif": "P3",
+          "target": "2026-05-31",
+          "owner": "laurent",
+          "charge": 0.5,
+          "raf": 0.0,
+          "steps": [
+            {
+              "name": "Spécification",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Développement",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "commentaire": "Voir SPEC-CORRECTIONS.md — implémenté et validé le 2026-05-20.",
+          "type": "BugFix"
+        },
+        {
+          "id": "maj-mois-courant",
+          "name": "Mise à jour du mois courant",
+          "titre": "Saisie mensuelle des dépenses réelles dans l onglet du mois en cours.",
+          "status": "wip",
+          "qualif": "P1",
+          "target": "2026-05-31",
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "steps": [],
+          "commentaire": "Mise à jour manuelle via session Cowork — données collées depuis le relevé BP BFC.",
+          "type": "Récurrent"
+        }
+      ],
+      "gsheet_hidden": true
+    },
+    {
+      "id": "rangement-git",
+      "name": "Technicienne de surface GIT",
+      "alias": "RangementGIT",
+      "desc": "Skill, tâche planifiée et artifact de ménage quotidien du répertoire GIT — cohérence, orphelins, git status.",
+      "stack": "Cowork skill · Artifact",
+      "category": "infra",
+      "folder": "suivi-qualite/",
+      "docs": [
+        {
+          "id": "rapport-menage",
+          "file": "suivi-qualite/rapport-menage.json",
+          "title": "Rapport de ménage GIT",
+          "description": "Rapport JSON produit après chaque exécution du skill rangement-git — statut des 5 checks, actions effectuées, points à régler.",
+          "type": "notes",
+          "status": "draft",
+          "date": "2026-05-19"
+        }
+      ],
+      "subprojects": [
+        {
+          "id": "technicienne-surface-cowork",
+          "name": "Technicienne de surface Cowork",
+          "titre": "Skill, tâche planifiée et artifact de ménage du répertoire GIT — vérification cohérence, orphelins, terminal.txt, git status.",
+          "status": "done",
+          "qualif": "P2",
+          "target": "2026-05-19",
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "steps": [
+            {
+              "name": "Skill rangement-git",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tâche planifiée (2×/jour)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Artifact dashboard ménage",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "commentaire": ""
+        }
+      ],
+      "gsheet_hidden": true
+    },
+    {
+      "id": "suivi-qualite-process",
+      "name": "Suivi qualité process Cowork",
+      "alias": "SuiviQualite",
+      "desc": "Bilans de session, suivi des suggestions d'amélioration et analyse qualité des prompts.",
+      "stack": "Markdown · Python (monitor-bilans.py prévu)",
+      "category": "infra",
+      "folder": "suivi-qualite/",
+      "docs": [],
+      "subprojects": [
+        {
+          "id": "bilans-session",
+          "name": "Bilans de session",
+          "titre": "Rédaction des bilans de session close dans bilans/ — template parseable, README, nommage YYYY-MM-DD.",
+          "status": "done",
+          "qualif": "P1",
+          "target": "",
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "steps": [
+            {
+              "name": "Template + README",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Bilans alimentés régulièrement",
+              "status": "wip",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "commentaire": "15 bilans produits (2026-05-15 → 2026-05-18)"
+        },
+        {
+          "id": "monitor-bilans",
+          "name": "monitor-bilans.py",
+          "titre": "Script d'extraction automatique des suggestions depuis les bilans — alimente suivi-suggestions.md et synthese-prompts.md.",
+          "status": "done",
+          "qualif": "P2",
+          "target": "",
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "steps": [],
+          "commentaire": "Implémenté le 2026-05-19. Extrait suggestions depuis bilans/*.md, déduit priorité/complexité par mots-clés, régénère suivi-suggestions.md."
+        }
+      ],
+      "gsheet_hidden": true
+    },
+    {
+      "id": "monitoring-sessions-cowork",
+      "name": "Monitoring Sessions Cowork",
+      "desc": "Vue de suivi des sessions Cowork ouvertes : nom, statut (active/en pause), aperçu du dernier état. Déclenchée à la demande depuis le chat.",
+      "stack": "Cowork · session_info MCP · Skill (prévu)",
+      "category": "infra",
+      "folder": "suivi-qualite/",
+      "docs": [
+        {
+          "id": "spec-monitoring-sessions-cowork",
+          "file": "suivi-qualite/SPEC-monitoring-sessions-cowork.md",
+          "title": "SPEC — Monitoring Sessions Cowork",
+          "desc": "Contexte, contraintes techniques (artifact non viable, restriction sandbox), architecture de la vue à la demande, déduplication par nom, exemple de sortie.",
+          "type": "spec",
+          "status": "draft",
+          "date": "2026-05-19",
+          "subproject": "vue-demande-chat"
+        }
+      ],
+      "subprojects": [
+        {
+          "id": "vue-demande-chat",
+          "name": "Vue à la demande dans le chat",
+          "titre": "Sur déclenchement manuel : list_sessions + read_transcript en parallèle → tableau nom · statut · aperçu dans le chat.",
+          "status": "done",
+          "qualif": "P2",
+          "target": "2026-05-19",
+          "owner": "laurent",
+          "charge": 1.5,
+          "raf": 0.0,
+          "steps": [
+            {
+              "name": "Exploration (artifact)",
+              "status": "done",
+              "charge": 0.5,
+              "raf": 0.0
+            },
+            {
+              "name": "Vue chat à la demande",
+              "status": "done",
+              "charge": 0.5,
+              "raf": 0.0
+            },
+            {
+              "name": "Skill invocable",
+              "status": "done",
+              "charge": 0.5,
+              "raf": 0.0
+            }
+          ],
+          "commentaire": "Artifact abandonné (erreur 400 sandbox). Vue chat + skill sessions-cowork.skill livrés le 2026-05-19."
+        }
+      ],
+      "gsheet_hidden": true
+    },
+    {
+      "id": "tests-quiz-plateformes",
+      "name": "Tests de quiz dans les plateformes",
+      "alias": "TestsQuiz",
+      "desc": "Tests fonctionnels des quiz sur les plateformes Training V7 et Examens V7.",
+      "stack": "Markdown · Tests fonctionnels",
+      "category": "active",
+      "folder": "tests-quiz-plateformes/",
+      "subprojects": [
+        {
+          "id": "tester-examen-final",
+          "name": "Tester un examen final",
+          "status": "wip",
+          "qualif": "P2",
+          "target": "20/05/2026",
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "titre": "Import CSV + test sur Training DEV (sprint 1 : A→B validé)",
+          "steps": []
+        },
+        {
+          "id": "parametres-quiz-post-import",
+          "name": "Paramètres de quiz post-import",
+          "status": "todo",
+          "qualif": "P2",
+          "target": null,
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "titre": "Arbitrer : template manuel vs quiz test dédié pré-paramétré",
+          "commentaire": "L'import CSV ne transporte pas les paramètres de quiz. Deux options documentées dans CLAUDE.md (section Limitations connues).",
+          "steps": []
+        },
+        {
+          "id": "validation-automatique-parcours-training",
+          "name": "Validation automatique du parcours Training",
+          "status": "done",
+          "qualif": "P1",
+          "target": null,
+          "owner": "laurent",
+          "charge": 0.5,
+          "raf": 0.0,
+          "titre": "Page admin WP : valider 100% quiz + topics pour un compte cible",
+          "commentaire": "Implémentation et tests Docker validés le 2026-05-21. T2, T3.3, T3.7, T4.1, T5.2, T6.1, T8.1 ✅. En attente make check + commit.",
+          "steps": [
+            {
+              "name": "Spec",
+              "status": "done",
+              "charge": 0.1,
+              "raf": 0.0
+            },
+            {
+              "name": "Implémentation (2 fichiers : admin-complete-parcours.php + functions.php)",
+              "status": "done",
+              "charge": 0.3,
+              "raf": 0.0
+            },
+            {
+              "name": "Test sur Docker local",
+              "status": "done",
+              "charge": 0.1,
+              "raf": 0.0
+            }
+          ]
+        },
+        {
+          "id": "maj-quiz-source-examen-sql",
+          "name": "Mise à jour quiz SOURCE EXAMEN via SQL",
+          "status": "wip",
+          "qualif": "P1",
+          "target": null,
+          "owner": "laurent",
+          "charge": 1.5,
+          "raf": 0.3,
+          "titre": "Script Python + SQL : maj textes question/réponses quiz SOURCE #1 (passe FALC)",
+          "steps": [
+            {
+              "name": "Analyse table + stratégie",
+              "status": "done",
+              "charge": 0.3,
+              "raf": 0.0
+            },
+            {
+              "name": "Script update-source-quiz.py (dry-run + execute + 3 SQL)",
+              "status": "done",
+              "charge": 0.5,
+              "raf": 0.0
+            },
+            {
+              "name": "Exécution locale + vérification visuelle",
+              "status": "done",
+              "charge": 0.2,
+              "raf": 0.0
+            },
+            {
+              "name": "Exécution DEV + vérification",
+              "status": "done",
+              "charge": 0.2,
+              "raf": 0.0
+            },
+            {
+              "name": "Exécution PROD",
+              "status": "todo",
+              "charge": 0.3,
+              "raf": 0.3
+            }
+          ]
+        }
+      ],
+      "docs": [
+        {
+          "id": "spec-admin-complete-parcours",
+          "file": "tests-quiz-plateformes/validation-automatique-parcours-training/SPEC-admin-complete-parcours.md",
+          "title": "SPEC — Page admin « Valider le parcours Training »",
+          "desc": "Spec de la feature : page admin WP pour valider 100% du parcours Training fr pour un utilisateur cible (quiz + topics non-quiz).",
+          "type": "spec",
+          "status": "final",
+          "date": "2026-05-21",
+          "subproject": "validation-automatique-parcours-training"
+        },
+        {
+          "id": "tests-admin-complete-parcours",
+          "file": "tests-quiz-plateformes/validation-automatique-parcours-training/TESTS-admin-complete-parcours.md",
+          "title": "TESTS — Page admin « Valider le parcours Training »",
+          "desc": "Cas de test fonctionnels (T1–T9) : sécurité, interface, résolution utilisateur, reset, quiz, topics, examen, confirmation, cas limites.",
+          "type": "tests",
+          "status": "final",
+          "date": "2026-05-21",
+          "subproject": "validation-automatique-parcours-training"
+        }
+      ]
+    },
+    {
+      "id": "brief-equipe",
+      "name": "Brief Équipe",
+      "desc": "Générateur de briefs d'équipe hebdomadaires.",
+      "stack": "Python · HTML · éditorial",
+      "category": "active",
+      "folder": "brief-equipe/",
+      "docs": [],
+      "subprojects": []
+    },
+    {
+      "id": "tests-e2e-python",
+      "name": "Tests e2e Python",
+      "desc": "Suite de tests end-to-end Python pour les plateformes Opquast.",
+      "stack": "Python · pytest · requests",
+      "category": "active",
+      "folder": "tests-e2e-python/",
+      "docs": [],
+      "subprojects": []
+    },
+    {
+      "id": "operations-devcontainer",
+      "name": "Opérations DevContainer",
+      "alias": "DevContainer",
+      "desc": "Assistance à l'utilisation du devcontainer Opquast",
+      "stack": "Docker · VS Code · 1Password · Dev Containers",
+      "category": "infra",
+      "folder": "opq-devcontainer-MHO/opq-devcontainer/",
+      "docs": [],
+      "subprojects": [
+        {
+          "id": "prise-en-main",
+          "name": "Prise en main",
+          "titre": "Assistance aux opérations courantes du devcontainer Opquast",
+          "status": "récurrent",
+          "qualif": "P1",
+          "target": "",
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "commentaire": "",
+          "type": "Support",
+          "steps": [
+            {
+              "name": "Spécification",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Développement",
+              "status": "wip",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Mis en ligne",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "debug-test-2026-05-21",
+      "name": "Debug et Test 21 mai 2026",
+      "alias": "DebugTest210526",
+      "desc": "Session de debug et tests sur l'environnement examens-v7 (devcontainer, plugin MT WP PRO QUIZ IMPORT, UIDs)",
+      "stack": "PHP · WordPress · WpProQuiz · Docker · Python",
+      "category": "active",
+      "folder": "opq-devcontainer-MHO/examens-domain/examens-v7/",
+      "docs": [],
+      "subprojects": [
+        {
+          "id": "debug-plugin-mt-quiz",
+          "name": "Debug plugin WP MT QUIZ",
+          "titre": "Correction export CSV + import UID/metadata dans MT WP PRO QUIZ IMPORT",
+          "status": "spec",
+          "qualif": "P1",
+          "target": "2026-05-28",
+          "owner": "laurent",
+          "charge": 4.0,
+          "raf": 4.0,
+          "commentaire": "",
+          "type": "BugFix",
+          "steps": [
+            {
+              "name": "Spécification",
+              "status": "wip",
+              "charge": 0.5,
+              "raf": 0.0
+            },
+            {
+              "name": "Développement",
+              "status": "todo",
+              "charge": 3.0,
+              "raf": 3.0
+            },
+            {
+              "name": "Tests",
+              "status": "todo",
+              "charge": 0.5,
+              "raf": 0.5
+            },
+            {
+              "name": "Mis en ligne",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

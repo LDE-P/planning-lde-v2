@@ -27,7 +27,7 @@ TOKEN_FILE = BASE_DIR / 'token.json'
 MAX_PAYLOAD = 1_000_000  # 1 Mo
 PORT = 8001
 
-_VALID_STATUSES = {'done', 'wip', 'review', 'spec', 'todo', 'blocked'}
+_VALID_STATUSES = {'done', 'wip', 'review', 'spec', 'todo', 'blocked', 'récurrent'}
 _VALID_STEP_STATUSES = _VALID_STATUSES | {'na'}
 
 _DOC_TYPES = {'spec', 'audit', 'tests', 'bilan', 'notes', 'autre'}
@@ -38,6 +38,7 @@ _DOC_PATCH_FIELDS = {'file', 'title', 'desc', 'type', 'status', 'date', 'subproj
 _STATUS_TO_GS = {
     'done': 'TERMINÉ', 'wip': 'EN COURS', 'review': 'REVUE',
     'spec': 'SPEC', 'todo': 'À FAIRE', 'blocked': 'STAND BY',
+    'récurrent': 'RÉCURRENT',
 }
 _STATUS_FROM_GS = {v: k for k, v in _STATUS_TO_GS.items()}
 

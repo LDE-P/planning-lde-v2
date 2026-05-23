@@ -1,0 +1,582 @@
+{
+  "projects": [
+    {
+      "id": "dashboard-datamart",
+      "name": "Dashboard Datamart",
+      "alias": "Datamart",
+      "desc": "Dashboard de suivi des examens et formations.",
+      "stack": "JS · Chart.js · Python proxy",
+      "category": "active",
+      "folder": "dashbord-datamart-V1/dashboard-datamart",
+      "docs": [],
+      "subprojects": [
+        {
+          "id": "suivi-couts-claude",
+          "name": "Suivi continu des coûts Claude",
+          "titre": "Log JSONL des appels Claude, calcul coût, pages de rendu Examens et Training.",
+          "status": "done",
+          "qualif": "P1",
+          "target": "15/05/2026",
+          "owner": "laurent",
+          "charge": 7.5,
+          "raf": 0.0,
+          "type": "Feature",
+          "commentaire": "Spec : optimisation-prompts-claude/SPEC-SUIVI-COUTS-CLAUDE.md. Pages : claude-costs-examen.html / claude-costs-training.html",
+          "steps": [
+            {
+              "name": "Spec + TESTS (Ping-Pong Cowork)",
+              "status": "done",
+              "charge": 0.5,
+              "raf": 0.0
+            },
+            {
+              "name": "Implémentation Claude Code (proxy, routes, pages HTML)",
+              "status": "done",
+              "charge": 6.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Vérification et synchronisation GIT",
+              "status": "done",
+              "charge": 0.5,
+              "raf": 0.0
+            }
+          ]
+        },
+        {
+          "id": "dashboard-training",
+          "name": "Dashboard Training — V 1",
+          "titre": "Volet Training du dashboard Datamart (éditorial)",
+          "status": "done",
+          "qualif": "P0",
+          "target": "15/05/2026",
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "steps": [
+            {
+              "name": "Spécification",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Développement",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests",
+              "status": "na",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Mis en ligne",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "commentaire": "",
+          "type": "Feature"
+        }
+      ]
+    },
+    {
+      "id": "training-v7",
+      "name": "Training V7",
+      "alias": "Training",
+      "desc": "Refonte du module de formation Opquast.",
+      "stack": "PHP 8 · WordPress · MySQL 8",
+      "category": "active",
+      "folder": "opq-devcontainer-MHO/training-domain/training-v7",
+      "docs": [],
+      "subprojects": [
+        {
+          "id": "metadonnees-quiz",
+          "name": "Métadonnées Quiz",
+          "titre": "Gestion des métadonnées sur les quiz de formation.",
+          "status": "done",
+          "qualif": "P0",
+          "target": "30/03/2026",
+          "owner": "laurent",
+          "charge": 5.0,
+          "raf": 0.0,
+          "steps": [
+            {
+              "name": "Spécification",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Développement",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Mis en ligne",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "commentaire": "",
+          "type": "Feature"
+        }
+      ]
+    },
+    {
+      "id": "cas-pratiques-project",
+      "name": "Cas Pratiques",
+      "alias": "Cas Prat.",
+      "desc": "Module d'exercices pratiques Opquast.",
+      "stack": "HTML · JavaScript · Python · Bootstrap 5",
+      "category": "active",
+      "folder": "CAS-PRATIQUES",
+      "docs": [],
+      "subprojects": [
+        {
+          "id": "generateur-cas-pratiques-v2",
+          "name": "Générateur de cas pratiques V2",
+          "titre": "34 cas pratiques pédagogiques Opquast répartis en 3 lots avec interface de consultation.",
+          "status": "done",
+          "qualif": "P1",
+          "target": "11/05/2026",
+          "owner": "laurent",
+          "charge": 3.0,
+          "raf": 0.0,
+          "steps": [
+            {
+              "name": "Production de 34 cas pratiques (lots 1, 2 et 3)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Interface de consultation",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "commentaire": "",
+          "type": "Feature"
+        },
+        {
+          "id": "generateur-schmoll-v1",
+          "name": "Générateur de cas pratiques V1 (Schmoll)",
+          "titre": "Application web locale (Node.js + JS vanilla) pour générer des cas pratiques d'audit à partir de référentiels qualité via IA (Gemini/Claude).",
+          "status": "done",
+          "qualif": "P1",
+          "target": "01/05/2026",
+          "owner": "laurent",
+          "charge": 5.0,
+          "raf": 0.0,
+          "steps": [
+            {
+              "name": "Audit & consolidation (refacto, doc, tests)",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Intégration pipeline Opquast",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Déploiement & mise en service",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "commentaire": "Dossier : generateur-snippets-schmoll/. Backend Express (port 3000) + Frontend Vite. Pipeline en 5 étapes : extraction référentiel → vue ACT Rules → composants → bac à sable HTML → quiz QCM/QCU.",
+          "type": "Feature"
+        }
+      ]
+    },
+    {
+      "id": "planning-lde-v2",
+      "name": "Planning LDE",
+      "alias": "Planning",
+      "desc": "Nouveau système de suivi V2 — modèle Projet → Sous-projet → Étape.",
+      "stack": "HTML · JS vanilla · Python",
+      "category": "active",
+      "folder": "planning-lde-v2",
+      "docs": [],
+      "subprojects": [
+        {
+          "id": "simplification-v2",
+          "name": "V2",
+          "titre": "Refonte du planning LDE avec architecture data.json.",
+          "status": "done",
+          "qualif": "P0",
+          "target": "16/05/2026",
+          "owner": "laurent",
+          "charge": 3.0,
+          "raf": 0.0,
+          "steps": [
+            {
+              "name": "Spécification",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Développement",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Mis en ligne",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "commentaire": "",
+          "type": "Feature"
+        },
+        {
+          "id": "audit-v1-2026-05-14",
+          "name": "Audit V1 (2026-05-14)",
+          "titre": "Audit comparatif de planning-lde V1 — même grille que l'audit V2, livré dans V1-AUDIT-2026-05-14.md.",
+          "status": "done",
+          "qualif": "P1",
+          "target": "14/05/2026",
+          "owner": "laurent",
+          "charge": 1.0,
+          "raf": 0.0,
+          "steps": [
+            {
+              "name": "Spécification",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Développement",
+              "status": "done",
+              "charge": 1.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests",
+              "status": "na",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Mis en ligne",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "commentaire": "Audit V1 + bilan comparatif V1 vs V2. 3 P0 V1 prioritaires (MAX_PAYLOAD, écriture atomique, backup avant pull/init). Reco générale : stabiliser V1 sur les P0 puis basculer sur V2.",
+          "type": "Feature"
+        },
+        {
+          "id": "gestion-des-md",
+          "name": "Gestion des MD",
+          "titre": "Vue 'Docs' dans le dashboard V2 — catalogue de fichiers MD par projet avec liens TextMate/Finder.",
+          "status": "done",
+          "qualif": "P2",
+          "target": "16/05/2026",
+          "owner": "laurent",
+          "charge": 6.0,
+          "raf": 0.0,
+          "steps": [
+            {
+              "name": "Spécification",
+              "status": "done",
+              "charge": 0.5,
+              "raf": 0.0
+            },
+            {
+              "name": "Développement",
+              "status": "done",
+              "charge": 4.5,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests",
+              "status": "done",
+              "charge": 1.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Mis en ligne",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "commentaire": "SPEC + TESTS v4 + impl complète (backend 4 endpoints, 89 tests docs verts, vue Docs UI, étape 3bis CLAUDE.md). Validé par test manuel UI le 2026-05-15.",
+          "type": "Feature"
+        },
+        {
+          "id": "archivage-projets-sous-projets",
+          "name": "Archivage des projets et sous-projets",
+          "titre": "Feature d'archivage dans le dashboard V2 — onglet Archives, data-archives.json, restauration.",
+          "status": "done",
+          "qualif": "P1",
+          "target": "2026-05-16",
+          "owner": "laurent",
+          "charge": 3.5,
+          "raf": 0.5,
+          "type": "Feature",
+          "commentaire": "Ping-Pong Cowork + implémentation Claude Code 2026-05-16. Tests D2 (409) et UI verts. Reste : commit git.",
+          "steps": [
+            {
+              "name": "Spécification",
+              "status": "done",
+              "charge": 1.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Développement",
+              "status": "done",
+              "charge": 2.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Mis en ligne",
+              "status": "done",
+              "charge": 0.5,
+              "raf": 0.5
+            }
+          ]
+        },
+        {
+          "id": "mise-en-forme-gsheet",
+          "name": "Mise en forme Gsheet",
+          "titre": "Préserver la mise en forme (largeurs colonnes, MFC, filtres) lors des réinitialisations GSheet via une feuille modèle.",
+          "status": "done",
+          "qualif": "P2",
+          "target": "16/05/2026",
+          "owner": "laurent",
+          "charge": 2.0,
+          "raf": 0.0,
+          "commentaire": "Bouton ⊡ Modèles + endpoint save-template. Init duplique les modèles (_modèle_*) au lieu de recréer à blanc. Fallback avec warnings si modèle absent. Testé 2026-05-16.",
+          "steps": [
+            {
+              "name": "Créer les onglets modèles dans la GSheet",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Modifier _gs_init() pour dupliquer au lieu de créer",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Gérer le fallback si onglet modèle absent",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "type": "BugFix"
+        },
+        {
+          "id": "audit-v2-2026-05-14",
+          "name": "Audit V2 (2026-05-14)",
+          "titre": "Audit complet architecture / robustesse / maintenabilité / perfs / sécurité — livré dans AUDIT-2026-05-14.md.",
+          "status": "done",
+          "qualif": "P1",
+          "target": "14/05/2026",
+          "owner": "laurent",
+          "charge": 1.0,
+          "raf": 0.0,
+          "steps": [
+            {
+              "name": "Spécification",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Développement",
+              "status": "done",
+              "charge": 1.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests",
+              "status": "na",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Mis en ligne",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "commentaire": "Audit Cowork — 3 P0 (data.json atomique, backup avant pull, tests GSheet mockés), 4 P1 (verrou, modale init, split ui.js, optimisme UI), 12 P2 listés. Voir AUDIT-2026-05-14.md.",
+          "type": "Feature"
+        },
+        {
+          "id": "spinners-dashboard",
+          "name": "Spinners dashboard",
+          "titre": "Ajout d'un ring spinner CSS sur les 6 boutons GSheet (Init, Format, Modèles, Pull TCD, Pull Tâches, Push) via un helper setLoading().",
+          "status": "done",
+          "qualif": "P0",
+          "target": "16/05/2026",
+          "owner": "laurent",
+          "charge": 0.5,
+          "raf": 0.0,
+          "type": "BugFix",
+          "commentaire": "URGENT !",
+          "steps": [
+            {
+              "name": "Spécification",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Développement",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Mis en ligne",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "petites-taches",
+      "name": "PETITES TÂCHES",
+      "alias": "PetitesTaches",
+      "desc": "Petites tâches techniques ponctuelles, non rattachées à un projet majeur.",
+      "stack": "Divers",
+      "category": "active",
+      "folder": "projets-divers/",
+      "docs": [
+        {
+          "id": "spec-favicon-localhost",
+          "file": "projets-divers/favicon-localhost/SPEC.md",
+          "title": "SPEC — Favicon locaux pour les instances Docker Opquast",
+          "desc": "Spec technique : favicons distinctifs (Tr/Ex/Ad/bo) pour identifier les sites locaux dans les onglets navigateur. WordPress mu-plugin + middleware Django, local uniquement.",
+          "type": "spec",
+          "status": "draft",
+          "date": "2026-05-21",
+          "subproject": "favicon-localhost"
+        }
+      ],
+      "subprojects": [
+        {
+          "id": "favicon-localhost",
+          "name": "Favicon instances locales Localhost Opquast",
+          "status": "done",
+          "qualif": "P2",
+          "target": null,
+          "owner": "laurent",
+          "charge": 0.5,
+          "raf": 0.5,
+          "titre": "Favicon distinctifs pour identifier les sites locaux dans les onglets navigateur",
+          "steps": [
+            {
+              "name": "Analyse + how-to",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Training V7",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Examens V7",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Admin / PDN",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gestion-script-serveurs",
+      "name": "Gestion script de lancement des serveurs locaux",
+      "alias": "ScriptServeurs",
+      "desc": "Script bash de gestion des serveurs locaux Opquast — start/stop/restart/check, menu interactif iTerm2.",
+      "stack": "Bash",
+      "category": "infra",
+      "folder": "",
+      "docs": [],
+      "subprojects": [
+        {
+          "id": "maintenance-2026-05-21",
+          "name": "Maintenance",
+          "titre": "Session Cowork 2026-05-21 — ajout services Docker, retrait Planning V1, relance script",
+          "status": "done",
+          "qualif": "P2",
+          "target": "2026-05-21",
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "steps": [],
+          "commentaire": ""
+        }
+      ],
+      "gsheet_hidden": true
+    }
+  ]
+}

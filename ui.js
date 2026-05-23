@@ -66,10 +66,11 @@ function fetchStateAndRefresh() {
 const STATUS_LABELS = {
   done: 'TERMINÉ', wip: 'EN COURS', review: 'REVUE',
   spec: 'SPEC', todo: 'À FAIRE', blocked: 'STAND BY', na: 'N/A',
+  récurrent: 'RÉCURRENT',
 };
 
-const SP_STATUSES = ['wip', 'todo', 'spec', 'review', 'blocked', 'done'];
-const STEP_STATUSES = ['todo', 'wip', 'done', 'na'];
+const SP_STATUSES = ['wip', 'récurrent', 'todo', 'spec', 'review', 'blocked', 'done'];
+const STEP_STATUSES = ['todo', 'wip', 'récurrent', 'done', 'na'];
 
 // ── Loading state (boutons GSheet) ─────────────────────────────────────────────
 
@@ -119,6 +120,7 @@ function updateStats() {
   document.getElementById('stat-wip').textContent = sps.filter(s => s.status === 'wip').length;
   document.getElementById('stat-todo').textContent = sps.filter(s => s.status === 'todo').length;
   document.getElementById('stat-done').textContent = sps.filter(s => s.status === 'done').length;
+  document.getElementById('stat-récurrent').textContent = sps.filter(s => s.status === 'récurrent').length;
 }
 
 // ── Filter ─────────────────────────────────────────────────────────────────────
@@ -141,8 +143,9 @@ function makeBadge(status, cls = 'status-badge') {
 
 function renderProject(proj) {
   const sps = (proj.subprojects || []).filter(shouldShow);
-  const total = (proj.subprojects || []).length;
-  const done = (proj.subprojects || []).filter(s => s.status === 'done').length;
+  const countable = (proj.subprojects || []).filter(s => s.status !== 'récurrent');
+  const total = countable.length;
+  const done = countable.filter(s => s.status === 'done').length;
   const pct = total > 0 ? Math.round((done / total) * 100) : 0;
 
   const card = document.createElement('div');
