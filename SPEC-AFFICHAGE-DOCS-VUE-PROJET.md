@@ -2,7 +2,7 @@
 
 **Projet :** Planning LDE V2
 **Sous-projet :** `affichage-docs-vue-projet`
-**Statut :** SPEC (arbitrages LDE intégrés — prête pour ping-pong)
+**Statut :** SPEC — prête pour implémentation (arbitrages ping-pong validés 2026-05-23)
 **Auteur :** LDE + Cowork
 **Date :** 2026-05-20
 
@@ -31,7 +31,9 @@ Ce n'est **pas** un doublon de la Vue Docs : l'onglet Docs reste le catalogue de
 | **SP** | `doc.subproject === sp.id` (SP actif uniquement) | Dans `stepsPanel` du SP, après les étapes |
 | **Projet** | `doc.subproject` absent **ou** SP orphelin (introuvable) | Bloc dépliable `📄 Docs (N)` en pied de carte projet |
 
-**Docs référençant un SP archivé :** **non affichés** (ni au niveau SP — le SP n'est plus dans la liste — ni au niveau projet). Ces docs restent dans la Vue Docs globale.
+**Docs référençant un SP archivé — Vue Projets :** **non affichés** (le SP n'est plus dans la liste active). Ces docs restent accessibles via la Vue Docs globale.
+
+**Docs référençant un SP archivé — Vue Archives :** **affichés**, mais **visuellement différenciés** : la ligne doc porte un badge ou un style atténué indiquant que le SP est archivé (ex. classe `sp-archived`, texte secondaire « SP archivé »). Cela permet de distinguer un doc de travail normal d'un doc attaché à un SP terminé, sans masquer l'information dans un contexte où tous les SP sont précisément archivés.
 
 ### 2.2 — Bloc dépliable au niveau projet
 
@@ -76,7 +78,8 @@ Fonction partagée, utilisée aux deux niveaux.
  * @param {Object} doc - objet doc de data.json
  * @param {string} absFile - chemin absolu vers le fichier (git_root + doc.file)
  * @param {Object} [options]
- * @param {string} [options.orphanSpId] - si défini, affiche la mention orphelin
+ * @param {string} [options.orphanSpId] - si défini, affiche la mention orphelin (rouge)
+ * @param {boolean} [options.spArchived] - si true, affiche la mention "SP archivé" (atténué)
  * @returns {HTMLElement}
  */
 function renderDocInlineRow(doc, absFile, options = {}) { ... }
@@ -95,6 +98,8 @@ Structure HTML produite :
   </div>
   <!-- uniquement si options.orphanSpId -->
   <div class="doc-inline-sp"><span class="orphan">SP : {orphanSpId} (orphelin)</span></div>
+  <!-- uniquement si options.spArchived -->
+  <div class="doc-inline-sp"><span class="sp-archived">SP archivé</span></div>
 </div>
 ```
 
@@ -126,21 +131,23 @@ if (spDocs.length > 0) {
 
 ### 3.3 — Fonction `renderProjectDocsBlock(proj, isArchive)`
 
-Filtre les docs de niveau projet : sans SP, ou SP orphelin (introuvable dans actifs ET dans archives).
+Filtre les docs de niveau projet.
+
+- **Vue Projets (`isArchive = false`)** : inclut les docs sans SP et les vrais orphelins. Exclut les docs liés à un SP actif (déjà dans le panneau SP) et les docs liés à un SP archivé (non affichés).
+- **Vue Archives (`isArchive = true`)** : inclut les docs sans SP, les vrais orphelins **et les docs liés à un SP archivé** (affichés avec un marquage visuel `sp-archived`).
 
 ```js
 /**
  * Crée le bloc dépliable "Docs" au niveau projet.
- * N'inclut PAS les docs associés à un SP actif (affichés dans le SP).
- * N'inclut PAS les docs associés à un SP archivé (non affichés).
- * Inclut les docs sans SP et les vrais orphelins.
+ * Vue Projets : inclut sans-SP + orphelins. Exclut SP actif et SP archivé.
+ * Vue Archives : inclut sans-SP + orphelins + SP archivé (avec classe sp-archived).
  * @returns {HTMLElement|null} - null si aucun doc de niveau projet
  */
 function renderProjectDocsBlock(proj, isArchive = false) {
   const allDocs = proj.docs || [];
   if (allDocs.length === 0) return null;
 
-  // Set des SP actifs du projet (dans Vue Projets) ou vide (Vue Archives — tous sont archivés)
+  // Set des SP actifs du projet (vide en Vue Archives — tous archivés)
   const activeSpIds = isArchive
     ? new Set()
     : new Set((proj.subprojects || []).map(s => s.id));
@@ -149,13 +156,18 @@ function renderProjectDocsBlock(proj, isArchive = false) {
   const archProj = _archivesState?.projects.find(p => p.id === proj.id);
   const archivedSpIds = new Set((archProj?.subprojects || []).map(s => s.id));
 
-  const projectDocs = allDocs.filter(d => {
-    if (!d || typeof d !== 'object') return false;
-    if (!d.subproject) return true;                        // pas de SP → niveau projet
-    if (activeSpIds.has(d.subproject)) return false;       // SP actif → affiché dans le SP
-    if (archivedSpIds.has(d.subproject)) return false;     // SP archivé → non affiché
-    return true;                                           // vrai orphelin → niveau projet
-  });
+  const projectDocs = allDocs
+    .filter(d => {
+      if (!d || typeof d !== 'object') return false;
+      if (!d.subproject) return true;                        // pas de SP → niveau projet
+      if (activeSpIds.has(d.subproject)) return false;       // SP actif → affiché dans le SP
+      if (archivedSpIds.has(d.subproject)) return isArchive; // SP archivé → affiché en Archives, masqué en Projets
+      return true;                                           // vrai orphelin → niveau projet
+    })
+    .map(d => ({
+      ...d,
+      _spArchived: !!d.subproject && archivedSpIds.has(d.subproject),
+    }));
 
   if (projectDocs.length === 0) return null;
 
@@ -174,9 +186,11 @@ function renderProjectDocsBlock(proj, isArchive = false) {
   const gitRoot = _state.git_root || '';
   projectDocs.forEach(doc => {
     const absFile = gitRoot ? `${gitRoot}/${doc.file}` : doc.file;
-    const isOrphan = !!doc.subproject; // si on arrive ici avec un subproject, c'est un orphelin
-    list.appendChild(renderDocInlineRow(doc, absFile,
-      isOrphan ? { orphanSpId: doc.subproject } : {}));
+    const isOrphan = !!doc.subproject && !doc._spArchived;
+    list.appendChild(renderDocInlineRow(doc, absFile, {
+      ...(isOrphan         ? { orphanSpId: doc.subproject } : {}),
+      ...(doc._spArchived  ? { spArchived: true }           : {}),
+    }));
   });
 
   toggle.addEventListener('click', e => {
@@ -207,7 +221,7 @@ const docsBlock = renderProjectDocsBlock(archivedProj, true);
 if (docsBlock) card.appendChild(docsBlock);
 ```
 
-> **Note Vue Archives :** en Vue Archives, tous les SP sont archivés. Les docs sans SP s'affichent dans le bloc projet. Les docs associés à des SP archivés ne s'affichent nulle part (règle uniforme : SP archivé → doc non affiché). Seuls les vrais orphelins (id SP inconnu) s'affichent avec la mention rouge.
+> **Note Vue Archives :** en Vue Archives, tous les SP sont archivés. Les docs sans SP et les docs liés à des SP archivés s'affichent tous dans le bloc projet — les premiers normalement, les seconds avec la mention « SP archivé » en italique atténué (`class="sp-archived"`). Les vrais orphelins (id SP inconnu) s'affichent avec la mention rouge (`class="orphan"`). Seuls les docs liés à un SP actif (cas impossible en Vue Archives) seraient exclus.
 
 > **Avant d'implémenter :** lire les fonctions de rendu Archives pour identifier le bon point d'insertion. Appliquer la Règle 4.
 
@@ -311,17 +325,24 @@ if (docsBlock) card.appendChild(docsBlock);
 .doc-inline-sp .orphan {
   color: var(--blocked);
 }
+
+.doc-inline-sp .sp-archived {
+  color: var(--text-secondary);
+  font-style: italic;
+}
 ```
 
 ---
 
 ## 4. Réponses aux questions ouvertes
 
-### Q1 — Docs orphelins légitimes (SP archivé)
+### Q1 — Docs liés à un SP archivé
 
-**Réponse :** les docs référençant un SP archivé sont **non affichés** dans la Vue Projets inline. Ils restent accessibles via la Vue Docs globale. Raison : le SP n'est plus actif, afficher ses docs dans le contexte de travail courant n'apporte pas de valeur — et signaler ces docs comme "archivés" risque de polluer le panneau détail avec des informations passées.
+**Vue Projets :** non affichés (le SP n'est plus actif — sans valeur dans le contexte de travail courant). Restent accessibles via la Vue Docs globale.
 
-Les vrais orphelins (id SP totalement inconnu, ni actif ni archivé) sont **signalés** au niveau projet avec la classe `orphan` (texte rouge) pour indiquer une incohérence à corriger.
+**Vue Archives :** **affichés**, mais **visuellement différenciés** avec la mention « SP archivé » en italique atténué (`class="sp-archived"`, `var(--text-secondary)`). Raison : en Vue Archives, le contexte est précisément les projets/SP terminés — masquer leurs docs serait contre-intuitif. Le style atténué permet de les distinguer des docs sans SP (docs "projet" courants).
+
+Les vrais orphelins (id SP totalement inconnu, ni actif ni archivé) restent signalés avec la classe `orphan` (texte rouge, `var(--blocked)`) dans les deux vues.
 
 ### Q2 — Impact process (checklist fin de session)
 
@@ -370,13 +391,13 @@ Aucune modification de `serve-v2.py`, `api.js`, `data.json`.
 
 ---
 
-## 8. Questions ouvertes pour le ping-pong
+## 8. Arbitrages validés (ping-pong 2026-05-23)
 
-1. **Docs SP archivé en Vue Archives :** en Vue Archives, tous les SP sont archivés. La règle actuelle dit "SP archivé → non affiché". Résultat : dans la Vue Archives, aucun doc SP n'est jamais affiché en inline (uniquement les docs sans SP et les orphelins). Est-ce le comportement voulu ? Ou dans la Vue Archives, les docs associés aux SP archivés devraient-ils s'afficher (puisque c'est précisément le contexte archive) ?
+1. **Docs SP archivé en Vue Archives :** ✅ **Affichés, différenciés.** Style atténué (`sp-archived`, italique, `var(--text-secondary)`) pour distinguer les docs liés à un SP archivé des docs de niveau projet courants. Voir §2.1 et §3.3.
 
-2. **Bloc projet fermé vs ouvert par défaut :** la spec choisit fermé. Valider ce choix.
+2. **Bloc projet fermé vs ouvert par défaut :** ✅ **Fermé validé.**
 
-3. **Lien TextMate comme action principale :** est-ce la bonne priorité ? (Cohérence avec le bouton 📁 de l'en-tête projet.)
+3. **Lien TextMate comme action principale :** ✅ **Cohérent.** Le lien d'ouverture fichier dans Finder existe déjà pour d'autres raisons ; TextMate simplifie l'ouverture directe d'un doc.
 
 ---
 
@@ -386,7 +407,7 @@ Aucune modification de `serve-v2.py`, `api.js`, `data.json`.
 >
 > Points d'attention :
 > (1) Les docs SP s'insèrent dans `stepsPanel` de `renderSubproject()`, après les étapes — pas dans un bloc séparé avec son propre toggle, la même commande ▶/▼ contrôle tout.
-> (2) `renderProjectDocsBlock()` filtre soigneusement : SP actif → exclu (déjà dans le SP) ; SP archivé → exclu (non affiché) ; pas de SP ou SP orphelin → inclus.
+> (2) `renderProjectDocsBlock()` filtre soigneusement : SP actif → exclu (déjà dans le SP) ; SP archivé → exclu en Vue Projets, **inclus avec flag `_spArchived: true`** en Vue Archives (affichés en italique atténué, `class="sp-archived"`) ; pas de SP ou SP orphelin → inclus dans les deux vues.
 > (3) Dans `renderSubproject()`, les docs sont récupérés via `_state.projects.find(p => p.id === projectId)?.docs || []` — pas passés en paramètre.
 > (4) Les CSS doivent utiliser les variables existantes (`var(--border)`, `var(--text-secondary)`, `var(--blocked)`…) — ne pas introduire de valeurs brutes.
 > (5) Aucune modification de `serve-v2.py` ou `api.js` — tout est dans `ui.js` et `DASHBOARD-V2.html`.

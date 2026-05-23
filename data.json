@@ -2207,7 +2207,7 @@
       "desc": "Page de statut « À mon attention aujourd'hui » — agrégation Front (compartiments + Subscribed + Assigné) et Google Drive, alimentée par un artifact Cowork et une tâche planifiée 30 min en lecture seule.",
       "stack": "HTML · JS vanilla · Cowork artifact · Tâche planifiée",
       "category": "active",
-      "folder": "projets-divers/notifications-front",
+      "folder": "perso/notifications-front",
       "docs": [],
       "subprojects": [
         {
