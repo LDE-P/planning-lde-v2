@@ -2509,6 +2509,78 @@
           "type": "Récurrent"
         },
         {
+          "id": "prefill-recurring-reset",
+          "name": "Pré-remplissage récurrentes au reset",
+          "titre": "Injection automatique des dépenses récurrentes dans Mois prochain lors du reset et du premier accès.",
+          "status": "done",
+          "qualif": "P3",
+          "target": "2026-05-24",
+          "owner": "laurent",
+          "charge": 0.5,
+          "raf": 0.0,
+          "steps": [
+            { "name": "Spécification", "status": "na", "charge": 0.0, "raf": 0.0 },
+            { "name": "Développement", "status": "done", "charge": 0.5, "raf": 0.0 },
+            { "name": "Tests", "status": "done", "charge": 0.0, "raf": 0.0 }
+          ],
+          "commentaire": "preFillRecurringExpenses(d) dans getNextData() — idempotent, matching libellé exact.",
+          "type": "Feature"
+        },
+        {
+          "id": "auto-creation-mois-courant",
+          "name": "Auto-création onglet mois courant",
+          "titre": "Créer automatiquement l onglet du mois courant (Charges + Assurances + Abonnements) sans attendre l import du relevé BP BFC.",
+          "status": "todo",
+          "qualif": "P2",
+          "target": "",
+          "owner": "laurent",
+          "charge": 2.0,
+          "raf": 2.0,
+          "steps": [
+            { "name": "Spécification", "status": "todo", "charge": 0.5, "raf": 0.5 },
+            { "name": "Développement", "status": "todo", "charge": 1.5, "raf": 1.5 },
+            { "name": "Tests", "status": "todo", "charge": 0.0, "raf": 0.0 }
+          ],
+          "commentaire": "Nouveau KEY_AUTO_CURRENT dans _state. Tab disparaît quand data-mois.json est mis à jour.",
+          "type": "Feature"
+        },
+        {
+          "id": "artifact-import-releve-bpbfc",
+          "name": "Artifact import relevé BP BFC",
+          "titre": "Artifact Cowork pour parser un copié-collé ou upload du relevé BP BFC et générer le JSON data-mois.json.",
+          "status": "todo",
+          "qualif": "P2",
+          "target": "",
+          "owner": "laurent",
+          "charge": 2.0,
+          "raf": 2.0,
+          "steps": [
+            { "name": "Spécification", "status": "todo", "charge": 0.5, "raf": 0.5 },
+            { "name": "Développement", "status": "todo", "charge": 1.5, "raf": 1.5 },
+            { "name": "Tests", "status": "todo", "charge": 0.0, "raf": 0.0 }
+          ],
+          "commentaire": "Parser le format fixe BP BFC. Artifact HTML + window.cowork.callMcpTool ou upload fichier.",
+          "type": "Feature"
+        },
+        {
+          "id": "graphique-rtv-mensuel",
+          "name": "Graphique RTV mensuel",
+          "titre": "Courbe d évolution du Reste à vivre de janvier à aujourd hui, calculée depuis les données existantes.",
+          "status": "todo",
+          "qualif": "P3",
+          "target": "",
+          "owner": "laurent",
+          "charge": 1.0,
+          "raf": 1.0,
+          "steps": [
+            { "name": "Spécification", "status": "na", "charge": 0.0, "raf": 0.0 },
+            { "name": "Développement", "status": "todo", "charge": 1.0, "raf": 1.0 },
+            { "name": "Tests", "status": "na", "charge": 0.0, "raf": 0.0 }
+          ],
+          "commentaire": "Pas besoin de CSV — les données sont dans MONTHS_DATA + computeRtv(mk). Vue additionnelle dans simulateur_depenses.html.",
+          "type": "Feature"
+        },
+        {
           "id": "fine-tuning-ui",
           "name": "Fine tuning UI et corrections",
           "titre": "Save/restore mois prochain, Total revenus, RTV fond noir, séparateur, CSS inputs, placeholder prévisions, dates récurrentes, colonne Jour.",
