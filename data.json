@@ -2505,20 +2505,6 @@
           "type": "BugFix"
         },
         {
-          "id": "maj-mois-courant",
-          "name": "Mise à jour du mois courant",
-          "titre": "Saisie mensuelle des dépenses réelles dans l onglet du mois en cours.",
-          "status": "wip",
-          "qualif": "P1",
-          "target": "2026-05-31",
-          "owner": "laurent",
-          "charge": 0.0,
-          "raf": 0.0,
-          "steps": [],
-          "commentaire": "Mise à jour manuelle via session Cowork — données collées depuis le relevé BP BFC.",
-          "type": "Récurrent"
-        },
-        {
           "id": "prefill-recurring-reset",
           "name": "Pré-remplissage récurrentes au reset",
           "titre": "Injection automatique des dépenses récurrentes dans Mois prochain lors du reset et du premier accès.",
@@ -2557,34 +2543,34 @@
         {
           "id": "artifact-import-releve-bpbfc",
           "name": "Artifact import relevé BP BFC",
-          "titre": "Artifact Cowork pour parser un copié-collé ou upload du relevé BP BFC et générer le JSON data-mois.json.",
-          "status": "todo",
+          "titre": "Page /import servie par le serveur Python : parse le CSV BP BFC, prévisualise les transactions classées en 9 groupes avec reclassement manuel, et pousse via POST /api/import-month.",
+          "status": "done",
           "qualif": "P2",
-          "target": "",
+          "target": "2026-05",
           "owner": "laurent",
           "charge": 2.0,
-          "raf": 2.0,
+          "raf": 0.0,
           "steps": [
-            { "name": "Spécification", "status": "todo", "charge": 0.5, "raf": 0.5 },
-            { "name": "Développement", "status": "todo", "charge": 1.5, "raf": 1.5 },
-            { "name": "Tests", "status": "todo", "charge": 0.0, "raf": 0.0 }
+            { "name": "Spécification", "status": "done", "charge": 0.5, "raf": 0.0 },
+            { "name": "Développement", "status": "done", "charge": 1.5, "raf": 0.0 },
+            { "name": "Tests", "status": "done", "charge": 0.5, "raf": 0.0 }
           ],
-          "commentaire": "Parser le format fixe BP BFC. Artifact HTML + window.cowork.callMcpTool ou upload fichier.",
+          "commentaire": "Page HTML autonome (import-releve.html) + endpoint /api/import-month. 10 règles de classification, 17 tests IR-T1..T17. Option A (même origine) retenue.",
           "type": "Feature"
         },
         {
           "id": "graphique-rtv-mensuel",
           "name": "Graphique RTV mensuel",
-          "titre": "Courbe d évolution du Reste à vivre de janvier à aujourd hui, calculée depuis les données existantes.",
-          "status": "todo",
+          "titre": "Bars SVG collapsible affichant le RTV de chaque mois importé. Section en bas de page, même pattern que Récurrentes.",
+          "status": "done",
           "qualif": "P3",
-          "target": "",
+          "target": "2026-05",
           "owner": "laurent",
           "charge": 1.0,
-          "raf": 1.0,
+          "raf": 0.0,
           "steps": [
             { "name": "Spécification", "status": "na", "charge": 0.0, "raf": 0.0 },
-            { "name": "Développement", "status": "todo", "charge": 1.0, "raf": 1.0 },
+            { "name": "Développement", "status": "done", "charge": 1.0, "raf": 0.0 },
             { "name": "Tests", "status": "na", "charge": 0.0, "raf": 0.0 }
           ],
           "commentaire": "Pas besoin de CSV — les données sont dans MONTHS_DATA + computeRtv(mk). Vue additionnelle dans simulateur_depenses.html.",
