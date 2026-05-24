@@ -2425,6 +2425,16 @@
           "status": "final",
           "date": "2026-05-20",
           "subproject": "corrections-ux"
+        },
+        {
+          "id": "spec-auto-mois-courant",
+          "file": "perso/gestion-compte-personnel/SPEC-AUTO-MOIS-COURANT.md",
+          "title": "SPEC — Auto-création onglet mois courant",
+          "desc": "Spec Ping-Pong V1.2 : création automatique d un onglet provisoire au 1er du mois (Charges + Assurances + Abonnements pré-remplis, fond jaune). Cycle de vie, getAutoCurrentData(), purge à l import réel.",
+          "type": "spec",
+          "status": "final",
+          "date": "2026-05-24",
+          "subproject": "auto-creation-mois-courant"
         }
       ],
       "subprojects": [
@@ -2530,18 +2540,18 @@
           "id": "auto-creation-mois-courant",
           "name": "Auto-création onglet mois courant",
           "titre": "Créer automatiquement l onglet du mois courant (Charges + Assurances + Abonnements) sans attendre l import du relevé BP BFC.",
-          "status": "todo",
+          "status": "done",
           "qualif": "P2",
-          "target": "",
+          "target": "2026-05-24",
           "owner": "laurent",
           "charge": 2.0,
-          "raf": 2.0,
+          "raf": 0.0,
           "steps": [
-            { "name": "Spécification", "status": "todo", "charge": 0.5, "raf": 0.5 },
-            { "name": "Développement", "status": "todo", "charge": 1.5, "raf": 1.5 },
-            { "name": "Tests", "status": "todo", "charge": 0.0, "raf": 0.0 }
+            { "name": "Spécification (Ping-Pong V1.2)", "status": "done", "charge": 0.5, "raf": 0.0 },
+            { "name": "Développement", "status": "done", "charge": 1.5, "raf": 0.0 },
+            { "name": "Tests AC-T1..T15", "status": "done", "charge": 0.0, "raf": 0.0 }
           ],
-          "commentaire": "Nouveau KEY_AUTO_CURRENT dans _state. Tab disparaît quand data-mois.json est mis à jour.",
+          "commentaire": "Implémenté 2026-05-24. KEY_AUTO_CURRENT dans _state. 15 tests AC-T. Tab disparaît quand data-mois.json est mis à jour.",
           "type": "Feature"
         },
         {
