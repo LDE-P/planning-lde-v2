@@ -2507,6 +2507,24 @@
           "steps": [],
           "commentaire": "Mise à jour manuelle via session Cowork — données collées depuis le relevé BP BFC.",
           "type": "Récurrent"
+        },
+        {
+          "id": "fine-tuning-ui",
+          "name": "Fine tuning UI et corrections",
+          "titre": "Save/restore mois prochain, Total revenus, RTV fond noir, séparateur, CSS inputs, placeholder prévisions, dates récurrentes, colonne Jour.",
+          "status": "done",
+          "qualif": "P3",
+          "target": "2026-05-24",
+          "owner": "laurent",
+          "charge": 1.0,
+          "raf": 0.0,
+          "steps": [
+            { "name": "Spécification", "status": "na", "charge": 0.0, "raf": 0.0 },
+            { "name": "Développement", "status": "done", "charge": 1.0, "raf": 0.0 },
+            { "name": "Tests", "status": "done", "charge": 0.0, "raf": 0.0 }
+          ],
+          "commentaire": "8 améliorations visuelles et fonctionnelles — session Cowork 2026-05-24.",
+          "type": "Feature"
         }
       ],
       "gsheet_hidden": true
