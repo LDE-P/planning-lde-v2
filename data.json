@@ -3235,6 +3235,57 @@
           ]
         }
       ]
+    },
+    {
+      "id": "serveur-local",
+      "name": "Serveur local",
+      "alias": "ServeurLocal",
+      "desc": "Réflexions sur l'intérêt et la faisabilité d'un serveur local Python et/ou d'une IA locale",
+      "stack": "À définir",
+      "category": "active",
+      "folder": "",
+      "docs": [],
+      "subprojects": [
+        {
+          "id": "reflexions-preliminaires",
+          "name": "Réflexions préliminaires",
+          "titre": "Évaluation de l'intérêt d'un serveur local Python / IA locale",
+          "status": "wip",
+          "qualif": "P2",
+          "target": "",
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "commentaire": "",
+          "type": "Autre",
+          "steps": [
+            {
+              "name": "Intérêt d'un serveur local Python",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Intérêt d'un serveur IA locale",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Moyens nécessaires",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Coûts",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ]
+        }
+      ]
     }
   ]
 }
