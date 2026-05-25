@@ -2563,6 +2563,16 @@
           "status": "final",
           "date": "2026-05-24",
           "subproject": "pave-numerique"
+        },
+        {
+          "id": "spec-debug-mise-a-jour",
+          "file": "perso/gestion-compte-personnel/SPEC-DEBUG-MISE-A-JOUR.md",
+          "title": "SPEC — Debug Mise à Jour (import CSV)",
+          "desc": "Deux bugs découverts lors du premier import CSV réel : B1 isCredit manquant (fix buildGroupedRows), B2 Mois Prochain réinitialisé après import (fix getNextMonthKey fallback). A1 backup automatique à implémenter.",
+          "type": "spec",
+          "status": "draft",
+          "date": "2026-05-26",
+          "subproject": "debug-mise-a-jour"
         }
       ],
       "subprojects": [
@@ -2948,6 +2958,39 @@
           "steps": [],
           "commentaire": "",
           "type": "Récurrent"
+        },
+        {
+          "id": "debug-mise-a-jour",
+          "name": "Debug Mise à Jour",
+          "titre": "Deux bugs découverts lors du premier import CSV réel (2026-05-26) : isCredit manquant (B1) et Mois Prochain réinitialisé après import (B2). Backup automatique avant import à implémenter (A1).",
+          "status": "wip",
+          "qualif": "P1",
+          "target": "2026-05-31",
+          "owner": "laurent",
+          "charge": 1.0,
+          "raf": 0.5,
+          "steps": [
+            {
+              "name": "B1 — isCredit manquant sur les entries (commit 69851bf)",
+              "status": "done",
+              "charge": 0.25,
+              "raf": 0.0
+            },
+            {
+              "name": "B2 — Mois Prochain réinitialisé après import (commit a0a24c0)",
+              "status": "done",
+              "charge": 0.5,
+              "raf": 0.0
+            },
+            {
+              "name": "A1 — Backup automatique simulateur_etat.json avant import",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.5
+            }
+          ],
+          "commentaire": "Spec : SPEC-DEBUG-MISE-A-JOUR.md. B1+B2 corrigés et testés (333 tests, 0 échec). A1 : backup horodaté dans temp/ au début de _post_import_month(), rotation 5 fichiers.",
+          "type": "BugFix"
         }
       ],
       "gsheet_hidden": true
