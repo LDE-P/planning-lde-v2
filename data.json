@@ -791,7 +791,28 @@
       "stack": "HTML · JavaScript · Python · Bootstrap 5",
       "category": "active",
       "folder": "CAS-PRATIQUES",
-      "docs": [],
+      "docs": [
+        {
+          "id": "spec-admin-complete-parcours",
+          "file": "tests-quiz-plateformes/validation-automatique-parcours-training/SPEC-admin-complete-parcours.md",
+          "title": "SPEC — Page admin « Valider le parcours Training »",
+          "desc": "Spec de la feature : page admin WP pour valider 100% du parcours Training fr pour un utilisateur cible (quiz + topics non-quiz).",
+          "type": "spec",
+          "status": "final",
+          "date": "2026-05-21",
+          "subproject": "validation-automatique-parcours-training"
+        },
+        {
+          "id": "tests-admin-complete-parcours",
+          "file": "tests-quiz-plateformes/validation-automatique-parcours-training/TESTS-admin-complete-parcours.md",
+          "title": "TESTS — Page admin « Valider le parcours Training »",
+          "desc": "Cas de test fonctionnels (T1–T9) : sécurité, interface, résolution utilisateur, reset, quiz, topics, examen, confirmation, cas limites.",
+          "type": "tests",
+          "status": "final",
+          "date": "2026-05-21",
+          "subproject": "validation-automatique-parcours-training"
+        }
+      ],
       "subprojects": [
         {
           "id": "convertisseur-wpproquiz",
@@ -945,6 +966,134 @@
             }
           ],
           "type": "Feature"
+        },
+        {
+          "id": "extraction-referentiels",
+          "name": "Extraction référentiels",
+          "titre": "Extraction et enrichissement IA des critères depuis HTML local ou URL.",
+          "status": "blocked",
+          "qualif": "P1",
+          "target": "01/05/2026",
+          "owner": "laurent",
+          "charge": 5.0,
+          "raf": 0.0,
+          "type": "Feature",
+          "commentaire": "",
+          "steps": []
+        },
+        {
+          "id": "generation-cas-pratiques",
+          "name": "Génération cas pratiques",
+          "titre": "Génération de snippets HTML sandbox et bacs d'exercices depuis les critères sélectionnés.",
+          "status": "blocked",
+          "qualif": "P1",
+          "target": "01/05/2026",
+          "owner": "laurent",
+          "charge": 5.0,
+          "raf": 0.0,
+          "type": "Feature",
+          "commentaire": "",
+          "steps": []
+        },
+        {
+          "id": "tester-examen-final",
+          "name": "Tester un examen final",
+          "status": "wip",
+          "qualif": "P2",
+          "target": "20/05/2026",
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "titre": "Import CSV + test sur Training DEV (sprint 1 : A→B validé)",
+          "steps": []
+        },
+        {
+          "id": "parametres-quiz-post-import",
+          "name": "Paramètres de quiz post-import",
+          "status": "todo",
+          "qualif": "P2",
+          "target": null,
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "titre": "Arbitrer : template manuel vs quiz test dédié pré-paramétré",
+          "commentaire": "L'import CSV ne transporte pas les paramètres de quiz. Deux options documentées dans CLAUDE.md (section Limitations connues).",
+          "steps": []
+        },
+        {
+          "id": "validation-automatique-parcours-training",
+          "name": "Validation automatique du parcours Training",
+          "status": "done",
+          "qualif": "P1",
+          "target": null,
+          "owner": "laurent",
+          "charge": 0.5,
+          "raf": 0.0,
+          "titre": "Page admin WP : valider 100% quiz + topics pour un compte cible",
+          "commentaire": "Implémentation et tests Docker validés le 2026-05-21. T2, T3.3, T3.7, T4.1, T5.2, T6.1, T8.1 ✅. En attente make check + commit.",
+          "steps": [
+            {
+              "name": "Spec",
+              "status": "done",
+              "charge": 0.1,
+              "raf": 0.0
+            },
+            {
+              "name": "Implémentation (2 fichiers : admin-complete-parcours.php + functions.php)",
+              "status": "done",
+              "charge": 0.3,
+              "raf": 0.0
+            },
+            {
+              "name": "Test sur Docker local",
+              "status": "done",
+              "charge": 0.1,
+              "raf": 0.0
+            }
+          ]
+        },
+        {
+          "id": "maj-quiz-source-examen-sql",
+          "name": "Mise à jour quiz SOURCE EXAMEN via SQL",
+          "status": "wip",
+          "qualif": "P1",
+          "target": null,
+          "owner": "laurent",
+          "charge": 1.5,
+          "raf": 0.3,
+          "titre": "Script Python + SQL : maj textes question/réponses quiz SOURCE #1 (passe FALC)",
+          "steps": [
+            {
+              "name": "Analyse table + stratégie",
+              "status": "done",
+              "charge": 0.3,
+              "raf": 0.0
+            },
+            {
+              "name": "Script update-source-quiz.py (dry-run + execute + 3 SQL)",
+              "status": "done",
+              "charge": 0.5,
+              "raf": 0.0
+            },
+            {
+              "name": "Exécution locale + vérification visuelle",
+              "status": "done",
+              "charge": 0.2,
+              "raf": 0.0
+            },
+            {
+              "name": "Exécution DEV + vérification",
+              "status": "done",
+              "charge": 0.2,
+              "raf": 0.0
+            },
+            {
+              "name": "Exécution PROD",
+              "status": "todo",
+              "charge": 0.3,
+              "raf": 0.3
+            }
+          ]
         }
       ]
     },
@@ -1647,47 +1796,6 @@
           "steps": []
         }
       ]
-    },
-    {
-      "id": "generateur-snippets-schmoll",
-      "name": "Cas Pratiques Schmoll",
-      "alias": "Schmoll",
-      "desc": "Générateur de cas pratiques web quality (snippets HTML/CSS/JS) depuis des référentiels Opquast/RGAA.",
-      "stack": "Node.js · Express · JS vanilla · Vite",
-      "category": "active",
-      "folder": "generateur-snippets-schmoll",
-      "docs": [],
-      "subprojects": [
-        {
-          "id": "extraction-referentiels",
-          "name": "Extraction référentiels",
-          "titre": "Extraction et enrichissement IA des critères depuis HTML local ou URL.",
-          "status": "blocked",
-          "qualif": "P1",
-          "target": "01/05/2026",
-          "owner": "laurent",
-          "charge": 5.0,
-          "raf": 0.0,
-          "type": "Feature",
-          "commentaire": "",
-          "steps": []
-        },
-        {
-          "id": "generation-cas-pratiques",
-          "name": "Génération cas pratiques",
-          "titre": "Génération de snippets HTML sandbox et bacs d'exercices depuis les critères sélectionnés.",
-          "status": "blocked",
-          "qualif": "P1",
-          "target": "01/05/2026",
-          "owner": "laurent",
-          "charge": 5.0,
-          "raf": 0.0,
-          "type": "Feature",
-          "commentaire": "",
-          "steps": []
-        }
-      ],
-      "gsheet_hidden": true
     },
     {
       "id": "amelioration-training",
@@ -2535,9 +2643,24 @@
           "charge": 0.5,
           "raf": 0.0,
           "steps": [
-            { "name": "Spécification", "status": "na", "charge": 0.0, "raf": 0.0 },
-            { "name": "Développement", "status": "done", "charge": 0.5, "raf": 0.0 },
-            { "name": "Tests", "status": "done", "charge": 0.0, "raf": 0.0 }
+            {
+              "name": "Spécification",
+              "status": "na",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Développement",
+              "status": "done",
+              "charge": 0.5,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            }
           ],
           "commentaire": "preFillRecurringExpenses(d) dans getNextData() — idempotent, matching libellé exact.",
           "type": "Feature"
@@ -2553,9 +2676,24 @@
           "charge": 2.0,
           "raf": 0.0,
           "steps": [
-            { "name": "Spécification (Ping-Pong V1.2)", "status": "done", "charge": 0.5, "raf": 0.0 },
-            { "name": "Développement", "status": "done", "charge": 1.5, "raf": 0.0 },
-            { "name": "Tests AC-T1..T15", "status": "done", "charge": 0.0, "raf": 0.0 }
+            {
+              "name": "Spécification (Ping-Pong V1.2)",
+              "status": "done",
+              "charge": 0.5,
+              "raf": 0.0
+            },
+            {
+              "name": "Développement",
+              "status": "done",
+              "charge": 1.5,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests AC-T1..T15",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            }
           ],
           "commentaire": "Implémenté 2026-05-24. KEY_AUTO_CURRENT dans _state. 15 tests AC-T. Tab disparaît quand data-mois.json est mis à jour.",
           "type": "Feature"
@@ -2571,9 +2709,24 @@
           "charge": 2.0,
           "raf": 0.0,
           "steps": [
-            { "name": "Spécification", "status": "done", "charge": 0.5, "raf": 0.0 },
-            { "name": "Développement", "status": "done", "charge": 1.5, "raf": 0.0 },
-            { "name": "Tests", "status": "done", "charge": 0.5, "raf": 0.0 }
+            {
+              "name": "Spécification",
+              "status": "done",
+              "charge": 0.5,
+              "raf": 0.0
+            },
+            {
+              "name": "Développement",
+              "status": "done",
+              "charge": 1.5,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests",
+              "status": "done",
+              "charge": 0.5,
+              "raf": 0.0
+            }
           ],
           "commentaire": "Page HTML autonome (import-releve.html) + endpoint /api/import-month. 10 règles de classification, 17 tests IR-T1..T17. Option A (même origine) retenue.",
           "type": "Feature"
@@ -2589,9 +2742,24 @@
           "charge": 1.0,
           "raf": 0.0,
           "steps": [
-            { "name": "Spécification", "status": "na", "charge": 0.0, "raf": 0.0 },
-            { "name": "Développement", "status": "done", "charge": 1.0, "raf": 0.0 },
-            { "name": "Tests", "status": "na", "charge": 0.0, "raf": 0.0 }
+            {
+              "name": "Spécification",
+              "status": "na",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Développement",
+              "status": "done",
+              "charge": 1.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests",
+              "status": "na",
+              "charge": 0.0,
+              "raf": 0.0
+            }
           ],
           "commentaire": "Pas besoin de CSV — les données sont dans MONTHS_DATA + computeRtv(mk). Vue additionnelle dans simulateur_depenses.html.",
           "type": "Feature"
@@ -2607,9 +2775,24 @@
           "charge": 1.0,
           "raf": 0.0,
           "steps": [
-            { "name": "Spécification", "status": "na", "charge": 0.0, "raf": 0.0 },
-            { "name": "Développement", "status": "done", "charge": 1.0, "raf": 0.0 },
-            { "name": "Tests", "status": "done", "charge": 0.0, "raf": 0.0 }
+            {
+              "name": "Spécification",
+              "status": "na",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Développement",
+              "status": "done",
+              "charge": 1.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            }
           ],
           "commentaire": "8 améliorations visuelles et fonctionnelles — session Cowork 2026-05-24.",
           "type": "Feature"
@@ -2625,9 +2808,24 @@
           "charge": 1.0,
           "raf": 0.0,
           "steps": [
-            { "name": "Spécification", "status": "na", "charge": 0.0, "raf": 0.0 },
-            { "name": "Développement", "status": "done", "charge": 1.0, "raf": 0.0 },
-            { "name": "Tests AR-T1..T10", "status": "done", "charge": 0.0, "raf": 0.0 }
+            {
+              "name": "Spécification",
+              "status": "na",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Développement",
+              "status": "done",
+              "charge": 1.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests AR-T1..T10",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            }
           ],
           "commentaire": "getAutresRevenus/saveAutresRevenus/computeAutresRevenusTotal. renderAutresRevenusRows injecté dans renderIncomeRows + renderIncomeMirrorRows. 245 tests, 0 échec.",
           "type": "Feature"
@@ -2643,10 +2841,30 @@
           "charge": 2.0,
           "raf": 0.0,
           "steps": [
-            { "name": "Spec Ping-Pong (v1.0 + v1.1)", "status": "done", "charge": 0.5, "raf": 0.0 },
-            { "name": "P1 — fix import-releve.html", "status": "done", "charge": 0.5, "raf": 0.0 },
-            { "name": "P2+P3 — serve-simu.py + modale", "status": "done", "charge": 1.0, "raf": 0.0 },
-            { "name": "Tests REC-T1..T17 (264 tests, 0 échec)", "status": "done", "charge": 0.0, "raf": 0.0 }
+            {
+              "name": "Spec Ping-Pong (v1.0 + v1.1)",
+              "status": "done",
+              "charge": 0.5,
+              "raf": 0.0
+            },
+            {
+              "name": "P1 — fix import-releve.html",
+              "status": "done",
+              "charge": 0.5,
+              "raf": 0.0
+            },
+            {
+              "name": "P2+P3 — serve-simu.py + modale",
+              "status": "done",
+              "charge": 1.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests REC-T1..T17 (264 tests, 0 échec)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            }
           ],
           "commentaire": "Spec v1.1 arbitrée (PO1-PO4). Validé en live 2026-05-24. Limitation connue : injection manuelle dans simulateur_etat.json écrasée par beforeunload — normal usage via import page non affecté.",
           "type": "Feature"
@@ -2662,9 +2880,24 @@
           "charge": 1.5,
           "raf": 0.0,
           "steps": [
-            { "name": "Spec Ping-Pong (v1.0→v1.3)", "status": "done", "charge": 0.5, "raf": 0.0 },
-            { "name": "Développement", "status": "done", "charge": 1.0, "raf": 0.0 },
-            { "name": "Tests NP-T1..T13 + NP-P1/P2 (283 tests, 0 échec)", "status": "done", "charge": 0.0, "raf": 0.0 }
+            {
+              "name": "Spec Ping-Pong (v1.0→v1.3)",
+              "status": "done",
+              "charge": 0.5,
+              "raf": 0.0
+            },
+            {
+              "name": "Développement",
+              "status": "done",
+              "charge": 1.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests NP-T1..T13 + NP-P1/P2 (283 tests, 0 échec)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            }
           ],
           "commentaire": "numpadInsert() partagé calculatrice + popup. PO1 : chiffres à droite des opérateurs. PO2 : inputs prévisions/autres-revenus. PO3 : toujours visible desktop. Validé 2026-05-24.",
           "type": "Feature"
@@ -2680,9 +2913,24 @@
           "charge": 2.0,
           "raf": 2.0,
           "steps": [
-            { "name": "Corrections tableau SPEC v2.2", "status": "spec", "charge": 0.0, "raf": 2.0 },
-            { "name": "Corrections UX issues remontées", "status": "todo", "charge": 0.0, "raf": 0.0 },
-            { "name": "Vérification cohérence globale", "status": "todo", "charge": 0.0, "raf": 0.0 }
+            {
+              "name": "Corrections tableau SPEC v2.2",
+              "status": "spec",
+              "charge": 0.0,
+              "raf": 2.0
+            },
+            {
+              "name": "Corrections UX issues remontées",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Vérification cohérence globale",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
           ],
           "commentaire": "SPEC-CORRECTIONS-TABLEAU v2.2 commitée (8fb9c77), prête pour transmission Claude Code.",
           "type": "Feature"
@@ -2865,139 +3113,6 @@
         }
       ],
       "gsheet_hidden": true
-    },
-    {
-      "id": "tests-quiz-plateformes",
-      "name": "Tests de quiz dans les plateformes",
-      "alias": "TestsQuiz",
-      "desc": "Tests fonctionnels des quiz sur les plateformes Training V7 et Examens V7.",
-      "stack": "Markdown · Tests fonctionnels",
-      "category": "active",
-      "folder": "tests-quiz-plateformes/",
-      "subprojects": [
-        {
-          "id": "tester-examen-final",
-          "name": "Tester un examen final",
-          "status": "wip",
-          "qualif": "P2",
-          "target": "20/05/2026",
-          "owner": "laurent",
-          "charge": 0.0,
-          "raf": 0.0,
-          "titre": "Import CSV + test sur Training DEV (sprint 1 : A→B validé)",
-          "steps": []
-        },
-        {
-          "id": "parametres-quiz-post-import",
-          "name": "Paramètres de quiz post-import",
-          "status": "todo",
-          "qualif": "P2",
-          "target": null,
-          "owner": "laurent",
-          "charge": 0.0,
-          "raf": 0.0,
-          "titre": "Arbitrer : template manuel vs quiz test dédié pré-paramétré",
-          "commentaire": "L'import CSV ne transporte pas les paramètres de quiz. Deux options documentées dans CLAUDE.md (section Limitations connues).",
-          "steps": []
-        },
-        {
-          "id": "validation-automatique-parcours-training",
-          "name": "Validation automatique du parcours Training",
-          "status": "done",
-          "qualif": "P1",
-          "target": null,
-          "owner": "laurent",
-          "charge": 0.5,
-          "raf": 0.0,
-          "titre": "Page admin WP : valider 100% quiz + topics pour un compte cible",
-          "commentaire": "Implémentation et tests Docker validés le 2026-05-21. T2, T3.3, T3.7, T4.1, T5.2, T6.1, T8.1 ✅. En attente make check + commit.",
-          "steps": [
-            {
-              "name": "Spec",
-              "status": "done",
-              "charge": 0.1,
-              "raf": 0.0
-            },
-            {
-              "name": "Implémentation (2 fichiers : admin-complete-parcours.php + functions.php)",
-              "status": "done",
-              "charge": 0.3,
-              "raf": 0.0
-            },
-            {
-              "name": "Test sur Docker local",
-              "status": "done",
-              "charge": 0.1,
-              "raf": 0.0
-            }
-          ]
-        },
-        {
-          "id": "maj-quiz-source-examen-sql",
-          "name": "Mise à jour quiz SOURCE EXAMEN via SQL",
-          "status": "wip",
-          "qualif": "P1",
-          "target": null,
-          "owner": "laurent",
-          "charge": 1.5,
-          "raf": 0.3,
-          "titre": "Script Python + SQL : maj textes question/réponses quiz SOURCE #1 (passe FALC)",
-          "steps": [
-            {
-              "name": "Analyse table + stratégie",
-              "status": "done",
-              "charge": 0.3,
-              "raf": 0.0
-            },
-            {
-              "name": "Script update-source-quiz.py (dry-run + execute + 3 SQL)",
-              "status": "done",
-              "charge": 0.5,
-              "raf": 0.0
-            },
-            {
-              "name": "Exécution locale + vérification visuelle",
-              "status": "done",
-              "charge": 0.2,
-              "raf": 0.0
-            },
-            {
-              "name": "Exécution DEV + vérification",
-              "status": "done",
-              "charge": 0.2,
-              "raf": 0.0
-            },
-            {
-              "name": "Exécution PROD",
-              "status": "todo",
-              "charge": 0.3,
-              "raf": 0.3
-            }
-          ]
-        }
-      ],
-      "docs": [
-        {
-          "id": "spec-admin-complete-parcours",
-          "file": "tests-quiz-plateformes/validation-automatique-parcours-training/SPEC-admin-complete-parcours.md",
-          "title": "SPEC — Page admin « Valider le parcours Training »",
-          "desc": "Spec de la feature : page admin WP pour valider 100% du parcours Training fr pour un utilisateur cible (quiz + topics non-quiz).",
-          "type": "spec",
-          "status": "final",
-          "date": "2026-05-21",
-          "subproject": "validation-automatique-parcours-training"
-        },
-        {
-          "id": "tests-admin-complete-parcours",
-          "file": "tests-quiz-plateformes/validation-automatique-parcours-training/TESTS-admin-complete-parcours.md",
-          "title": "TESTS — Page admin « Valider le parcours Training »",
-          "desc": "Cas de test fonctionnels (T1–T9) : sécurité, interface, résolution utilisateur, reset, quiz, topics, examen, confirmation, cas limites.",
-          "type": "tests",
-          "status": "final",
-          "date": "2026-05-21",
-          "subproject": "validation-automatique-parcours-training"
-        }
-      ]
     },
     {
       "id": "brief-equipe",

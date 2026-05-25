@@ -577,6 +577,180 @@
         }
       ],
       "gsheet_hidden": true
+    },
+    {
+      "id": "generateur-snippets-schmoll",
+      "name": "Cas Pratiques Schmoll",
+      "alias": "Schmoll",
+      "desc": "Générateur de cas pratiques web quality (snippets HTML/CSS/JS) depuis des référentiels Opquast/RGAA.",
+      "stack": "Node.js · Express · JS vanilla · Vite",
+      "category": "active",
+      "folder": "generateur-snippets-schmoll",
+      "docs": [],
+      "subprojects": [
+        {
+          "id": "extraction-referentiels",
+          "name": "Extraction référentiels",
+          "titre": "Extraction et enrichissement IA des critères depuis HTML local ou URL.",
+          "status": "blocked",
+          "qualif": "P1",
+          "target": "01/05/2026",
+          "owner": "laurent",
+          "charge": 5.0,
+          "raf": 0.0,
+          "type": "Feature",
+          "commentaire": "",
+          "steps": []
+        },
+        {
+          "id": "generation-cas-pratiques",
+          "name": "Génération cas pratiques",
+          "titre": "Génération de snippets HTML sandbox et bacs d'exercices depuis les critères sélectionnés.",
+          "status": "blocked",
+          "qualif": "P1",
+          "target": "01/05/2026",
+          "owner": "laurent",
+          "charge": 5.0,
+          "raf": 0.0,
+          "type": "Feature",
+          "commentaire": "",
+          "steps": []
+        }
+      ],
+      "gsheet_hidden": true
+    },
+    {
+      "id": "tests-quiz-plateformes",
+      "name": "Tests de quiz dans les plateformes",
+      "alias": "TestsQuiz",
+      "desc": "Tests fonctionnels des quiz sur les plateformes Training V7 et Examens V7.",
+      "stack": "Markdown · Tests fonctionnels",
+      "category": "active",
+      "folder": "tests-quiz-plateformes/",
+      "subprojects": [
+        {
+          "id": "tester-examen-final",
+          "name": "Tester un examen final",
+          "status": "wip",
+          "qualif": "P2",
+          "target": "20/05/2026",
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "titre": "Import CSV + test sur Training DEV (sprint 1 : A→B validé)",
+          "steps": []
+        },
+        {
+          "id": "parametres-quiz-post-import",
+          "name": "Paramètres de quiz post-import",
+          "status": "todo",
+          "qualif": "P2",
+          "target": null,
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "titre": "Arbitrer : template manuel vs quiz test dédié pré-paramétré",
+          "commentaire": "L'import CSV ne transporte pas les paramètres de quiz. Deux options documentées dans CLAUDE.md (section Limitations connues).",
+          "steps": []
+        },
+        {
+          "id": "validation-automatique-parcours-training",
+          "name": "Validation automatique du parcours Training",
+          "status": "done",
+          "qualif": "P1",
+          "target": null,
+          "owner": "laurent",
+          "charge": 0.5,
+          "raf": 0.0,
+          "titre": "Page admin WP : valider 100% quiz + topics pour un compte cible",
+          "commentaire": "Implémentation et tests Docker validés le 2026-05-21. T2, T3.3, T3.7, T4.1, T5.2, T6.1, T8.1 ✅. En attente make check + commit.",
+          "steps": [
+            {
+              "name": "Spec",
+              "status": "done",
+              "charge": 0.1,
+              "raf": 0.0
+            },
+            {
+              "name": "Implémentation (2 fichiers : admin-complete-parcours.php + functions.php)",
+              "status": "done",
+              "charge": 0.3,
+              "raf": 0.0
+            },
+            {
+              "name": "Test sur Docker local",
+              "status": "done",
+              "charge": 0.1,
+              "raf": 0.0
+            }
+          ]
+        },
+        {
+          "id": "maj-quiz-source-examen-sql",
+          "name": "Mise à jour quiz SOURCE EXAMEN via SQL",
+          "status": "wip",
+          "qualif": "P1",
+          "target": null,
+          "owner": "laurent",
+          "charge": 1.5,
+          "raf": 0.3,
+          "titre": "Script Python + SQL : maj textes question/réponses quiz SOURCE #1 (passe FALC)",
+          "steps": [
+            {
+              "name": "Analyse table + stratégie",
+              "status": "done",
+              "charge": 0.3,
+              "raf": 0.0
+            },
+            {
+              "name": "Script update-source-quiz.py (dry-run + execute + 3 SQL)",
+              "status": "done",
+              "charge": 0.5,
+              "raf": 0.0
+            },
+            {
+              "name": "Exécution locale + vérification visuelle",
+              "status": "done",
+              "charge": 0.2,
+              "raf": 0.0
+            },
+            {
+              "name": "Exécution DEV + vérification",
+              "status": "done",
+              "charge": 0.2,
+              "raf": 0.0
+            },
+            {
+              "name": "Exécution PROD",
+              "status": "todo",
+              "charge": 0.3,
+              "raf": 0.3
+            }
+          ]
+        }
+      ],
+      "docs": [
+        {
+          "id": "spec-admin-complete-parcours",
+          "file": "tests-quiz-plateformes/validation-automatique-parcours-training/SPEC-admin-complete-parcours.md",
+          "title": "SPEC — Page admin « Valider le parcours Training »",
+          "desc": "Spec de la feature : page admin WP pour valider 100% du parcours Training fr pour un utilisateur cible (quiz + topics non-quiz).",
+          "type": "spec",
+          "status": "final",
+          "date": "2026-05-21",
+          "subproject": "validation-automatique-parcours-training"
+        },
+        {
+          "id": "tests-admin-complete-parcours",
+          "file": "tests-quiz-plateformes/validation-automatique-parcours-training/TESTS-admin-complete-parcours.md",
+          "title": "TESTS — Page admin « Valider le parcours Training »",
+          "desc": "Cas de test fonctionnels (T1–T9) : sécurité, interface, résolution utilisateur, reset, quiz, topics, examen, confirmation, cas limites.",
+          "type": "tests",
+          "status": "final",
+          "date": "2026-05-21",
+          "subproject": "validation-automatique-parcours-training"
+        }
+      ]
     }
   ]
 }
