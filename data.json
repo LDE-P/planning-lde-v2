@@ -2593,6 +2593,16 @@
           "status": "draft",
           "date": "2026-05-26",
           "subproject": "merge-import"
+        },
+        {
+          "id": "spec-label-historique",
+          "file": "perso/gestion-compte-personnel/SPEC-LABEL-HISTORIQUE.md",
+          "title": "SPEC — Libellés éditables dans les mois historiques importés",
+          "desc": "Extension de la feature labels éditables (déjà active en mode Mois Prochain) aux mois historiques. Click → contenteditable → POST /api/row-label-patch → data-mois.json. Préservation au ré-import via SPEC-MERGE-IMPORT. 4 tests LH-T1..T4.",
+          "type": "spec",
+          "status": "draft",
+          "date": "2026-05-26",
+          "subproject": "label-historique"
         }
       ],
       "subprojects": [
@@ -3077,6 +3087,45 @@
           ],
           "commentaire": "Spec : SPEC-MERGE-IMPORT.md. Dépend de SPEC-SALAIRE-IMPORT (merge doit précéder inject_salary). Sprint Ping-Pong à faire.",
           "type": "BugFix"
+        },
+        {
+          "id": "label-historique",
+          "name": "Libellés éditables dans les mois historiques",
+          "titre": "Extension de l'édition inline de libellés (mode next) aux mois importés — click → édition → PATCH → data-mois.json.",
+          "status": "spec",
+          "qualif": "P2",
+          "target": "2026-05-31",
+          "owner": "laurent",
+          "charge": 0.5,
+          "raf": 0.5,
+          "steps": [
+            {
+              "name": "Spécification",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Vérifier Cas A/B endpoint row-label-patch",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.1
+            },
+            {
+              "name": "renderHistoricalGroupBlock + handler blur",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.25
+            },
+            {
+              "name": "Tests LH-T1..T4",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.15
+            }
+          ],
+          "commentaire": "Spec : SPEC-LABEL-HISTORIQUE.md. Recommandé après SPEC-MERGE-IMPORT pour que les libellés édités survivent aux ré-imports.",
+          "type": "Feature"
         }
       ],
       "gsheet_hidden": true
