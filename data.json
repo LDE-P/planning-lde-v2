@@ -2668,6 +2668,38 @@
           ],
           "commentaire": "numpadInsert() partagé calculatrice + popup. PO1 : chiffres à droite des opérateurs. PO2 : inputs prévisions/autres-revenus. PO3 : toujours visible desktop. Validé 2026-05-24.",
           "type": "Feature"
+        },
+        {
+          "id": "finalisation-v1",
+          "name": "Finalisation V1",
+          "titre": "Corrections tableau (SPEC v2.2), corrections UX issues remontées à l'usage, vérification cohérence globale.",
+          "status": "wip",
+          "qualif": "P1",
+          "target": "2026-05-31",
+          "owner": "laurent",
+          "charge": 2.0,
+          "raf": 2.0,
+          "steps": [
+            { "name": "Corrections tableau SPEC v2.2", "status": "spec", "charge": 0.0, "raf": 2.0 },
+            { "name": "Corrections UX issues remontées", "status": "todo", "charge": 0.0, "raf": 0.0 },
+            { "name": "Vérification cohérence globale", "status": "todo", "charge": 0.0, "raf": 0.0 }
+          ],
+          "commentaire": "SPEC-CORRECTIONS-TABLEAU v2.2 commitée (8fb9c77), prête pour transmission Claude Code.",
+          "type": "Feature"
+        },
+        {
+          "id": "suivi-et-maintenance",
+          "name": "Suivi et maintenance",
+          "titre": "Maintenance courante post-V1 : bugs remontés à l'usage, adaptations saisonnières (nouveaux mois), mises à jour données récurrentes.",
+          "status": "todo",
+          "qualif": "P3",
+          "target": "",
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "steps": [],
+          "commentaire": "",
+          "type": "Récurrent"
         }
       ],
       "gsheet_hidden": true
