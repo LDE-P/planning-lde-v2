@@ -2603,6 +2603,16 @@
           "status": "draft",
           "date": "2026-05-26",
           "subproject": "label-historique"
+        },
+        {
+          "id": "spec-undo-redo",
+          "file": "perso/gestion-compte-personnel/SPEC-UNDO-REDO.md",
+          "title": "SPEC — Historique de saisie (CMD+Z / CMD+SHIFT+Z)",
+          "desc": "UndoManager singleton (Command Pattern, stack 50 ops, in-memory). record() post-action wrapping tous les handlers de sauvegarde : libellés, montants, prévisions, épargnes, reclassements de groupe, overrides income/expense. 8 tests UM-T1..T8.",
+          "type": "spec",
+          "status": "draft",
+          "date": "2026-05-26",
+          "subproject": "undo-redo"
         }
       ],
       "subprojects": [
@@ -3125,6 +3135,45 @@
             }
           ],
           "commentaire": "Spec : SPEC-LABEL-HISTORIQUE.md. Recommandé après SPEC-MERGE-IMPORT pour que les libellés édités survivent aux ré-imports.",
+          "type": "Feature"
+        },
+        {
+          "id": "undo-redo",
+          "name": "Historique de saisie (CMD+Z / CMD+SHIFT+Z)",
+          "titre": "UndoManager in-memory (Command Pattern, 50 ops) — annulation universelle de toutes les actions éditables.",
+          "status": "spec",
+          "qualif": "P2",
+          "target": "2026-05-31",
+          "owner": "laurent",
+          "charge": 1.5,
+          "raf": 1.5,
+          "steps": [
+            {
+              "name": "Spécification",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "UndoManager singleton + intercepteur clavier",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.5
+            },
+            {
+              "name": "Wrapping handlers (libellés, montants, setField, reclassements, overrides)",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.75
+            },
+            {
+              "name": "Tests UM-T1..T8",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.25
+            }
+          ],
+          "commentaire": "Spec : SPEC-UNDO-REDO.md. Dépend de SPEC-LABEL-HISTORIQUE pour les handlers historiques. Sprint Ping-Pong à faire.",
           "type": "Feature"
         }
       ],
