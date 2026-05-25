@@ -3261,7 +3261,7 @@
           "steps": [
             {
               "name": "Intérêt d'un serveur local Python",
-              "status": "todo",
+              "status": "wip",
               "charge": 0.0,
               "raf": 0.0
             },
