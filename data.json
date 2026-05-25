@@ -2568,11 +2568,21 @@
           "id": "spec-debug-mise-a-jour",
           "file": "perso/gestion-compte-personnel/SPEC-DEBUG-MISE-A-JOUR.md",
           "title": "SPEC — Debug Mise à Jour (import CSV)",
-          "desc": "Deux bugs découverts lors du premier import CSV réel : B1 isCredit manquant (fix buildGroupedRows), B2 Mois Prochain réinitialisé après import (fix getNextMonthKey fallback). A1 backup automatique à implémenter.",
+          "desc": "Deux bugs découverts lors du premier import CSV réel : B1 isCredit manquant (fix buildGroupedRows), B2 Mois Prochain réinitialisé après import (fix getNextMonthKey fallback). A1 backup automatique avant import.",
+          "type": "spec",
+          "status": "final",
+          "date": "2026-05-26",
+          "subproject": "debug-mise-a-jour"
+        },
+        {
+          "id": "spec-salaire-import",
+          "file": "perso/gestion-compte-personnel/SPEC-SALAIRE-IMPORT.md",
+          "title": "SPEC — Salaire mensuel : préservation à l'import et au nouveau mois",
+          "desc": "Injection automatique de la ligne salary dans mouvements si absente du CSV. Source prioritaire : next.salary si next.month == month. Fallback : DEFAULTS.salaries[month] ou 2922.38. 3 tests prévus (SAL-T1, SAL-T2, SAL-T3).",
           "type": "spec",
           "status": "draft",
           "date": "2026-05-26",
-          "subproject": "debug-mise-a-jour"
+          "subproject": "salaire-import"
         }
       ],
       "subprojects": [
@@ -2962,13 +2972,13 @@
         {
           "id": "debug-mise-a-jour",
           "name": "Debug Mise à Jour",
-          "titre": "Deux bugs découverts lors du premier import CSV réel (2026-05-26) : isCredit manquant (B1) et Mois Prochain réinitialisé après import (B2). Backup automatique avant import à implémenter (A1).",
-          "status": "wip",
+          "titre": "Trois correctifs pour le premier import CSV réel (2026-05-26) : B1 isCredit manquant, B2 Mois Prochain réinitialisé après import, A1 backup automatique avant import.",
+          "status": "done",
           "qualif": "P1",
           "target": "2026-05-31",
           "owner": "laurent",
           "charge": 1.0,
-          "raf": 0.5,
+          "raf": 0.0,
           "steps": [
             {
               "name": "B1 — isCredit manquant sur les entries (commit 69851bf)",
@@ -2983,14 +2993,47 @@
               "raf": 0.0
             },
             {
-              "name": "A1 — Backup automatique simulateur_etat.json avant import",
-              "status": "todo",
-              "charge": 0.0,
-              "raf": 0.5
+              "name": "A1 — Backup automatique simulateur_etat.json avant import (commit 2de557c)",
+              "status": "done",
+              "charge": 0.25,
+              "raf": 0.0
             }
           ],
-          "commentaire": "Spec : SPEC-DEBUG-MISE-A-JOUR.md. B1+B2 corrigés et testés (333 tests, 0 échec). A1 : backup horodaté dans temp/ au début de _post_import_month(), rotation 5 fichiers.",
+          "commentaire": "Spec : SPEC-DEBUG-MISE-A-JOUR.md. B1+B2+A1 corrigés et testés (332 jsdom + 26 pytest, 0 échec).",
           "type": "BugFix"
+        },
+        {
+          "id": "salaire-import",
+          "name": "Préservation salaire à l'import CSV",
+          "titre": "Injection automatique de la ligne salary dans mouvements si absente du CSV importé.",
+          "status": "spec",
+          "qualif": "P1",
+          "target": "2026-05-31",
+          "owner": "laurent",
+          "charge": 0.5,
+          "raf": 0.5,
+          "steps": [
+            {
+              "name": "Spécification",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Implémentation serve-simu.py",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.25
+            },
+            {
+              "name": "Tests SAL-T1, T2, T3",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.25
+            }
+          ],
+          "commentaire": "Spec : SPEC-SALAIRE-IMPORT.md. Fix immédiat appliqué manuellement sur data-mois.json (jan, avr, mai 2026). Sprint Ping-Pong à faire.",
+          "type": "Feature"
         }
       ],
       "gsheet_hidden": true
