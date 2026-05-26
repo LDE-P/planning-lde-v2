@@ -1008,13 +1008,14 @@
         {
           "id": "tester-examen-final",
           "name": "Tester un examen final",
-          "status": "wip",
+          "status": "done",
           "qualif": "P2",
           "target": "20/05/2026",
           "owner": "laurent",
           "charge": 0.0,
           "raf": 0.0,
-          "titre": "Import CSV + test sur Training DEV (sprint 1 : A→B validé)",
+          "titre": "Solution actuelle : import SQL validé DEV+PROD. Import CSV abandonné (bugué PROD). Future API Quiz WP en spec.",
+          "commentaire": "Import CSV testé et validé en DEV mais trop bugué en PROD — mis entre parenthèses. Solution de remplacement : import SQL, implémenté et validé DEV et PROD. Une future API Quiz WP est en cours de spec pour remplacer les deux approches.",
           "steps": []
         },
         {
