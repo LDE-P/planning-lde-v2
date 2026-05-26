@@ -811,6 +811,16 @@
           "status": "final",
           "date": "2026-05-21",
           "subproject": "validation-automatique-parcours-training"
+        },
+        {
+          "id": "deploiement-maj-quiz-source-mho",
+          "file": "amelioration-training/passe-falc/DEPLOIEMENT-maj-quiz-source-MHO.md",
+          "title": "Guide déploiement MHO — Mise à jour quiz SOURCE EXAMEN",
+          "desc": "Procédure complète pour MHO : contexte, séquence LOCAL/DEV/PROD, description et code source du script update-source-quiz.py (passe FALC).",
+          "type": "autre",
+          "status": "final",
+          "date": "2026-05-22",
+          "subproject": "maj-quiz-source-examen-sql"
         }
       ],
       "subprojects": [
@@ -1089,6 +1099,88 @@
             },
             {
               "name": "Exécution PROD",
+              "status": "todo",
+              "charge": 0.3,
+              "raf": 0.3
+            }
+          ]
+        },
+        {
+          "id": "maj-quiz-source-training-sql",
+          "name": "Mise à jour quiz source TRAINING via SQL",
+          "status": "todo",
+          "qualif": "P1",
+          "target": null,
+          "owner": "laurent",
+          "charge": 1.0,
+          "raf": 1.0,
+          "titre": "Script Python + SQL : maj textes question/réponses quiz source Training (passe FALC) — adapté de l'Examen",
+          "steps": [
+            {
+              "name": "Analyse structure quiz source Training (table, UIDs, format)",
+              "status": "todo",
+              "charge": 0.2,
+              "raf": 0.2
+            },
+            {
+              "name": "Adaptation script + dry-run local",
+              "status": "todo",
+              "charge": 0.2,
+              "raf": 0.2
+            },
+            {
+              "name": "Exécution locale + vérification visuelle",
+              "status": "todo",
+              "charge": 0.2,
+              "raf": 0.2
+            },
+            {
+              "name": "Exécution DEV + vérification",
+              "status": "todo",
+              "charge": 0.2,
+              "raf": 0.2
+            },
+            {
+              "name": "Exécution PROD",
+              "status": "todo",
+              "charge": 0.2,
+              "raf": 0.2
+            }
+          ]
+        },
+        {
+          "id": "generation-globale-cas-pratiques",
+          "name": "Cas pratiques : génération globale",
+          "status": "todo",
+          "qualif": "P1",
+          "target": null,
+          "owner": "laurent",
+          "charge": 2.0,
+          "raf": 2.0,
+          "titre": "Composer lot-test-recap-1 et lot-exam-blanc-1 (3×3 snippets chacun depuis lot1/lot2/lot3)",
+          "type": "Feature",
+          "commentaire": "",
+          "steps": [
+            {
+              "name": "Sélection des snippets (6 par lot source, sans doublon entre les 2 nouveaux lots)",
+              "status": "todo",
+              "charge": 0.3,
+              "raf": 0.3
+            },
+            {
+              "name": "Composition lot-test-recap-1 (index HTML + 9 snippets)",
+              "status": "todo",
+              "charge": 0.7,
+              "raf": 0.7
+            },
+            {
+              "name": "Composition lot-exam-blanc-1 (index HTML + 9 snippets)",
+              "status": "todo",
+              "charge": 0.7,
+              "raf": 0.7
+            },
+            {
+              "name": "Export WpProQuiz + validation",
               "status": "todo",
               "charge": 0.3,
               "raf": 0.3
@@ -1981,7 +2073,7 @@
           "target": "2026-06-10",
           "owner": "laurent",
           "charge": 6.0,
-          "raf": 3.5,
+          "raf": 1.0,
           "steps": [
             {
               "name": "S1 — VPTCS + CONTEXTES (13 questions)",
@@ -2003,15 +2095,15 @@
             },
             {
               "name": "S4 — UTI1 + UTI2 + UTI3 (125 questions, mises en situation)",
-              "status": "todo",
+              "status": "done",
               "charge": 1.5,
-              "raf": 1.5
+              "raf": 0.0
             },
             {
               "name": "S5 — RECAP1 + RECAP2 (240 questions)",
-              "status": "todo",
+              "status": "done",
               "charge": 1.0,
-              "raf": 1.0
+              "raf": 0.0
             },
             {
               "name": "S6 — BLANCFINAL (120 questions, mises en situation)",
