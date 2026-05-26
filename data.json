@@ -1958,6 +1958,26 @@
           "status": "final",
           "date": "2026-05-26",
           "subproject": "passe-falc-training"
+        },
+        {
+          "id": "plan-update-training-quiz",
+          "title": "PLAN — Mise à jour quiz TRAINING via SQL",
+          "desc": "Pipeline complet LDE pour le déploiement SQL des 14 quiz Training (892 questions, 7 champs). Dry-run DEV ✅ 2026-05-26.",
+          "file": "tests-quiz-plateformes/PLAN-update-training-quiz.md",
+          "type": "spec",
+          "status": "final",
+          "date": "2026-05-26",
+          "subproject": "maj-quiz-source-training-sql"
+        },
+        {
+          "id": "deploiement-training-sql-mho",
+          "title": "Guide déploiement SQL Training — MHO",
+          "desc": "Procédure phpMyAdmin pour déployer les 892 UPDATE Training sur DEV et PROD. Inclus dans sql-training.zip.",
+          "file": "amelioration-training/passe-falc/DEPLOIEMENT-maj-quiz-training-MHO.md",
+          "type": "notes",
+          "status": "final",
+          "date": "2026-05-26",
+          "subproject": "maj-quiz-source-training-sql"
         }
       ],
       "subprojects": [
@@ -2141,6 +2161,44 @@
               "status": "done",
               "charge": 1.0,
               "raf": 0.0
+            }
+          ]
+        },
+        {
+          "id": "maj-quiz-source-training-sql",
+          "name": "Déploiement SQL passe FALC Training",
+          "status": "wip",
+          "qualif": "P1",
+          "target": "",
+          "owner": "laurent",
+          "charge": 2.0,
+          "raf": 0.5,
+          "titre": "",
+          "commentaire": "",
+          "steps": [
+            {
+              "name": "Dry-run DEV",
+              "status": "done",
+              "charge": 0.5,
+              "raf": 0.0
+            },
+            {
+              "name": "--execute DEV",
+              "status": "done",
+              "charge": 0.5,
+              "raf": 0.0
+            },
+            {
+              "name": "Déploiement PROD (via MHO)",
+              "status": "todo",
+              "charge": 0.5,
+              "raf": 0.5
+            },
+            {
+              "name": "Nettoyage tables miroir LOCAL/DEV/PROD",
+              "status": "todo",
+              "charge": 0.5,
+              "raf": 0.5
             }
           ]
         }
