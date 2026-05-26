@@ -1927,6 +1927,36 @@
           "status": "draft",
           "date": "2026-05-16",
           "subproject": "plan-amelioration-exam-v7"
+        },
+        {
+          "id": "plan-global-falc-training",
+          "file": "amelioration-training/passe-falc/PLAN-GLOBAL-FALC-TRAINING.md",
+          "title": "Plan global — Passe FALC training",
+          "desc": "Plan complet de simplification FALC/ortho des 14 quiz Training V7 (895 questions) : alias, patterns, colonnes cibles, procédure étape par étape pour les 6 sessions.",
+          "type": "spec",
+          "status": "final",
+          "date": "2026-05-26",
+          "subproject": "passe-falc-training"
+        },
+        {
+          "id": "prompt-demarrage-session-falc",
+          "file": "amelioration-training/passe-falc/PROMPT-DEMARRAGE-SESSION.md",
+          "title": "Prompts de démarrage S1–S6 — Passe FALC training",
+          "desc": "Prompts prêts à l'emploi pour lancer chacune des 6 sessions de traitement (VPTCS+CONTEXTES, VOC, OBJ, UTI, RECAP, BLANCFINAL).",
+          "type": "notes",
+          "status": "final",
+          "date": "2026-05-26",
+          "subproject": "passe-falc-training"
+        },
+        {
+          "id": "deploiement-falc-training",
+          "file": "amelioration-training/passe-falc/DEPLOIEMENT-maj-quiz-source-MHO.md",
+          "title": "Guide déploiement PHPMyAdmin — Passe FALC training",
+          "desc": "Procédure SQL via PHPMyAdmin pour déployer les CSV corrigés sur LOCAL, DEV et PROD. Statut : LOCAL ✅ DEV ✅ PROD ⏳.",
+          "type": "notes",
+          "status": "final",
+          "date": "2026-05-26",
+          "subproject": "passe-falc-training"
         }
       ],
       "subprojects": [
