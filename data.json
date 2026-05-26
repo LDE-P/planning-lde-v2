@@ -1981,7 +1981,7 @@
           "target": "2026-06-10",
           "owner": "laurent",
           "charge": 6.0,
-          "raf": 5.0,
+          "raf": 3.5,
           "steps": [
             {
               "name": "S1 — VPTCS + CONTEXTES (13 questions)",
@@ -1991,15 +1991,15 @@
             },
             {
               "name": "S2 — VOC1 + VOC2 + VOC3 (215 questions)",
-              "status": "todo",
+              "status": "done",
               "charge": 1.0,
-              "raf": 1.0
+              "raf": 0.0
             },
             {
               "name": "S3 — OBJ1 + OBJ2 + OBJ3 (182 questions)",
-              "status": "todo",
+              "status": "done",
               "charge": 1.0,
-              "raf": 1.0
+              "raf": 0.0
             },
             {
               "name": "S4 — UTI1 + UTI2 + UTI3 (125 questions, mises en situation)",
