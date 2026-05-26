@@ -3298,34 +3298,34 @@
         {
           "id": "merge-import",
           "name": "Fusion données existantes à l'import CSV",
-          "titre": "L'import CSV ne remplace plus tout : merge-by-ID, seules les nouvelles entrées sont ajoutées, l'existant est préservé.",
-          "status": "spec",
+          "titre": "L'import CSV ne remplace plus tout : merge-by-ID (cyrb53), seules les nouvelles entrées sont ajoutées, l'existant est préservé.",
+          "status": "done",
           "qualif": "P1",
           "target": "2026-05-31",
           "owner": "laurent",
-          "charge": 0.75,
-          "raf": 0.75,
+          "charge": 1.0,
+          "raf": 0.0,
           "steps": [
             {
-              "name": "Spécification",
+              "name": "Spécification (v1.2 Ping-Pong)",
               "status": "done",
               "charge": 0.0,
               "raf": 0.0
             },
             {
-              "name": "Implémentation serve-simu.py",
-              "status": "todo",
+              "name": "Implémentation serve-simu.py + import-releve.html",
+              "status": "done",
               "charge": 0.0,
-              "raf": 0.5
+              "raf": 0.0
             },
             {
-              "name": "Tests MI-T1..T5",
-              "status": "todo",
+              "name": "Tests MI-T1..T6 + IR-T19..T25 (30/30)",
+              "status": "done",
               "charge": 0.0,
-              "raf": 0.25
+              "raf": 0.0
             }
           ],
-          "commentaire": "Spec : SPEC-MERGE-IMPORT.md. Dépend de SPEC-SALAIRE-IMPORT (merge doit précéder inject_salary). Sprint Ping-Pong à faire.",
+          "commentaire": "Spec v1.2 : SPEC-MERGE-IMPORT.md. commit 498b6d4. cyrb53 stableRowId, merge-by-ID, 30/30 jsdom.",
           "type": "BugFix"
         },
         {
