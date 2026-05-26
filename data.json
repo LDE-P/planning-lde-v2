@@ -1911,7 +1911,7 @@
         },
         {
           "id": "passe-falc",
-          "name": "Passe Falc",
+          "name": "Passe Falc examen final",
           "titre": "Simplification FALC/ELAN des questions et réponses du quiz examen final (v5) — 288 questions.",
           "status": "done",
           "qualif": "P2",
@@ -1971,6 +1971,55 @@
           ],
           "commentaire": "Livrable final : amelioration-training/passe-falc/examen-APRES-passe-falc-full-mise-en-situations.csv",
           "type": "Autre"
+        },
+        {
+          "id": "passe-falc-training",
+          "name": "Passe FALC training",
+          "titre": "Simplification FALC/ortho des 14 quiz Training V7 — 895 questions (6 sessions)",
+          "status": "wip",
+          "qualif": "P2",
+          "target": "2026-06-10",
+          "owner": "laurent",
+          "charge": 6.0,
+          "raf": 5.0,
+          "steps": [
+            {
+              "name": "S1 — VPTCS + CONTEXTES (13 questions)",
+              "status": "done",
+              "charge": 0.5,
+              "raf": 0.0
+            },
+            {
+              "name": "S2 — VOC1 + VOC2 + VOC3 (215 questions)",
+              "status": "todo",
+              "charge": 1.0,
+              "raf": 1.0
+            },
+            {
+              "name": "S3 — OBJ1 + OBJ2 + OBJ3 (182 questions)",
+              "status": "todo",
+              "charge": 1.0,
+              "raf": 1.0
+            },
+            {
+              "name": "S4 — UTI1 + UTI2 + UTI3 (125 questions, mises en situation)",
+              "status": "todo",
+              "charge": 1.5,
+              "raf": 1.5
+            },
+            {
+              "name": "S5 — RECAP1 + RECAP2 (240 questions)",
+              "status": "todo",
+              "charge": 1.0,
+              "raf": 1.0
+            },
+            {
+              "name": "S6 — BLANCFINAL (120 questions, mises en situation)",
+              "status": "todo",
+              "charge": 1.0,
+              "raf": 1.0
+            }
+          ]
         }
       ]
     },
