@@ -1151,36 +1151,36 @@
         {
           "id": "generation-globale-cas-pratiques",
           "name": "Cas pratiques : génération globale",
-          "status": "todo",
+          "status": "wip",
           "qualif": "P1",
           "target": null,
           "owner": "laurent",
           "charge": 2.0,
-          "raf": 2.0,
-          "titre": "Composer lot-test-recap-1 et lot-exam-blanc-1 (3×3 snippets chacun depuis lot1/lot2/lot3)",
+          "raf": 0.3,
+          "titre": "lot-test-recap-1 + lot-exam-blanc-1 créés, CSV générés — reste : modif shortcode PHP + import WpProQuiz",
           "type": "Feature",
           "commentaire": "",
           "steps": [
             {
               "name": "Sélection des snippets (6 par lot source, sans doublon entre les 2 nouveaux lots)",
-              "status": "todo",
+              "status": "done",
               "charge": 0.3,
-              "raf": 0.3
+              "raf": 0.0
             },
             {
               "name": "Composition lot-test-recap-1 (index HTML + 9 snippets)",
-              "status": "todo",
+              "status": "done",
               "charge": 0.7,
-              "raf": 0.7
+              "raf": 0.0
             },
             {
               "name": "Composition lot-exam-blanc-1 (index HTML + 9 snippets)",
-              "status": "todo",
+              "status": "done",
               "charge": 0.7,
-              "raf": 0.7
+              "raf": 0.0
             },
             {
-              "name": "Export WpProQuiz + validation",
+              "name": "Export WpProQuiz + validation (shortcode PHP Training V7 + import CSV)",
               "status": "todo",
               "charge": 0.3,
               "raf": 0.3
