@@ -4,6 +4,10 @@ Nouveau système de suivi des projets LDE — modèle Projet → Sous-projet →
 
 > **⚠️ Les règles « Garde-fous avant implémentation » du CLAUDE.md racine s'appliquent ici.**
 
+## En début de session
+
+Lire **`notes-todo.md`** à la racine du projet : contient les notes inter-sessions (rappels, actions en attente, items à implémenter).
+
 ## Remote Git
 
 - **URL** : https://github.com/LDE-P/planning-lde-v2 (repo privé, compte LDE-P)
