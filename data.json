@@ -3165,9 +3165,9 @@
           "id": "finalisation-v1",
           "name": "Finalisation V1",
           "titre": "Corrections tableau (SPEC v2.2), corrections UX issues remontées à l'usage, vérification cohérence globale.",
-          "status": "wip",
+          "status": "done",
           "qualif": "P1",
-          "target": "2026-05-31",
+          "target": "2026-05-27",
           "owner": "laurent",
           "charge": 2.0,
           "raf": 0.0,
@@ -3191,7 +3191,7 @@
               "raf": 0.0
             }
           ],
-          "commentaire": "SPEC-CORRECTIONS-TABLEAU v2.2 implémentée (commits sessions 5-6). Corrections UX sessions 7-8 : modale réconciliation, epargneBP/CA déductions, ligne Solde compte. Sauvegarde référence 2026-05-26.",
+          "commentaire": "SPEC-CORRECTIONS-TABLEAU v2.2 implémentée (commits sessions 5-6). Corrections UX sessions 7-9 : modale réconciliation, epargneBP/CA, Solde compte, Total dépenses prévues, formule RTV v3 (soldeCompte−ecart−prevTotal), signe € partout. Terminé 2026-05-27.",
           "type": "Feature"
         },
         {
@@ -3205,7 +3205,7 @@
           "charge": 0.0,
           "raf": 0.0,
           "steps": [],
-          "commentaire": "Session 8 (2026-05-26) : UX modale réconciliation, epargneBP/CA, Solde compte, backup référence.",
+          "commentaire": "Session 8 (2026-05-26) : UX modale réconciliation, epargneBP/CA, Solde compte, backup référence. Session 9 (2026-05-27) : Total dépenses prévues, formule RTV v3, signe € partout, backup complet.",
           "type": "Récurrent"
         },
         {
