@@ -1114,8 +1114,8 @@
           "target": null,
           "owner": "laurent",
           "charge": 2.0,
-          "raf": 0.3,
-          "titre": "lot-test-recap-1 + lot-exam-blanc-1 créés, CSV générés — reste : modif shortcode PHP + import WpProQuiz",
+          "raf": 0.2,
+          "titre": "Snippets + shortcode PHP + CSV enrichis (feedbacks + mises en situation) — reste : import SQL WpProQuiz + test local",
           "type": "Feature",
           "commentaire": "",
           "steps": [
@@ -1138,12 +1138,51 @@
               "raf": 0.0
             },
             {
-              "name": "Export WpProQuiz + validation (shortcode PHP Training V7 + import CSV)",
-              "status": "todo",
+              "name": "Snippets dans wp-content/snippets/ + shortcode PHP modifié (Training V7 local)",
+              "status": "done",
+              "charge": 0.2,
+              "raf": 0.0
+            },
+            {
+              "name": "CSV enrichis : feedbacks rédigés + mises en situation (3 CSV : indices, corrigés, exam-blanc)",
+              "status": "done",
               "charge": 0.3,
-              "raf": 0.3
+              "raf": 0.0
+            },
+            {
+              "name": "[Hors scope] Import SQL WpProQuiz + test local + validation",
+              "status": "todo",
+              "charge": 0.2,
+              "raf": 0.2
             }
           ]
+        },
+        {
+          "id": "generateur-cas-pratiques-v2",
+          "name": "Générateur de cas pratiques V2",
+          "titre": "34 cas pratiques pédagogiques Opquast répartis en 3 lots avec interface de consultation.",
+          "status": "done",
+          "qualif": "P1",
+          "target": "11/05/2026",
+          "owner": "laurent",
+          "charge": 3.0,
+          "raf": 0.0,
+          "steps": [
+            {
+              "name": "Production de 34 cas pratiques (lots 1, 2 et 3)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Interface de consultation",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "commentaire": "",
+          "type": "Feature"
         }
       ]
     },
