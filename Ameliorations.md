@@ -64,3 +64,7 @@
 
 - [ ] **`test_gsheet_status_no_credentials` et `test_gsheet_init_no_credentials_returns_error` flaky par environnement** : ces tests supposent l'absence de `token.json` mais celui-ci est présent sur la machine de LDE. Ajouter `pytest.mark.skipif(token_file.exists(), reason="token.json présent — flow OAuth réussit")` pour rendre ces tests proprement skippables.
 - [ ] **`tests-e2e-python/` pas dans un repo git** : décision à prendre — soit init d'un repo dédié, soit intégration dans un repo existant. Sans versioning, les 7 nouveaux fichiers de tests de la vue Docs ne sont pas traçables.
+
+## Outillage IA
+
+- [ ] **Explorer outils optimisation BMAD** (2026-05-27)
