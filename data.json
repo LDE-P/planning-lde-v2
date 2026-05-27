@@ -1109,25 +1109,25 @@
         {
           "id": "maj-quiz-source-training-sql",
           "name": "Mise à jour quiz source TRAINING via SQL",
-          "status": "todo",
+          "status": "wip",
           "qualif": "P1",
           "target": null,
           "owner": "laurent",
           "charge": 1.0,
-          "raf": 1.0,
+          "raf": 0.7,
           "titre": "Script Python + SQL : maj textes question/réponses quiz source Training (passe FALC) — adapté de l'Examen",
           "steps": [
             {
               "name": "Analyse structure quiz source Training (table, UIDs, format)",
-              "status": "todo",
+              "status": "done",
               "charge": 0.2,
-              "raf": 0.2
+              "raf": 0.0
             },
             {
               "name": "Adaptation script + dry-run local",
-              "status": "todo",
+              "status": "wip",
               "charge": 0.2,
-              "raf": 0.2
+              "raf": 0.1
             },
             {
               "name": "Exécution locale + vérification visuelle",
