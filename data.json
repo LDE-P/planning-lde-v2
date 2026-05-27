@@ -1114,7 +1114,7 @@
           "target": null,
           "owner": "laurent",
           "charge": 1.0,
-          "raf": 0.7,
+          "raf": 0.2,
           "titre": "Script Python + SQL : maj textes question/réponses quiz source Training (passe FALC) — adapté de l'Examen",
           "steps": [
             {
@@ -1125,21 +1125,21 @@
             },
             {
               "name": "Adaptation script + dry-run local",
-              "status": "wip",
+              "status": "done",
               "charge": 0.2,
-              "raf": 0.1
+              "raf": 0.0
             },
             {
               "name": "Exécution locale + vérification visuelle",
-              "status": "todo",
+              "status": "done",
               "charge": 0.2,
-              "raf": 0.2
+              "raf": 0.0
             },
             {
               "name": "Exécution DEV + vérification",
-              "status": "todo",
+              "status": "done",
               "charge": 0.2,
-              "raf": 0.2
+              "raf": 0.0
             },
             {
               "name": "Exécution PROD",
