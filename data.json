@@ -3611,7 +3611,18 @@
       "stack": "Docker · VS Code · 1Password · Dev Containers",
       "category": "infra",
       "folder": "opq-devcontainer-MHO/opq-devcontainer/",
-      "docs": [],
+      "docs": [
+        {
+          "id": "the-fucking-manual-devcontainer",
+          "file": "the_fucking-Manual-devcontaner.md",
+          "title": "The Fucking Manual — Devcontainer & Workflow Git Opquast",
+          "desc": "Guide personnel : fonctionnement du devcontainer, synchronisation prod, workflow git feature branch → DEV → PROD.",
+          "type": "notes",
+          "status": "draft",
+          "date": "2026-05-27",
+          "subproject": "aide-git-devcontainer"
+        }
+      ],
       "subprojects": [
         {
           "id": "prise-en-main",
@@ -3647,6 +3658,27 @@
             {
               "name": "Mis en ligne",
               "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ]
+        },
+        {
+          "id": "aide-git-devcontainer",
+          "name": "Aide git devcontainer",
+          "titre": "Guide personnel git + workflow devcontainer Opquast",
+          "status": "wip",
+          "qualif": "P2",
+          "target": "",
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "commentaire": "",
+          "type": "Support",
+          "steps": [
+            {
+              "name": "Mise en place The fucking Manual",
+              "status": "wip",
               "charge": 0.0,
               "raf": 0.0
             }
