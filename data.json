@@ -1107,49 +1107,6 @@
           ]
         },
         {
-          "id": "maj-quiz-source-training-sql",
-          "name": "Mise à jour quiz source TRAINING via SQL",
-          "status": "wip",
-          "qualif": "P1",
-          "target": null,
-          "owner": "laurent",
-          "charge": 1.0,
-          "raf": 0.2,
-          "titre": "Script Python + SQL : maj textes question/réponses quiz source Training (passe FALC) — adapté de l'Examen",
-          "steps": [
-            {
-              "name": "Analyse structure quiz source Training (table, UIDs, format)",
-              "status": "done",
-              "charge": 0.2,
-              "raf": 0.0
-            },
-            {
-              "name": "Adaptation script + dry-run local",
-              "status": "done",
-              "charge": 0.2,
-              "raf": 0.0
-            },
-            {
-              "name": "Exécution locale + vérification visuelle",
-              "status": "done",
-              "charge": 0.2,
-              "raf": 0.0
-            },
-            {
-              "name": "Exécution DEV + vérification",
-              "status": "done",
-              "charge": 0.2,
-              "raf": 0.0
-            },
-            {
-              "name": "Exécution PROD",
-              "status": "todo",
-              "charge": 0.2,
-              "raf": 0.2
-            }
-          ]
-        },
-        {
           "id": "generation-globale-cas-pratiques",
           "name": "Cas pratiques : génération globale",
           "status": "wip",
@@ -2166,39 +2123,51 @@
         },
         {
           "id": "maj-quiz-source-training-sql",
-          "name": "Déploiement SQL passe FALC Training",
+          "name": "Mise à jour quiz source TRAINING via SQL",
           "status": "wip",
           "qualif": "P1",
           "target": "",
           "owner": "laurent",
-          "charge": 2.0,
-          "raf": 0.5,
-          "titre": "",
+          "charge": 1.0,
+          "raf": 0.2,
+          "titre": "Script Python + SQL : maj textes question/réponses quiz source Training (passe FALC) — adapté de l Examen",
           "commentaire": "",
           "steps": [
             {
-              "name": "Dry-run DEV",
+              "name": "Analyse structure quiz source Training (table, UIDs, format)",
               "status": "done",
-              "charge": 0.5,
+              "charge": 0.2,
               "raf": 0.0
             },
             {
-              "name": "--execute DEV",
+              "name": "Adaptation script + dry-run local",
               "status": "done",
-              "charge": 0.5,
+              "charge": 0.2,
               "raf": 0.0
             },
             {
-              "name": "Déploiement PROD (via MHO)",
+              "name": "Exécution locale + vérification visuelle",
+              "status": "done",
+              "charge": 0.2,
+              "raf": 0.0
+            },
+            {
+              "name": "Exécution DEV + vérification",
+              "status": "done",
+              "charge": 0.2,
+              "raf": 0.0
+            },
+            {
+              "name": "Exécution PROD (via MHO)",
               "status": "todo",
-              "charge": 0.5,
-              "raf": 0.5
+              "charge": 0.2,
+              "raf": 0.2
             },
             {
               "name": "Nettoyage tables miroir LOCAL/DEV/PROD",
               "status": "todo",
-              "charge": 0.5,
-              "raf": 0.5
+              "charge": 0.0,
+              "raf": 0.0
             }
           ]
         }
