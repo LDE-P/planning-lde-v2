@@ -146,33 +146,6 @@
       "docs": [],
       "subprojects": [
         {
-          "id": "generateur-cas-pratiques-v2",
-          "name": "Générateur de cas pratiques V2",
-          "titre": "34 cas pratiques pédagogiques Opquast répartis en 3 lots avec interface de consultation.",
-          "status": "done",
-          "qualif": "P1",
-          "target": "11/05/2026",
-          "owner": "laurent",
-          "charge": 3.0,
-          "raf": 0.0,
-          "steps": [
-            {
-              "name": "Production de 34 cas pratiques (lots 1, 2 et 3)",
-              "status": "done",
-              "charge": 0.0,
-              "raf": 0.0
-            },
-            {
-              "name": "Interface de consultation",
-              "status": "done",
-              "charge": 0.0,
-              "raf": 0.0
-            }
-          ],
-          "commentaire": "",
-          "type": "Feature"
-        },
-        {
           "id": "generateur-schmoll-v1",
           "name": "Générateur de cas pratiques V1 (Schmoll)",
           "titre": "Application web locale (Node.js + JS vanilla) pour générer des cas pratiques d'audit à partir de référentiels qualité via IA (Gemini/Claude).",
