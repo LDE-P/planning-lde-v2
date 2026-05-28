@@ -778,12 +778,18 @@
   </div>
   <div id="gsheet-bar">
     <span id="gsheet-status">GSheet : —</span>
-    <button class="btn" id="btn-init-gsheet">Init</button>
+    <!-- TEMPORAIRE 2026-05-28 : Init, Modèles, Push et Pull désactivés suite à incident de perte
+         de données GSheet Datamart.
+         Bugs à investiguer : (1) pull silencieusement non capté dans data.json, (2) push ayant
+         écrasé col C (Type) et col J (Commentaire) malgré spec contraire.
+         Format reste actif (manuel uniquement, peu de risque). Réactiver en retirant `disabled`
+         une fois le diagnostic effectué. -->
+    <button class="btn" id="btn-init-gsheet" disabled title="Désactivé temporairement — voir commentaire dans le HTML">Init</button>
     <button class="btn" id="btn-format-gsheet" title="Configure les menus déroulants Type et Avanc.">Format</button>
-    <button class="btn" id="btn-save-template" title="Sauvegarde la mise en forme des 3 onglets comme modèles (_modèle_*)">⊡ Modèles</button>
-    <button class="btn" id="btn-pull-tcd">← Pull TCD</button>
-    <button class="btn" id="btn-pull-gsheet">← Pull Tâches</button>
-    <button class="btn" id="btn-push-gsheet">Push →</button>
+    <button class="btn" id="btn-save-template" disabled title="Désactivé temporairement — voir commentaire dans le HTML">⊡ Modèles</button>
+    <button class="btn" id="btn-pull-tcd" disabled title="Désactivé temporairement — voir commentaire dans le HTML">← Pull TCD</button>
+    <button class="btn" id="btn-pull-gsheet" disabled title="Désactivé temporairement — voir commentaire dans le HTML">← Pull Tâches</button>
+    <button class="btn" id="btn-push-gsheet" disabled title="Désactivé temporairement — voir commentaire dans le HTML">Push →</button>
   </div>
 </header>
 
