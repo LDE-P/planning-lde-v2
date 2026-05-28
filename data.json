@@ -3498,6 +3498,42 @@
           ],
           "commentaire": "Commits bb25d32 + 29d5e10. 339/339 jsdom + 34/34 Python. Données réelles post-import conservées (décision LDE 2026-05-26).",
           "type": "Chore"
+        },
+        {
+          "id": "formules-rtv-v4",
+          "name": "Formules RTV v4",
+          "titre": "Nouvelle formule RTV unifiée (revenu − dépenses − prévues + écart) + suppression kindOverrides + bouton hard-delete par ligne.",
+          "status": "spec",
+          "qualif": "P1",
+          "target": "2026-06-04",
+          "owner": "laurent",
+          "charge": 3.0,
+          "raf": 3.0,
+          "steps": [
+            { "name": "SPEC-FORMULES-RTV-V4.md v1.1 (Ping-Pong V1)", "status": "done", "charge": 0.5, "raf": 0.0 },
+            { "name": "Validation LDE + go implémentation", "status": "todo", "charge": 0.0, "raf": 0.0 },
+            { "name": "Implémentation simulateur_depenses.html + serve-simu.py", "status": "todo", "charge": 1.5, "raf": 1.5 },
+            { "name": "Adaptation tests (~12 tests + suppression bloc 8c + DR-T1..T4)", "status": "todo", "charge": 1.0, "raf": 1.0 }
+          ],
+          "type": "Feature"
+        },
+        {
+          "id": "simulation-retraite",
+          "name": "Simulation retraite",
+          "titre": "Onglet simulation retraite — feuille disjointe, montants à zéro, RTV de flux. Sprint séparé, après RTV v4.",
+          "status": "spec",
+          "qualif": "P2",
+          "target": "",
+          "owner": "laurent",
+          "charge": 4.0,
+          "raf": 4.0,
+          "steps": [
+            { "name": "SPEC-SIMULATION-RETRAITE.md v2.0 (Ping-Pong V2)", "status": "done", "charge": 0.5, "raf": 0.0 },
+            { "name": "Validation LDE + go implémentation", "status": "todo", "charge": 0.0, "raf": 0.0 },
+            { "name": "Implémentation simulateur_depenses.html (mode retraite, 14 fonctions)", "status": "todo", "charge": 2.5, "raf": 2.5 },
+            { "name": "Tests RT-T1..RT-T12 (test_retraite.mjs)", "status": "todo", "charge": 1.0, "raf": 1.0 }
+          ],
+          "type": "Feature"
         }
       ],
       "gsheet_hidden": true
