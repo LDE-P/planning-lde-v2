@@ -463,7 +463,188 @@
       "stack": "PHP 8 · WordPress · MySQL 8",
       "category": "active",
       "folder": "opq-devcontainer-MHO/training-domain/training-v7",
-      "docs": [],
+      "docs": [
+        {
+          "id": "audit-personna-training-spec",
+          "file": "dashbord-datamart-V1/optimisation-prompts/SPEC_PROJET.md",
+          "title": "Audit Training par persona — Spec projet",
+          "desc": "Spécification du projet d'audit éditorial Training simulant 13 personas (objectifs, méthodologie, livrables).",
+          "type": "spec",
+          "status": "final",
+          "date": "2026-05-13",
+          "subproject": "audit-parcours-par-claude-avec-personna"
+        },
+        {
+          "id": "audit-personna-training-avancement",
+          "file": "dashbord-datamart-V1/optimisation-prompts/AVANCEMENT.md",
+          "title": "Audit Training par persona — Avancement",
+          "desc": "État d'avancement du projet d'audit Training par 13 personas.",
+          "type": "notes",
+          "status": "final",
+          "date": "2026-05-13",
+          "subproject": "audit-parcours-par-claude-avec-personna"
+        },
+        {
+          "id": "audit-personna-training-cartographie",
+          "file": "dashbord-datamart-V1/optimisation-prompts/CARTOGRAPHIE.md",
+          "title": "Audit Training par persona — Cartographie",
+          "desc": "Cartographie du parcours Training Opquast (étape 1 de l'audit).",
+          "type": "audit",
+          "status": "final",
+          "date": "2026-05-13",
+          "subproject": "audit-parcours-par-claude-avec-personna"
+        },
+        {
+          "id": "audit-personna-training-profil-01",
+          "file": "dashbord-datamart-V1/optimisation-prompts/profil-01-etudiant.md",
+          "title": "Audit Training par persona — Profil 01 Étudiant",
+          "desc": "Analyse du parcours Training Opquast vu par le profil étudiant.",
+          "type": "audit",
+          "status": "final",
+          "date": "2026-05-13",
+          "subproject": "audit-parcours-par-claude-avec-personna"
+        },
+        {
+          "id": "audit-personna-training-profil-02",
+          "file": "dashbord-datamart-V1/optimisation-prompts/profil-02-developpeur.md",
+          "title": "Audit Training par persona — Profil 02 Développeur",
+          "desc": "Analyse du parcours Training Opquast vu par le profil développeur.",
+          "type": "audit",
+          "status": "final",
+          "date": "2026-05-13",
+          "subproject": "audit-parcours-par-claude-avec-personna"
+        },
+        {
+          "id": "audit-personna-training-profil-03",
+          "file": "dashbord-datamart-V1/optimisation-prompts/profil-03-ux-designer.md",
+          "title": "Audit Training par persona — Profil 03 UX Designer",
+          "desc": "Analyse du parcours Training Opquast vu par le profil UX designer.",
+          "type": "audit",
+          "status": "final",
+          "date": "2026-05-13",
+          "subproject": "audit-parcours-par-claude-avec-personna"
+        },
+        {
+          "id": "audit-personna-training-profil-04",
+          "file": "dashbord-datamart-V1/optimisation-prompts/profil-04-web-designer.md",
+          "title": "Audit Training par persona — Profil 04 Web Designer",
+          "desc": "Analyse du parcours Training Opquast vu par le profil web designer.",
+          "type": "audit",
+          "status": "final",
+          "date": "2026-05-13",
+          "subproject": "audit-parcours-par-claude-avec-personna"
+        },
+        {
+          "id": "audit-personna-training-profil-05",
+          "file": "dashbord-datamart-V1/optimisation-prompts/profil-05-seo.md",
+          "title": "Audit Training par persona — Profil 05 SEO",
+          "desc": "Analyse du parcours Training Opquast vu par le profil SEO.",
+          "type": "audit",
+          "status": "final",
+          "date": "2026-05-13",
+          "subproject": "audit-parcours-par-claude-avec-personna"
+        },
+        {
+          "id": "audit-personna-training-profil-06",
+          "file": "dashbord-datamart-V1/optimisation-prompts/profil-06-chef-projet.md",
+          "title": "Audit Training par persona — Profil 06 Chef de projet",
+          "desc": "Analyse du parcours Training Opquast vu par le profil chef de projet.",
+          "type": "audit",
+          "status": "final",
+          "date": "2026-05-13",
+          "subproject": "audit-parcours-par-claude-avec-personna"
+        },
+        {
+          "id": "audit-personna-training-profil-07",
+          "file": "dashbord-datamart-V1/optimisation-prompts/profil-07-product-manager.md",
+          "title": "Audit Training par persona — Profil 07 Product Manager",
+          "desc": "Analyse du parcours Training Opquast vu par le profil product manager.",
+          "type": "audit",
+          "status": "final",
+          "date": "2026-05-13",
+          "subproject": "audit-parcours-par-claude-avec-personna"
+        },
+        {
+          "id": "audit-personna-training-profil-08",
+          "file": "dashbord-datamart-V1/optimisation-prompts/profil-08-dsi.md",
+          "title": "Audit Training par persona — Profil 08 DSI",
+          "desc": "Analyse du parcours Training Opquast vu par le profil DSI.",
+          "type": "audit",
+          "status": "final",
+          "date": "2026-05-13",
+          "subproject": "audit-parcours-par-claude-avec-personna"
+        },
+        {
+          "id": "audit-personna-training-profil-09",
+          "file": "dashbord-datamart-V1/optimisation-prompts/profil-09-freelance.md",
+          "title": "Audit Training par persona — Profil 09 Freelance",
+          "desc": "Analyse du parcours Training Opquast vu par le profil freelance.",
+          "type": "audit",
+          "status": "final",
+          "date": "2026-05-13",
+          "subproject": "audit-parcours-par-claude-avec-personna"
+        },
+        {
+          "id": "audit-personna-training-profil-10",
+          "file": "dashbord-datamart-V1/optimisation-prompts/profil-10-redacteur.md",
+          "title": "Audit Training par persona — Profil 10 Rédacteur",
+          "desc": "Analyse du parcours Training Opquast vu par le profil rédacteur.",
+          "type": "audit",
+          "status": "final",
+          "date": "2026-05-13",
+          "subproject": "audit-parcours-par-claude-avec-personna"
+        },
+        {
+          "id": "audit-personna-training-profil-11",
+          "file": "dashbord-datamart-V1/optimisation-prompts/profil-11-communication.md",
+          "title": "Audit Training par persona — Profil 11 Communication",
+          "desc": "Analyse du parcours Training Opquast vu par le profil communication.",
+          "type": "audit",
+          "status": "final",
+          "date": "2026-05-13",
+          "subproject": "audit-parcours-par-claude-avec-personna"
+        },
+        {
+          "id": "audit-personna-training-profil-12",
+          "file": "dashbord-datamart-V1/optimisation-prompts/profil-12-accessibilite.md",
+          "title": "Audit Training par persona — Profil 12 Accessibilité",
+          "desc": "Analyse du parcours Training Opquast vu par le profil accessibilité.",
+          "type": "audit",
+          "status": "final",
+          "date": "2026-05-13",
+          "subproject": "audit-parcours-par-claude-avec-personna"
+        },
+        {
+          "id": "audit-personna-training-profil-13",
+          "file": "dashbord-datamart-V1/optimisation-prompts/profil-13-formateur.md",
+          "title": "Audit Training par persona — Profil 13 Formateur",
+          "desc": "Analyse du parcours Training Opquast vu par le profil formateur.",
+          "type": "audit",
+          "status": "final",
+          "date": "2026-05-13",
+          "subproject": "audit-parcours-par-claude-avec-personna"
+        },
+        {
+          "id": "audit-personna-training-synthese-md",
+          "file": "dashbord-datamart-V1/optimisation-prompts/audit-personna-training-synthese.md",
+          "title": "Audit Training par persona — Synthèse comparative (MD)",
+          "desc": "Synthèse comparative de l'audit éditorial du Training Opquast simulant 13 personas. Format Markdown.",
+          "type": "audit",
+          "status": "final",
+          "date": "2026-05-13",
+          "subproject": "audit-parcours-par-claude-avec-personna"
+        },
+        {
+          "id": "audit-personna-training-synthese-docx",
+          "file": "dashbord-datamart-V1/optimisation-prompts/audit-personna-training-synthese.docx",
+          "title": "Audit Training par persona — Synthèse comparative (DOCX)",
+          "desc": "Synthèse comparative de l'audit éditorial du Training Opquast simulant 13 personas. Format Word.",
+          "type": "audit",
+          "status": "final",
+          "date": "2026-05-13",
+          "subproject": "audit-parcours-par-claude-avec-personna"
+        }
+      ],
       "subprojects": [
         {
           "id": "nouvelles-modalites-meli-melo",
@@ -2214,6 +2395,26 @@
               "raf": 0.0
             }
           ]
+        },
+        {
+          "id": "viralite-parcours-training",
+          "name": "Viralité du parcours Training",
+          "status": "todo",
+          "qualif": "",
+          "target": "",
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "titre": "Trouver et ajouter des activités dans le parcours qui amène l'utilisateur à faire voir le parcours, la certification à ses collègues, etc.",
+          "commentaire": "",
+          "steps": [
+            {
+              "name": "Analyse, audit",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ]
         }
       ],
       "gsheet_hidden": true
@@ -3510,10 +3711,30 @@
           "charge": 3.0,
           "raf": 3.0,
           "steps": [
-            { "name": "SPEC-FORMULES-RTV-V4.md v1.1 (Ping-Pong V1)", "status": "done", "charge": 0.5, "raf": 0.0 },
-            { "name": "Validation LDE + go implémentation", "status": "todo", "charge": 0.0, "raf": 0.0 },
-            { "name": "Implémentation simulateur_depenses.html + serve-simu.py", "status": "todo", "charge": 1.5, "raf": 1.5 },
-            { "name": "Adaptation tests (~12 tests + suppression bloc 8c + DR-T1..T4)", "status": "todo", "charge": 1.0, "raf": 1.0 }
+            {
+              "name": "SPEC-FORMULES-RTV-V4.md v1.1 (Ping-Pong V1)",
+              "status": "done",
+              "charge": 0.5,
+              "raf": 0.0
+            },
+            {
+              "name": "Validation LDE + go implémentation",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Implémentation simulateur_depenses.html + serve-simu.py",
+              "status": "todo",
+              "charge": 1.5,
+              "raf": 1.5
+            },
+            {
+              "name": "Adaptation tests (~12 tests + suppression bloc 8c + DR-T1..T4)",
+              "status": "todo",
+              "charge": 1.0,
+              "raf": 1.0
+            }
           ],
           "type": "Feature"
         },
@@ -3528,10 +3749,30 @@
           "charge": 4.0,
           "raf": 4.0,
           "steps": [
-            { "name": "SPEC-SIMULATION-RETRAITE.md v2.0 (Ping-Pong V2)", "status": "done", "charge": 0.5, "raf": 0.0 },
-            { "name": "Validation LDE + go implémentation", "status": "todo", "charge": 0.0, "raf": 0.0 },
-            { "name": "Implémentation simulateur_depenses.html (mode retraite, 14 fonctions)", "status": "todo", "charge": 2.5, "raf": 2.5 },
-            { "name": "Tests RT-T1..RT-T12 (test_retraite.mjs)", "status": "todo", "charge": 1.0, "raf": 1.0 }
+            {
+              "name": "SPEC-SIMULATION-RETRAITE.md v2.0 (Ping-Pong V2)",
+              "status": "done",
+              "charge": 0.5,
+              "raf": 0.0
+            },
+            {
+              "name": "Validation LDE + go implémentation",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Implémentation simulateur_depenses.html (mode retraite, 14 fonctions)",
+              "status": "todo",
+              "charge": 2.5,
+              "raf": 2.5
+            },
+            {
+              "name": "Tests RT-T1..RT-T12 (test_retraite.mjs)",
+              "status": "todo",
+              "charge": 1.0,
+              "raf": 1.0
+            }
           ],
           "type": "Feature"
         }
