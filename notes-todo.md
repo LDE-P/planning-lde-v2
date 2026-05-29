@@ -27,6 +27,14 @@ Le pull du 2026-05-28 n'a pas écrit dans `data.json` les éditions manuelles GS
 
 Le push du 2026-05-28 a vidé col C (Type) et col J (Commentaire) côté GSheet — alors que la spec dit que push ne touche que A-B, D-I, K-L. À investiguer dans `serve-v2.py` : `_push_to_gsheet()` et le `batch_clear`.
 
+### 📘 Référence — Note Gemini sur erreurs #REF! et structure GSheet (2026-05-28)
+
+Gemini a corrigé directement dans la GSheet en ligne (indépendamment du Dashboard) des erreurs `#REF!` et a fait des recommandations sur les Tableaux Dynamiques + espaces fantômes dans les noms. À lire avant de retoucher au code push/pull.
+
+→ [notes-gsheet-gemini-2026-05-28.md](computer:///Users/laurentdenis/Documents/GIT/planning-lde-v2/notes-gsheet-gemini-2026-05-28.md)
+
+Impacts probables côté code à vérifier : strip systématique sur col A/B au pull, compatibilité gspread avec les Tableaux Dynamiques Google natifs.
+
 ### P1 — `affichage-docs-vue-projet` (~2h, spec prête)
 
 Affichage des documents associés dans la vue projet du dashboard V2. SPEC prête, en attente d'implémentation.
