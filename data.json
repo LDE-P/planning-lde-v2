@@ -4064,6 +4064,16 @@
           "type": "bilan",
           "status": "final",
           "subproject": "reflexions-preliminaires"
+        },
+        {
+          "id": "brief-ping-pong-hub",
+          "title": "Brief Ping-Pong — Serveur local GIT (hub Python + IA locale)",
+          "path": "CLAUDE/Projects/SERVEUR LOCAL/BRIEF-PING-PONG-HUB.md",
+          "description": "Brief Claude Code pour planification du hub Python port 9000 : architecture, endpoints, registre, tests e2e, points ouverts. Ne pas implémenter sans validation LDE.",
+          "type": "spec",
+          "status": "final",
+          "date": "2026-05-25",
+          "subproject": "reflexions-preliminaires"
         }
       ],
       "subprojects": [
