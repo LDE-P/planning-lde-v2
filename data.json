@@ -2546,6 +2546,36 @@
           "status": "final",
           "date": "2026-05-29",
           "subproject": "reflexion-meeting-bha-mho-lde"
+        },
+        {
+          "id": "expertise-regles-opquast-synthese",
+          "file": "banc-de-tests/docs/expertise-regles-opquast-synthese.md",
+          "title": "Expertise règles Opquast — périmètre & matière experte",
+          "desc": "Synthèse de la contribution expertise-règles (transverse benchmark/MCP/eservice-manager) : livrables experts, matière par déterminisme/granularité/thématique, + pré-classification DRAFT des 245 règles.",
+          "type": "notes",
+          "status": "draft",
+          "date": "2026-05-29",
+          "subproject": "reflexion-meeting-bha-mho-lde"
+        },
+        {
+          "id": "spec-amorce-banc-test-mcp",
+          "file": "banc-de-tests/docs/spec-amorce-banc-test-mcp.md",
+          "title": "Spec d'amorce — Banc de test du MCP Opquast (POC)",
+          "desc": "Spécification du POC expert-piloté : modèle d'oracle à 3 corpus, boucle, auditeur aveugle, composeur de specimens (page/mini-site), rôles, règles gravées (host minimal + re-vérification oracle).",
+          "type": "spec",
+          "status": "draft",
+          "date": "2026-05-29",
+          "subproject": "reflexion-meeting-bha-mho-lde"
+        },
+        {
+          "id": "classification-245-regles-xlsx",
+          "file": "banc-de-tests/docs/classification-245-regles.xlsx",
+          "title": "Classification des 245 règles — grille de travail (xlsx)",
+          "desc": "Grille éditable : proposition automatique (déterminisme/granularité/auto) × axe MCP (verification_type/automation_level par thème) + colonnes VALIDÉES par LDE (menus déroulants, criticité, testable martyr). Supersède le CSV draft.",
+          "type": "autre",
+          "status": "wip",
+          "date": "2026-05-29",
+          "subproject": "reflexion-meeting-bha-mho-lde"
         }
       ],
       "subprojects": [
@@ -2628,7 +2658,7 @@
         },
         {
           "id": "reflexion-meeting-bha-mho-lde",
-          "name": "Réflexion avant meeting BHA MHO LDE",
+          "name": "Lancement Projet et Amorce",
           "titre": "Réflexion avant meeting BHA MHO LDE",
           "status": "wip",
           "qualif": "P2",
@@ -2646,6 +2676,24 @@
             {
               "name": "Analyse eservice-manager → bancs de test",
               "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Valider la classification des 245 règles (65 'à qualifier' + fusion axe MCP dom/network/visual + colonne criticité)",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Spec d'amorce LDE",
+              "status": "wip",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Création de l'échantillon de règles",
+              "status": "todo",
               "charge": 0.0,
               "raf": 0.0
             }
