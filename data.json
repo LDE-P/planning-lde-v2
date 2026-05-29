@@ -2200,7 +2200,7 @@
           "id": "metriques-tbd-certification",
           "name": "Plan amélioration Training V1",
           "titre": "Établir le plan d'amélioration complet de Training V7 (7 axes, 33 tâches)",
-          "status": "wip",
+          "status": "todo",
           "qualif": "P2",
           "target": "05/06/2026",
           "owner": null,
@@ -2372,13 +2372,13 @@
             },
             {
               "name": "Exécution locale + vérification visuelle",
-              "status": "done",
+              "status": "wip",
               "charge": 0.2,
               "raf": 0.0
             },
             {
               "name": "Exécution DEV + vérification",
-              "status": "done",
+              "status": "wip",
               "charge": 0.2,
               "raf": 0.0
             },
@@ -2751,58 +2751,6 @@
           ],
           "commentaire": "Livrables : Synthese_G2_document_consolide.md + .docx",
           "type": "Autre"
-        }
-      ],
-      "gsheet_hidden": true
-    },
-    {
-      "id": "notification-front",
-      "name": "Notification Front",
-      "alias": "NotifFront",
-      "desc": "Page de statut « À mon attention aujourd'hui » — agrégation Front (compartiments + Subscribed + Assigné) et Google Drive, alimentée par un artifact Cowork et une tâche planifiée 30 min en lecture seule.",
-      "stack": "HTML · JS vanilla · Cowork artifact · Tâche planifiée",
-      "category": "active",
-      "folder": "perso/notifications-front",
-      "docs": [],
-      "subprojects": [
-        {
-          "id": "mise-en-place",
-          "name": "Mise en place",
-          "titre": "Création de l'artifact Cowork et de la tâche planifiée 30 min en lecture seule sur Front.",
-          "status": "done",
-          "qualif": "P1",
-          "target": "17/05/2026",
-          "owner": "laurent",
-          "charge": 0.0,
-          "raf": 0.0,
-          "steps": [
-            {
-              "name": "Spécification",
-              "status": "done",
-              "charge": 0.0,
-              "raf": 0.0
-            },
-            {
-              "name": "Développement",
-              "status": "wip",
-              "charge": 0.0,
-              "raf": 0.0
-            },
-            {
-              "name": "Tests",
-              "status": "todo",
-              "charge": 0.0,
-              "raf": 0.0
-            },
-            {
-              "name": "Mis en ligne",
-              "status": "todo",
-              "charge": 0.0,
-              "raf": 0.0
-            }
-          ],
-          "commentaire": "",
-          "type": "Feature"
         }
       ],
       "gsheet_hidden": true
@@ -3981,6 +3929,16 @@
           "status": "draft",
           "date": "2026-05-27",
           "subproject": "aide-git-devcontainer"
+        },
+        {
+          "id": "the-fucking-manual-docker",
+          "file": "the_fucking-Manual-docker.md",
+          "title": "The Fucking Manual — Docker Desktop sur le Mac de LDE",
+          "desc": "Guide personnel : gestion de Docker Desktop (procédures pré-reboot, récupération post-crash, diagnostic disque plein vs corruption containerd, commandes utiles palette VS Code, historique des incidents).",
+          "type": "notes",
+          "status": "draft",
+          "date": "2026-05-28",
+          "subproject": "prise-en-main"
         }
       ],
       "subprojects": [
@@ -4027,7 +3985,7 @@
           "id": "aide-git-devcontainer",
           "name": "Aide git devcontainer",
           "titre": "Guide personnel git + workflow devcontainer Opquast",
-          "status": "wip",
+          "status": "récurrent",
           "qualif": "P2",
           "target": "",
           "owner": "laurent",
