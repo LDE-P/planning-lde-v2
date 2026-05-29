@@ -3114,6 +3114,26 @@
           "status": "final",
           "date": "2026-05-25",
           "subproject": "calculatrice-v2"
+        },
+        {
+          "id": "spec-formules-rtv-v4",
+          "file": "perso/gestion-compte-personnel/SPEC-FORMULES-RTV-V4.md",
+          "title": "SPEC — Formules RTV v4 (formule unifiée, hard-delete, déplacement universel, abandon classement auto)",
+          "desc": "Spec Ping-Pong v1.3. §1 formule unifiée rtv=revenu−dépenses−prévues−écart. §2 suppression kindOverrides. §3 hard-delete par ligne (modale). §4 séquencement. §5 tests/fichiers. §6 Enter ferme pavé numérique. §7 déplacement universel (tous groupes movable). §8 abandon classement auto import (tout→Nouveaux). 17 nouveaux tests (DR-T1..T7, NP-T1..T2, MV-T1..T2 + RTV pattern).",
+          "type": "spec",
+          "status": "final",
+          "date": "2026-05-29",
+          "subproject": "formules-rtv-v4"
+        },
+        {
+          "id": "spec-simulation-retraite",
+          "file": "perso/gestion-compte-personnel/SPEC-SIMULATION-RETRAITE.md",
+          "title": "SPEC — Simulation retraite (onglet disjoint, RTV de flux, mode retraite)",
+          "desc": "Spec Ping-Pong v2.0 (renommée de mi-temps, corrigée Claude Code). RT_KEY='__retraite__', mode 'retraite', NC=4, canPush=false. Feuille disjointe, montants à zéro, preFill récurrents, RTV de flux (income−expenses−déductions−prévisions, sans écart). 12 tests RT-T1..RT-T12. Sprint séparé après RTV v4.",
+          "type": "spec",
+          "status": "draft",
+          "date": "2026-05-29",
+          "subproject": "simulation-retraite"
         }
       ],
       "subprojects": [
@@ -3746,39 +3766,40 @@
         {
           "id": "formules-rtv-v4",
           "name": "Formules RTV v4",
-          "titre": "Nouvelle formule RTV unifiée (revenu − dépenses − prévues + écart) + suppression kindOverrides + bouton hard-delete par ligne.",
-          "status": "spec",
+          "titre": "Nouvelle formule RTV unifiée (revenu − dépenses − prévues − écart) + suppression kindOverrides + bouton hard-delete par ligne + déplacement universel + abandon classement auto import + Enter ferme pavé numérique.",
+          "status": "wip",
           "qualif": "P1",
-          "target": "2026-06-04",
+          "target": "2026-05-29",
           "owner": "laurent",
           "charge": 3.0,
-          "raf": 3.0,
+          "raf": 0.0,
           "steps": [
             {
-              "name": "SPEC-FORMULES-RTV-V4.md v1.1 (Ping-Pong V1)",
+              "name": "SPEC-FORMULES-RTV-V4.md v1.3 (Ping-Pong V1 → corrections Claude Code)",
               "status": "done",
               "charge": 0.5,
               "raf": 0.0
             },
             {
               "name": "Validation LDE + go implémentation",
-              "status": "todo",
+              "status": "done",
               "charge": 0.0,
               "raf": 0.0
             },
             {
-              "name": "Implémentation simulateur_depenses.html + serve-simu.py",
-              "status": "todo",
+              "name": "Implémentation simulateur_depenses.html + serve-simu.py + import-releve.html",
+              "status": "done",
               "charge": 1.5,
-              "raf": 1.5
+              "raf": 0.0
             },
             {
-              "name": "Adaptation tests (~12 tests + suppression bloc 8c + DR-T1..T4)",
-              "status": "todo",
+              "name": "Tests RTV v4 (10 tests) + DR-T1..T7 + NP-T1..T2 + MV-T1..T2 (0 régression)",
+              "status": "done",
               "charge": 1.0,
-              "raf": 1.0
+              "raf": 0.0
             }
           ],
+          "commentaire": "Sprint 2026-05-29. 0 régression, 17 nouveaux tests. Validation manuelle LDE en attente (UI).",
           "type": "Feature"
         },
         {
