@@ -2510,18 +2510,49 @@
     },
     {
       "id": "sites-martyrs",
-      "name": "Sites martyrs",
-      "alias": "Sites Martyrs",
+      "name": "Banc de tests",
+      "alias": "Banc de tests",
       "desc": "",
       "stack": "",
       "category": "active",
-      "folder": "",
-      "docs": [],
+      "folder": "banc-de-tests",
+      "docs": [
+        {
+          "id": "meeting-lde-mho-bha-banc-de-tests",
+          "file": "banc-de-tests/meeting-lde-mho-bha-banc-de-tests.md",
+          "title": "Réflexion bancs de test MCP Opquast — meeting BHA/MHO/LDE",
+          "desc": "Proposition de 7 bancs de test pour valider le MCP Opquast et son usage via Claude, + questions pour le meeting.",
+          "type": "notes",
+          "status": "draft",
+          "date": "2026-05-29",
+          "subproject": "reflexion-meeting-bha-mho-lde"
+        },
+        {
+          "id": "plan-banc-tests-opquast-v3",
+          "file": "banc-de-tests/docs/plan_banc_tests_opquast_v3.xlsx",
+          "title": "Plan banc de tests Opquast (benchmark robots) — v3",
+          "desc": "Plan complet de mise en place et d'exploitation d'un banc de benchmark des robots QA web contre les 245 règles Opquast : phases, tâches, risques, jalons, budget, KPIs.",
+          "type": "plan",
+          "status": "draft",
+          "date": "2026-05-29",
+          "subproject": "reflexion-meeting-bha-mho-lde"
+        },
+        {
+          "id": "conversation-source-benjamin-architecture",
+          "file": "banc-de-tests/docs/conversation-source-benjamin-architecture-banc-tests.md",
+          "title": "Conversation source Benjamin — architecture banc de tests",
+          "desc": "Transcription de la conversation Claude de Benjamin (BHA, 19 mars) ayant produit le plan xlsx v3 : challenges, taxonomie, strates de specimens, panel WARC, KPIs. Capturée depuis un partage claude.ai.",
+          "type": "notes",
+          "status": "final",
+          "date": "2026-05-29",
+          "subproject": "reflexion-meeting-bha-mho-lde"
+        }
+      ],
       "subprojects": [
         {
           "id": "sites-martyrs-lot-1",
-          "name": "Sites martyrs —  lot 1",
-          "titre": "Sites martirs lot 1",
+          "name": "Banc de tests — lot 1",
+          "titre": "Banc de tests lot 1",
           "status": "todo",
           "qualif": "P2",
           "target": "05/06/2026",
@@ -2558,8 +2589,8 @@
         },
         {
           "id": "sites-martyrs-lot-2",
-          "name": "Sites martyrs —  lot 2",
-          "titre": "Sites martirs lot 2",
+          "name": "Banc de tests — lot 2",
+          "titre": "Banc de tests lot 2",
           "status": "todo",
           "qualif": "P2",
           "target": "12/06/2026",
@@ -2594,6 +2625,32 @@
           ],
           "type": "Feature",
           "commentaire": "TEST"
+        },
+        {
+          "id": "reflexion-meeting-bha-mho-lde",
+          "name": "Réflexion avant meeting BHA MHO LDE",
+          "titre": "Réflexion avant meeting BHA MHO LDE",
+          "status": "wip",
+          "qualif": "P2",
+          "target": "",
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "steps": [
+            {
+              "name": "Analyse MCP Opquast → bancs de test",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Analyse eservice-manager → bancs de test",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "type": "Autre"
         }
       ],
       "gsheet_hidden": true
@@ -4052,9 +4109,9 @@
       "name": "Serveur local",
       "alias": "ServeurLocal",
       "desc": "Réflexions sur l'intérêt et la faisabilité d'un serveur local Python et/ou d'une IA locale",
-      "stack": "À définir",
+      "stack": "Python · http.server · HTML/JS vanilla",
       "category": "active",
-      "folder": "",
+      "folder": "local-hub/",
       "docs": [
         {
           "id": "synthese-reflexions-serveur-local",
@@ -4074,6 +4131,26 @@
           "status": "final",
           "date": "2026-05-25",
           "subproject": "reflexions-preliminaires"
+        },
+        {
+          "id": "spec-local-hub",
+          "title": "SPEC — Local Hub (dashboard local)",
+          "path": "local-hub/SPEC-LOCAL-HUB.md",
+          "description": "Contrat d'implémentation du mini-serveur dashboard : architecture serve-hub.py, endpoints, sécurité (secret + same-origin + content-type), registre, How to Rollback.",
+          "type": "spec",
+          "status": "final",
+          "date": "2026-05-29",
+          "subproject": "hub-dashboard-v1"
+        },
+        {
+          "id": "tests-local-hub",
+          "title": "TESTS — Local Hub",
+          "path": "local-hub/TESTS-LOCAL-HUB.md",
+          "description": "Cas de test e2e du hub (registry, run, secret, content-type, timeout, status) avec scripts factices.",
+          "type": "tests",
+          "status": "final",
+          "date": "2026-05-29",
+          "subproject": "hub-dashboard-v1"
         }
       ],
       "subprojects": [
@@ -4112,6 +4189,45 @@
               "name": "Coûts",
               "status": "done",
               "charge": 0.5,
+              "raf": 0.0
+            }
+          ]
+        },
+        {
+          "id": "hub-dashboard-v1",
+          "name": "Hub dashboard v1",
+          "titre": "Mini-serveur local + dashboard navigateur pour lancer les scripts utilitaires",
+          "status": "review",
+          "qualif": "P2",
+          "target": "2026-06-05",
+          "owner": "laurent",
+          "charge": 2.5,
+          "raf": 0.5,
+          "commentaire": "",
+          "type": "Feature",
+          "steps": [
+            {
+              "name": "Spécification",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Développement",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests e2e",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Mise en service",
+              "status": "todo",
+              "charge": 0.0,
               "raf": 0.0
             }
           ]
