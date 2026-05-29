@@ -2921,16 +2921,6 @@
           "subproject": "migration-serveur-local"
         },
         {
-          "id": "spec-corrections-simu",
-          "file": "perso/gestion-compte-personnel/SPEC-CORRECTIONS.md",
-          "title": "SPEC — Corrections export/import et mois courant",
-          "desc": "C1 : export/import exhaustif (toutes les clés de _stateCache). C2 : affichage automatique du mois courant au chargement.",
-          "type": "spec",
-          "status": "final",
-          "date": "2026-05-20",
-          "subproject": "corrections-ux"
-        },
-        {
           "id": "spec-reconciliation-previsions",
           "file": "perso/gestion-compte-personnel/SPEC-RECONCILIATION-PREVISIONS.md",
           "title": "SPEC — Réconciliation prévisions / dépenses effectives",
