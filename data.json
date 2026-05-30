@@ -3898,12 +3898,12 @@
           "id": "refactorisation-v2",
           "name": "Refactorisation V2",
           "titre": "Chantier de refactorisation du simulateur dans un répertoire dédié (port 8091). Bascule V1→V2 uniquement après validation complète en parallèle.",
-          "status": "done",
+          "status": "review",
           "qualif": "P2",
           "target": "",
           "owner": "laurent",
           "charge": 6.0,
-          "raf": 0.0,
+          "raf": 0.5,
           "steps": [
             {
               "name": "Nettoyage tests — viser 346/346 verts (11 fails préexistants + 4 miroirs mai + 2 DR obsolètes)",
@@ -3937,8 +3937,14 @@
             },
             {
               "name": "Validation en parallèle V1 + bascule",
-              "status": "done",
+              "status": "wip",
               "charge": 0.5,
+              "raf": 0.0
+            },
+            {
+              "name": "Suppression V1 (après validation parallèle)",
+              "status": "todo",
+              "charge": 0.0,
               "raf": 0.0
             }
           ],
