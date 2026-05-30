@@ -905,6 +905,37 @@
             }
           ],
           "commentaire": ""
+        },
+        {
+          "id": "audit-persona-training",
+          "name": "Audit quiz Training avec persona",
+          "titre": "Validation FALC — lecture des corrigés avec profil non-technique",
+          "status": "wip",
+          "qualif": "P2",
+          "target": "2026-06-10",
+          "owner": "laurent",
+          "charge": 1.0,
+          "raf": 1.0,
+          "steps": [
+            {
+              "name": "Passer les quiz avec profil non-technique (UX/rédac/chef de projet)",
+              "status": "wip",
+              "charge": 0.5,
+              "raf": 0.5
+            },
+            {
+              "name": "Documenter les observations (lisibilité, cohérence, erreurs)",
+              "status": "todo",
+              "charge": 0.3,
+              "raf": 0.3
+            },
+            {
+              "name": "Arbitrer corrections éventuelles sur le CSV",
+              "status": "todo",
+              "charge": 0.2,
+              "raf": 0.2
+            }
+          ]
         }
       ],
       "gsheet_hidden": true
@@ -2349,37 +2380,6 @@
               "status": "done",
               "charge": 1.0,
               "raf": 0.0
-            }
-          ]
-        },
-        {
-          "id": "audit-persona-training",
-          "name": "Audit quiz Training avec persona",
-          "titre": "Validation FALC — lecture des corrigés avec profil non-technique",
-          "status": "wip",
-          "qualif": "P2",
-          "target": "2026-06-10",
-          "owner": "laurent",
-          "charge": 1.0,
-          "raf": 1.0,
-          "steps": [
-            {
-              "name": "Passer les quiz avec profil non-technique (UX/rédac/chef de projet)",
-              "status": "wip",
-              "charge": 0.5,
-              "raf": 0.5
-            },
-            {
-              "name": "Documenter les observations (lisibilité, cohérence, erreurs)",
-              "status": "todo",
-              "charge": 0.3,
-              "raf": 0.3
-            },
-            {
-              "name": "Arbitrer corrections éventuelles sur le CSV",
-              "status": "todo",
-              "charge": 0.2,
-              "raf": 0.2
             }
           ]
         },
