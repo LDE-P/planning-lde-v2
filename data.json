@@ -805,7 +805,7 @@
           "target": "29/05/2026",
           "owner": "laurent",
           "charge": 2.0,
-          "raf": 3.0,
+          "raf": 1.0,
           "steps": [
             {
               "name": "Cartographie du Training",
@@ -827,25 +827,25 @@
             },
             {
               "name": "Audit examen final de certification",
-              "status": "wip",
+              "status": "done",
               "charge": 0.0,
               "raf": 0.0
             },
             {
               "name": "Passer les quiz avec profil non-technique (UX/rédac/chef de projet)",
-              "status": "wip",
+              "status": "done",
               "charge": 0.5,
-              "raf": 0.5
+              "raf": 0.0
             },
             {
               "name": "Documenter les observations (lisibilité, cohérence, erreurs)",
-              "status": "todo",
+              "status": "done",
               "charge": 0.3,
-              "raf": 0.3
+              "raf": 0.0
             },
             {
               "name": "Arbitrer corrections éventuelles sur le CSV",
-              "status": "todo",
+              "status": "wip",
               "charge": 0.2,
               "raf": 0.2
             },
@@ -856,7 +856,7 @@
               "raf": 0.0
             }
           ],
-          "commentaire": "",
+          "commentaire": "Audit livré — corrections en cours (session AUDIT PERSONNA TRAINING CSV FULL). DA PUSH CSV en attente.",
           "type": "Feature"
         },
         {
