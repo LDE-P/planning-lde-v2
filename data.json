@@ -1328,8 +1328,8 @@
           "target": null,
           "owner": "laurent",
           "charge": 2.0,
-          "raf": 0.2,
-          "titre": "Snippets + shortcode PHP + CSV enrichis (feedbacks + mises en situation) — reste : import SQL WpProQuiz + test local",
+          "raf": 0.5,
+          "titre": "Snippets + shortcode PHP + CSV enrichis (feedbacks + mises en situation + corrigé détaillé []) — reste : enrichissement options + import SQL WpProQuiz + test local",
           "type": "Feature",
           "commentaire": "",
           "steps": [
@@ -1362,6 +1362,12 @@
               "status": "done",
               "charge": 0.3,
               "raf": 0.0
+            },
+            {
+              "name": "Enrichissement réponses pour corrigé détaillé ([] dans options a–e des 3 CSV)",
+              "status": "wip",
+              "charge": 0.3,
+              "raf": 0.3
             },
             {
               "name": "[Hors scope] Import SQL WpProQuiz + test local + validation",
