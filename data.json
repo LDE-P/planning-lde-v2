@@ -713,6 +713,16 @@
           "status": "final",
           "date": "2026-05-30",
           "subproject": "audit-parcours-par-claude-avec-personna"
+        },
+        {
+          "id": "audit-personna-cp-jouabilite",
+          "file": "amelioration-training/audit-persona-quiz/cas-pratiques/RAPPORT-jouabilite-snippets.md",
+          "title": "Audit persona cas pratiques — Rapport de jouabilité (test navigateur)",
+          "desc": "Test d'exécution réel des 18 snippets dans Chrome : interactivity.js 404 sur l'instance (couche interactive morte sur tous les cas), rendu visuel OK, décalages snippet↔réponses confirmés, indice de correctabilité par cas.",
+          "type": "audit",
+          "status": "final",
+          "date": "2026-05-30",
+          "subproject": "audit-parcours-par-claude-avec-personna"
         }
       ],
       "subprojects": [
