@@ -1328,8 +1328,8 @@
           "target": null,
           "owner": "laurent",
           "charge": 2.0,
-          "raf": 0.5,
-          "titre": "Snippets + shortcode PHP + CSV enrichis (feedbacks + mises en situation + corrigé détaillé []) — reste : enrichissement options + import SQL WpProQuiz + test local",
+          "raf": 0.2,
+          "titre": "Snippets + shortcode PHP + CSV enrichis (feedbacks + mises en situation + corrigé détaillé []) — reste : import SQL WpProQuiz + test local",
           "type": "Feature",
           "commentaire": "",
           "steps": [
@@ -1365,9 +1365,9 @@
             },
             {
               "name": "Enrichissement réponses pour corrigé détaillé ([] dans options a–e des 3 CSV)",
-              "status": "wip",
+              "status": "done",
               "charge": 0.3,
-              "raf": 0.3
+              "raf": 0.0
             },
             {
               "name": "[Hors scope] Import SQL WpProQuiz + test local + validation",
@@ -4325,6 +4325,26 @@
           "status": "final",
           "date": "2026-05-29",
           "subproject": "hub-dashboard-v1"
+        },
+        {
+          "id": "spec-pilotage-serveurs",
+          "title": "SPEC — Pilotage des serveurs (hub)",
+          "path": "local-hub/SPEC-PILOTAGE-SERVEURS.md",
+          "description": "Boutons start/stop/restart par serveur dans le hub, par délégation à start-servers.sh (option C). Gate osascript/iTerm levé.",
+          "type": "spec",
+          "status": "draft",
+          "date": "2026-05-30",
+          "subproject": "pilotage-serveurs"
+        },
+        {
+          "id": "tests-pilotage-serveurs",
+          "title": "TESTS — Pilotage des serveurs",
+          "path": "local-hub/TESTS-PILOTAGE-SERVEURS.md",
+          "description": "Cas de test e2e du pilotage serveurs (start/stop/restart, état, sécurité) avec start-servers.sh factice.",
+          "type": "tests",
+          "status": "draft",
+          "date": "2026-05-30",
+          "subproject": "pilotage-serveurs"
         }
       ],
       "subprojects": [
@@ -4401,6 +4421,51 @@
             {
               "name": "Mise en service",
               "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ]
+        },
+        {
+          "id": "pilotage-serveurs",
+          "name": "Pilotage des serveurs (hub)",
+          "titre": "Boutons démarrer/arrêter/relancer par serveur, délégués à start-servers.sh",
+          "status": "spec",
+          "qualif": "P2",
+          "target": "2026-06-15",
+          "owner": "laurent",
+          "charge": 2.0,
+          "raf": 2.0,
+          "commentaire": "",
+          "type": "Feature",
+          "steps": [
+            {
+              "name": "Spécification",
+              "status": "wip",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Mode non-interactif start-servers.sh",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Hub: exec non-Python + endpoints serveur",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Dashboard: boutons par état",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests e2e",
+              "status": "todo",
               "charge": 0.0,
               "raf": 0.0
             }
