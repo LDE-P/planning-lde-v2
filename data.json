@@ -693,6 +693,26 @@
           "status": "final",
           "date": "2026-05-30",
           "subproject": "audit-parcours-par-claude-avec-personna"
+        },
+        {
+          "id": "audit-personna-cp-matrice",
+          "file": "amelioration-training/audit-persona-quiz/cas-pratiques/MATRICE-cas-pratiques-18.xlsx",
+          "title": "Audit persona cas pratiques — Matrice (18 cas)",
+          "desc": "Matrice d'audit des 18 nouveaux cas pratiques (Test récap IND+COR + examen blanc REE) : équité 13 personas, méchanceté, et validité snippet↔réponses.",
+          "type": "audit",
+          "status": "final",
+          "date": "2026-05-30",
+          "subproject": "audit-parcours-par-claude-avec-personna"
+        },
+        {
+          "id": "audit-personna-cp-synthese",
+          "file": "amelioration-training/audit-persona-quiz/cas-pratiques/SYNTHESE-cas-pratiques.md",
+          "title": "Audit persona cas pratiques — Synthèse",
+          "desc": "Synthèse de l'audit des 18 cas pratiques : corpus très équitable (aucun profil défavorable, DSI neutre) mais 12 cas avec écarts snippet↔réponses ou identifiants Rxxx visibles à corriger avant import.",
+          "type": "audit",
+          "status": "final",
+          "date": "2026-05-30",
+          "subproject": "audit-parcours-par-claude-avec-personna"
         }
       ],
       "subprojects": [
@@ -915,6 +935,12 @@
               "name": "Test import CSV Training (post-arbitrage)",
               "status": "todo",
               "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Audit personna nouveaux cas pratiques",
+              "status": "done",
+              "charge": 0.3,
               "raf": 0.0
             }
           ],
