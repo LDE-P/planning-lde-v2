@@ -848,6 +848,12 @@
               "status": "todo",
               "charge": 0.2,
               "raf": 0.2
+            },
+            {
+              "name": "Test import CSV Training (post-arbitrage)",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
             }
           ],
           "commentaire": "",
@@ -1114,6 +1120,12 @@
           "raf": 17.0,
           "titre": "Validation et poussage",
           "steps": [
+            {
+              "name": "Finalisation CSV helpers (indices + corrigés si juste/faux)",
+              "status": "wip",
+              "charge": 0.0,
+              "raf": 0.0
+            },
             {
               "name": "Spécification",
               "status": "todo",
