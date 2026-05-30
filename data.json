@@ -4299,6 +4299,26 @@
           "status": "final",
           "date": "2026-05-30",
           "subproject": "pilotage-serveurs"
+        },
+        {
+          "id": "spec-hub-python-2",
+          "title": "SPEC — Hub Python 2 (consolidée)",
+          "path": "local-hub/SPEC-HUB-PYTHON-2.md",
+          "description": "Spec consolidée du hub local livré : architecture, endpoints, sécurité, registres scripts/serveurs, launchd. Point d'entrée unique de reprise.",
+          "type": "spec",
+          "status": "final",
+          "date": "2026-05-30",
+          "subproject": "hub-python-2"
+        },
+        {
+          "id": "etat-avancement-hub-python-2",
+          "title": "État d'avancement — Hub Python 2",
+          "path": "local-hub/ETAT-AVANCEMENT-HUB-PYTHON-2.md",
+          "description": "Avancement par lot, points en attente, guide de reprise en 30 s.",
+          "type": "notes",
+          "status": "final",
+          "date": "2026-05-30",
+          "subproject": "hub-python-2"
         }
       ],
       "subprojects": [
@@ -4384,12 +4404,12 @@
           "id": "pilotage-serveurs",
           "name": "Pilotage des serveurs (hub)",
           "titre": "Boutons démarrer/arrêter/relancer par serveur, délégués à start-servers.sh",
-          "status": "review",
+          "status": "done",
           "qualif": "P2",
           "target": "2026-06-15",
           "owner": "laurent",
           "charge": 2.0,
-          "raf": 0.5,
+          "raf": 0.0,
           "commentaire": "",
           "type": "Feature",
           "steps": [
@@ -4419,6 +4439,51 @@
             },
             {
               "name": "Tests e2e",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ]
+        },
+        {
+          "id": "hub-python-2",
+          "name": "Hub Python 2",
+          "titre": "Hub local (dashboard navigateur) : lancement de scripts + pilotage des serveurs, en service launchd",
+          "status": "done",
+          "qualif": "P2",
+          "target": "2026-05-30",
+          "owner": "laurent",
+          "charge": 5.0,
+          "raf": 0.0,
+          "commentaire": "",
+          "type": "Feature",
+          "steps": [
+            {
+              "name": "Conception & faisabilité",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Hub : serveur + lancement de scripts",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Pilotage des serveurs",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests e2e",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Service launchd",
               "status": "done",
               "charge": 0.0,
               "raf": 0.0
