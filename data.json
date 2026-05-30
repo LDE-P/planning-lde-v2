@@ -3856,7 +3856,7 @@
           "id": "refactorisation-v2",
           "name": "Refactorisation V2",
           "titre": "Chantier de refactorisation du simulateur dans un répertoire dédié (port 8091). Bascule V1→V2 uniquement après validation complète en parallèle.",
-          "status": "todo",
+          "status": "wip",
           "qualif": "P2",
           "target": "",
           "owner": "laurent",
