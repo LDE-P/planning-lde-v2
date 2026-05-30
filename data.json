@@ -918,7 +918,7 @@
               "raf": 0.0
             }
           ],
-          "commentaire": "Audit éditorial persona livré sur tout le corpus (895 q, 14 quiz, 13 profils) — matrices + synthèses dans amelioration-training/audit-persona-quiz/. Suites cadrées (polish+gamification V1, chantier CR4/CR5, process équivalence examens) : voir PLAN-sequencement-chantiers.md. Reste : arbitrage corrections CSV + test import.",
+          "commentaire": "Audit livré — polish CSV en cours (DA PUSH CSV FALC TRAINING SQL). Approfondissement corrections en pause (AUDIT PERSONNA TRAINING CSV FULL). Test import CSV après arbitrage.",
           "type": "Feature"
         },
         {
@@ -1252,6 +1252,39 @@
             }
           ],
           "type": "Feature"
+        },
+        {
+          "id": "audit-persona-cas-pratiques",
+          "name": "Audit persona cas pratiques",
+          "titre": "Audit persona des lots test récap (indices + corrigés) et examen blanc conditions réelles",
+          "status": "wip",
+          "qualif": "P1",
+          "target": "2026-06-15",
+          "owner": "laurent",
+          "charge": 2.0,
+          "raf": 2.0,
+          "commentaire": "Session AUDIT PERSONNA CAS PRATIQUES TEST RECAP EXAM BLANC CSV (EN COURS). Lots 2 (exam blanc indices + corrigés) et lot 3 (conditions réelles).",
+          "type": "Audit",
+          "steps": [
+            {
+              "name": "Audit lot 2 — test récap (indices + corrigés)",
+              "status": "wip",
+              "charge": 1.0,
+              "raf": 1.0
+            },
+            {
+              "name": "Audit lot 3 — examen blanc conditions réelles",
+              "status": "todo",
+              "charge": 0.5,
+              "raf": 0.5
+            },
+            {
+              "name": "Synthèse et recommandations corrections",
+              "status": "todo",
+              "charge": 0.5,
+              "raf": 0.5
+            }
+          ]
         },
         {
           "id": "extraction-referentiels",
@@ -2454,7 +2487,7 @@
           "charge": 1.0,
           "raf": 0.2,
           "titre": "Script Python + SQL : maj textes question/réponses quiz source Training (passe FALC) — adapté de l Examen",
-          "commentaire": "",
+          "commentaire": "Passe polish en cours (DA PUSH CSV FALC TRAINING SQL). Import test après finalisation arbitrage corrections.",
           "steps": [
             {
               "name": "Analyse structure quiz source Training (table, UIDs, format)",
