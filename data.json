@@ -2907,44 +2907,65 @@
           "type": "Autre"
         },
         {
-          "id": "generation-snippets-cas-pratiques-reprise",
-          "name": "Génération snippets/cas pratiques — reprise à zéro",
-          "titre": "Reprise à zéro du chantier de génération de snippets et cas pratiques, dans le cadre du projet Banc Tests",
+          "id": "generation-snippets-cas-pratiques-v1",
+          "name": "Génération snippets/cas pratiques — V1",
+          "titre": "Premier jet : 18 snippets (tirage 1 sur lots 1–3), CSV enrichis, déployés dans Training V7 local",
+          "status": "fail",
+          "qualif": "P1",
+          "target": null,
+          "owner": "laurent",
+          "charge": 2.0,
+          "raf": 0.0,
+          "commentaire": "Snippets générés non pertinents / incohérents avec réponses et distracteurs — constat audit persona (session ÉCHEC 2026-05-30). Travail réalisé conservé dans CAS-PRATIQUES/lot-test-recap-1/ et lot-exam-blanc-1/. Correction des plus récupérables tentée en parallèle (SP correction-snippets-recuperables).",
+          "type": "Feature",
+          "steps": [
+            {
+              "name": "Sélection snippets — tirage 1 (18 snippets, lots 1+2+3)",
+              "status": "done",
+              "charge": 0.3,
+              "raf": 0.0
+            },
+            {
+              "name": "Composition lots test-recap-1 et exam-blanc-1 (index HTML + snippets)",
+              "status": "done",
+              "charge": 0.7,
+              "raf": 0.0
+            },
+            {
+              "name": "Déploiement wp-content/snippets/ + shortcode PHP (Training V7 local)",
+              "status": "done",
+              "charge": 0.2,
+              "raf": 0.0
+            },
+            {
+              "name": "CSV enrichis : feedbacks, mises en situation, corrigés détaillés (3 CSV)",
+              "status": "done",
+              "charge": 0.8,
+              "raf": 0.0
+            },
+            {
+              "name": "Audit persona — ÉCHEC (snippets non pertinents/incohérents)",
+              "status": "fail",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ]
+        },
+        {
+          "id": "generation-snippets-cas-pratiques-v2",
+          "name": "Génération snippets/cas pratiques — V2",
+          "titre": "Reprise à zéro — nouvelles règles de cohérence snippet↔réponses↔distracteurs",
           "status": "todo",
           "qualif": "P1",
           "target": null,
           "owner": "laurent",
           "charge": 10.0,
           "raf": 10.0,
-          "commentaire": "Déclenché après constat d’échec de la génération initiale (snippets non pertinents / incohérents). Chantier à spécifier.",
+          "commentaire": "Découle du constat d'échec de V1. À spécifier avant toute production.",
           "type": "Feature",
           "steps": [
             {
-              "name": "Spécification (critères qualité snippets, méthode de validation)",
-              "status": "todo",
-              "charge": 1.0,
-              "raf": 1.0
-            },
-            {
-              "name": "Sélection règles et thèmes",
-              "status": "todo",
-              "charge": 1.0,
-              "raf": 1.0
-            },
-            {
-              "name": "Production snippets",
-              "status": "todo",
-              "charge": 5.0,
-              "raf": 5.0
-            },
-            {
-              "name": "Validation cohérence réponses/distracteurs",
-              "status": "todo",
-              "charge": 2.0,
-              "raf": 2.0
-            },
-            {
-              "name": "Intégration Training V7 (wp-content/snippets/ + CSV)",
+              "name": "Spécification (critères qualité, méthode de validation cohérence)",
               "status": "todo",
               "charge": 1.0,
               "raf": 1.0

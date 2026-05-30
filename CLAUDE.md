@@ -91,7 +91,7 @@ Les tests se trouvent dans `tests-e2e-python/planning-lde/` (style pytest, port 
         {
           "id": "...",
           "name": "...",
-          "status": "todo|wip|review|spec|done|blocked",
+          "status": "todo|wip|review|spec|done|blocked|fail",
           "qualif": "P0|P1|P2|P3",
           "target": "YYYY-MM-DD",
           "owner": "laurent|micka|elie|team|null",
