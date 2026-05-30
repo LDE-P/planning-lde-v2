@@ -4233,58 +4233,6 @@
       "gsheet_hidden": true
     },
     {
-      "id": "debug-test-2026-05-21",
-      "name": "Debug et Test 21 mai 2026",
-      "alias": "DebugTest210526",
-      "desc": "Session de debug et tests sur l'environnement examens-v7 (devcontainer, plugin MT WP PRO QUIZ IMPORT, UIDs)",
-      "stack": "PHP · WordPress · WpProQuiz · Docker · Python",
-      "category": "active",
-      "folder": "opq-devcontainer-MHO/examens-domain/examens-v7/",
-      "docs": [],
-      "subprojects": [
-        {
-          "id": "debug-plugin-mt-quiz",
-          "name": "Debug plugin WP MT QUIZ",
-          "titre": "Correction export CSV + import UID/metadata dans MT WP PRO QUIZ IMPORT",
-          "status": "spec",
-          "qualif": "P1",
-          "target": "2026-05-28",
-          "owner": "laurent",
-          "charge": 4.0,
-          "raf": 4.0,
-          "commentaire": "",
-          "type": "BugFix",
-          "steps": [
-            {
-              "name": "Spécification",
-              "status": "wip",
-              "charge": 0.5,
-              "raf": 0.0
-            },
-            {
-              "name": "Développement",
-              "status": "todo",
-              "charge": 3.0,
-              "raf": 3.0
-            },
-            {
-              "name": "Tests",
-              "status": "todo",
-              "charge": 0.5,
-              "raf": 0.5
-            },
-            {
-              "name": "Mis en ligne",
-              "status": "todo",
-              "charge": 0.0,
-              "raf": 0.0
-            }
-          ]
-        }
-      ],
-      "gsheet_hidden": true
-    },
-    {
       "id": "serveur-local",
       "name": "Serveur local",
       "alias": "ServeurLocal",
