@@ -3797,9 +3797,21 @@
               "status": "done",
               "charge": 1.0,
               "raf": 0.0
+            },
+            {
+              "name": "Ajustements post-implémentation : ligne « Total dépenses prévues » statique (Σ previsions), inversion signe écart (formule + migration ecart_sign_v2 + label) + ajout groupe enligne",
+              "status": "done",
+              "charge": 1.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Session 2026-05-30 — Bascule mensuelle v3 (héritage mai→auto-current), getNextData persistant, migration auto→state[tk], suppression miroirs mai parasites, chart RTV simplifié + test e2e bascule juin réussi",
+              "status": "done",
+              "charge": 3.0,
+              "raf": 0.0
             }
           ],
-          "commentaire": "Sprint 2026-05-29. 0 régression, 17 nouveaux tests. Validation manuelle LDE en attente (UI).",
+          "commentaire": "Sprints 2026-05-29/30. 0 régression, 23 nouveaux tests (DR/NPE/MV/IC). Ajustements post-implém : ligne Total dépenses prévues statique, inversion convention écart (migration ecart_sign_v2), groupe enligne, bascule v3 (héritage mois précédent + 4 groupes persistés + badge « Mois dernier, à traiter »), getNextData() ne réinitialise plus next à la bascule (Mois prochain indépendant), migration auto→state[tk] préservant prévisions/autresRevenus/déductions, UX import (boutons ✅→📤/🔄, liens « Ouvrir le simulateur » retirés). Test e2e bascule juin validé via override todayKey. Validation manuelle LDE au 1er juin réel en attente — cf. notes-todo.md « À faire au 1er juin 2026 » (ajout MIRROR_DEFS_BY_MONTH['2026-06'] ou refactor auto).",
           "type": "Feature"
         },
         {
