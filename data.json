@@ -643,6 +643,56 @@
           "status": "final",
           "date": "2026-05-13",
           "subproject": "audit-parcours-par-claude-avec-personna"
+        },
+        {
+          "id": "audit-personna-synthese-finale",
+          "file": "amelioration-training/audit-persona-quiz/SYNTHESE-FINALE-corpus-complet.md",
+          "title": "Audit persona quiz — Synthèse finale (corpus complet)",
+          "desc": "Synthèse finale de l'audit éditorial persona des 895 questions (14 quiz, 13 profils) : équité par profil, constats transversaux, recommandations priorisées.",
+          "type": "audit",
+          "status": "final",
+          "date": "2026-05-30",
+          "subproject": "audit-parcours-par-claude-avec-personna"
+        },
+        {
+          "id": "audit-personna-matrice-entrainement",
+          "file": "amelioration-training/audit-persona-quiz/matrices/MATRICE-quiz-entrainement-535q.xlsx",
+          "title": "Audit persona quiz — Matrice quiz d'entraînement (535 q)",
+          "desc": "Matrice de scoring par question des 11 quiz d'entraînement : domaine, méchanceté, équité par persona, signalements, redondance.",
+          "type": "audit",
+          "status": "final",
+          "date": "2026-05-30",
+          "subproject": "audit-parcours-par-claude-avec-personna"
+        },
+        {
+          "id": "audit-personna-matrice-examens",
+          "file": "amelioration-training/audit-persona-quiz/matrices/MATRICE-examens-blancs-216q.xlsx",
+          "title": "Audit persona quiz — Matrice examens blancs (216 q uniques)",
+          "desc": "Matrice de scoring des 3 examens blancs : équivalence des formes IND/COR/REE, composition, équité par persona.",
+          "type": "audit",
+          "status": "final",
+          "date": "2026-05-30",
+          "subproject": "audit-parcours-par-claude-avec-personna"
+        },
+        {
+          "id": "audit-personna-prompt-polish",
+          "file": "amelioration-training/audit-persona-quiz/PROMPT-passe-polish.md",
+          "title": "Audit persona quiz — Prompt passe de polish",
+          "desc": "Prompt prêt à transmettre pour la passe de polish (critères CR1, pièges, distracteurs, gamification méchanceté V1, FALC systématique).",
+          "type": "spec",
+          "status": "final",
+          "date": "2026-05-30",
+          "subproject": "audit-parcours-par-claude-avec-personna"
+        },
+        {
+          "id": "audit-personna-plan-sequencement",
+          "file": "amelioration-training/audit-persona-quiz/PLAN-sequencement-chantiers.md",
+          "title": "Audit persona quiz — Plan de séquençage des chantiers",
+          "desc": "Séquençage des suites : polish+gamification (parallèle), chantier CR4/CR5, process d'équivalence des examens, arbitrages parcours décideur/redondance.",
+          "type": "notes",
+          "status": "final",
+          "date": "2026-05-30",
+          "subproject": "audit-parcours-par-claude-avec-personna"
         }
       ],
       "subprojects": [
@@ -805,7 +855,7 @@
           "target": "29/05/2026",
           "owner": "laurent",
           "charge": 2.0,
-          "raf": 1.0,
+          "raf": 0.5,
           "steps": [
             {
               "name": "Cartographie du Training",
@@ -844,6 +894,18 @@
               "raf": 0.0
             },
             {
+              "name": "Audit éditorial par question — tout le corpus (895 q : matrices + synthèses)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Prompt passe polish + plan de séquençage des suites",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
               "name": "Arbitrer corrections éventuelles sur le CSV",
               "status": "wip",
               "charge": 0.2,
@@ -856,7 +918,7 @@
               "raf": 0.0
             }
           ],
-          "commentaire": "Audit livré — corrections en cours (session AUDIT PERSONNA TRAINING CSV FULL). DA PUSH CSV en attente.",
+          "commentaire": "Audit éditorial persona livré sur tout le corpus (895 q, 14 quiz, 13 profils) — matrices + synthèses dans amelioration-training/audit-persona-quiz/. Suites cadrées (polish+gamification V1, chantier CR4/CR5, process équivalence examens) : voir PLAN-sequencement-chantiers.md. Reste : arbitrage corrections CSV + test import.",
           "type": "Feature"
         },
         {
