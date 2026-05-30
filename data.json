@@ -1293,18 +1293,18 @@
           "id": "audit-persona-cas-pratiques",
           "name": "Audit persona cas pratiques",
           "titre": "Audit persona des lots test récap (indices + corrigés) et examen blanc conditions réelles",
-          "status": "wip",
+          "status": "blocked",
           "qualif": "P1",
           "target": "2026-06-15",
           "owner": "laurent",
           "charge": 2.0,
           "raf": 2.0,
-          "commentaire": "Session AUDIT PERSONNA CAS PRATIQUES TEST RECAP EXAM BLANC CSV (EN COURS). Lots 2 (exam blanc indices + corrigés) et lot 3 (conditions réelles).",
+          "commentaire": "Session AUDIT PERSONNA CAS PRATIQUES TEST RECAP EXAM BLANC CSV (ÉCHEC). Snippets générés non pertinents / incohérents avec réponses et distracteurs. Bloqué jusqu’à correction ou regénération des snippets.",
           "type": "Audit",
           "steps": [
             {
               "name": "Audit lot 2 — test récap (indices + corrigés)",
-              "status": "wip",
+              "status": "blocked",
               "charge": 1.0,
               "raf": 1.0
             },
@@ -1462,7 +1462,7 @@
           "raf": 0.2,
           "titre": "Snippets + shortcode PHP + CSV enrichis (feedbacks + mises en situation + corrigé détaillé []) — reste : import SQL WpProQuiz + test local",
           "type": "Feature",
-          "commentaire": "",
+          "commentaire": "Snippets produits jugés non pertinents / incohérents avec réponses et distracteurs (constat audit persona ÉCHEC). Correction des plus récupérables en cours (SP dédié). Reprise à zéro prévue sous Banc de tests.",
           "steps": [
             {
               "name": "Sélection des snippets (6 par lot source, sans doublon entre les 2 nouveaux lots)",
@@ -1534,6 +1534,39 @@
           ],
           "commentaire": "",
           "type": "Feature"
+        },
+        {
+          "id": "correction-snippets-recuperables",
+          "name": "Correction des snippets récupérables",
+          "titre": "Correction des snippets les plus récupérables des lots test-récap et exam-blanc (cohérence réponses/distracteurs)",
+          "status": "wip",
+          "qualif": "P1",
+          "target": "2026-06-15",
+          "owner": "laurent",
+          "charge": 1.0,
+          "raf": 1.0,
+          "commentaire": "Tentative de correction directe par la session AUDIT PERSONNA CAS PRATIQUES TEST RECAP EXAM BLANC CSV (pivotée en correction).",
+          "type": "Fix",
+          "steps": [
+            {
+              "name": "Identifier les snippets récupérables vs à refaire",
+              "status": "wip",
+              "charge": 0.2,
+              "raf": 0.2
+            },
+            {
+              "name": "Corrections snippet par snippet",
+              "status": "todo",
+              "charge": 0.6,
+              "raf": 0.6
+            },
+            {
+              "name": "Validation cohérence réponses/distracteurs",
+              "status": "todo",
+              "charge": 0.2,
+              "raf": 0.2
+            }
+          ]
         }
       ],
       "gsheet_hidden": true
@@ -2872,6 +2905,51 @@
             }
           ],
           "type": "Autre"
+        },
+        {
+          "id": "generation-snippets-cas-pratiques-reprise",
+          "name": "Génération snippets/cas pratiques — reprise à zéro",
+          "titre": "Reprise à zéro du chantier de génération de snippets et cas pratiques, dans le cadre du projet Banc Tests",
+          "status": "todo",
+          "qualif": "P1",
+          "target": null,
+          "owner": "laurent",
+          "charge": 10.0,
+          "raf": 10.0,
+          "commentaire": "Déclenché après constat d’échec de la génération initiale (snippets non pertinents / incohérents). Chantier à spécifier.",
+          "type": "Feature",
+          "steps": [
+            {
+              "name": "Spécification (critères qualité snippets, méthode de validation)",
+              "status": "todo",
+              "charge": 1.0,
+              "raf": 1.0
+            },
+            {
+              "name": "Sélection règles et thèmes",
+              "status": "todo",
+              "charge": 1.0,
+              "raf": 1.0
+            },
+            {
+              "name": "Production snippets",
+              "status": "todo",
+              "charge": 5.0,
+              "raf": 5.0
+            },
+            {
+              "name": "Validation cohérence réponses/distracteurs",
+              "status": "todo",
+              "charge": 2.0,
+              "raf": 2.0
+            },
+            {
+              "name": "Intégration Training V7 (wp-content/snippets/ + CSV)",
+              "status": "todo",
+              "charge": 1.0,
+              "raf": 1.0
+            }
+          ]
         }
       ],
       "gsheet_hidden": true
