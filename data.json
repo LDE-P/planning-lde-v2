@@ -3856,51 +3856,51 @@
           "id": "refactorisation-v2",
           "name": "Refactorisation V2",
           "titre": "Chantier de refactorisation du simulateur dans un répertoire dédié (port 8091). Bascule V1→V2 uniquement après validation complète en parallèle.",
-          "status": "wip",
+          "status": "done",
           "qualif": "P2",
           "target": "",
           "owner": "laurent",
           "charge": 6.0,
-          "raf": 6.0,
+          "raf": 0.0,
           "steps": [
             {
               "name": "Nettoyage tests — viser 346/346 verts (11 fails préexistants + 4 miroirs mai + 2 DR obsolètes)",
-              "status": "todo",
+              "status": "done",
               "charge": 1.0,
-              "raf": 1.0
+              "raf": 0.0
             },
             {
               "name": "Spec modèle cible (1 page — frontières modes, ce qui disparaît, ce qui reste) — validation LDE",
-              "status": "todo",
+              "status": "done",
               "charge": 0.5,
-              "raf": 0.5
+              "raf": 0.0
             },
             {
               "name": "Sprint A — code mort (deleteNextRow/Ac, MIRROR_DEFS_BY_MONTH 2026-05, champs résiduels, CSS/fonctions orphelins)",
-              "status": "todo",
+              "status": "done",
               "charge": 1.0,
-              "raf": 1.0
+              "raf": 0.0
             },
             {
               "name": "Sprint C — factorisation historical+auto (getField/setField, renderNextGroupBlock/renderAutoCurrentGroupBlock)",
-              "status": "todo",
+              "status": "done",
               "charge": 2.5,
-              "raf": 2.5
+              "raf": 0.0
             },
             {
               "name": "Sprint D — migrations one-shot (purge orphelins, ecart_sign_v2, bascule v3, factoriser ou retirer)",
-              "status": "todo",
+              "status": "done",
               "charge": 1.0,
-              "raf": 1.0
+              "raf": 0.0
             },
             {
               "name": "Validation en parallèle V1 + bascule",
-              "status": "todo",
+              "status": "done",
               "charge": 0.5,
-              "raf": 0.5
+              "raf": 0.0
             }
           ],
-          "commentaire": "Répertoire dédié : perso/gestion-compte-personnel-refactorisation-v2/. Init 2026-05-30 (copie V1 commit 198e9aa). Dépend de notes-todo.md § Refactoring planifié. À démarrer après bascule du 1er juin et observation ~2 semaines (mi-juin 2026).",
+          "commentaire": "Refactoring autonome Claude Code terminé et validé 2026-05-30 (346/346 tests verts sur Mac). 6 phases : baseline fixture figée, serve-simu.py factorisé, MONTHS_FR unique, migrations extraites de loadAllData, renderers next/auto unifiés (renderEditableGroupBlock), code mort retiré. Comportement strictement préservé. Dédup résiduelle next/auto + CSS variables + modularisation ESM reportés (§ 8 SPEC-REFACTOR-V2.md).",
           "type": "Feature"
         }
       ],
