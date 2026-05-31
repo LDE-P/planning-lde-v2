@@ -3396,24 +3396,24 @@
         {
           "id": "verif-referentiels-v5-finaux",
           "name": "Vérification référentiels V5 finaux",
-          "titre": "LDE vérifie que checklist-v5-final.md et glossaire-v5-final.md sont bien à jour",
+          "titre": "LDE vérifie que checklist-v5-final.md et glossaire-v5-final.md (GIT/referentiels/) sont à jour — source de vérité : GIT/le-livre-opquast/documentation/",
           "status": "todo",
           "qualif": "P1",
           "target": null,
           "owner": "laurent",
           "charge": 0.5,
           "raf": 0.5,
-          "commentaire": "Copies créées dans GIT/referentiels/ le 2026-05-31 depuis dashbord-datamart-V1. À vérifier avant migration du dashboard.",
+          "commentaire": "Copies créées dans GIT/referentiels/ le 2026-05-31 depuis dashbord-datamart-V1. Source de vérité pour la mise à jour : /Users/laurentdenis/Documents/GIT/le-livre-opquast/documentation/. À valider avant migration du dashboard-datamart vers les nouveaux chemins.",
           "type": "Autre",
           "steps": [
             {
-              "name": "Glossaire : vérifier présence 'Vibe coding' et entrées récentes",
+              "name": "Glossaire : comparer glossaire-v5-final.md avec le-livre-opquast/documentation/ — vérifier 'Vibe coding' et entrées récentes",
               "status": "todo",
               "charge": 0.2,
               "raf": 0.2
             },
             {
-              "name": "Checklist : vérifier règle entête HTTP obsolète et règles récentes",
+              "name": "Checklist : comparer checklist-v5-final.md avec le-livre-opquast/documentation/ — vérifier règle entête HTTP obsolète et règles récentes",
               "status": "todo",
               "charge": 0.2,
               "raf": 0.2
