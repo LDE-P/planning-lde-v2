@@ -2684,12 +2684,42 @@
           "titre": "Passe A–E sur 535 questions d'entraînement : harmonisation CR1, pièges, polish rédactionnel, gamification méchanceté, FALC/ortho-typo.",
           "commentaire": "",
           "steps": [
-            { "name": "Tâche A — Harmonisation CR1", "status": "done", "charge": 0.0, "raf": 0.0 },
-            { "name": "Tâche B — Questions pièges", "status": "done", "charge": 0.0, "raf": 0.0 },
-            { "name": "Tâche C — Polish rédactionnel", "status": "done", "charge": 0.0, "raf": 0.0 },
-            { "name": "Tâche D — Gamification méchanceté V1", "status": "done", "charge": 0.0, "raf": 0.0 },
-            { "name": "Tâche E — FALC + ortho-typo", "status": "done", "charge": 0.0, "raf": 0.0 },
-            { "name": "Déploiement SQL PROD + admin WpProQuiz", "status": "todo", "charge": 0.0, "raf": 0.0 }
+            {
+              "name": "Tâche A — Harmonisation CR1",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tâche B — Questions pièges",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tâche C — Polish rédactionnel",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tâche D — Gamification méchanceté V1",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tâche E — FALC + ortho-typo",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Déploiement SQL PROD + admin WpProQuiz",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
           ]
         }
       ],
@@ -2860,6 +2890,16 @@
           "desc": "Brief de démarrage du POC Composeur (règle R069, dossier banc-de-tests/composeur/) : objectif, contraintes (oracle séparé, host minimal, re-vérification), livrables, garde-fous.",
           "type": "notes",
           "status": "final",
+          "date": "2026-05-31",
+          "subproject": "generation-snippets-cas-pratiques-v2"
+        },
+        {
+          "id": "spec-composeur-poc",
+          "file": "banc-de-tests/composeur/SPEC-composeur-poc.md",
+          "title": "SPEC courte — Composeur de specimens (POC R069, mode banc)",
+          "desc": "Spécification POC du Composeur : résultat du gate ≤5 outils (audit aveugle 4/4), architecture cœur+adaptateurs, format de l'oracle (manifest §8), arborescence des fichiers, méthode de re-vérification (T-ISO/T-ORA/T-LEAK + audit aveugle rejoué). EN ATTENTE DE VALIDATION LDE.",
+          "type": "spec",
+          "status": "draft",
           "date": "2026-05-31",
           "subproject": "generation-snippets-cas-pratiques-v2"
         }
@@ -3041,20 +3081,32 @@
           "id": "generation-snippets-cas-pratiques-v2",
           "name": "Composeur",
           "titre": "Générateur UNIQUE de snippets (décision actée 2026-05-31) — un cœur commun, 2 modes de sortie : banc (oracle machine-lisible) + pédagogique (QCM/Training V7). POC sur 1 règle (R069) : cas d'applicabilité (NA) + validité (respectée/non respectée/indéterminable).",
-          "status": "todo",
+          "status": "wip",
           "qualif": "P1",
           "target": null,
           "owner": "laurent",
           "charge": 10.0,
-          "raf": 10.0,
-          "commentaire": "Découle du constat d'échec de V1. À spécifier avant toute production.",
+          "raf": 8.5,
+          "commentaire": "Gate ≤5 outils VALIDÉ le 2026-05-31 (audit aveugle 4/4 sur R069, fiabilité auto-calibrée). SPEC courte rédigée (SPEC-composeur-poc.md), EN ATTENTE DE VALIDATION LDE avant tout code. Découverte : le MCP ne renvoie que le summary (moyen de contrôle détaillé = auth checklist:extended).",
           "type": "Feature",
           "steps": [
             {
-              "name": "Spécification (critères qualité, méthode de validation cohérence)",
-              "status": "todo",
+              "name": "Gate ≤5 outils — audit aveugle (subagent isolé + MCP) sur 4 pages R069 : 4/4 concordants, indice de fiabilité auto-calibré (0.45 sur l'indéterminable, ≥0.90 sinon)",
+              "status": "done",
+              "charge": 0.5,
+              "raf": 0.0
+            },
+            {
+              "name": "SPEC courte (archi cœur+adaptateurs, format oracle §8, arborescence, re-vérification T-ISO/T-ORA/T-LEAK) — banc-de-tests/composeur/SPEC-composeur-poc.md — EN ATTENTE VALIDATION LDE",
+              "status": "wip",
               "charge": 1.0,
-              "raf": 1.0
+              "raf": 0.5
+            },
+            {
+              "name": "Coder le générateur (core/ + adapters/banc + verify/) → 4 specimens R069 + manifests — bloqué tant que la SPEC n'est pas validée",
+              "status": "todo",
+              "charge": 3.0,
+              "raf": 3.0
             }
           ]
         }
@@ -3340,6 +3392,39 @@
           ],
           "commentaire": "Livrable : tags-eryolles.csv — 245 règles avec ligne de tags formatée (3 groupes séparés par |) + référence InDesign par règle.",
           "type": "Autre"
+        },
+        {
+          "id": "verif-referentiels-v5-finaux",
+          "name": "Vérification référentiels V5 finaux",
+          "titre": "LDE vérifie que checklist-v5-final.md et glossaire-v5-final.md sont bien à jour",
+          "status": "todo",
+          "qualif": "P1",
+          "target": null,
+          "owner": "laurent",
+          "charge": 0.5,
+          "raf": 0.5,
+          "commentaire": "Copies créées dans GIT/referentiels/ le 2026-05-31 depuis dashbord-datamart-V1. À vérifier avant migration du dashboard.",
+          "type": "Autre",
+          "steps": [
+            {
+              "name": "Glossaire : vérifier présence 'Vibe coding' et entrées récentes",
+              "status": "todo",
+              "charge": 0.2,
+              "raf": 0.2
+            },
+            {
+              "name": "Checklist : vérifier règle entête HTTP obsolète et règles récentes",
+              "status": "todo",
+              "charge": 0.2,
+              "raf": 0.2
+            },
+            {
+              "name": "Si à jour : valider comme source unique pour nouveaux projets",
+              "status": "todo",
+              "charge": 0.1,
+              "raf": 0.1
+            }
+          ]
         }
       ],
       "gsheet_hidden": true
