@@ -2782,6 +2782,16 @@
           "status": "wip",
           "date": "2026-05-29",
           "subproject": "reflexion-meeting-bha-mho-lde"
+        },
+        {
+          "id": "prompt-lancement-composeur",
+          "file": "banc-de-tests/docs/prompt-lancement-composeur.md",
+          "title": "Prompt de lancement — sous-projet Composeur",
+          "desc": "Brief de démarrage du POC Composeur (règle R069, dossier banc-de-tests/composeur/) : objectif, contraintes (oracle séparé, host minimal, re-vérification), livrables, garde-fous.",
+          "type": "notes",
+          "status": "final",
+          "date": "2026-05-31",
+          "subproject": "generation-snippets-cas-pratiques-v2"
         }
       ],
       "subprojects": [
@@ -2887,12 +2897,18 @@
             },
             {
               "name": "Valider la classification des 245 règles (65 'à qualifier' + fusion axe MCP dom/network/visual + colonne criticité)",
-              "status": "todo",
+              "status": "wip",
               "charge": 0.0,
               "raf": 0.0
             },
             {
               "name": "Spec d'amorce LDE",
+              "status": "wip",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "POC composeur de specimens BANC (oracle, 1 règle arbitraire) — PRIORITÉ, en parallèle de la classification",
               "status": "wip",
               "charge": 0.0,
               "raf": 0.0
@@ -2953,8 +2969,8 @@
         },
         {
           "id": "generation-snippets-cas-pratiques-v2",
-          "name": "Génération snippets/cas pratiques — V2",
-          "titre": "Reprise à zéro — nouvelles règles de cohérence snippet↔réponses↔distracteurs",
+          "name": "Composeur",
+          "titre": "Générateur UNIQUE de snippets (décision actée 2026-05-31) — un cœur commun, 2 modes de sortie : banc (oracle machine-lisible) + pédagogique (QCM/Training V7). POC sur 1 règle (R069) : cas d'applicabilité (NA) + validité (respectée/non respectée/indéterminable).",
           "status": "todo",
           "qualif": "P1",
           "target": null,
@@ -4563,6 +4579,15 @@
           "status": "final",
           "date": "2026-05-30",
           "subproject": "hub-python-2"
+        },
+        {
+          "id": "audit-resilience-donnees-2026-05-31",
+          "title": "Audit résilience données — hub + serveurs",
+          "path": "local-hub/AUDIT-RESILIENCE-DONNEES-2026-05-31.md",
+          "description": "Cartographie des risques de perte de données (hub + 5 serveurs pilotés), classée par sévérité, avec recommandations de blindage.",
+          "type": "audit",
+          "status": "final",
+          "subproject": "blindage-resilience-donnees"
         }
       ],
       "subprojects": [
@@ -4731,6 +4756,51 @@
               "status": "done",
               "charge": 0.0,
               "raf": 0.0
+            }
+          ]
+        },
+        {
+          "id": "blindage-resilience-donnees",
+          "name": "Blindage résilience données",
+          "titre": "Écriture atomique + garde anti-wipe + backups (Planning, Datamart, Schmoll, CAS, simu)",
+          "status": "done",
+          "qualif": "P1",
+          "target": "2026-05-31",
+          "owner": "laurent",
+          "charge": 0,
+          "raf": 0,
+          "commentaire": "Suite à l’incident simu du 2026-05-31. Redémarrages serveurs à faire pour activer (Datamart/Schmoll/CAS). Charges à renseigner par LDE.",
+          "type": "BugFix",
+          "steps": [
+            {
+              "name": "Audit résilience (hub + 5 serveurs)",
+              "status": "done",
+              "charge": 0,
+              "raf": 0
+            },
+            {
+              "name": "Planning data.json : atomique + garde + backups",
+              "status": "done",
+              "charge": 0,
+              "raf": 0
+            },
+            {
+              "name": "Datamart CSV : atomique + rotation .bak + garde",
+              "status": "done",
+              "charge": 0,
+              "raf": 0
+            },
+            {
+              "name": "Schmoll : écritures routées via helper atomique",
+              "status": "done",
+              "charge": 0,
+              "raf": 0
+            },
+            {
+              "name": "CAS server.py : atomique + garde anti-vide",
+              "status": "done",
+              "charge": 0,
+              "raf": 0
             }
           ]
         }
