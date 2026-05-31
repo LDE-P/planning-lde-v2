@@ -3087,7 +3087,7 @@
           "owner": "laurent",
           "charge": 10.0,
           "raf": 8.5,
-          "commentaire": "Gate ≤5 outils VALIDÉ le 2026-05-31 (audit aveugle 4/4 sur R069, fiabilité auto-calibrée). SPEC courte rédigée (SPEC-composeur-poc.md), EN ATTENTE DE VALIDATION LDE avant tout code. Découverte : le MCP ne renvoie que le summary (moyen de contrôle détaillé = auth checklist:extended).",
+          "commentaire": "Gate ≤5 outils VALIDÉ (audit aveugle 4/4 sur R069, fiabilité auto-calibrée). Revue LDE intégrée : bloquant 1 (T-ORA = seul gate, re-audit = diagnostic) + bloquant 2 RÉSOLU via DOUBLE BANC (A fidélité MCP↔checklist niveau 1 / B complétude vs RGAA-WCAG niveau 2 ; indéterminable scindé inhérent/checklist ; specimen R069 = divergence subtile label↔aria-label : Banc A indéterminable-checklist, Banc B non respectée WCAG 2.5.3). Source de vérité = referentiels/checklist-v5-final.md (pas le MCP). Formalisé dans 3 docs (SPEC composeur + regles-generation-snippets §6.2bis/§8 + spec-amorce §4bis). Relecture finale LDE avant go code.",
           "type": "Feature",
           "steps": [
             {
@@ -3097,10 +3097,10 @@
               "raf": 0.0
             },
             {
-              "name": "SPEC courte (archi cœur+adaptateurs, format oracle §8, arborescence, re-vérification T-ISO/T-ORA/T-LEAK) — banc-de-tests/composeur/SPEC-composeur-poc.md — EN ATTENTE VALIDATION LDE",
+              "name": "SPEC courte + intégration revue LDE (double banc A/B, bloquants 1&2 résolus, manifest bi-niveau, sources de vérité) — SPEC-composeur-poc.md + MAJ regles-generation-snippets.md + spec-amorce — RELECTURE FINALE LDE",
               "status": "wip",
-              "charge": 1.0,
-              "raf": 0.5
+              "charge": 1.5,
+              "raf": 0.3
             },
             {
               "name": "Coder le générateur (core/ + adapters/banc + verify/) → 4 specimens R069 + manifests — bloqué tant que la SPEC n'est pas validée",
