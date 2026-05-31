@@ -4235,6 +4235,20 @@
             }
           ],
           "commentaire": ""
+        },
+        {
+          "id": "debug-synchro-icloud-git",
+          "name": "Debug Synchro iCloud sur les dépôts GIT",
+          "titre": "Diagnostic et résolution des problèmes de synchronisation iCloud sur les dépôts git locaux",
+          "status": "wip",
+          "qualif": "P1",
+          "target": null,
+          "owner": "laurent",
+          "charge": 1.0,
+          "raf": 1.0,
+          "commentaire": "En cours (2026-05-31).",
+          "type": "BugFix",
+          "steps": []
         }
       ],
       "gsheet_hidden": true
