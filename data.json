@@ -4240,13 +4240,13 @@
           "id": "debug-synchro-icloud-git",
           "name": "Debug Synchro iCloud sur les dépôts GIT",
           "titre": "Diagnostic et résolution des problèmes de synchronisation iCloud sur les dépôts git locaux",
-          "status": "wip",
+          "status": "done",
           "qualif": "P1",
           "target": null,
           "owner": "laurent",
           "charge": 1.0,
-          "raf": 1.0,
-          "commentaire": "En cours (2026-05-31).",
+          "raf": 0.0,
+          "commentaire": "Résolu (2026-05-31). Réserve résiduelle : toute session ouverte pendant la migration GIT a une vue obsolète du dossier → redémarrer la session (process frais) pour la remettre d'aplomb.",
           "type": "BugFix",
           "steps": []
         }
