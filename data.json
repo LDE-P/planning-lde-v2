@@ -4246,7 +4246,7 @@
           "owner": "laurent",
           "charge": 1.0,
           "raf": 0.0,
-          "commentaire": "Résolu (2026-05-31). Réserve résiduelle : toute session ouverte pendant la migration GIT a une vue obsolète du dossier → redémarrer la session (process frais) pour la remettre d'aplomb.",
+          "commentaire": "Résolu (2026-05-31). Réserve résiduelle : toute session Cowork ouverte avant la migration/restore de GIT a une vue obsolète du dossier → redémarrer la session (process frais) suffit à la remettre d'aplomb.",
           "type": "BugFix",
           "steps": []
         }
