@@ -6,7 +6,9 @@ from __future__ import annotations
 import http.server
 import json
 import math
+import os
 import re
+import shutil
 import subprocess
 import sys
 import unicodedata
@@ -71,11 +73,111 @@ def _load_data() -> dict:
         raise ValueError('data.json corrompu (JSON invalide)')
 
 
+# ── Écriture atomique + backups (blindage anti-perte, 2026-05-31) ──────────────
+# Les backups sont relatifs au fichier écrit (path.parent/'backups-data') — pas
+# d'état global, donc auto-isolant sous test (DATA_FILE patché vers un tmp).
+_BACKUP_DIRNAME = 'backups-data'
+_BACKUP_KEEP = 10              # backups horodatés gardés (par fichier)
+_BACKUP_THROTTLE_S = 600       # au plus 1 backup horodaté / 10 min / fichier
+
+
+class WipeRefused(Exception):
+    """Levée quand une écriture viderait un état riche (garde anti-wipe).
+    Interceptée dans do_POST → réponse 409, fichier préservé."""
+
+
+def _count_projects(obj) -> int:
+    return len(obj.get('projects', [])) if isinstance(obj, dict) else 0
+
+
+def _fsync_dir(dirpath: Path):
+    """fsync du dossier pour rendre durable le rename atomique."""
+    fd = os.open(str(dirpath), os.O_RDONLY)
+    try:
+        os.fsync(fd)
+    except OSError:
+        pass
+    finally:
+        os.close(fd)
+
+
+def _dump_rejected(path: Path, data):
+    """Conserve un payload refusé par la garde anti-wipe (pour inspection)."""
+    try:
+        backup_dir = path.parent / _BACKUP_DIRNAME
+        backup_dir.mkdir(exist_ok=True)
+        ts = datetime.now().strftime('%Y%m%d_%H%M%S')
+        (backup_dir / f'REJECTED_{path.name}_{ts}.json').write_text(
+            json.dumps(data, indent=2, ensure_ascii=False), encoding='utf-8')
+    except OSError:
+        pass
+
+
+def _rotate_timestamped_backup(path: Path):
+    """Backup horodaté de `path` dans <dir>/backups-data, throttlé
+    (_BACKUP_THROTTLE_S) et tronqué aux _BACKUP_KEEP plus récents (par fichier)."""
+    try:
+        backup_dir = path.parent / _BACKUP_DIRNAME
+        backup_dir.mkdir(exist_ok=True)
+        pattern = path.name + '.*.json'
+        existing = sorted(backup_dir.glob(pattern), key=lambda p: p.stat().st_mtime)
+        now = datetime.now().timestamp()
+        if existing and (now - existing[-1].stat().st_mtime) < _BACKUP_THROTTLE_S:
+            return  # throttle : un backup horodaté trop récent existe déjà
+        ts = datetime.now().strftime('%Y%m%d_%H%M%S')
+        shutil.copy2(path, backup_dir / f'{path.name}.{ts}.json')
+        newest_first = sorted(backup_dir.glob(pattern),
+                              key=lambda p: p.stat().st_mtime, reverse=True)
+        for old in newest_first[_BACKUP_KEEP:]:
+            try:
+                old.unlink()
+            except OSError:
+                pass
+    except OSError:
+        pass
+
+
+def _atomic_write_json(path: Path, data: dict, *, keep_prev: bool = True):
+    """Écrit `data` en JSON de façon atomique et protégée contre la perte.
+
+    1. Garde anti-wipe : refuse de remplacer un état riche (>0 projets) par un
+       état à 0 projet (lève WipeRefused, payload refusé conservé).
+    2. tmp (fsync) -> os.replace (rename atomique) -> fsync du dossier.
+    3. Backups : `.prev` (1 cran) + horodaté rotatif (throttle 10 min, 10 gardés).
+    """
+    # 1. Garde anti-wipe
+    if path.exists():
+        try:
+            old = json.loads(path.read_text(encoding='utf-8'))
+        except (json.JSONDecodeError, OSError):
+            old = None
+        if _count_projects(old) > 0 and _count_projects(data) == 0:
+            _dump_rejected(path, data)
+            raise WipeRefused(
+                f'{path.name} : écriture refusée (passerait de '
+                f'{_count_projects(old)} à 0 projet)')
+
+    # 2. Écriture atomique
+    tmp = path.parent / (path.name + '.tmp')
+    with open(tmp, 'w', encoding='utf-8') as f:
+        f.write(json.dumps(data, indent=2, ensure_ascii=False))
+        f.flush()
+        os.fsync(f.fileno())
+
+    # 3. Backups avant remplacement
+    if keep_prev and path.exists():
+        try:
+            shutil.copy2(path, path.parent / (path.name + '.prev'))
+        except OSError:
+            pass
+        _rotate_timestamped_backup(path)
+
+    os.replace(tmp, path)        # rename atomique (tmp et cible dans le même dossier)
+    _fsync_dir(path.parent)      # rend le rename durable
+
+
 def _save_data(data: dict):
-    DATA_FILE.write_text(
-        json.dumps(data, indent=2, ensure_ascii=False),
-        encoding='utf-8',
-    )
+    _atomic_write_json(DATA_FILE, data)
 
 
 def _load_archives() -> dict:
@@ -88,10 +190,7 @@ def _load_archives() -> dict:
 
 
 def _save_archives(data: dict):
-    ARCHIVES_FILE.write_text(
-        json.dumps(data, indent=2, ensure_ascii=False),
-        encoding='utf-8',
-    )
+    _atomic_write_json(ARCHIVES_FILE, data)
 
 
 def _log(entries: list):
@@ -1210,6 +1309,13 @@ class Handler(http.server.BaseHTTPRequestHandler):
 
     def do_POST(self):
         path = self.path.split('?')[0]
+        try:
+            self._dispatch_post(path)
+        except WipeRefused as e:
+            # Garde anti-wipe : écriture refusée, data.json/archives préservés.
+            self._json_error(f'Écriture refusée (garde anti-wipe) : {e}', 409)
+
+    def _dispatch_post(self, path):
         if path == '/api/save-subproject':
             self._handle_save_subproject()
         elif path == '/api/add-subproject':

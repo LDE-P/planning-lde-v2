@@ -189,7 +189,7 @@ POST (corps JSON) :
 
 - Formules GSheet : référence absolue = `planning-lde-v2/formules.md` (jamais réinventer, recopier caractère par caractère — §5.5 SPEC)
 - Bibliothèque GSheet : `gspread` (pas `google-api-python-client`)
-- `data.json` : lecture/écriture atomique via `_load_data()` / `_save_data()`
+- `data.json` / `data-archives.json` : lecture via `_load_data()`/`_load_archives()` ; **écriture atomique** via `_save_data()`/`_save_archives()` → `_atomic_write_json()` (blindage 2026-05-31). Garanties : écriture `tmp` + `fsync` → `os.replace` (rename atomique) → `fsync` du dossier ; **garde anti-wipe** (refuse de remplacer un état à N>0 projets par 0 projet → `WipeRefused` → HTTP 409, payload refusé conservé) ; **backups** `.prev` (1 cran, chaque save) + horodatés rotatifs dans `backups-data/` (throttle 10 min, 10 gardés). `.prev`/`.tmp`/`backups-data/` sont gitignorés ; `data.json` reste versionné.
 - CORS : tous les endpoints renvoient `Access-Control-Allow-Origin: *`
 - Payload max : 1 Mo (413 si dépassé)
 - **APIs de mise en forme GSheet** (`setDataValidation`, formatting, conditional rules) : **uniquement** via `/api/gsheet/format`, appel manuel — interdit dans push/pull (§5.6 SPEC)

@@ -17,3 +17,10 @@ __pycache__/
 # Runtime / outils IA
 history.jsonl
 .claude/
+
+# Blindage écriture atomique (data.json reste suivi ; ces dérivés non)
+data.json.tmp
+data.json.prev
+data-archives.json.tmp
+data-archives.json.prev
+backups-data/
