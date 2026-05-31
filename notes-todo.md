@@ -7,6 +7,38 @@
 
 ## Rappel prochaine session
 
+### 🥇 À TRAITER EN PREMIER — Ajouter le statut `fail` dans le dashboard
+
+**Tâche unique à la reprise**, avant tout autre travail.
+
+**Contexte** : le statut `fail` vient d'être ajouté au schéma `data.json` (cf `planning-lde-v2/CLAUDE.md`) pour tracer les sous-projets abandonnés après échec. Déjà utilisé dans `data.json` :
+- SP `generation-snippets-cas-pratiques-v1` sous **Banc de tests**
+- step « Audit persona — ÉCHEC » dans ce même SP
+
+**Préalable** : lire d'abord [/Users/laurentdenis/Documents/GIT/CLAUDE.md](computer:///Users/laurentdenis/Documents/GIT/CLAUDE.md) puis `planning-lde-v2/CLAUDE.md`.
+
+**Trois fichiers à modifier** :
+
+1. **`serve-v2.py`**
+   - Ajouter `'fail'` dans `_VALID_STATUSES` (ligne ~30)
+   - Ajouter `'fail'` dans `_STATUS_TO_GS` (valeur GSheet suggérée : `'FAIL'`)
+   - `_STATUS_FROM_GS` est généré automatiquement par dict comprehension → pas de changement
+
+2. **`DASHBOARD-V2.html`**
+   - Ajouter la variable CSS `--fail` (couleur suggérée : `#f97316`, orange brûlé — distinct de `blocked`/rouge et de `todo`/gris)
+   - Ajouter `.status-fail` dans le bloc des status-badge (ligne ~331–337) — même pattern que `.status-blocked`
+   - Ajouter le label d'affichage `'fail'` dans la fonction JS qui traduit les statuts en texte lisible (chercher les labels `'blocked'`, `'done'`, etc.) — label suggéré : **« Échec »**
+   - Ajouter la même classe dans le bloc `.step-status-badge` si les steps ont leur propre jeu de badges
+
+**Contraintes** :
+- Lire les blocs concernés avant d'éditer (ne pas modifier à l'aveugle)
+- Pas de modification hors des trois points ci-dessus
+- Commit dans `planning-lde-v2/` après validation
+
+**Vérification attendue** : après modification, ouvrir `data.json`, confirmer que le SP `generation-snippets-cas-pratiques-v1` (status: `"fail"`) s'affiche correctement dans le dashboard avec le badge orange **« Échec »**.
+
+---
+
 ### 🚨 P0 — Régénérer le token OAuth Google Sheets
 
 Token expiré le 2026-05-28 (`invalid_grant: Token has been expired or revoked`). Procédure :
