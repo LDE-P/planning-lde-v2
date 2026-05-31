@@ -2360,6 +2360,56 @@
           "status": "final",
           "date": "2026-05-26",
           "subproject": "maj-quiz-source-training-sql"
+        },
+        {
+          "id": "prompt-passe-polish",
+          "title": "Prompt passe de polish post-audit persona",
+          "desc": "Prompt structuré de la passe de polish des 535 questions d'entraînement — tâches A à E (CR1, pièges, polish, gamification, FALC).",
+          "file": "amelioration-training/audit-persona-quiz/PROMPT-passe-polish.md",
+          "type": "notes",
+          "status": "final",
+          "date": "2026-05-31",
+          "subproject": "passe-polish-post-audit"
+        },
+        {
+          "id": "journal-tache-a-cr1",
+          "title": "Journal Tâche A — harmonisation vocabulaire CR1",
+          "desc": "Journal des 10 modifications CR1 appliquées dans UR1 : avant/après par champ, critère canonique retenu.",
+          "file": "amelioration-training/audit-persona-quiz/JOURNAL-TACHE-A-CR1-propositions.md",
+          "type": "bilan",
+          "status": "final",
+          "date": "2026-05-31",
+          "subproject": "passe-polish-post-audit"
+        },
+        {
+          "id": "journal-taches-bc",
+          "title": "Journal Tâches B & C — pièges et polish rédactionnel",
+          "desc": "Journal des modifications Tâche B (4 questions pièges) et Tâche C (7 champs + 2 doublons à supprimer via admin WpProQuiz).",
+          "file": "amelioration-training/audit-persona-quiz/JOURNAL-TACHES-BC-propositions.md",
+          "type": "bilan",
+          "status": "final",
+          "date": "2026-05-31",
+          "subproject": "passe-polish-post-audit"
+        },
+        {
+          "id": "note-gamification-v1",
+          "title": "Note d'implémentation gamification V1",
+          "desc": "Spec V1 du système de niveaux de difficulté (méchanceté) pour les 535 questions d'entraînement — HTML badge, CSS, distribution, CR4/CR5.",
+          "file": "amelioration-training/audit-persona-quiz/NOTE-IMPLEMENTATION-gamification-v1.md",
+          "type": "spec",
+          "status": "final",
+          "date": "2026-05-31",
+          "subproject": "passe-polish-post-audit"
+        },
+        {
+          "id": "gamification-v1-mapping",
+          "title": "Mapping gamification V1 — 535 questions",
+          "desc": "Table complète UID → niveau méchanceté (1–5), emoji, label, quiz, CR4/CR5 flag.",
+          "file": "amelioration-training/audit-persona-quiz/GAMIFICATION-V1-mapping.csv",
+          "type": "autre",
+          "status": "final",
+          "date": "2026-05-31",
+          "subproject": "passe-polish-post-audit"
         }
       ],
       "subprojects": [
@@ -2620,6 +2670,26 @@
               "charge": 0.0,
               "raf": 0.0
             }
+          ]
+        },
+        {
+          "id": "passe-polish-post-audit",
+          "name": "Passe de polish post-audit persona",
+          "status": "review",
+          "qualif": "P1",
+          "target": "",
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "titre": "Passe A–E sur 535 questions d'entraînement : harmonisation CR1, pièges, polish rédactionnel, gamification méchanceté, FALC/ortho-typo.",
+          "commentaire": "",
+          "steps": [
+            { "name": "Tâche A — Harmonisation CR1", "status": "done", "charge": 0.0, "raf": 0.0 },
+            { "name": "Tâche B — Questions pièges", "status": "done", "charge": 0.0, "raf": 0.0 },
+            { "name": "Tâche C — Polish rédactionnel", "status": "done", "charge": 0.0, "raf": 0.0 },
+            { "name": "Tâche D — Gamification méchanceté V1", "status": "done", "charge": 0.0, "raf": 0.0 },
+            { "name": "Tâche E — FALC + ortho-typo", "status": "done", "charge": 0.0, "raf": 0.0 },
+            { "name": "Déploiement SQL PROD + admin WpProQuiz", "status": "todo", "charge": 0.0, "raf": 0.0 }
           ]
         }
       ],
