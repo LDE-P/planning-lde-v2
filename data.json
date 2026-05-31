@@ -3086,8 +3086,8 @@
           "target": null,
           "owner": "laurent",
           "charge": 10.0,
-          "raf": 8.0,
-          "commentaire": "GO LDE 2026-05-31 (REVUE-LDE-vue-de-haut.md) → IMPLÉMENTATION DÉMARRÉE par Claude Code. Gate ≤5 outils validé (audit aveugle, corrigé 3/4 contre oracle corrigé + 1er datapoint Banc 5). Double banc acté : A fidélité MCP↔checklist (niveau 1 = referentiels/checklist-v5-final.md) / B complétude vs RGAA-WCAG (niveau 2 = RGAA-v4.1.2.md) ; indéterminable scindé inhérent/checklist ; specimen R069 = divergence subtile label↔aria-label (Banc A indéterminable-checklist, Banc B non respectée WCAG 2.5.3). T-ORA seul gate ; re-audit = diagnostic. Ordre incrémental : evaluate_r069+test_core → 1er specimen → gates → 3 autres → corpus → captures → D-AUDIT. Jouabilité en 2 passes (capture auj. / Playwright demain). Formalisé : SPEC composeur + regles-generation-snippets §6.2bis/§8 + spec-amorce §4bis. Référentiels non commités = verrou git de sécurité volontaire (aucune action git).",
+          "raf": 5.0,
+          "commentaire": "POC R069 IMPLÉMENTÉ et VERT (Claude Code, autonomie, 2026-05-31 ; JOURNAL-IMPLEMENTATION.md). Suite verte : 61 passed / 3 skipped (gate seul 60 passed) — RE-VÉRIFIÉ indépendamment en sandbox (identique). Gates : T-ORA (4 verdicts re-dérivés == manifest), T-LEAK, T-ISO (R071/R136 NA), T-COV, T-REPRO octet-à-octet, T-STD (WCAG 2.5.3 sur specimen 004). Archi cœur/adaptateurs + templates figés (zéro génération LLM). A1 (OracleJudgmentRequired sans intention), A2 (sérialisation déterministe), Q1 (nature_indetermination) appliqués ; 7 trous §4 comblés. Double banc : A fidélité MCP↔checklist (niveau 1 = checklist-v5-final.md) / B vs RGAA-WCAG ; T-ORA seul gate, re-audit diagnostic. RESTE : run D-AUDIT supervisé (harnais livré, non exécuté car subagent+MCP non déterministe) ; jouabilité passe 1 capture (auj.) puis passe 2 Playwright (demain). Port preview 3502. Référentiels + composeur non commités = verrou git volontaire (aucune action git). Snapshot _snapshots/composeur-20260531-1903/.",
           "type": "Feature",
           "steps": [
             {
@@ -3103,10 +3103,16 @@
               "raf": 0.0
             },
             {
-              "name": "Coder le générateur (core/ + adapters/banc + verify/) → 4 specimens R069 + manifests — implémentation EN COURS (Claude Code), ordre incrémental ; jouabilité 2 passes (capture auj. / Playwright demain)",
-              "status": "wip",
+              "name": "Coder le générateur (core/ + adapters/banc + verify/) → 4 specimens R069 + manifests + suite de tests — FAIT (Claude Code, 61 passed/3 skipped, re-vérifié sandbox)",
+              "status": "done",
               "charge": 3.0,
-              "raf": 3.0
+              "raf": 0.0
+            },
+            {
+              "name": "Finalisation POC : jouabilité passe 1 (capture) puis passe 2 (Playwright, demain) + run D-AUDIT supervisé (subagent + MCP) pour la 1re mesure de fidélité auditeur",
+              "status": "todo",
+              "charge": 1.0,
+              "raf": 1.0
             }
           ]
         }
