@@ -2904,6 +2904,16 @@
           "subproject": "generation-snippets-cas-pratiques-v2"
         },
         {
+          "id": "spec-composeur-v2-auto-apprenant",
+          "file": "banc-de-tests/composeur/SPEC-composeur-v2-auto-apprenant.md",
+          "title": "SPEC — Composeur V2 (auto-apprenant)",
+          "desc": "Boucle de calibration à source de vérité protégée : 2 niveaux de connaissance (S1 libellés / S2 checklist), 3 phases (production / validation 2 axes / capitalisation), invariant (l'apprentissage réécrit le modèle + la classification, jamais l'oracle), bootstrap sur le sous-ensemble générable. À valider (Ping-Pong).",
+          "type": "spec",
+          "status": "draft",
+          "date": "2026-06-01",
+          "subproject": "composeur-v2-auto-apprenant"
+        },
+        {
           "id": "spec-composeur-poc",
           "file": "banc-de-tests/composeur/SPEC-composeur-poc.md",
           "title": "SPEC courte — Composeur de specimens (POC R069, mode banc)",
@@ -3129,6 +3139,45 @@
               "status": "todo",
               "charge": 4.0,
               "raf": 4.0
+            }
+          ]
+        },
+        {
+          "id": "composeur-v2-auto-apprenant",
+          "name": "Composeur V2 (auto-apprenant)",
+          "titre": "Moteur à boucle de calibration à source de vérité protégée : produit/valide/apprend sur 2 niveaux de connaissance (S1 libellés / S2 checklist) ; corrige le Composeur et la classification sans laisser dériver l'oracle.",
+          "status": "spec",
+          "qualif": "P1",
+          "target": null,
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "commentaire": "SPEC rédigée 2026-06-01 (composeur/SPEC-composeur-v2-auto-apprenant.md), à valider (Ping-Pong) avant tout code. Démarrage en bootstrap sur le sous-ensemble générable (déterministes/seuil, par élément/page), pas les 245 d'emblée. 3 couches : oracle (vérité, S2+standards+LDE) / prédiction S1 (hypothèse MCP) / verdict réel auditeur. Invariant : l'apprentissage réécrit le modèle + la classification, jamais l'oracle.",
+          "type": "Feature",
+          "steps": [
+            {
+              "name": "Rédiger la SPEC V2 (3 couches · invariant boucle vertueuse · 3 phases · bootstrap)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Valider la SPEC (revue LDE + Ping-Pong)",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Bootstrap : règle-packs (sous-ensemble déterministe) + chaîne S1/S2 + run réel + revue",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Boucle de capitalisation : corrigé versionné + amélioration de la classification",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
             }
           ]
         }
@@ -3982,7 +4031,7 @@
           "charge": 0.0,
           "raf": 0.0,
           "steps": [],
-          "commentaire": "Session 8 (2026-05-26) : UX modale réconciliation, epargneBP/CA, Solde compte, backup référence. Session 9 (2026-05-27) : Total dépenses prévues, formule RTV v3, signe € partout, backup complet.",
+          "commentaire": "Session 8 (2026-05-26) : UX modale réconciliation, epargneBP/CA, Solde compte, backup référence. Session 9 (2026-05-27) : Total dépenses prévues, formule RTV v3, signe € partout, backup complet. Session 2026-05-31 : incident persistance (état écrasé au redémarrage) — garde-fou anti-écrasement + --no-browser déployés en V1 et V2 (commits 08aca6a, 2a8c000). Données récupérées via Time Machine.",
           "type": "Récurrent"
         },
         {
@@ -4321,7 +4370,7 @@
           "id": "refactorisation-v2",
           "name": "Refactorisation V2",
           "titre": "Chantier de refactorisation du simulateur dans un répertoire dédié (port 8091). Bascule V1→V2 uniquement après validation complète en parallèle.",
-          "status": "review",
+          "status": "wip",
           "qualif": "P2",
           "target": "",
           "owner": "laurent",
@@ -4359,8 +4408,8 @@
               "raf": 0.0
             },
             {
-              "name": "Validation en parallèle V1 + bascule",
-              "status": "wip",
+              "name": "V2 = focus principal (V1 conservée sans modification) — travail continu en V2",
+              "status": "done",
               "charge": 0.5,
               "raf": 0.0
             },
@@ -4369,9 +4418,15 @@
               "status": "todo",
               "charge": 0.0,
               "raf": 0.0
+            },
+            {
+              "name": "NEXT-IMPORT-TRANSFER (2026-06-01) : next.previsions + autresRevenus → import du mois (SR-T1..T4, 0 régression)",
+              "status": "done",
+              "charge": 0.5,
+              "raf": 0.0
             }
           ],
-          "commentaire": "Refactoring autonome Claude Code terminé et validé 2026-05-30 (346/346 tests verts sur Mac). 6 phases : baseline fixture figée, serve-simu.py factorisé, MONTHS_FR unique, migrations extraites de loadAllData, renderers next/auto unifiés (renderEditableGroupBlock), code mort retiré. Comportement strictement préservé. Dédup résiduelle next/auto + CSS variables + modularisation ESM reportés (§ 8 SPEC-REFACTOR-V2.md).",
+          "commentaire": "Refactoring autonome Claude Code terminé et validé 2026-05-30 (346/346 tests verts sur Mac). 6 phases : baseline fixture figée, serve-simu.py factorisé, MONTHS_FR unique, migrations extraites de loadAllData, renderers next/auto unifiés (renderEditableGroupBlock), code mort retiré. Comportement strictement préservé. Dédup résiduelle next/auto + CSS variables + modularisation ESM reportés (§ 8 SPEC-REFACTOR-V2.md). Session 2026-06-01 : V2 retenue comme focus principal de développement (V1 conservée intacte). Correctifs garde-fou + --no-browser répliqués en V2. NEXT-IMPORT-TRANSFER : au premier import d'un mois M si next.month===M, previsions et autresRevenus transférés automatiquement (serve-simu.py d4f7b61). CLAUDE.md V2 complété (NEXT-TRANSFER, groupes V3 10→corrigé, paths corrects).",
           "type": "Feature"
         }
       ],
