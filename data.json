@@ -3162,8 +3162,8 @@
               "raf": 0.0
             },
             {
-              "name": "Valider la SPEC (revue LDE + Ping-Pong)",
-              "status": "todo",
+              "name": "Valider la SPEC (revue LDE + Ping-Pong) — v1.2 close : 2 tours Claude Code + arbitrages LDE, T-LEAK-CORRIGÉ gate bloquant, changelog d'oracle gravé",
+              "status": "done",
               "charge": 0.0,
               "raf": 0.0
             },
