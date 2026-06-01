@@ -3178,14 +3178,14 @@
               "raf": 0.0
             },
             {
-              "name": "Bootstrap : 5 règle-packs (R069+R136+R071+R236+R132) + chaîne S1/S2 + revue — chaîne COMPLÈTE (200 passed/17 skipped, T-LEAK-CORRIGÉ gate bloquant + méta-test, KPIs, oracle-changelog amorcé) ; reste les runs réels aveugles des 4 nouvelles règles",
-              "status": "wip",
+              "name": "Bootstrap : 5 règle-packs + chaîne S1/S2 (200/17, T-LEAK-CORRIGÉ gate) + runs réels aveugles FAITS (D-AUDIT 14 verdicts) — accord_S1↔réel 0.64, taux_angle-mort 2/14 (R071), 0/3 angles morts prédits réalisés (Claude > heuristique S1), R236 confirmée. Cf. rapport/D-AUDIT-2026-06-01.md",
+              "status": "done",
               "charge": 0.0,
               "raf": 0.0
             },
             {
-              "name": "Boucle de capitalisation : corrigé versionné + amélioration de la classification",
-              "status": "todo",
+              "name": "Boucle de capitalisation : corrigé versionné + amélioration classification — findings D-AUDIT à verser (S1 trop pessimiste à recalibrer ; faux positif R071 ; oracle 071-001 à réviser par LDE)",
+              "status": "wip",
               "charge": 0.0,
               "raf": 0.0
             }
