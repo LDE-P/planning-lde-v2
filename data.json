@@ -3096,8 +3096,8 @@
           "target": null,
           "owner": "laurent",
           "charge": 10.0,
-          "raf": 5.0,
-          "commentaire": "POC R069 IMPLÉMENTÉ et VERT (Claude Code, autonomie, 2026-05-31 ; JOURNAL-IMPLEMENTATION.md). Suite verte : 61 passed / 3 skipped (gate seul 60 passed) — RE-VÉRIFIÉ indépendamment en sandbox (identique). Gates : T-ORA (4 verdicts re-dérivés == manifest), T-LEAK, T-ISO (R071/R136 NA), T-COV, T-REPRO octet-à-octet, T-STD (WCAG 2.5.3 sur specimen 004). Archi cœur/adaptateurs + templates figés (zéro génération LLM). A1 (OracleJudgmentRequired sans intention), A2 (sérialisation déterministe), Q1 (nature_indetermination) appliqués ; 7 trous §4 comblés. Double banc : A fidélité MCP↔checklist (niveau 1 = checklist-v5-final.md) / B vs RGAA-WCAG ; T-ORA seul gate, re-audit diagnostic. RESTE : run D-AUDIT supervisé (harnais livré, non exécuté car subagent+MCP non déterministe) ; jouabilité passe 1 capture (auj.) puis passe 2 Playwright (demain). Port preview 3502. Référentiels + composeur non commités = verrou git volontaire (aucune action git). Snapshot _snapshots/composeur-20260531-1903/.",
+          "raf": 4.0,
+          "commentaire": "POC R069 COMPLET et DÉMONTRÉ DE BOUT EN BOUT (2026-06-01). Génération déterministe (templates figés) → gates verts (T-ORA seul gate, T-LEAK, T-ISO, T-COV, T-REPRO octet-à-octet, T-STD) : 61 passed / 3 skipped, re-vérifié sandbox. Place nette faite : nature_indetermination retiré de l'oracle (option b, sortie auditeur only ; phase 2 = nature_attendue), méta-constat CLAUDE.md corrigé, VERROU GIT LEVÉ pour ce projet (composeur a son dépôt propre, commits locaux, pas de remote). Étapes 1/2/3 FAITES : (1) jouabilité passe 1 dans CLAUDE IN CHROME via http://localhost:3502 — T3.1 0 erreur + T3.2 submit→modale sur les 4 specimens ; (2) Playwright verify/test_playwright.py (adaptatif hors-ligne, vert réel sur Mac) ; (3) D-AUDIT 4/4 sur Banc A + 1er datapoint Banc 5 (004 indéterminable @ incertitude 0.50). Double banc A (checklist-v5-final) / B (RGAA-WCAG). RESTE (phase 2, hors POC) : intégration checklist-IA-V1.json (245 règles), strates variation/adversariale, bras Banc 5 (b) moyen de contrôle injecté, mode pédagogique. Port preview 3502.",
           "type": "Feature",
           "steps": [
             {
@@ -3119,10 +3119,16 @@
               "raf": 0.0
             },
             {
-              "name": "Finalisation POC : jouabilité passe 1 (capture) puis passe 2 (Playwright, demain) + run D-AUDIT supervisé (subagent + MCP) pour la 1re mesure de fidélité auditeur",
-              "status": "todo",
+              "name": "Finalisation POC : place nette + jouabilité passe 1 (CLAUDE IN CHROME, HTTP 3502, T3.1/T3.2 verts) + passe 2 Playwright (test écrit, adaptatif) + run D-AUDIT (4/4 Banc A) — FAIT",
+              "status": "done",
               "charge": 1.0,
-              "raf": 1.0
+              "raf": 0.0
+            },
+            {
+              "name": "Phase 2 (hors POC) : intégration checklist-IA-V1.json (245 règles), strates variation/adversariale, bras Banc 5 (b) moyen de contrôle injecté, mode pédagogique",
+              "status": "todo",
+              "charge": 4.0,
+              "raf": 4.0
             }
           ]
         }
