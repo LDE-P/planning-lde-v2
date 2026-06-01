@@ -3156,7 +3156,7 @@
           "id": "composeur-v2-auto-apprenant",
           "name": "Composeur V2 (auto-apprenant)",
           "titre": "Moteur à boucle de calibration à source de vérité protégée : produit/valide/apprend sur 2 niveaux de connaissance (S1 libellés / S2 checklist) ; corrige le Composeur et la classification sans laisser dériver l'oracle.",
-          "status": "spec",
+          "status": "wip",
           "qualif": "P1",
           "target": null,
           "owner": "laurent",
@@ -3178,8 +3178,8 @@
               "raf": 0.0
             },
             {
-              "name": "Bootstrap : règle-packs (sous-ensemble déterministe) + chaîne S1/S2 + run réel + revue",
-              "status": "todo",
+              "name": "Bootstrap : 5 règle-packs (R069+R136+R071+R236+R132) + chaîne S1/S2 + revue — chaîne COMPLÈTE (200 passed/17 skipped, T-LEAK-CORRIGÉ gate bloquant + méta-test, KPIs, oracle-changelog amorcé) ; reste les runs réels aveugles des 4 nouvelles règles",
+              "status": "wip",
               "charge": 0.0,
               "raf": 0.0
             },
