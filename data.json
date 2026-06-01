@@ -2410,6 +2410,16 @@
           "status": "final",
           "date": "2026-05-31",
           "subproject": "passe-polish-post-audit"
+        },
+        {
+          "id": "bilan-passe-amelioration-training",
+          "title": "Bilan passe d'amélioration Training V7",
+          "desc": "Bilan chiffré complet : 895 questions · 3 183 champs modifiés/créés · 1 460 créations ex nihilo (indices, corrigés si juste/faux). Détail par quiz et par type de champ.",
+          "file": "amelioration-training/BILAN-passe-amelioration-training-2026-06-01.md",
+          "type": "bilan",
+          "status": "final",
+          "date": "2026-06-01",
+          "subproject": "passe-polish-post-audit"
         }
       ],
       "subprojects": [
