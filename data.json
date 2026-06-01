@@ -2909,7 +2909,17 @@
           "title": "SPEC — Composeur V2 (auto-apprenant)",
           "desc": "Boucle de calibration à source de vérité protégée : 2 niveaux de connaissance (S1 libellés / S2 checklist), 3 phases (production / validation 2 axes / capitalisation), invariant (l'apprentissage réécrit le modèle + la classification, jamais l'oracle), bootstrap sur le sous-ensemble générable. À valider (Ping-Pong).",
           "type": "spec",
-          "status": "draft",
+          "status": "final",
+          "date": "2026-06-01",
+          "subproject": "composeur-v2-auto-apprenant"
+        },
+        {
+          "id": "prompt-lancement-composeur-v2",
+          "file": "banc-de-tests/composeur/prompt-lancement-composeur-v2.md",
+          "title": "Prompt de lancement — implémentation Composeur V2",
+          "desc": "Brief Claude Code pour l'implémentation V2 (composeur-v2/, V1 en lecture seule) : SPEC v1.2 autorité, 3 couches, Invariant H / T-LEAK-CORRIGÉ gate bloquant, S1=heuristique code, livrables (corrigé JSON, oracle-changelog, KPIs), ordre incrémental (R136 d'abord), garde-fous (verrou git, snapshot).",
+          "type": "notes",
+          "status": "final",
           "date": "2026-06-01",
           "subproject": "composeur-v2-auto-apprenant"
         },
