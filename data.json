@@ -3640,8 +3640,64 @@
       "stack": "Node.js · Python · HTML",
       "category": "perso",
       "folder": "perso/POIDS/",
-      "docs": [],
-      "subprojects": [],
+      "docs": [
+        {
+          "id": "spec-persistance-serveur-poids",
+          "title": "SPEC — Persistance serveur robuste",
+          "path": "perso/POIDS/SPEC-PERSISTANCE-SERVEUR.md",
+          "description": "Plan d’implémentation Option A : poids_data.json écrit par le serveur (atomique + garde anti-wipe + backups), FS Access API retirée.",
+          "type": "spec",
+          "status": "final",
+          "subproject": "persistance-serveur"
+        }
+      ],
+      "subprojects": [
+        {
+          "id": "persistance-serveur",
+          "name": "Persistance serveur",
+          "titre": "poids_data.json en source de vérité serveur (atomique + garde anti-wipe + backups)",
+          "status": "review",
+          "qualif": "P1",
+          "target": "2026-06-02",
+          "owner": "laurent",
+          "charge": 0,
+          "raf": 0,
+          "commentaire": "Implémentation + tests OK (run_tests.js 71/71 · test_atomic_poids 7/7), commit local 7b53c5a. En attente : validation visuelle live (charger localhost:8092, éditer, vérifier « ✓ enregistré » + persistance au reload) + redémarrage serveur 8092. Charges à renseigner par LDE.",
+          "type": "Feature",
+          "steps": [
+            {
+              "name": "serve-poids.py : POST /api/poids + blindage (atomique/garde/backups)",
+              "status": "done",
+              "charge": 0,
+              "raf": 0
+            },
+            {
+              "name": "Poids.html : saveToServer + loadFromServer + retrait FS API + migration",
+              "status": "done",
+              "charge": 0,
+              "raf": 0
+            },
+            {
+              "name": "tests/test_atomic_poids.py",
+              "status": "done",
+              "charge": 0,
+              "raf": 0
+            },
+            {
+              "name": "CLAUDE.md POIDS mis à jour",
+              "status": "done",
+              "charge": 0,
+              "raf": 0
+            },
+            {
+              "name": "Cleanup résidus .crswap",
+              "status": "done",
+              "charge": 0,
+              "raf": 0
+            }
+          ]
+        }
+      ],
       "gsheet_hidden": true
     },
     {
