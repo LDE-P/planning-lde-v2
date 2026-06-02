@@ -3037,7 +3037,7 @@
             },
             {
               "name": "Valider la classification des 245 règles (65 'à qualifier' + fusion axe MCP dom/network/visual + colonne criticité)",
-              "status": "wip",
+              "status": "done",
               "charge": 0.0,
               "raf": 0.0
             },
@@ -3185,7 +3185,7 @@
             },
             {
               "name": "Boucle de capitalisation : corrigé versionné + amélioration classification — findings D-AUDIT à verser (S1 trop pessimiste à recalibrer ; faux positif R071 ; oracle 071-001 à réviser par LDE)",
-              "status": "wip",
+              "status": "done",
               "charge": 0.0,
               "raf": 0.0
             }
@@ -5234,6 +5234,24 @@
           "steps": []
         }
       ]
+    },
+    {
+      "id": "todo-list-lde",
+      "name": "Todo-list LDE",
+      "desc": "Bloc-notes structuré pour todo-list quotidienne avec sauvegarde continue.",
+      "stack": "Python · HTML · JS vanilla",
+      "category": "perso",
+      "folder": "perso/todo-list-lde/",
+      "docs": [],
+      "subprojects": [
+        {
+          "id": "init-bloc-notes",
+          "name": "Initialisation bloc-notes",
+          "status": "wip",
+          "steps": []
+        }
+      ],
+      "gsheet_hidden": true
     }
   ]
 }
