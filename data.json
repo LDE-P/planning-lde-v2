@@ -3695,13 +3695,13 @@
           "id": "persistance-serveur",
           "name": "Persistance serveur",
           "titre": "poids_data.json en source de vérité serveur (atomique + garde anti-wipe + backups)",
-          "status": "review",
+          "status": "done",
           "qualif": "P1",
           "target": "2026-06-02",
           "owner": "laurent",
           "charge": 0,
           "raf": 0,
-          "commentaire": "Implémentation + tests OK (run_tests.js 71/71 · test_atomic_poids 7/7), commit local 7b53c5a. En attente : validation visuelle live (charger localhost:8092, éditer, vérifier « ✓ enregistré » + persistance au reload) + redémarrage serveur 8092. Charges à renseigner par LDE.",
+          "commentaire": "Test visuel validé par LDE le 2026-06-02 (persistance serveur OK + bandeau corrigé). Commits POIDS 7b53c5a + 7ae95ad. Charges à renseigner par LDE.",
           "type": "Feature",
           "steps": [
             {
