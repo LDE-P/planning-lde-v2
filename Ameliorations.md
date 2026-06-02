@@ -72,3 +72,11 @@
 ## Outillage IA
 
 - [ ] **Explorer outils optimisation BMAD** (2026-05-27)
+
+## Process / CLAUDE.md
+
+- [ ] **Extraire le pattern de blindage en helper partagé** (2026-06-02) : écriture atomique (`tmp`+`fsync`+`os.replace`) + garde anti-wipe + backups recopiée dans `serve-simu`/`serve-v2`/`datamart-proxy`/CAS `server.py`/`serve-poids` — en faire un module Python réutilisable.
+- [ ] **`.maintenance-lock` pour sessions parallèles sur l'infra racine** (2026-06-02) : le poser dès qu'une session édite `CLAUDE.md`/`referentiels/` racine — a manqué le 2026-06-02 (quasi-conflit d'édition du `CLAUDE.md` racine, une correction annulée).
+- [ ] **Anticiper les régressions sync→async** (2026-06-02) : un passage de persistance synchrone à async a révélé un bug latent (`checkNewMonth` non idempotent, bandeau fantôme Poids) — revoir l'ordre init/chargement lors de tels changements.
+
+- [ ] **Règle commit `\n` à corriger (CLAUDE.md racine)** (2026-05-31) : la forme recommandée `git commit -m "titre\n\n- point"` produit des **`\n` littéraux** en zsh (non interprétés entre guillemets doubles) — constaté sur le commit `89d8972` du projet Poids. Préconiser plutôt des **`-m` multiples** (un par paragraphe, robuste au copier-coller mono-ligne) ou `$'...\n...'`.
