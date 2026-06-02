@@ -2932,6 +2932,26 @@
           "status": "draft",
           "date": "2026-05-31",
           "subproject": "generation-snippets-cas-pratiques-v2"
+        },
+        {
+          "id": "spec-mini-serveur-minisite",
+          "file": "banc-de-tests/mini-serveur-minisite/SPEC.md",
+          "title": "SPEC — Mini-site martyr (Phase 2)",
+          "desc": "Spécification du générateur de mini-site réaliste pour audit de règles de portée globale : échantillonnage 20 règles (stratifié), structure 4 pages, architecture build_minisite.py autonome, oracle machine-lisible, garde-fous (test_minisite.py).",
+          "type": "spec",
+          "status": "draft",
+          "date": "2026-05-29",
+          "subproject": "mini-serveur-minisite"
+        },
+        {
+          "id": "spec-mini-serveur-minisite-full",
+          "file": "banc-de-tests/mini-serveur-minisite-full/SPEC.md",
+          "title": "SPEC — Mini-site full (245 règles)",
+          "desc": "Spécification du générateur de mini-site couvrant les 245 règles Opquast : intégration moteur composeur-v2, 25 RulePacks existants + 220 mocks, validation formelle S2==oracle avant génération, manifest complet.",
+          "type": "spec",
+          "status": "draft",
+          "date": "2026-05-29",
+          "subproject": "mini-serveur-minisite-full"
         }
       ],
       "subprojects": [
@@ -3209,6 +3229,88 @@
               "status": "done",
               "charge": 0.0,
               "raf": 0.0
+            }
+          ]
+        },
+        {
+          "id": "mini-serveur-minisite",
+          "name": "Mini-site martyr (Phase 2)",
+          "titre": "Générateur de mini-site réaliste (20 règles, 4 pages) pour audit de règles de portée globale — oracle machine-lisible, sans dépendance au composeur-v2",
+          "status": "todo",
+          "qualif": "P1",
+          "target": null,
+          "owner": "laurent",
+          "charge": 3.0,
+          "raf": 3.0,
+          "type": "Feature",
+          "steps": [
+            {
+              "name": "Tirage 20 règles (stratification 7 déterministes / 7 seuil / 6 jugement, portée globale, hors phase 1)",
+              "status": "todo",
+              "charge": 0.5,
+              "raf": 0.5
+            },
+            {
+              "name": "build_minisite.py — génération HTML (4 pages : index, contact, produits, mentions-légales) avec header/footer commun et injections oracle délibérées",
+              "status": "todo",
+              "charge": 1.5,
+              "raf": 1.5
+            },
+            {
+              "name": "manifest.json — oracle machine-lisible (règle × statut : conforme / non-conforme, zéro annotation visible)",
+              "status": "todo",
+              "charge": 0.5,
+              "raf": 0.5
+            },
+            {
+              "name": "test_minisite.py — validation statique (20 règles, répartition 7-7-6, HTML valide, zéro fuite oracle)",
+              "status": "todo",
+              "charge": 0.5,
+              "raf": 0.5
+            }
+          ]
+        },
+        {
+          "id": "mini-serveur-minisite-full",
+          "name": "Mini-site full (245 règles)",
+          "titre": "Mini-site martyr couvrant les 245 règles Opquast — intègre le moteur composeur-v2, 25 RulePacks existants + 220 mocks, validation formelle S2==oracle, manifest complet",
+          "status": "todo",
+          "qualif": "P1",
+          "target": null,
+          "owner": "laurent",
+          "charge": 5.0,
+          "raf": 5.0,
+          "type": "Feature",
+          "steps": [
+            {
+              "name": "Import moteur composeur-v2 (sys.path.append, RulePack, compose_pack) dans build_full.py",
+              "status": "todo",
+              "charge": 0.5,
+              "raf": 0.5
+            },
+            {
+              "name": "25 RulePacks existants — intégration depuis composeur-v2/rulepacks/",
+              "status": "todo",
+              "charge": 0.5,
+              "raf": 0.5
+            },
+            {
+              "name": "220 RulePacks génériques (mocks) — proto-spécimen basique, oracle indéterminable, invariant S2==oracle respecté",
+              "status": "todo",
+              "charge": 1.5,
+              "raf": 1.5
+            },
+            {
+              "name": "Validation formelle avant génération HTML (test_accord_s2_oracle + test_leak_corrigé pour les 245 règles)",
+              "status": "todo",
+              "charge": 1.0,
+              "raf": 1.0
+            },
+            {
+              "name": "Génération HTML mini-site cohérent (header/main/footer, 245 proto-spécimens) + manifest.json complet",
+              "status": "todo",
+              "charge": 1.5,
+              "raf": 1.5
             }
           ]
         }
