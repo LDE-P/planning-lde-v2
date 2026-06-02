@@ -3016,7 +3016,7 @@
           "id": "reflexion-meeting-bha-mho-lde",
           "name": "Lancement Projet et Amorce",
           "titre": "Réflexion avant meeting BHA MHO LDE",
-          "status": "wip",
+          "status": "done",
           "qualif": "P2",
           "target": "",
           "owner": "laurent",
@@ -3055,7 +3055,7 @@
             },
             {
               "name": "Création de l'échantillon de règles",
-              "status": "todo",
+              "status": "done",
               "charge": 0.0,
               "raf": 0.0
             }
@@ -3185,6 +3185,27 @@
             },
             {
               "name": "Boucle de capitalisation : corrigé versionné + amélioration classification — findings D-AUDIT à verser (S1 trop pessimiste à recalibrer ; faux positif R071 ; oracle 071-001 à réviser par LDE)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ]
+        },
+        {
+          "id": "mini-serveur-specimen",
+          "name": "Mini-serveur de spécimens",
+          "titre": "Serveur local Python pour fournir les spécimens au MCP en condition d'audit",
+          "status": "done",
+          "qualif": "P1",
+          "target": "02/06/2026",
+          "owner": "laurent",
+          "charge": 1.0,
+          "raf": 0.0,
+          "commentaire": "Création de serve.py permettant à MHO de lancer les specimens en local avec simulation des headers HTTP (R213, R226) et interception des liens de dépendances (zip, sitemap). Inclus dans site-martyr-phase1.zip",
+          "type": "Feature",
+          "steps": [
+            {
+              "name": "Spécification et code du serveur",
               "status": "done",
               "charge": 0.0,
               "raf": 0.0
