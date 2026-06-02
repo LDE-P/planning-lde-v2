@@ -5248,7 +5248,46 @@
           "id": "init-bloc-notes",
           "name": "Initialisation bloc-notes",
           "status": "wip",
-          "steps": []
+          "steps": [
+            {
+              "name": "Serveur HTTP + endpoints (GET/POST state)",
+              "status": "done",
+              "charge": 0.3,
+              "raf": 0.0
+            },
+            {
+              "name": "Interface todo.html (blocs h1/paragraph/listes)",
+              "status": "done",
+              "charge": 0.3,
+              "raf": 0.0
+            },
+            {
+              "name": "Résilience données (atomique + garde + backups rotatifs)",
+              "status": "done",
+              "charge": 0.2,
+              "raf": 0.0
+            },
+            {
+              "name": "Intégration hub (hub-config.json, start-servers.sh)",
+              "status": "done",
+              "charge": 0.1,
+              "raf": 0.0
+            },
+            {
+              "name": "Fine tuning (UX, fonctionnalités)",
+              "status": "wip",
+              "charge": 0.1,
+              "raf": 0.3
+            }
+          ],
+          "titre": "Bloc-notes structuré — serveur Python, écriture atomique, backups, intégration hub",
+          "qualif": "P2",
+          "target": null,
+          "owner": "laurent",
+          "charge": 1.0,
+          "raf": 0.3,
+          "type": "Feature",
+          "commentaire": "Implémentation initiale livrée (commit 120ce88). Fine tuning restant avant done."
         }
       ],
       "gsheet_hidden": true
