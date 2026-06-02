@@ -3328,8 +3328,8 @@
           "type": "Feature",
           "steps": [
             {
-              "name": "Sélectionner les 15 règles (page-auditables · oracle décidable · signal d'apprentissage) — +2 déterministe, +7 à seuil, +6 jugement ; confirmer catégories sur checklist-v5-final (grille draft)",
-              "status": "todo",
+              "name": "Sélectionner les 15 règles (page-auditables · oracle décidable · signal d'apprentissage) — FAIT, vérifié sur checklist-v5-final : +2 déterministe, +4 à seuil, +9 jugement (7/4/9, pas 7/7/6 : le référentiel ne contient que 3-4 vraies règles « à seuil »). Voir PARENTHESE-selection-regles.md",
+              "status": "done",
               "charge": 0.0,
               "raf": 0.0
             },
