@@ -3043,13 +3043,13 @@
             },
             {
               "name": "Spec d'amorce LDE",
-              "status": "wip",
+              "status": "done",
               "charge": 0.0,
               "raf": 0.0
             },
             {
               "name": "POC composeur de specimens BANC (oracle, 1 règle arbitraire) — PRIORITÉ, en parallèle de la classification",
-              "status": "wip",
+              "status": "done",
               "charge": 0.0,
               "raf": 0.0
             },
@@ -3156,7 +3156,7 @@
           "id": "composeur-v2-auto-apprenant",
           "name": "Composeur V2 (auto-apprenant)",
           "titre": "Moteur à boucle de calibration à source de vérité protégée : produit/valide/apprend sur 2 niveaux de connaissance (S1 libellés / S2 checklist) ; corrige le Composeur et la classification sans laisser dériver l'oracle.",
-          "status": "wip",
+          "status": "done",
           "qualif": "P1",
           "target": null,
           "owner": "laurent",
