@@ -1127,6 +1127,26 @@
           "status": "final",
           "date": "2026-05-22",
           "subproject": "maj-quiz-source-examen-sql"
+        },
+        {
+          "id": "prompt-lancement-composeur",
+          "file": "banc-de-tests/docs/prompt-lancement-composeur.md",
+          "title": "Prompt de lancement — sous-projet Composeur",
+          "desc": "Brief de démarrage du POC Composeur (règle R069, dossier banc-de-tests/composeur/) : objectif, contraintes (oracle séparé, host minimal, re-vérification), livrables, garde-fous.",
+          "type": "notes",
+          "status": "final",
+          "date": "2026-05-31",
+          "subproject": "generation-snippets-cas-pratiques-v2"
+        },
+        {
+          "id": "spec-composeur-poc",
+          "file": "banc-de-tests/composeur/SPEC-composeur-poc.md",
+          "title": "SPEC courte — Composeur de specimens (POC R069, mode banc)",
+          "desc": "Spécification POC du Composeur : résultat du gate ≤5 outils (audit aveugle 4/4), architecture cœur+adaptateurs, format de l'oracle (manifest §8), arborescence des fichiers, méthode de re-vérification (T-ISO/T-ORA/T-LEAK + audit aveugle rejoué). EN ATTENTE DE VALIDATION LDE.",
+          "type": "spec",
+          "status": "draft",
+          "date": "2026-05-31",
+          "subproject": "generation-snippets-cas-pratiques-v2"
         }
       ],
       "subprojects": [
@@ -1565,6 +1585,96 @@
               "status": "todo",
               "charge": 0.2,
               "raf": 0.2
+            }
+          ]
+        },
+        {
+          "id": "generation-snippets-cas-pratiques-v1",
+          "name": "Génération snippets/cas pratiques — V1",
+          "titre": "Premier jet : 18 snippets (tirage 1 sur lots 1–3), CSV enrichis, déployés dans Training V7 local",
+          "status": "fail",
+          "qualif": "P1",
+          "target": null,
+          "owner": "laurent",
+          "charge": 2.0,
+          "raf": 0.0,
+          "commentaire": "Snippets générés non pertinents / incohérents avec réponses et distracteurs — constat audit persona (session ÉCHEC 2026-05-30). Travail réalisé conservé dans CAS-PRATIQUES/lot-test-recap-1/ et lot-exam-blanc-1/. Correction des plus récupérables tentée en parallèle (SP correction-snippets-recuperables).",
+          "type": "Feature",
+          "steps": [
+            {
+              "name": "Sélection snippets — tirage 1 (18 snippets, lots 1+2+3)",
+              "status": "done",
+              "charge": 0.3,
+              "raf": 0.0
+            },
+            {
+              "name": "Composition lots test-recap-1 et exam-blanc-1 (index HTML + snippets)",
+              "status": "done",
+              "charge": 0.7,
+              "raf": 0.0
+            },
+            {
+              "name": "Déploiement wp-content/snippets/ + shortcode PHP (Training V7 local)",
+              "status": "done",
+              "charge": 0.2,
+              "raf": 0.0
+            },
+            {
+              "name": "CSV enrichis : feedbacks, mises en situation, corrigés détaillés (3 CSV)",
+              "status": "done",
+              "charge": 0.8,
+              "raf": 0.0
+            },
+            {
+              "name": "Audit persona — ÉCHEC (snippets non pertinents/incohérents)",
+              "status": "fail",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ]
+        },
+        {
+          "id": "generation-snippets-cas-pratiques-v2",
+          "name": "Composeur",
+          "titre": "Générateur UNIQUE de snippets (décision actée 2026-05-31) — un cœur commun, 2 modes de sortie : banc (oracle machine-lisible) + pédagogique (QCM/Training V7). POC sur 1 règle (R069) : cas d'applicabilité (NA) + validité (respectée/non respectée/indéterminable).",
+          "status": "wip",
+          "qualif": "P1",
+          "target": null,
+          "owner": "laurent",
+          "charge": 10.0,
+          "raf": 4.0,
+          "commentaire": "POC R069 COMPLET et DÉMONTRÉ DE BOUT EN BOUT (2026-06-01). Génération déterministe (templates figés) → gates verts (T-ORA seul gate, T-LEAK, T-ISO, T-COV, T-REPRO octet-à-octet, T-STD) : 61 passed / 3 skipped, re-vérifié sandbox. Place nette faite : nature_indetermination retiré de l'oracle (option b, sortie auditeur only ; phase 2 = nature_attendue), méta-constat CLAUDE.md corrigé, VERROU GIT LEVÉ pour ce projet (composeur a son dépôt propre, commits locaux, pas de remote). Étapes 1/2/3 FAITES : (1) jouabilité passe 1 dans CLAUDE IN CHROME via http://localhost:3502 — T3.1 0 erreur + T3.2 submit→modale sur les 4 specimens ; (2) Playwright verify/test_playwright.py (adaptatif hors-ligne, vert réel sur Mac) ; (3) D-AUDIT 4/4 sur Banc A (summary seul) ; bras Banc 5 (b) moyen de contrôle injecté → FINDING → OPTION Y (LDE) : le 004 reclassé respectée (Banc A) / non respectée (Banc B WCAG 2.5.3) = angle mort par faux respectée ; R069 n'a PAS de specimen indéterminable authentique (phase 2, règle de jugement, avec cible nature_attendue). Y propagé dans code (suite verte 61/3) + SPEC + référentiel §6.2/§6.2bis/§8 + spec-amorce §4bis + vue-poc.html. Double banc A (checklist-v5-final) / B (RGAA-WCAG). RESTE (phase 2, hors POC) : intégration checklist-IA-V1.json (245 règles), strates variation/adversariale, mode pédagogique, démonstration indéterminable sur règle de jugement. Port preview 3502.",
+          "type": "Feature",
+          "steps": [
+            {
+              "name": "Gate ≤5 outils — audit aveugle (subagent isolé + MCP) sur 4 pages R069 : 4/4 concordants, indice de fiabilité auto-calibré (0.45 sur l'indéterminable, ≥0.90 sinon)",
+              "status": "done",
+              "charge": 0.5,
+              "raf": 0.0
+            },
+            {
+              "name": "SPEC courte + intégration revues LDE & Claude Code (double banc A/B, bloquants 1&2 résolus, manifest bi-niveau, sources de vérité, suite de tests §8) — SPEC-composeur-poc.md + MAJ regles-generation-snippets.md + spec-amorce — VALIDÉE (GO)",
+              "status": "done",
+              "charge": 1.5,
+              "raf": 0.0
+            },
+            {
+              "name": "Coder le générateur (core/ + adapters/banc + verify/) → 4 specimens R069 + manifests + suite de tests — FAIT (Claude Code, 61 passed/3 skipped, re-vérifié sandbox)",
+              "status": "done",
+              "charge": 3.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Finalisation POC : place nette + jouabilité passe 1 (CLAUDE IN CHROME, HTTP 3502, T3.1/T3.2 verts) + passe 2 Playwright (test écrit, adaptatif) + run D-AUDIT (4/4 Banc A) — FAIT",
+              "status": "done",
+              "charge": 1.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Phase 2 (hors POC) : intégration checklist-IA-V1.json (245 règles), strates variation/adversariale, bras Banc 5 (b) moyen de contrôle injecté, mode pédagogique",
+              "status": "todo",
+              "charge": 4.0,
+              "raf": 4.0
             }
           ]
         }
@@ -2894,16 +3004,6 @@
           "subproject": "reflexion-meeting-bha-mho-lde"
         },
         {
-          "id": "prompt-lancement-composeur",
-          "file": "banc-de-tests/docs/prompt-lancement-composeur.md",
-          "title": "Prompt de lancement — sous-projet Composeur",
-          "desc": "Brief de démarrage du POC Composeur (règle R069, dossier banc-de-tests/composeur/) : objectif, contraintes (oracle séparé, host minimal, re-vérification), livrables, garde-fous.",
-          "type": "notes",
-          "status": "final",
-          "date": "2026-05-31",
-          "subproject": "generation-snippets-cas-pratiques-v2"
-        },
-        {
           "id": "spec-composeur-v2-auto-apprenant",
           "file": "banc-de-tests/composeur/SPEC-composeur-v2-auto-apprenant.md",
           "title": "SPEC — Composeur V2 (auto-apprenant)",
@@ -2922,16 +3022,6 @@
           "status": "final",
           "date": "2026-06-01",
           "subproject": "composeur-v2-auto-apprenant"
-        },
-        {
-          "id": "spec-composeur-poc",
-          "file": "banc-de-tests/composeur/SPEC-composeur-poc.md",
-          "title": "SPEC courte — Composeur de specimens (POC R069, mode banc)",
-          "desc": "Spécification POC du Composeur : résultat du gate ≤5 outils (audit aveugle 4/4), architecture cœur+adaptateurs, format de l'oracle (manifest §8), arborescence des fichiers, méthode de re-vérification (T-ISO/T-ORA/T-LEAK + audit aveugle rejoué). EN ATTENTE DE VALIDATION LDE.",
-          "type": "spec",
-          "status": "draft",
-          "date": "2026-05-31",
-          "subproject": "generation-snippets-cas-pratiques-v2"
         },
         {
           "id": "spec-mini-serveur-minisite",
@@ -2955,83 +3045,6 @@
         }
       ],
       "subprojects": [
-        {
-          "id": "sites-martyrs-lot-1",
-          "name": "Banc de tests — lot 1",
-          "titre": "Banc de tests lot 1",
-          "status": "todo",
-          "qualif": "P2",
-          "target": "05/06/2026",
-          "owner": null,
-          "charge": 21.0,
-          "raf": 21.0,
-          "steps": [
-            {
-              "name": "Spécification",
-              "status": "todo",
-              "charge": 0.0,
-              "raf": 0.0
-            },
-            {
-              "name": "Développement",
-              "status": "todo",
-              "charge": 0.0,
-              "raf": 0.0
-            },
-            {
-              "name": "Tests",
-              "status": "todo",
-              "charge": 0.0,
-              "raf": 0.0
-            },
-            {
-              "name": "Mis en ligne",
-              "status": "todo",
-              "charge": 0.0,
-              "raf": 0.0
-            }
-          ],
-          "type": "Feature"
-        },
-        {
-          "id": "sites-martyrs-lot-2",
-          "name": "Banc de tests — lot 2",
-          "titre": "Banc de tests lot 2",
-          "status": "todo",
-          "qualif": "P2",
-          "target": "12/06/2026",
-          "owner": null,
-          "charge": 21.0,
-          "raf": 0.0,
-          "steps": [
-            {
-              "name": "Spécification",
-              "status": "todo",
-              "charge": 0.0,
-              "raf": 0.0
-            },
-            {
-              "name": "Développement",
-              "status": "todo",
-              "charge": 0.0,
-              "raf": 0.0
-            },
-            {
-              "name": "Tests",
-              "status": "todo",
-              "charge": 0.0,
-              "raf": 0.0
-            },
-            {
-              "name": "Mis en ligne",
-              "status": "todo",
-              "charge": 0.0,
-              "raf": 0.0
-            }
-          ],
-          "type": "Feature",
-          "commentaire": "TEST"
-        },
         {
           "id": "reflexion-meeting-bha-mho-lde",
           "name": "Lancement Projet et Amorce",
@@ -3083,100 +3096,10 @@
           "type": "Autre"
         },
         {
-          "id": "generation-snippets-cas-pratiques-v1",
-          "name": "Génération snippets/cas pratiques — V1",
-          "titre": "Premier jet : 18 snippets (tirage 1 sur lots 1–3), CSV enrichis, déployés dans Training V7 local",
-          "status": "fail",
-          "qualif": "P1",
-          "target": null,
-          "owner": "laurent",
-          "charge": 2.0,
-          "raf": 0.0,
-          "commentaire": "Snippets générés non pertinents / incohérents avec réponses et distracteurs — constat audit persona (session ÉCHEC 2026-05-30). Travail réalisé conservé dans CAS-PRATIQUES/lot-test-recap-1/ et lot-exam-blanc-1/. Correction des plus récupérables tentée en parallèle (SP correction-snippets-recuperables).",
-          "type": "Feature",
-          "steps": [
-            {
-              "name": "Sélection snippets — tirage 1 (18 snippets, lots 1+2+3)",
-              "status": "done",
-              "charge": 0.3,
-              "raf": 0.0
-            },
-            {
-              "name": "Composition lots test-recap-1 et exam-blanc-1 (index HTML + snippets)",
-              "status": "done",
-              "charge": 0.7,
-              "raf": 0.0
-            },
-            {
-              "name": "Déploiement wp-content/snippets/ + shortcode PHP (Training V7 local)",
-              "status": "done",
-              "charge": 0.2,
-              "raf": 0.0
-            },
-            {
-              "name": "CSV enrichis : feedbacks, mises en situation, corrigés détaillés (3 CSV)",
-              "status": "done",
-              "charge": 0.8,
-              "raf": 0.0
-            },
-            {
-              "name": "Audit persona — ÉCHEC (snippets non pertinents/incohérents)",
-              "status": "fail",
-              "charge": 0.0,
-              "raf": 0.0
-            }
-          ]
-        },
-        {
-          "id": "generation-snippets-cas-pratiques-v2",
-          "name": "Composeur",
-          "titre": "Générateur UNIQUE de snippets (décision actée 2026-05-31) — un cœur commun, 2 modes de sortie : banc (oracle machine-lisible) + pédagogique (QCM/Training V7). POC sur 1 règle (R069) : cas d'applicabilité (NA) + validité (respectée/non respectée/indéterminable).",
-          "status": "wip",
-          "qualif": "P1",
-          "target": null,
-          "owner": "laurent",
-          "charge": 10.0,
-          "raf": 4.0,
-          "commentaire": "POC R069 COMPLET et DÉMONTRÉ DE BOUT EN BOUT (2026-06-01). Génération déterministe (templates figés) → gates verts (T-ORA seul gate, T-LEAK, T-ISO, T-COV, T-REPRO octet-à-octet, T-STD) : 61 passed / 3 skipped, re-vérifié sandbox. Place nette faite : nature_indetermination retiré de l'oracle (option b, sortie auditeur only ; phase 2 = nature_attendue), méta-constat CLAUDE.md corrigé, VERROU GIT LEVÉ pour ce projet (composeur a son dépôt propre, commits locaux, pas de remote). Étapes 1/2/3 FAITES : (1) jouabilité passe 1 dans CLAUDE IN CHROME via http://localhost:3502 — T3.1 0 erreur + T3.2 submit→modale sur les 4 specimens ; (2) Playwright verify/test_playwright.py (adaptatif hors-ligne, vert réel sur Mac) ; (3) D-AUDIT 4/4 sur Banc A (summary seul) ; bras Banc 5 (b) moyen de contrôle injecté → FINDING → OPTION Y (LDE) : le 004 reclassé respectée (Banc A) / non respectée (Banc B WCAG 2.5.3) = angle mort par faux respectée ; R069 n'a PAS de specimen indéterminable authentique (phase 2, règle de jugement, avec cible nature_attendue). Y propagé dans code (suite verte 61/3) + SPEC + référentiel §6.2/§6.2bis/§8 + spec-amorce §4bis + vue-poc.html. Double banc A (checklist-v5-final) / B (RGAA-WCAG). RESTE (phase 2, hors POC) : intégration checklist-IA-V1.json (245 règles), strates variation/adversariale, mode pédagogique, démonstration indéterminable sur règle de jugement. Port preview 3502.",
-          "type": "Feature",
-          "steps": [
-            {
-              "name": "Gate ≤5 outils — audit aveugle (subagent isolé + MCP) sur 4 pages R069 : 4/4 concordants, indice de fiabilité auto-calibré (0.45 sur l'indéterminable, ≥0.90 sinon)",
-              "status": "done",
-              "charge": 0.5,
-              "raf": 0.0
-            },
-            {
-              "name": "SPEC courte + intégration revues LDE & Claude Code (double banc A/B, bloquants 1&2 résolus, manifest bi-niveau, sources de vérité, suite de tests §8) — SPEC-composeur-poc.md + MAJ regles-generation-snippets.md + spec-amorce — VALIDÉE (GO)",
-              "status": "done",
-              "charge": 1.5,
-              "raf": 0.0
-            },
-            {
-              "name": "Coder le générateur (core/ + adapters/banc + verify/) → 4 specimens R069 + manifests + suite de tests — FAIT (Claude Code, 61 passed/3 skipped, re-vérifié sandbox)",
-              "status": "done",
-              "charge": 3.0,
-              "raf": 0.0
-            },
-            {
-              "name": "Finalisation POC : place nette + jouabilité passe 1 (CLAUDE IN CHROME, HTTP 3502, T3.1/T3.2 verts) + passe 2 Playwright (test écrit, adaptatif) + run D-AUDIT (4/4 Banc A) — FAIT",
-              "status": "done",
-              "charge": 1.0,
-              "raf": 0.0
-            },
-            {
-              "name": "Phase 2 (hors POC) : intégration checklist-IA-V1.json (245 règles), strates variation/adversariale, bras Banc 5 (b) moyen de contrôle injecté, mode pédagogique",
-              "status": "todo",
-              "charge": 4.0,
-              "raf": 4.0
-            }
-          ]
-        },
-        {
           "id": "composeur-v2-auto-apprenant",
           "name": "Composeur V2 (auto-apprenant)",
           "titre": "Moteur à boucle de calibration à source de vérité protégée : produit/valide/apprend sur 2 niveaux de connaissance (S1 libellés / S2 checklist) ; corrige le Composeur et la classification sans laisser dériver l'oracle.",
-          "status": "done",
+          "status": "blocked",
           "qualif": "P1",
           "target": null,
           "owner": "laurent",
@@ -3215,7 +3138,7 @@
           "id": "mini-serveur-specimen",
           "name": "Mini-serveur de spécimens",
           "titre": "Serveur local Python pour fournir les spécimens au MCP en condition d'audit",
-          "status": "done",
+          "status": "blocked",
           "qualif": "P1",
           "target": "02/06/2026",
           "owner": "laurent",
@@ -3236,7 +3159,7 @@
           "id": "mini-serveur-minisite",
           "name": "Mini-site martyr (Phase 2)",
           "titre": "Générateur de mini-site réaliste (20 règles, 4 pages) pour audit de règles de portée globale — oracle machine-lisible, sans dépendance au composeur-v2",
-          "status": "todo",
+          "status": "blocked",
           "qualif": "P1",
           "target": null,
           "owner": "laurent",
@@ -3274,7 +3197,7 @@
           "id": "mini-serveur-minisite-full",
           "name": "Mini-site full (245 règles)",
           "titre": "Mini-site martyr couvrant les 245 règles Opquast — intègre le moteur composeur-v2, 25 RulePacks existants + 220 mocks, validation formelle S2==oracle, manifest complet",
-          "status": "todo",
+          "status": "blocked",
           "qualif": "P1",
           "target": null,
           "owner": "laurent",
