@@ -1,3 +1,12 @@
+> **⚠️ RÈGLE OBLIGATOIRE — Contexte GIT racine :**
+> Ce projet est un sous-dossier de `/Users/laurentdenis/Documents/GIT/`.
+> **Avant toute action**, lire le fichier d'instructions racine correspondant à votre assistant :
+> - Claude Code / Cowork → `/Users/laurentdenis/Documents/GIT/CLAUDE.md`
+> - Antigravity → `/Users/laurentdenis/Documents/GIT/GEMINI.md`
+>
+> Si le dossier GIT racine n'est pas accessible depuis votre workspace, **signaler à LDE** :
+> « Session ouverte hors process — je n'ai pas accès au CLAUDE.md / GEMINI.md racine GIT. Merci de m'y donner accès ou de relancer depuis GIT/. »
+
 # Planning LDE V2
 
 Nouveau système de suivi des projets LDE — modèle Projet → Sous-projet → Étape.
