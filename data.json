@@ -3008,6 +3008,16 @@
       "folder": "banc-de-tests",
       "docs": [
         {
+          "id": "protocole-mho-audit-aveugle",
+          "file": "banc-de-tests/1-prealable-et-transmission/transmission/PROTOCOLE-MHO-audit-aveugle.md",
+          "title": "Protocole MHO — audit aveugle des 2 lots (proposition)",
+          "desc": "Workflow end-to-end pour MHO : 2 lots servis (parenthèse 20 + Brindille 54) audités en aveugle au libellé MCP seul, confrontation aux oracles, boucle d'auto-amélioration (signal laissé ouvert). Remplace le README-MHO obsolète. Gaps : serveur du lot 20, format de sortie unifié, packaging.",
+          "type": "spec",
+          "status": "draft",
+          "date": "2026-06-03",
+          "subproject": "composeur-final-synthese"
+        },
+        {
           "id": "spec-banc-unifie",
           "file": "banc-de-tests/4-specs-cles/SPEC-banc-unifie.md",
           "title": "SPEC — Banc unifié (proposition)",
