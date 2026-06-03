@@ -3307,6 +3307,57 @@
               "raf": 0.0
             }
           ]
+        },
+        {
+          "id": "composeur-final-synthese",
+          "name": "Composeur final (synthèse)",
+          "titre": "Session de synthèse fusionnant les deux bancs de calibration : pages indépendantes (20 règles, parenthèse) + site-martyr e-commerce « Brindille » (54 règles). Objectif : converger vers un banc unifié, une spec de durcissement commune et une transmission équipe (enrichir le MCP avec les seuils/exigences Opquast).",
+          "status": "wip",
+          "qualif": "P1",
+          "target": "",
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "commentaire": "Synthèse post-parenthèse. Points d'entrée : banc-de-tests/DOSSIER-RENCONTRE-pages-independantes.md + DOSSIER-RENCONTRE-site-martyr.md.",
+          "type": "Feature",
+          "steps": [
+            {
+              "name": "Aligner la source de vérité unique — FAIT (2026-06-03) : referentiels/checklist-v5-final.md confirmé source unique par LDE. Diagnostic : CAS-PRATIQUES/checklist-IA-V1.json est un miroir structuré content-identique (245 règles, numérotation 1:1, contenu vérifié dont R210). Seul build_classification.py lit le JSON ; classification valide car le champ controle est identique. Pas de divergence réelle de verdicts.",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Comparer les deux corpus et démarches (20 pages indépendantes vs 54 site intégré) : recouvrement de règles, qualité des oracles, ce que chaque format couvre exclusivement.",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Cross-audit réciproque : auditer le site-martyr avec la méthode aveugle isolée + intervalles, et réciproquement, pour éprouver la généralité hors des ~20 règles.",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Schéma d'oracle unifié + invariants communs : slugs neutres / zéro fuite, séparation physique servi↔oracle (public/ + publish.py), convention de verdicts (NA / respectée / non respectée / indéterminable).",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Spec de durcissement commune : fusionner les leviers par portée de règle (seuils Opquast explicites, faux positif confiant, parcours interactif, confiance comme métrique de tri, Banc A/B Opquast vs WCAG/RGAA).",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Acter le banc unifié + préparer brief équipe / transmission MHO, en s'appuyant sur le résultat chiffré (summary-only ↔ Opquast 0,81 → ~0,97 avec contrôle injecté) → argument pour enrichir le MCP.",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ]
         }
       ],
       "gsheet_hidden": true
