@@ -776,6 +776,51 @@
         }
       ],
       "gsheet_hidden": true
+    },
+    {
+      "id": "sites-martyrs",
+      "name": "Banc de tests",
+      "subprojects": [
+        {
+          "id": "composeur-v2-auto-apprenant",
+          "name": "Composeur V2 (auto-apprenant)",
+          "titre": "Moteur à boucle de calibration à source de vérité protégée : produit/valide/apprend sur 2 niveaux de connaissance (S1 libellés / S2 checklist) ; corrige le Composeur et la classification sans laisser dériver l'oracle.",
+          "status": "done",
+          "qualif": "P1",
+          "target": null,
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "commentaire": "RETIRÉ le 2026-06-02 (décision LDE) — moteur Composeur V2 abandonné. Seuls les principes sont conservés → banc-de-tests/PRINCIPES-banc-calibration.md. Le code (rule-packs, prédiction S1, gates T-LEAK/T-REPRO) n'est réactivable que pour l'industrialisation des 245 règles. Banc de calibration de référence : banc-de-tests/parenthese-20/. | SPEC rédigée 2026-06-01 (composeur/SPEC-composeur-v2-auto-apprenant.md), à valider (Ping-Pong) avant tout code. Démarrage en bootstrap sur le sous-ensemble générable (déterministes/seuil, par élément/page), pas les 245 d'emblée. 3 couches : oracle (vérité, S2+standards+LDE) / prédiction S1 (hypothèse MCP) / verdict réel auditeur. Invariant : l'apprentissage réécrit le modèle + la classification, jamais l'oracle.",
+          "type": "Feature",
+          "steps": [
+            {
+              "name": "Rédiger la SPEC V2 (3 couches · invariant boucle vertueuse · 3 phases · bootstrap)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Valider la SPEC (revue LDE + Ping-Pong) — v1.2 close : 2 tours Claude Code + arbitrages LDE, T-LEAK-CORRIGÉ gate bloquant, changelog d'oracle gravé",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Bootstrap : 5 règle-packs + chaîne S1/S2 (200/17, T-LEAK-CORRIGÉ gate) + runs réels aveugles FAITS (D-AUDIT 14 verdicts) — accord_S1↔réel 0.64, taux_angle-mort 2/14 (R071), 0/3 angles morts prédits réalisés (Claude > heuristique S1), R236 confirmée. Cf. rapport/D-AUDIT-2026-06-01.md",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Boucle de capitalisation : corrigé versionné + amélioration classification — findings D-AUDIT à verser (S1 trop pessimiste à recalibrer ; faux positif R071 ; oracle 071-001 à réviser par LDE)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ]
+        }
+      ]
     }
   ]
 }
