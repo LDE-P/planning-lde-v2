@@ -3251,44 +3251,44 @@
         {
           "id": "mini-serveur-minisite-full",
           "name": "Mini-site full (245 règles)",
-          "titre": "Mini-site martyr couvrant les 245 règles Opquast — intègre le moteur composeur-v2, 25 RulePacks existants + 220 mocks, validation formelle S2==oracle, manifest complet",
-          "status": "fail",
+          "titre": "Mini-site martyr couvrant les 245 règles Opquast — intègre le moteur composeur-v2, 25 RulePacks existants + 220 mocks intelligents (heuristiques sémantiques), validation formelle S2==oracle, manifest complet",
+          "status": "done",
           "qualif": "P1",
           "target": null,
           "owner": "laurent",
           "charge": 5.0,
-          "raf": 5.0,
+          "raf": 0.0,
           "type": "Feature",
           "steps": [
             {
               "name": "Import moteur composeur-v2 (sys.path.append, RulePack, compose_pack) dans build_full.py",
-              "status": "todo",
+              "status": "done",
               "charge": 0.5,
-              "raf": 0.5
+              "raf": 0.0
             },
             {
               "name": "25 RulePacks existants — intégration depuis composeur-v2/rulepacks/",
-              "status": "todo",
+              "status": "done",
               "charge": 0.5,
-              "raf": 0.5
+              "raf": 0.0
             },
             {
-              "name": "220 RulePacks génériques (mocks) — proto-spécimen basique, oracle indéterminable, invariant S2==oracle respecté",
-              "status": "todo",
+              "name": "220 RulePacks génériques (mocks intelligents via heuristiques sémantiques) — éléments DOM réalistes (Invariant A), oracle indéterminable, invariant S2==oracle respecté",
+              "status": "done",
               "charge": 1.5,
-              "raf": 1.5
+              "raf": 0.0
             },
             {
               "name": "Validation formelle avant génération HTML (test_accord_s2_oracle + test_leak_corrigé pour les 245 règles)",
-              "status": "todo",
+              "status": "done",
               "charge": 1.0,
-              "raf": 1.0
+              "raf": 0.0
             },
             {
-              "name": "Génération HTML mini-site cohérent (header/main/footer, 245 proto-spécimens) + manifest.json complet",
-              "status": "todo",
+              "name": "Génération HTML mini-site (298 proto-spécimens indexés) + manifest.json complet",
+              "status": "done",
               "charge": 1.5,
-              "raf": 1.5
+              "raf": 0.0
             }
           ]
         },
