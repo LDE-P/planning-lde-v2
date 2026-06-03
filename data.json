@@ -1147,6 +1147,26 @@
           "status": "draft",
           "date": "2026-05-31",
           "subproject": "generation-snippets-cas-pratiques-v2"
+        },
+        {
+          "id": "spec-cas-pratiques-issus-du-banc",
+          "file": "CAS-PRATIQUES/cas-pratiques-issus-du-banc/SPEC-cas-pratiques-issus-du-banc.md",
+          "title": "Cas pratiques issus du Banc — spec & relais",
+          "desc": "Comment repartir des spécimens du Banc test pour produire des cas pratiques pédagogiques ; correspondance oracle→QCM, point de départ, garde-fous.",
+          "type": "spec",
+          "status": "final",
+          "date": "2026-06-03",
+          "subproject": "cas-pratiques-issus-du-banc"
+        },
+        {
+          "id": "ressources-communes-banc-caspratiques",
+          "file": "CAS-PRATIQUES/cas-pratiques-issus-du-banc/RESSOURCES-COMMUNES.md",
+          "title": "Ressources communes Banc ↔ Cas Pratiques",
+          "desc": "Inventaire des ressources partagées, où vit le corpus, règle d'évolution conjointe.",
+          "type": "notes",
+          "status": "draft",
+          "date": "2026-06-03",
+          "subproject": "cas-pratiques-issus-du-banc"
         }
       ],
       "subprojects": [
@@ -1675,6 +1695,51 @@
               "status": "todo",
               "charge": 4.0,
               "raf": 4.0
+            }
+          ]
+        },
+        {
+          "id": "cas-pratiques-issus-du-banc",
+          "name": "Cas pratiques issus du Banc test",
+          "titre": "Transformer les spécimens du Banc test (page + oracle machine-lisible) en cas pratiques pédagogiques (QCM + distracteurs + feedbacks) pour Training V7, via le mode pédagogique du Composeur. Double finalité actée (rendement banc ≠ valeur pédagogique).",
+          "status": "spec",
+          "qualif": "P2",
+          "target": "",
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "type": "Feature",
+          "commentaire": "Amont fait au Banc de tests (SP parenthese-livrable-20-specimens). Relais + spec : CAS-PRATIQUES/cas-pratiques-issus-du-banc/SPEC-cas-pratiques-issus-du-banc.md ; ressources partagées : RESSOURCES-COMMUNES.md (même dossier). Correspondance clé : oracle → (bonne réponse + distracteurs + feedback) ; les cas-pièges du banc sont les meilleurs distracteurs. Garde-fou : oracle protégé, ne pas modifier le corpus banc sans coordination. Mécanisme de collaboration inter-projets à définir avec LDE.",
+          "steps": [
+            {
+              "name": "Lire relais + SYNTHESE-leviers-durcissement + referentiels/regles-editoriales-quiz",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Premier lot pédagogique : dark patterns (R033/R059) + à-seuil (R182/R186) → QCM + distracteurs + feedback",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Export WpProQuiz (CSV) + procédure UIDs/soft-delete",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Double-étiqueter le corpus (rendement banc / valeur pédagogique)",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Arbitrer l'emplacement du corpus partagé (option A lecture seule / B neutre)",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
             }
           ]
         }
