@@ -3193,7 +3193,7 @@
           "id": "mini-serveur-specimen",
           "name": "Mini-serveur de spécimens",
           "titre": "Serveur local Python pour fournir les spécimens au MCP en condition d'audit",
-          "status": "blocked",
+          "status": "fail",
           "qualif": "P1",
           "target": "02/06/2026",
           "owner": "laurent",
@@ -3214,7 +3214,7 @@
           "id": "mini-serveur-minisite",
           "name": "Mini-site martyr (Phase 2)",
           "titre": "Générateur de mini-site réaliste (20 règles, 4 pages) pour audit de règles de portée globale — oracle machine-lisible, sans dépendance au composeur-v2",
-          "status": "blocked",
+          "status": "fail",
           "qualif": "P1",
           "target": null,
           "owner": "laurent",
@@ -3252,7 +3252,7 @@
           "id": "mini-serveur-minisite-full",
           "name": "Mini-site full (245 règles)",
           "titre": "Mini-site martyr couvrant les 245 règles Opquast — intègre le moteur composeur-v2, 25 RulePacks existants + 220 mocks, validation formelle S2==oracle, manifest complet",
-          "status": "blocked",
+          "status": "fail",
           "qualif": "P1",
           "target": null,
           "owner": "laurent",
@@ -3296,7 +3296,7 @@
           "id": "parenthese-livrable-20-specimens",
           "name": "Parenthèse pour livrable 20 spécimens",
           "titre": "Livrable deadline (≤12h, 2026-06-02 matin) : 20 spécimens (5 acquis + 15 à produire), équilibrés 1/3 déterministe / 1/3 à seuil / 1/3 jugement, même modèle (page assemblant proto-spécimens NA/conforme/non-conforme/indéterminé + audit aveugle MCP au libellé seul). Process simplifié, fiabilité moindre tolérée ; réintégration V2 ensuite.",
-          "status": "wip",
+          "status": "done",
           "qualif": "P0",
           "target": "02/06/2026",
           "owner": "laurent",
@@ -3359,6 +3359,12 @@
             {
               "name": "Livrables MHO — FAIT (2026-06-03, protocole VALIDÉ LDE) : protocole audit aveugle + format de verdicts (par URL) + serveurs (serve-lot20.py anti-tatillon port 8132, serve-martyr.py 8131) + URLs neutralisées (slugs opaques, mapping côté oracle, 0 R-id servi) + bundle zip livré par LDE. Garde-fou « seuils Opquast » retiré du livrable (gardé en interne).",
               "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Échantillon 20 sites réels capturés (audit 245 règles) — ACTÉ 2026-06-03, étape INTERCALÉE avant la BASCULE. Sites capturés par MHO sur serveur dédié (avec nos specimens), audités en aveugle par le robot MCP. Critères : sélection par probabilité + panel divers + garde-fous conditionnels (e-commerce, multilingue/i18n, newsletter, audio/vidéo, données perso/compte, UGC) ; capturabilité non éliminatoire (2e passe MHO) ; zones compte INCLUSES (comptes de test MHO) ; PAS d'oracle préalable (LDE fait l'audit de l'audit). Pérennité écartée : un 2e échantillon de sites DIFFÉRENTS (non capturés) éprouvera ensuite le MCP. FAIT cette session : liste élargie ~38 candidats + panel-20 (★) → docs/candidats-sites-captures.md. RESTE : figer le panel-20 + grille de transmission MHO (capturabilité + comptes de test).",
+              "status": "wip",
               "charge": 0.0,
               "raf": 0.0
             },
