@@ -452,8 +452,7 @@
             }
           ]
         }
-      ],
-      "gsheet_hidden": true
+      ]
     },
     {
       "id": "training-v7",
@@ -1022,8 +1021,7 @@
           ],
           "commentaire": ""
         }
-      ],
-      "gsheet_hidden": true
+      ]
     },
     {
       "id": "examens-v7",
@@ -1086,8 +1084,7 @@
             }
           ]
         }
-      ],
-      "gsheet_hidden": true
+      ]
     },
     {
       "id": "cas-pratiques-project",
@@ -1130,9 +1127,9 @@
         },
         {
           "id": "prompt-lancement-composeur",
-          "file": "banc-de-tests/docs/prompt-lancement-composeur.md",
+          "file": "banc-de-tests/1-prealable-et-transmission/docs/prompt-lancement-composeur.md",
           "title": "Prompt de lancement — sous-projet Composeur",
-          "desc": "Brief de démarrage du POC Composeur (règle R069, dossier banc-de-tests/composeur/) : objectif, contraintes (oracle séparé, host minimal, re-vérification), livrables, garde-fous.",
+          "desc": "Brief de démarrage du POC Composeur (règle R069, dossier banc-de-tests/3-produit/composeur/) : objectif, contraintes (oracle séparé, host minimal, re-vérification), livrables, garde-fous.",
           "type": "notes",
           "status": "final",
           "date": "2026-05-31",
@@ -1140,7 +1137,7 @@
         },
         {
           "id": "spec-composeur-poc",
-          "file": "banc-de-tests/composeur/SPEC-composeur-poc.md",
+          "file": "banc-de-tests/3-produit/composeur/SPEC-composeur-poc.md",
           "title": "SPEC courte — Composeur de specimens (POC R069, mode banc)",
           "desc": "Spécification POC du Composeur : résultat du gate ≤5 outils (audit aveugle 4/4), architecture cœur+adaptateurs, format de l'oracle (manifest §8), arborescence des fichiers, méthode de re-vérification (T-ISO/T-ORA/T-LEAK + audit aveugle rejoué). EN ATTENTE DE VALIDATION LDE.",
           "type": "spec",
@@ -1749,8 +1746,7 @@
             }
           ]
         }
-      ],
-      "gsheet_hidden": true
+      ]
     },
     {
       "id": "planning-lde-v2",
@@ -1803,7 +1799,7 @@
         },
         {
           "id": "plan-mise-en-forme-gsheet",
-          "file": "planning-lde-v2/mise-en-forme-gsheet.md",
+          "file": "planning-lde-v2/archive-gsheet/mise-en-forme-gsheet.md",
           "title": "Plan Mise en forme GSheet",
           "desc": "Plan d'avancement et notes techniques du sous-projet mise en forme GSheet — approche feuille modèle, comportements découverts (visibilité, protections, formules Semaines).",
           "type": "spec",
@@ -1833,7 +1829,7 @@
         },
         {
           "id": "spec-gsheet-hidden",
-          "file": "planning-lde-v2/SPEC-GSHEET-HIDDEN.md",
+          "file": "planning-lde-v2/archive-gsheet/SPEC-GSHEET-HIDDEN.md",
           "title": "Spec Exclusion GSheet par projet",
           "desc": "Spec complète du flag gsheet_hidden : schéma data.json, icône toggle UI, endpoint /api/toggle-gsheet-hidden, filtres push/pull, signalement dans les modales preview.",
           "type": "spec",
@@ -1843,7 +1839,7 @@
         },
         {
           "id": "tests-gsheet-hidden",
-          "file": "planning-lde-v2/TESTS-GSHEET-HIDDEN.md",
+          "file": "planning-lde-v2/archive-gsheet/TESTS-GSHEET-HIDDEN.md",
           "title": "Tests Exclusion GSheet par projet",
           "desc": "42 cas de test fonctionnels : endpoint toggle, push/TCD, pull, UI (icône, modales, CSS, tooltips), cas limites et rétrocompatibilité.",
           "type": "tests",
@@ -1857,7 +1853,7 @@
           "description": "Spec d'implémentation du sprint RAF Option B : charge/raf indépendants des étapes, automatisme GSheet, protection push/pull, col M clé stable.",
           "type": "spec",
           "status": "final",
-          "file": "planning-lde-v2/SPEC-RAF-OPTION-B.md",
+          "file": "planning-lde-v2/archive-gsheet/SPEC-RAF-OPTION-B.md",
           "subproject": "sprint-raf-option-b"
         },
         {
@@ -1866,14 +1862,14 @@
           "description": "Cas de test fonctionnels pour le sprint RAF Option B (35 cas, 9 sections, matrice de couverture).",
           "type": "tests",
           "status": "final",
-          "file": "planning-lde-v2/TESTS-RAF-OPTION-B.md",
+          "file": "planning-lde-v2/archive-gsheet/TESTS-RAF-OPTION-B.md",
           "subproject": "sprint-raf-option-b"
         },
         {
           "id": "debug-tests-push-pull",
           "title": "DEBUG — Tests manuels push/pull RAF Option B",
           "desc": "Journal de tests manuels RAF Option B — 36/36 ✅ (2026-05-18). 5 bugs corrigés (B1 cols 12→13, B2/B3 gspread 6.x, B4 pytest, B5 SUBSTITUE ;1). Sprint validé et clos.",
-          "file": "planning-lde-v2/DEBUG-TESTS-PUSH-PULL.md",
+          "file": "planning-lde-v2/archive-gsheet/DEBUG-TESTS-PUSH-PULL.md",
           "type": "notes",
           "status": "final",
           "subproject": "sprint-raf-option-b"
@@ -1939,7 +1935,7 @@
         },
         {
           "id": "spec-fix-entetes-semaines-tcd",
-          "file": "planning-lde-v2/SPEC-FIX-ENTETES-SEMAINES-TCD.md",
+          "file": "planning-lde-v2/archive-gsheet/SPEC-FIX-ENTETES-SEMAINES-TCD.md",
           "title": "Spec En-têtes dynamiques Semaines & TCD",
           "desc": "Spec d'implémentation des en-têtes C1-G1 en formules GSheet AUJOURDHUI() pour recalcul auto au changement de semaine.",
           "type": "spec",
@@ -2201,14 +2197,14 @@
           "id": "push-auto-apres-toggle-gsheet",
           "name": "Push auto après toggle GSheet Hidden",
           "titre": "Proposer un push automatique (avec confirmation) après exclusion ou réinclusion d'un projet.",
-          "status": "todo",
+          "status": "fail",
           "qualif": "P3",
           "target": "",
           "owner": "laurent",
           "charge": 0.5,
           "raf": 0.0,
           "type": "Feature",
-          "commentaire": "Suggestion LDE lors des tests du 2026-05-17 : quand on exclut/réinclut un projet, proposer immédiatement un push pour mettre la GSheet à jour.",
+          "commentaire": "Abandonné — découplage total Dashboard ↔ GSheet (2026-06-03). Sync GSheet définitivement arrêtée.",
           "steps": []
         },
         {
@@ -2345,12 +2341,13 @@
         {
           "id": "phase-6-cible-date-tcd",
           "name": "Phase 6 — Souveraineté Cible Date + TCD Projets",
-          "status": "spec",
+          "status": "fail",
           "owner": "laurent",
           "charge": 0.0,
           "raf": 0.0,
           "titre": "Autonomie de la colonne Cible Date et reconstruction TCD Projets",
-          "steps": []
+          "steps": [],
+          "commentaire": "Abandonné — découplage total Dashboard ↔ GSheet (2026-06-03). Sync GSheet définitivement arrêtée."
         },
         {
           "id": "deploiement-gitlab-clever-cloud",
@@ -2409,8 +2406,7 @@
           "commentaire": "",
           "steps": []
         }
-      ],
-      "gsheet_hidden": true
+      ]
     },
     {
       "id": "optimisation-prompts-claude",
@@ -2450,8 +2446,7 @@
           "commentaire": "",
           "steps": []
         }
-      ],
-      "gsheet_hidden": true
+      ]
     },
     {
       "id": "amelioration-training",
@@ -2913,8 +2908,7 @@
             }
           ]
         }
-      ],
-      "gsheet_hidden": true
+      ]
     },
     {
       "id": "formations-opquast",
@@ -3002,8 +2996,7 @@
           ],
           "type": "Autre"
         }
-      ],
-      "gsheet_hidden": true
+      ]
     },
     {
       "id": "sites-martyrs",
@@ -3016,7 +3009,7 @@
       "docs": [
         {
           "id": "meeting-lde-mho-bha-banc-de-tests",
-          "file": "banc-de-tests/meeting-lde-mho-bha-banc-de-tests.md",
+          "file": "banc-de-tests/1-prealable-et-transmission/transmission/meeting-lde-mho-bha-banc-de-tests.md",
           "title": "Réflexion bancs de test MCP Opquast — meeting BHA/MHO/LDE",
           "desc": "Proposition de 7 bancs de test pour valider le MCP Opquast et son usage via Claude, + questions pour le meeting.",
           "type": "notes",
@@ -3026,7 +3019,7 @@
         },
         {
           "id": "plan-banc-tests-opquast-v3",
-          "file": "banc-de-tests/docs/plan_banc_tests_opquast_v3.xlsx",
+          "file": "banc-de-tests/1-prealable-et-transmission/docs/plan_banc_tests_opquast_v3.xlsx",
           "title": "Plan banc de tests Opquast (benchmark robots) — v3",
           "desc": "Plan complet de mise en place et d'exploitation d'un banc de benchmark des robots QA web contre les 245 règles Opquast : phases, tâches, risques, jalons, budget, KPIs.",
           "type": "plan",
@@ -3036,7 +3029,7 @@
         },
         {
           "id": "conversation-source-benjamin-architecture",
-          "file": "banc-de-tests/docs/conversation-source-benjamin-architecture-banc-tests.md",
+          "file": "banc-de-tests/1-prealable-et-transmission/docs/conversation-source-benjamin-architecture-banc-tests.md",
           "title": "Conversation source Benjamin — architecture banc de tests",
           "desc": "Transcription de la conversation Claude de Benjamin (BHA, 19 mars) ayant produit le plan xlsx v3 : challenges, taxonomie, strates de specimens, panel WARC, KPIs. Capturée depuis un partage claude.ai.",
           "type": "notes",
@@ -3046,7 +3039,7 @@
         },
         {
           "id": "expertise-regles-opquast-synthese",
-          "file": "banc-de-tests/docs/expertise-regles-opquast-synthese.md",
+          "file": "banc-de-tests/1-prealable-et-transmission/docs/expertise-regles-opquast-synthese.md",
           "title": "Expertise règles Opquast — périmètre & matière experte",
           "desc": "Synthèse de la contribution expertise-règles (transverse benchmark/MCP/eservice-manager) : livrables experts, matière par déterminisme/granularité/thématique, + pré-classification DRAFT des 245 règles.",
           "type": "notes",
@@ -3056,7 +3049,7 @@
         },
         {
           "id": "spec-amorce-banc-test-mcp",
-          "file": "banc-de-tests/docs/spec-amorce-banc-test-mcp.md",
+          "file": "banc-de-tests/4-specs-cles/spec-amorce-banc-test-mcp.md",
           "title": "Spec d'amorce — Banc de test du MCP Opquast (POC)",
           "desc": "Spécification du POC expert-piloté : modèle d'oracle à 3 corpus, boucle, auditeur aveugle, composeur de specimens (page/mini-site), rôles, règles gravées (host minimal + re-vérification oracle).",
           "type": "spec",
@@ -3066,7 +3059,7 @@
         },
         {
           "id": "classification-245-regles-xlsx",
-          "file": "banc-de-tests/docs/classification-245-regles.xlsx",
+          "file": "banc-de-tests/1-prealable-et-transmission/docs/classification-245-regles.xlsx",
           "title": "Classification des 245 règles — grille de travail (xlsx)",
           "desc": "Grille éditable : proposition automatique (déterminisme/granularité/auto) × axe MCP (verification_type/automation_level par thème) + colonnes VALIDÉES par LDE (menus déroulants, criticité, testable martyr). Supersède le CSV draft.",
           "type": "autre",
@@ -3076,7 +3069,7 @@
         },
         {
           "id": "spec-composeur-v2-auto-apprenant",
-          "file": "banc-de-tests/composeur/SPEC-composeur-v2-auto-apprenant.md",
+          "file": "banc-de-tests/3-produit/composeur/SPEC-composeur-v2-auto-apprenant.md",
           "title": "SPEC — Composeur V2 (auto-apprenant)",
           "desc": "Boucle de calibration à source de vérité protégée : 2 niveaux de connaissance (S1 libellés / S2 checklist), 3 phases (production / validation 2 axes / capitalisation), invariant (l'apprentissage réécrit le modèle + la classification, jamais l'oracle), bootstrap sur le sous-ensemble générable. À valider (Ping-Pong).",
           "type": "spec",
@@ -3086,7 +3079,7 @@
         },
         {
           "id": "prompt-lancement-composeur-v2",
-          "file": "banc-de-tests/composeur/prompt-lancement-composeur-v2.md",
+          "file": "banc-de-tests/3-produit/composeur/prompt-lancement-composeur-v2.md",
           "title": "Prompt de lancement — implémentation Composeur V2",
           "desc": "Brief Claude Code pour l'implémentation V2 (composeur-v2/, V1 en lecture seule) : SPEC v1.2 autorité, 3 couches, Invariant H / T-LEAK-CORRIGÉ gate bloquant, S1=heuristique code, livrables (corrigé JSON, oracle-changelog, KPIs), ordre incrémental (R136 d'abord), garde-fous (verrou git, snapshot).",
           "type": "notes",
@@ -3096,7 +3089,7 @@
         },
         {
           "id": "spec-mini-serveur-minisite",
-          "file": "banc-de-tests/mini-serveur-minisite/SPEC.md",
+          "file": "banc-de-tests/2-retire-a-archiver/mini-serveur-minisite/SPEC.md",
           "title": "SPEC — Mini-site martyr (Phase 2)",
           "desc": "Spécification du générateur de mini-site réaliste pour audit de règles de portée globale : échantillonnage 20 règles (stratifié), structure 4 pages, architecture build_minisite.py autonome, oracle machine-lisible, garde-fous (test_minisite.py).",
           "type": "spec",
@@ -3106,7 +3099,7 @@
         },
         {
           "id": "spec-mini-serveur-minisite-full",
-          "file": "banc-de-tests/mini-serveur-minisite-full/SPEC.md",
+          "file": "banc-de-tests/2-retire-a-archiver/mini-serveur-minisite-full/SPEC.md",
           "title": "SPEC — Mini-site full (245 règles)",
           "desc": "Spécification du générateur de mini-site couvrant les 245 règles Opquast : intégration moteur composeur-v2, 25 RulePacks existants + 220 mocks, validation formelle S2==oracle avant génération, manifest complet.",
           "type": "spec",
@@ -3359,8 +3352,7 @@
             }
           ]
         }
-      ],
-      "gsheet_hidden": true
+      ]
     },
     {
       "id": "gt-formations",
@@ -3516,8 +3508,7 @@
           "commentaire": "Livrables : Synthese_G2_document_consolide.md + .docx",
           "type": "Autre"
         }
-      ],
-      "gsheet_hidden": true
+      ]
     },
     {
       "id": "livre-oq",
@@ -3675,8 +3666,7 @@
             }
           ]
         }
-      ],
-      "gsheet_hidden": true
+      ]
     },
     {
       "id": "poids",
@@ -3742,8 +3732,7 @@
             }
           ]
         }
-      ],
-      "gsheet_hidden": true
+      ]
     },
     {
       "id": "gestion-compte-personnel",
@@ -4669,8 +4658,7 @@
           "commentaire": "Refactoring autonome Claude Code terminé et validé 2026-05-30 (346/346 tests verts sur Mac). 6 phases : baseline fixture figée, serve-simu.py factorisé, MONTHS_FR unique, migrations extraites de loadAllData, renderers next/auto unifiés (renderEditableGroupBlock), code mort retiré. Comportement strictement préservé. Dédup résiduelle next/auto + CSS variables + modularisation ESM reportés (§ 8 SPEC-REFACTOR-V2.md). Session 2026-06-01 : V2 retenue comme focus principal de développement (V1 conservée intacte). Correctifs garde-fou + --no-browser répliqués en V2. NEXT-IMPORT-TRANSFER : au premier import d'un mois M si next.month===M, previsions et autresRevenus transférés automatiquement (serve-simu.py d4f7b61). CLAUDE.md V2 complété (NEXT-TRANSFER, groupes V3 10→corrigé, paths corrects). Bascule juin 2026-06-01 : entrée MIRROR_DEFS_BY_MONTH['2026-06'] (salaire lu depuis mouvements en historique, salaryAlertEnabled:false) ; tests reverdis 390/390 (346 JS + 44 PY) via pin de l'horloge de boot à 2026-05 dans helpers.mjs (cause : franchissement réel de date déclenchait bascule/auto-current au boot → crash updateGroupToggles + mai en historique).",
           "type": "Feature"
         }
-      ],
-      "gsheet_hidden": true
+      ]
     },
     {
       "id": "rangement-git",
@@ -4738,8 +4726,7 @@
           "type": "BugFix",
           "steps": []
         }
-      ],
-      "gsheet_hidden": true
+      ]
     },
     {
       "id": "suivi-qualite-process",
@@ -4790,8 +4777,7 @@
           "steps": [],
           "commentaire": "Implémenté le 2026-05-19. Extrait suggestions depuis bilans/*.md, déduit priorité/complexité par mots-clés, régénère suivi-suggestions.md."
         }
-      ],
-      "gsheet_hidden": true
+      ]
     },
     {
       "id": "monitoring-sessions-cowork",
@@ -4845,8 +4831,7 @@
           ],
           "commentaire": "Artifact abandonné (erreur 400 sandbox). Vue chat + skill sessions-cowork.skill livrés le 2026-05-19."
         }
-      ],
-      "gsheet_hidden": true
+      ]
     },
     {
       "id": "brief-equipe",
@@ -4856,8 +4841,7 @@
       "category": "active",
       "folder": "brief-equipe/",
       "docs": [],
-      "subprojects": [],
-      "gsheet_hidden": true
+      "subprojects": []
     },
     {
       "id": "tests-e2e-python",
@@ -4867,8 +4851,7 @@
       "category": "active",
       "folder": "tests-e2e-python/",
       "docs": [],
-      "subprojects": [],
-      "gsheet_hidden": true
+      "subprojects": []
     },
     {
       "id": "operations-devcontainer",
@@ -4961,8 +4944,7 @@
             }
           ]
         }
-      ],
-      "gsheet_hidden": true
+      ]
     },
     {
       "id": "serveur-local",
@@ -5276,8 +5258,7 @@
             }
           ]
         }
-      ],
-      "gsheet_hidden": true
+      ]
     },
     {
       "id": "gsheet-datamart",
@@ -5513,8 +5494,7 @@
           "type": "Feature",
           "commentaire": "Implémentation initiale livrée (commit 120ce88). Fine tuning restant avant done."
         }
-      ],
-      "gsheet_hidden": true
+      ]
     }
   ]
 }
