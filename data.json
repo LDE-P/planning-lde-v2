@@ -3008,6 +3008,16 @@
       "folder": "banc-de-tests",
       "docs": [
         {
+          "id": "spec-banc-unifie",
+          "file": "banc-de-tests/4-specs-cles/SPEC-banc-unifie.md",
+          "title": "SPEC — Banc unifié (proposition)",
+          "desc": "Proposition de fusion des deux bancs (parenthèse 20 + site-martyr 54) : format commun, schéma d'oracle unifié, règle d'attribution, jeu fusionné (73 règles, recouvrement = R065), 4 catégories. Décisions D1–D5 à valider par LDE.",
+          "type": "spec",
+          "status": "draft",
+          "date": "2026-06-03",
+          "subproject": "composeur-final-synthese"
+        },
+        {
           "id": "meeting-lde-mho-bha-banc-de-tests",
           "file": "banc-de-tests/1-prealable-et-transmission/transmission/meeting-lde-mho-bha-banc-de-tests.md",
           "title": "Réflexion bancs de test MCP Opquast — meeting BHA/MHO/LDE",
@@ -3321,7 +3331,13 @@
               "raf": 0.0
             },
             {
-              "name": "Comparer les deux corpus et démarches (20 pages indépendantes vs 54 site intégré) : recouvrement de règles, qualité des oracles, ce que chaque format couvre exclusivement.",
+              "name": "Comparer les deux corpus et démarches — FAIT (2026-06-03) : recouvrement = 1 règle (R065), union = 73 (20+54−1). Schémas d'oracle alignés à ~90 %. ⚠️ divergence de catégorisation (classifieur heuristique sur-classe « seuil » vs catégorisation experte).",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "PROCHAINE ÉTAPE — Valider la SPEC banc unifié (proposition) : 4-specs-cles/SPEC-banc-unifie.md, décisions D1–D5 (format double, schéma oracle sur-ensemble, attribution par page d'oracle, 4 catégories + re-catégorisation experte, R065 cas-témoin).",
               "status": "todo",
               "charge": 0.0,
               "raf": 0.0
