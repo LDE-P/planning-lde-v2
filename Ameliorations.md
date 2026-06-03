@@ -80,3 +80,8 @@
 - [ ] **Anticiper les régressions sync→async** (2026-06-02) : un passage de persistance synchrone à async a révélé un bug latent (`checkNewMonth` non idempotent, bandeau fantôme Poids) — revoir l'ordre init/chargement lors de tels changements.
 
 - [ ] **Règle commit `\n` à corriger (CLAUDE.md racine)** (2026-05-31) : la forme recommandée `git commit -m "titre\n\n- point"` produit des **`\n` littéraux** en zsh (non interprétés entre guillemets doubles) — constaté sur le commit `89d8972` du projet Poids. Préconiser plutôt des **`-m` multiples** (un par paragraphe, robuste au copier-coller mono-ligne) ou `$'...\n...'`.
+
+## Méthode (banc de test / audits IA) — 2026-06-03
+
+- [ ] **Vérif post-copie/consolidation** : après toute copie/assemblage de fichiers, compter attendu vs obtenu (le bug « dossiers R119/R126 vides » lors de la consolidation du corpus durci serait passé inaperçu sans le différentiel).
+- [ ] **Audits IA = intervalles + vote majoritaire** : tout audit IA non déterministe se mesure sur ≥ 3 runs (moyenne + écart-type), verdict d'une unité borderline = vote majoritaire. Ne pas rapporter un point unique (mesuré : ~23 % d'unités borderline oscillent). Intégré aux principes du banc.
