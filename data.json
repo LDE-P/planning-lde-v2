@@ -3008,6 +3008,16 @@
       "folder": "banc-de-tests",
       "docs": [
         {
+          "id": "format-verdicts-unifie",
+          "file": "banc-de-tests/1-prealable-et-transmission/transmission/FORMAT-verdicts-unifie.md",
+          "title": "Format de sortie des verdicts — unifié (proposition)",
+          "desc": "Format commun aux 2 lots pour l'audit aveugle : sortie indexée par URL (slug opaque), l'auditeur identifie lui-même les règles ; MHO remappe via mapping-url-regle.json pour la confrontation.",
+          "type": "spec",
+          "status": "draft",
+          "date": "2026-06-03",
+          "subproject": "composeur-final-synthese"
+        },
+        {
           "id": "protocole-mho-audit-aveugle",
           "file": "banc-de-tests/1-prealable-et-transmission/transmission/PROTOCOLE-MHO-audit-aveugle.md",
           "title": "Protocole MHO — audit aveugle des 2 lots (proposition)",
@@ -3347,7 +3357,19 @@
               "raf": 0.0
             },
             {
-              "name": "PROCHAINE ÉTAPE — Valider la SPEC banc unifié (proposition) : 4-specs-cles/SPEC-banc-unifie.md, décisions D1–D5 (format double, schéma oracle sur-ensemble, attribution par page d'oracle, 4 catégories + re-catégorisation experte, R065 cas-témoin).",
+              "name": "Livrables MHO — FAIT (2026-06-03, protocole VALIDÉ LDE) : protocole audit aveugle + format de verdicts (par URL) + serveurs (serve-lot20.py anti-tatillon port 8132, serve-martyr.py 8131) + URLs neutralisées (slugs opaques, mapping côté oracle, 0 R-id servi) + bundle zip livré par LDE. Garde-fou « seuils Opquast » retiré du livrable (gardé en interne).",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "BASCULE (2026-06-03) — la suite du projet passe à la PRODUCTION DE CAS PRATIQUES à partir de ces spécimens (lien projet Cas Pratiques). Le volet synthèse/durcissement ci-dessous reste en veille.",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Valider la SPEC banc unifié (proposition) : 4-specs-cles/SPEC-banc-unifie.md, décisions D1–D5 (format double, schéma oracle sur-ensemble, attribution par page d'oracle, 4 catégories + re-catégorisation experte, R065 cas-témoin).",
               "status": "todo",
               "charge": 0.0,
               "raf": 0.0
