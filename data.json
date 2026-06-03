@@ -3257,14 +3257,14 @@
               "raf": 0.0
             },
             {
-              "name": "Produire 15 pages + manifests oracle (NA/conforme/non-conforme/indéterminé) — slugs neutres, zéro fuite, oracle = checklist-v5-final (+RGAA si a11y)",
-              "status": "todo",
+              "name": "Produire les spécimens + manifests oracle (NA/conforme/non-conforme/indéterminé) — FAIT : 20 règles produites à neuf (28 pages HTML, 20 oracles, 2 PNG), slugs neutres, zéro fuite vérifiée, oracle = checklist-v5-final. Dossier banc-de-tests/parenthese-20/",
+              "status": "done",
               "charge": 0.0,
               "raf": 0.0
             },
             {
-              "name": "Run d'audit aveugle (libellé seul) sur les 20 + table de confrontation réel↔oracle (carburant d'apprentissage)",
-              "status": "todo",
+              "name": "Run d'audit aveugle (libellé seul) sur les 20 + table de confrontation réel↔oracle — FAIT : accord global 0,85 (déterministe 0,91 · jugement 0,89 · à seuil 0,69). 9 divergences analysées (audit/confrontation.md). Signal à seuil net.",
+              "status": "done",
               "charge": 0.0,
               "raf": 0.0
             },
