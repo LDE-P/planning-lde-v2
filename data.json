@@ -1709,8 +1709,14 @@
           "charge": 0.0,
           "raf": 0.0,
           "type": "Feature",
-          "commentaire": "Amont fait au Banc de tests (SP parenthese-livrable-20-specimens). Relais + spec : CAS-PRATIQUES/cas-pratiques-issus-du-banc/SPEC-cas-pratiques-issus-du-banc.md ; ressources partagées : RESSOURCES-COMMUNES.md (même dossier). Correspondance clé : oracle → (bonne réponse + distracteurs + feedback) ; les cas-pièges du banc sont les meilleurs distracteurs. Garde-fou : oracle protégé, ne pas modifier le corpus banc sans coordination. Mécanisme de collaboration inter-projets à définir avec LDE.",
+          "commentaire": "Amont fait au Banc de tests (SP parenthese-livrable-20-specimens). Relais + spec : CAS-PRATIQUES/cas-pratiques-issus-du-banc/SPEC-cas-pratiques-issus-du-banc.md ; ressources partagées : RESSOURCES-COMMUNES.md (même dossier). Correspondance clé : oracle → (bonne réponse + distracteurs + feedback) ; les cas-pièges du banc sont les meilleurs distracteurs. Garde-fou : oracle protégé, ne pas modifier le corpus banc sans coordination. Corpus = Option A actée (lecture seule). Mécanisme de collaboration validé a priori (cycle verrou/transmission), à finaliser en étape 0.",
           "steps": [
+            {
+              "name": "Étape 0 — finaliser le mécanisme de collaboration inter-projets (cycle production→verrou→bilan&transmission→déverrouillage→exploitation→bilan final ; verrou = protège la cible mouvante, pas la lecture). Validé a priori LDE 2026-06-03.",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
             {
               "name": "Lire relais + SYNTHESE-leviers-durcissement + referentiels/regles-editoriales-quiz",
               "status": "todo",
@@ -1736,8 +1742,8 @@
               "raf": 0.0
             },
             {
-              "name": "Arbitrer l'emplacement du corpus partagé (option A lecture seule / B neutre)",
-              "status": "todo",
+              "name": "Emplacement du corpus partagé : Option A validée (canonique sous banc-de-tests/, Cas Pratiques en lecture seule)",
+              "status": "done",
               "charge": 0.0,
               "raf": 0.0
             }
