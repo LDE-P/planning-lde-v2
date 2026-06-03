@@ -23,6 +23,7 @@
       --blocked: #dc2626;
       --na: #9ca3af;
       --récurrent: #0891b2;
+      --fail: #f97316;
       --border: #e2e8f0;
       --hover: #f1f5f9;
       --radius: 6px;
@@ -90,13 +91,6 @@
     .filter-btn:hover { background: var(--hover); color: var(--text); }
     .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
 
-    /* ── GSheet toolbar ── */
-    #gsheet-bar {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
-
     .btn {
       padding: 5px 12px;
       border-radius: var(--radius);
@@ -111,28 +105,6 @@
     .btn:hover { opacity: 0.85; }
     .btn.primary { background: var(--accent); border-color: var(--accent); }
     .btn:disabled { opacity: 0.4; cursor: default; }
-
-    /* Spinner ring (actions GSheet) */
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .btn-spinner {
-      display: inline-block;
-      width: 12px;
-      height: 12px;
-      border: 2px solid var(--border);
-      border-top-color: var(--accent);
-      border-radius: 50%;
-      animation: spin 0.7s linear infinite;
-      vertical-align: middle;
-      margin-right: 5px;
-      flex-shrink: 0;
-    }
-
-    #gsheet-status {
-      font-size: 12px;
-      color: var(--text-dim);
-    }
-
-    #gsheet-status.connected { color: var(--done); }
 
     /* ── Main content ── */
     main {
@@ -239,18 +211,6 @@
       text-shadow: 0 0 0 var(--blocked);
     }
 
-    /* 👁 toggle GSheet : rouge si exclu, vert si inclus.
-       Même technique que .icon-btn-danger pour repeindre l'emoji couleur. */
-    .btn-toggle-gsheet,
-    .btn-toggle-gsheet:hover {
-      color: transparent;
-      text-shadow: 0 0 0 var(--blocked);
-    }
-    .btn-toggle-gsheet.gsheet-visible,
-    .btn-toggle-gsheet.gsheet-visible:hover {
-      text-shadow: 0 0 0 var(--done);
-    }
-
     /* ── Subprojects list ── */
     .subprojects-list {
       display: none;
@@ -336,6 +296,7 @@
     .status-blocked   { background: rgba(239,68,68,.15);  color: var(--blocked);   border-color: rgba(239,68,68,.3); }
     .status-na        { background: rgba(75,85,99,.15);   color: var(--na);        border-color: rgba(75,85,99,.3); }
     .status-récurrent { background: rgba(8,145,178,.15);  color: var(--récurrent); border-color: rgba(8,145,178,.3); }
+    .status-fail      { background: rgba(249,115,22,.15); color: var(--fail);      border-color: rgba(249,115,22,.3); }
 
     /* ── Meta row ── */
     .sp-meta {
@@ -777,21 +738,6 @@
     <button class="filter-btn" id="btn-open-all">Tout ouvrir</button>
     <button class="filter-btn" id="btn-close-all">Tout fermer</button>
   </div>
-  <div id="gsheet-bar">
-    <span id="gsheet-status">GSheet : —</span>
-    <!-- TEMPORAIRE 2026-05-28 : Init, Modèles, Push et Pull désactivés suite à incident de perte
-         de données GSheet Datamart.
-         Bugs à investiguer : (1) pull silencieusement non capté dans data.json, (2) push ayant
-         écrasé col C (Type) et col J (Commentaire) malgré spec contraire.
-         Format reste actif (manuel uniquement, peu de risque). Réactiver en retirant `disabled`
-         une fois le diagnostic effectué. -->
-    <button class="btn" id="btn-init-gsheet" disabled title="Désactivé temporairement — voir commentaire dans le HTML">Init</button>
-    <button class="btn" id="btn-format-gsheet" title="Configure les menus déroulants Type et Avanc.">Format</button>
-    <button class="btn" id="btn-save-template" disabled title="Désactivé temporairement — voir commentaire dans le HTML">⊡ Modèles</button>
-    <button class="btn" id="btn-pull-tcd" disabled title="Désactivé temporairement — voir commentaire dans le HTML">← Pull TCD</button>
-    <button class="btn" id="btn-pull-gsheet" disabled title="Désactivé temporairement — voir commentaire dans le HTML">← Pull Tâches</button>
-    <button class="btn" id="btn-push-gsheet" disabled title="Désactivé temporairement — voir commentaire dans le HTML">Push →</button>
-  </div>
 </header>
 
 <div id="docs-filters" style="display:none">
@@ -879,7 +825,7 @@
       <input type="text" id="modal-proj-name" placeholder="ex : Nouveau Projet" autocomplete="off">
     </div>
     <div class="form-group">
-      <label>Alias (GSheet)</label>
+      <label>Alias (nom court)</label>
       <input type="text" id="modal-proj-alias" placeholder="ex : NvProjet" autocomplete="off">
     </div>
     <div class="form-group">
@@ -909,24 +855,13 @@
   </div>
 </div>
 
-<!-- Modal: Résultats push/pull -->
-<div class="modal-overlay" id="modal-results">
-  <div class="modal">
-    <h2 id="modal-results-title">Résultats</h2>
-    <div id="modal-results-body" style="font-size:13px;max-height:300px;overflow-y:auto;margin-bottom:8px"></div>
-    <div class="modal-actions">
-      <button class="btn primary" id="modal-results-close">Fermer</button>
-    </div>
-  </div>
-</div>
-
 <!-- Modal: Renommer alias projet -->
 <div class="modal-overlay" id="modal-rename-alias">
   <div class="modal">
-    <h2>Renommer l'alias GSheet</h2>
+    <h2>Renommer l'alias</h2>
     <p id="modal-rename-alias-desc" style="font-size:12px;color:var(--text-dim);margin-bottom:12px"></p>
     <div class="form-group">
-      <label>Alias (nom court affiché dans la GSheet, colonne A)</label>
+      <label>Alias (nom court affiché dans le dashboard)</label>
       <input type="text" id="modal-rename-alias-input" autocomplete="off">
     </div>
     <div class="modal-actions">

@@ -21,8 +21,7 @@ Lire **`notes-todo.md`** à la racine du projet : contient les notes inter-sessi
 
 - **URL** : https://github.com/LDE-P/planning-lde-v2 (repo privé, compte LDE-P)
 - `data.json` et `data-archives.json` sont **versionnés** — commiter à chaque fin de session
-- En cas de corruption : `git checkout data.json` (ne touche pas la GSheet — sync toujours manuelle)
-- ⚠️ Après un revert de `data.json`, ne pas faire de push GSheet sans vérifier que l'état est cohérent
+- En cas de corruption : `git checkout data.json`
 
 ### Commit et push depuis Cowork (sandbox)
 
@@ -42,11 +41,16 @@ git push
 
 **Hook pre-push** : les tests e2e sont ignorés automatiquement si pytest est absent ou si le serveur n'est pas joignable (comportement sandbox normal). Sur le Mac de LDE avec le serveur en cours, ils s'exécutent normalement.
 
+> **⚠️ Synchronisation Google Sheets ABANDONNÉE (2026-06-03).** Le dashboard est
+> 100 % autonome sur `data.json` — il n'émet plus aucune action vers une GSheet.
+> Tout le code de sync (gspread, OAuth, push/pull/TCD, `gsheet_hidden`) a été
+> retiré. Voir `SPEC-DECOUPLAGE-GSHEET.md` et les anciennes specs dans
+> `archive-gsheet/`. Ne pas réintroduire de dépendance GSheet sans nouvelle décision LDE.
+
 ## Stack
 
 - HTML/JS vanilla (3 fichiers : `app.js`, `ui.js`, `api.js`) pour le dashboard
-- Python 3.10+ pour le serveur local (`serve-v2.py`, port 8001)
-- `gspread` pour la synchronisation Google Sheets (Phase 2)
+- Python 3.10+ pour le serveur local (`serve-v2.py`, port 8001) — aucune dépendance externe
 - `data.json` comme source de vérité unique (remplace les sentinelles HTML de V1)
 
 ## Fichiers
@@ -58,8 +62,7 @@ git push
 | `ui.js` | Rendu, interactions, événements |
 | `api.js` | Wrappers fetch vers `/api/*` |
 | `serve-v2.py` | Serveur local (port 8001) |
-| `serve-v2.conf.json` | Config : `spreadsheet_id` |
-| `data.json` | Source de vérité des projets/sous-projets/étapes (gitignored ?) |
+| `data.json` | Source de vérité des projets/sous-projets/étapes (versionné) |
 | `terminal.txt` | (gitignored) Commande de démarrage |
 
 ## Lancer le serveur
@@ -120,13 +123,12 @@ Les tests se trouvent dans `tests-e2e-python/planning-lde/` (style pytest, port 
 ```
 
 Notes :
-- `type` et `commentaire` sont **GSheet-only** : lus au pull, jamais réécrits au push
-- `folder` et `docs` peuvent être absents pour les projets créés via le pull (initialisés à vide)
-- Au pull, si l'alias (col A) ou le nom SP (col B) n'existent pas dans `data.json`, le projet/sp est créé avec les 4 étapes par défaut
+- `type` et `commentaire` sont des champs **locaux** (édités via le dashboard) — vestiges de l'ancienne sync GSheet, ils restent dans le schéma.
+- `folder` et `docs` peuvent être absents pour certains projets (initialisés à vide).
 
 ## Correspondance statuts
 
-| Code | Label GSheet |
+| Code | Libellé affiché |
 |------|-------------|
 | `done` | TERMINÉ |
 | `wip` | EN COURS |
@@ -135,59 +137,27 @@ Notes :
 | `todo` | À FAIRE |
 | `blocked` | STAND BY |
 | `récurrent` | RÉCURRENT |
+| `fail` | ÉCHEC |
 | `na` | N/A (étapes uniquement) |
 
-## Google Sheets V2 — Configuration
-
-| Élément | Valeur |
-|---------|--------|
-| Spreadsheet ID | `1RY1SCZAW5PPG05Cbpvup5pAe6BWvUhy_UZ4DPwl3Wew` |
-| URL | https://docs.google.com/spreadsheets/d/1RY1SCZAW5PPG05Cbpvup5pAe6BWvUhy_UZ4DPwl3Wew/ |
-| `serve-v2.conf.json` | ✅ ID renseigné |
-| `client_secret.json` | ✅ Copié depuis `planning-lde/` (gitignored) |
-| `token.json` | Créé automatiquement au premier appel GSheet (gitignored) |
-
-**Premier lancement avec GSheet :** le flow OAuth ouvre le navigateur — cliquer "Autoriser" **immédiatement** (le callback localhost a un timeout court). En cas de page d'erreur localhost, relancer une action GSheet pour obtenir un flow frais.
-
-## Sync GSheet ↔ data.json (onglet Tâches)
-
-| Col | Champ sp | Direction | Notes |
-|-----|----------|-----------|-------|
-| A | projet (alias) | dashboard → GSheet | identifie le projet |
-| B | `name` | dashboard → GSheet | identifie le sp |
-| C | `type` | **GSheet → data.json** | GSheet-only, jamais réécrit |
-| D | `qualif` | bidirectionnel | |
-| E | `target` | bidirectionnel | |
-| F | `charge` | bidirectionnel | cellule vide au pull = pas d'écrasement |
-| G | `raf` | bidirectionnel | cellule vide au pull = pas d'écrasement |
-| H | `titre` | bidirectionnel | |
-| I | `status` | bidirectionnel | converti via `_STATUS_TO_GS` / `_STATUS_FROM_GS` |
-| J | `commentaire` | **GSheet → data.json** | GSheet-only, jamais réécrit |
-| K, L | semaine / année | formules GSheet | calculées depuis E |
-
-- **Push** : `batch_clear` et `batch_update` ciblent `A-B`, `D-I`, `K-L` uniquement (préservation C et J)
-- **Pull** crée les projets/sp manquants si l'alias ou le nom n'existent pas dans `data.json`
-- **TCD Projets** est reconstruit au push depuis `data.json` directement (via `_build_tcd_rows()`), pas une copie de Semaines — évite la race condition de recalcul asynchrone
-- **TCD col B** + **rows 2/3 C-G** : formules Semaines réutilisées (`_f_semaines_b_row/b2/b3/col2/col3`) pour que les éditions team sur C-G recalculent automatiquement les totaux, et pour rester locale-aware (FR : virgules)
+Codes définis dans `_VALID_STATUSES` (`serve-v2.py`) et `STATUS_LABELS` (`ui.js`).
 
 ## Endpoints HTTP
 
 GET :
 - `/api/state` — lit `data.json`
-- `/api/gsheet/status` — `{connected, url?}`
 - `/api/local-folders` — liste les sous-dossiers de `GIT/`
+- `/api/archives` — lit `data-archives.json`
 
 POST (corps JSON) :
 - `/api/save-subproject` — patch sp (name, status, qualif, target, owner, charge, raf, titre, steps)
 - `/api/save-project` — patch projet (alias, name, desc, stack)
 - `/api/add-subproject`, `/api/add-project`
 - `/api/remove-subproject`, `/api/remove-project`
-- `/api/open-folder`
-- `/api/gsheet/init` — reset complet des 3 onglets
-- `/api/gsheet/format` — **manuel uniquement** : pose les dropdowns col C et col I
-- `/api/sync-to-gsheet[/preview]` — push
-- `/api/pull-from-gsheet[/preview]` — pull Tâches
-- `/api/pull-from-tcd[/preview]` — pull TCD (RAF + target par sp)
+- `/api/open-folder`, `/api/open-file`
+- `/api/add-doc`, `/api/save-doc`, `/api/remove-doc`
+- `/api/archive-subproject`, `/api/archive-project`, `/api/restore-subproject`, `/api/restore-project`
+- `/api/delete-archive-subproject`, `/api/delete-archive-project`
 
 ## Conventions UI
 
@@ -196,13 +166,10 @@ POST (corps JSON) :
 
 ## Règles de développement
 
-- Formules GSheet : référence absolue = `planning-lde-v2/formules.md` (jamais réinventer, recopier caractère par caractère — §5.5 SPEC)
-- Bibliothèque GSheet : `gspread` (pas `google-api-python-client`)
 - `data.json` / `data-archives.json` : lecture via `_load_data()`/`_load_archives()` ; **écriture atomique** via `_save_data()`/`_save_archives()` → `_atomic_write_json()` (blindage 2026-05-31). Garanties : écriture `tmp` + `fsync` → `os.replace` (rename atomique) → `fsync` du dossier ; **garde anti-wipe** (refuse de remplacer un état à N>0 projets par 0 projet → `WipeRefused` → HTTP 409, payload refusé conservé) ; **backups** `.prev` (1 cran, chaque save) + horodatés rotatifs dans `backups-data/` (throttle 10 min, 10 gardés). `.prev`/`.tmp`/`backups-data/` sont gitignorés ; `data.json` reste versionné.
 - CORS : tous les endpoints renvoient `Access-Control-Allow-Origin: *`
 - Payload max : 1 Mo (413 si dépassé)
-- **APIs de mise en forme GSheet** (`setDataValidation`, formatting, conditional rules) : **uniquement** via `/api/gsheet/format`, appel manuel — interdit dans push/pull (§5.6 SPEC)
-- Push et pull réécrivent les libellés C1–G1 des onglets Semaines et TCD avec `_tcd_headers()` (S-1 = `S<nn>`, S0→S+3 = `S<nn> (P0)`→`(P3)`, ISO week réel)
+- **Aucune dépendance externe** : le serveur n'utilise que la bibliothèque standard Python. La synchronisation Google Sheets a été retirée (2026-06-03, voir `SPEC-DECOUPLAGE-GSHEET.md`).
 
 ## Fin de session
 

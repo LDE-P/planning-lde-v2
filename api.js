@@ -24,10 +24,6 @@ export async function fetchState() {
   return _get('/api/state');
 }
 
-export async function fetchGsheetStatus() {
-  return _get('/api/gsheet/status');
-}
-
 export async function saveSubproject(payload) {
   return _post('/api/save-subproject', payload);
 }
@@ -48,44 +44,12 @@ export async function openFolder(projectId) {
   return _post('/api/open-folder', { projectId });
 }
 
-export async function initGsheet() {
-  return _post('/api/gsheet/init', {});
-}
-
-export async function formatGsheet() {
-  return _post('/api/gsheet/format', {});
-}
-
-export async function saveGsheetTemplate() {
-  return _post('/api/gsheet/save-template', {});
-}
-
-export async function pushToGsheet() {
-  return _post('/api/sync-to-gsheet', {});
-}
-
-export async function pullFromGsheet() {
-  return _post('/api/pull-from-gsheet', {});
-}
-
-export async function pullFromTcd() {
-  return _post('/api/pull-from-tcd', {});
-}
-
-export async function writeSpField(payload) {
-  return _post('/api/gsheet/write-sp-field', payload);
-}
-
 export async function removeSubproject(payload) {
   return _post('/api/remove-subproject', payload);
 }
 
 export async function removeProject(projectId) {
   return _post('/api/remove-project', { projectId });
-}
-
-export async function toggleGsheetHidden(projectId) {
-  return _post('/api/toggle-gsheet-hidden', { projectId });
 }
 
 // ── Docs (SPEC-DOCS-MD.md §4) ──────────────────────────────────────────────────
