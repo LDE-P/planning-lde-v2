@@ -2861,6 +2861,39 @@
               "raf": 0.0
             }
           ]
+        },
+        {
+          "id": "traitement-feedbacks",
+          "name": "Traitement Feedbacks",
+          "titre": "Analyser et traiter les feedbacks Training reçus via Front",
+          "status": "recurrent",
+          "qualif": "P1",
+          "target": "09/06/2026",
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "type": "Recurrent",
+          "commentaire": "Feedbacks à traiter au fil de l'eau. Deadline : lundi 09/06/2026.",
+          "steps": [
+            {
+              "name": "Analyser les feedbacks en attente",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Déterminer le traitement pour chaque feedback",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Implémenter / classer les corrections",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ]
         }
       ]
     },
