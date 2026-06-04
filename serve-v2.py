@@ -297,6 +297,8 @@ class Handler(http.server.BaseHTTPRequestHandler):
         elif path in ('/app.js', '/ui.js', '/api.js'):
             self._serve_file(BASE_DIR / path.lstrip('/'),
                              'application/javascript; charset=utf-8')
+        elif path == '/favicon.svg':
+            self._serve_file(BASE_DIR / 'favicon.svg', 'image/svg+xml')
         elif path == '/api/state':
             self._handle_state()
         elif path == '/api/local-folders':
