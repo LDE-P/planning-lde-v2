@@ -331,8 +331,12 @@ function renderProject(proj) {
 
   hdr.addEventListener('click', () => {
     const isOpen = card.classList.toggle('open');
-    if (isOpen) _openProjects.add(proj.id);
-    else _openProjects.delete(proj.id);
+    if (isOpen) {
+      _openProjects.add(proj.id);
+      renderDocsSidebar(proj);
+    } else {
+      _openProjects.delete(proj.id);
+    }
   });
 
   // Subprojects list
@@ -1377,6 +1381,99 @@ function focusSubproject(projectId, spId) {
   setTimeout(() => { row.style.background = ''; }, 1200);
 }
 
+// ── Panneau latéral docs ───────────────────────────────────────────────────────
+
+let _sidebarOpen = false;
+
+function isSidebarResolution() {
+  return window.innerWidth >= 1600 && window.innerHeight >= 900;
+}
+
+function setSidebarOpen(open) {
+  _sidebarOpen = open;
+  const sidebar = document.getElementById('docs-sidebar');
+  const tab = document.getElementById('docs-sidebar-tab');
+  if (!sidebar || !tab) return;
+  sidebar.classList.toggle('open', open);
+  tab.classList.toggle('sidebar-open', open);
+}
+
+function renderDocsSidebar(proj) {
+  const body = document.getElementById('docs-sidebar-body');
+  const title = document.getElementById('docs-sidebar-title');
+  if (!body || !title) return;
+
+  title.textContent = proj.name;
+
+  const allDocs = (proj.docs || []).filter(d => d && typeof d === 'object');
+  const gitRoot = _state.git_root || '';
+
+  if (allDocs.length === 0) {
+    body.innerHTML = '<div class="sidebar-empty">Aucun doc enregistré pour ce projet.</div>';
+    return;
+  }
+
+  body.innerHTML = '';
+
+  const activeSpIds = new Set((proj.subprojects || []).map(s => s.id));
+  const archProj = _archivesState.projects.find(p => p.id === proj.id);
+  const archivedSpIds = new Set((archProj?.subprojects || []).map(s => s.id));
+
+  // Section "Notes projet" : docs sans SP + orphelins
+  const projectLevelDocs = allDocs.filter(d => {
+    if (!d.subproject) return true;
+    if (activeSpIds.has(d.subproject)) return false;
+    return true; // SP archivé ou orphelin → niveau projet
+  });
+
+  if (projectLevelDocs.length > 0) {
+    const section = makeSidebarSection(`📄 Notes projet`, projectLevelDocs, gitRoot, archivedSpIds);
+    body.appendChild(section);
+  }
+
+  // Sections par SP (uniquement SP avec des docs)
+  (proj.subprojects || []).forEach(sp => {
+    const spDocs = allDocs.filter(d => d.subproject === sp.id);
+    if (spDocs.length === 0) return;
+    const section = makeSidebarSection(`SP : ${sp.name}`, spDocs, gitRoot, archivedSpIds);
+    body.appendChild(section);
+  });
+}
+
+function makeSidebarSection(label, docs, gitRoot, archivedSpIds) {
+  const section = document.createElement('div');
+  section.className = 'sidebar-section';
+
+  const toggle = document.createElement('button');
+  toggle.className = 'sidebar-section-toggle';
+  toggle.innerHTML = `
+    <span class="sidebar-arrow">▼</span>
+    <span class="sidebar-section-name">${esc(label)}</span>
+    <span class="sidebar-section-count">(${docs.length})</span>
+  `;
+  section.appendChild(toggle);
+
+  const list = document.createElement('div');
+  list.className = 'sidebar-section-list';
+  section.appendChild(list);
+
+  docs.forEach(doc => {
+    const absFile = gitRoot ? `${gitRoot}/${doc.file}` : doc.file;
+    const isOrphan = !!doc.subproject && !archivedSpIds.has(doc.subproject);
+    list.appendChild(renderDocInlineRow(doc, absFile, {
+      ...(isOrphan                        ? { orphanSpId: doc.subproject } : {}),
+      ...(doc.subproject && archivedSpIds.has(doc.subproject) ? { spArchived: true } : {}),
+    }));
+  });
+
+  toggle.addEventListener('click', () => {
+    const collapsed = list.classList.toggle('collapsed');
+    toggle.querySelector('.sidebar-arrow').textContent = collapsed ? '▶' : '▼';
+  });
+
+  return section;
+}
+
 // ── Doc filters persistence ────────────────────────────────────────────────────
 
 const LS_KEY = 'planning-v2-docs-filters';
@@ -1710,6 +1807,16 @@ export function init(state) {
   document.getElementById('add-project-btn').style.display = 'flex';
 
   renderAll();
+
+  // Panneau latéral docs — état initial selon résolution
+  setSidebarOpen(isSidebarResolution());
+
+  document.getElementById('docs-sidebar-tab').addEventListener('click', () => {
+    setSidebarOpen(!_sidebarOpen);
+  });
+  document.getElementById('docs-sidebar-close').addEventListener('click', () => {
+    setSidebarOpen(false);
+  });
 }
 
 function applyDocFiltersToUI() {
