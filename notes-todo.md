@@ -1,7 +1,7 @@
 # Notes & Todo — Planning LDE V2
 
 > Fichier de continuité inter-sessions. Mis à jour à chaque fin de session.
-> Dernière mise à jour : 2026-06-03
+> Dernière mise à jour : 2026-06-04
 
 ---
 
@@ -25,18 +25,23 @@ Conséquences (tous les anciens todos GSheet sont **clos / sans objet**) :
 
 ## Rappel prochaine session
 
-### P1 — `affichage-docs-vue-projet` (~2h, spec prête)
+### ✅ P1 — `affichage-docs-vue-projet` — LIVRÉ (2026-06-04)
 
-Affichage des documents associés dans la vue projet du dashboard V2. SPEC prête
-(`SPEC-AFFICHAGE-DOCS-VUE-PROJET.md`), en attente d'implémentation.
+Docs inline dans Vue Projets + Vue Archives + panneau latéral slide-in.
+SP `affichage-docs-vue-projet` passé en `done` dans data.json.
+
+### ✅ P3 — `favicons-planning/` — DÉCIDÉ (2026-06-04)
+
+Pas de copie dans le repo. Favicon choisie déjà versionnée comme `favicon.svg`.
 
 ### P2 — Bouton carto dans `DASHBOARD-V2.html` (~15 min)
 
 Ajouter un bouton dans le dashboard V2 ouvrant [carto-projets-git.html](computer:///Users/laurentdenis/Documents/GIT/suivi-qualite/carto-projets-git.html).
 
-### P3 — Décider du sort de `favicons-planning/`
+### À surveiller — PAT GitHub en clair dans les transcripts
 
-Les 6 SVG + preview.html sont actuellement dans le folder Cowork `Planning LDE V2/favicons-planning/`, **PAS dans le repo git**. À décider : les copier dans le repo pour versionnement, ou les laisser hors repo. La favicon choisie (lettre P, option 03) est déjà versionnée comme `favicon.svg` à la racine.
+Le token `gho_…` dans `.git/config` est apparu dans les transcripts des sessions 2026-06-03/04.
+Proposer à LDE de le régénérer (GitHub → Settings → Developer settings → Personal access tokens).
 
 ---
 
