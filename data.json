@@ -3,7 +3,6 @@
     {
       "id": "dashboard-datamart",
       "name": "Dashboard Datamart",
-      "alias": "Datamart",
       "desc": "Dashboard de suivi des examens et formations.",
       "stack": "JS · Chart.js · Python proxy",
       "category": "active",
@@ -457,7 +456,6 @@
     {
       "id": "training-v7",
       "name": "Training V7",
-      "alias": "Amélioration Training",
       "desc": "Refonte du module de formation Opquast.",
       "stack": "PHP 8 · WordPress · MySQL 8",
       "category": "active",
@@ -1026,7 +1024,6 @@
     {
       "id": "examens-v7",
       "name": "Examens V7",
-      "alias": "Examen",
       "desc": "Refonte du module d'examen Opquast.",
       "stack": "PHP 8.4 · WordPress · MySQL",
       "category": "active",
@@ -1089,7 +1086,6 @@
     {
       "id": "cas-pratiques-project",
       "name": "Cas Pratiques",
-      "alias": "Cas Prat.",
       "desc": "Module d'exercices pratiques Opquast.",
       "stack": "HTML · JavaScript · Python · Bootstrap 5",
       "category": "active",
@@ -1751,7 +1747,6 @@
     {
       "id": "planning-lde-v2",
       "name": "Planning LDE",
-      "alias": "Planning",
       "desc": "Nouveau système de suivi V2 — modèle Projet → Sous-projet → Étape.",
       "stack": "HTML · JS vanilla · Python",
       "category": "active",
@@ -2420,7 +2415,6 @@
     {
       "id": "optimisation-prompts-claude",
       "name": "Optimisation Prompts Claude",
-      "alias": "OptiPrompts",
       "desc": "Optimisation du contenu et des coûts des prompts Claude.",
       "stack": "Markdown · éditorial",
       "category": "active",
@@ -2460,7 +2454,6 @@
     {
       "id": "amelioration-training",
       "name": "Amélioration Certification (training/exam)",
-      "alias": "AmelioCertif",
       "desc": "Travail de planification et d'amélioration de la plateforme de formation Opquast V7 — plan d'amélioration, analyse plugins, accessibilité.",
       "stack": "Markdown · PHP · WordPress",
       "category": "active",
@@ -2932,7 +2925,6 @@
     {
       "id": "formations-opquast",
       "name": "Formations Opquast",
-      "alias": "Formations",
       "desc": "Formations Référents, Formateurs, Experts",
       "stack": "",
       "category": "active",
@@ -3020,7 +3012,6 @@
     {
       "id": "sites-martyrs",
       "name": "Banc de tests",
-      "alias": "Banc de tests",
       "desc": "",
       "stack": "",
       "category": "active",
@@ -3430,7 +3421,6 @@
     {
       "id": "gt-formations",
       "name": "GT formations",
-      "alias": "GT formations",
       "desc": "Groupe de travail G2 — formations complémentaires Opquast par familles de métiers.",
       "stack": "Markdown · DOCX · PPTX · Éditorial",
       "category": "active",
@@ -3586,7 +3576,6 @@
     {
       "id": "livre-oq",
       "name": "Livre OQ",
-      "alias": "Livre OQ",
       "desc": "Relecture et contributions au livre Qualité & Conformité des services numériques (Eyrolles).",
       "stack": "Éditorial",
       "category": "active",
@@ -4736,7 +4725,6 @@
     {
       "id": "rangement-git",
       "name": "Technicienne de surface GIT",
-      "alias": "RangementGIT",
       "desc": "Skill, tâche planifiée et artifact de ménage quotidien du répertoire GIT — cohérence, orphelins, git status.",
       "stack": "Cowork skill · Artifact",
       "category": "infra",
@@ -4804,7 +4792,6 @@
     {
       "id": "suivi-qualite-process",
       "name": "Suivi qualité process Cowork",
-      "alias": "SuiviQualite",
       "desc": "Bilans de session, suivi des suggestions d'amélioration et analyse qualité des prompts.",
       "stack": "Markdown · Python (monitor-bilans.py prévu)",
       "category": "infra",
@@ -4929,7 +4916,6 @@
     {
       "id": "operations-devcontainer",
       "name": "Opérations DevContainer",
-      "alias": "DevContainer",
       "desc": "Assistance à l'utilisation du devcontainer Opquast",
       "stack": "Docker · VS Code · 1Password · Dev Containers",
       "category": "infra",
@@ -5022,7 +5008,6 @@
     {
       "id": "serveur-local",
       "name": "Serveur local",
-      "alias": "ServeurLocal",
       "desc": "Réflexions sur l'intérêt et la faisabilité d'un serveur local Python et/ou d'une IA locale",
       "stack": "Python · http.server · HTML/JS vanilla",
       "category": "active",
@@ -5336,7 +5321,6 @@
     {
       "id": "gsheet-datamart",
       "name": "GSheet Datamart",
-      "alias": "Datamart",
       "desc": "Vue simplifiée du suivi Dashboard Datamart pour la Gsheet",
       "stack": "",
       "category": "active",

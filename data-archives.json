@@ -3,7 +3,6 @@
     {
       "id": "dashboard-datamart",
       "name": "Dashboard Datamart",
-      "alias": "Datamart",
       "desc": "Dashboard de suivi des examens et formations.",
       "stack": "JS · Chart.js · Python proxy",
       "category": "active",
@@ -87,7 +86,6 @@
     {
       "id": "training-v7",
       "name": "Training V7",
-      "alias": "Training",
       "desc": "Refonte du module de formation Opquast.",
       "stack": "PHP 8 · WordPress · MySQL 8",
       "category": "active",
@@ -138,7 +136,6 @@
     {
       "id": "cas-pratiques-project",
       "name": "Cas Pratiques",
-      "alias": "Cas Prat.",
       "desc": "Module d'exercices pratiques Opquast.",
       "stack": "HTML · JavaScript · Python · Bootstrap 5",
       "category": "active",
@@ -183,7 +180,6 @@
     {
       "id": "planning-lde-v2",
       "name": "Planning LDE",
-      "alias": "Planning",
       "desc": "Nouveau système de suivi V2 — modèle Projet → Sous-projet → Étape.",
       "stack": "HTML · JS vanilla · Python",
       "category": "active",
@@ -468,7 +464,6 @@
     {
       "id": "petites-taches",
       "name": "PETITES TÂCHES",
-      "alias": "PetitesTaches",
       "desc": "Petites tâches techniques ponctuelles, non rattachées à un projet majeur.",
       "stack": "Divers",
       "category": "active",
@@ -528,7 +523,6 @@
     {
       "id": "gestion-script-serveurs",
       "name": "Gestion script de lancement des serveurs locaux",
-      "alias": "ScriptServeurs",
       "desc": "Script bash de gestion des serveurs locaux Opquast — start/stop/restart/check, menu interactif iTerm2.",
       "stack": "Bash",
       "category": "infra",
@@ -554,7 +548,6 @@
     {
       "id": "generateur-snippets-schmoll",
       "name": "Cas Pratiques Schmoll",
-      "alias": "Schmoll",
       "desc": "Générateur de cas pratiques web quality (snippets HTML/CSS/JS) depuis des référentiels Opquast/RGAA.",
       "stack": "Node.js · Express · JS vanilla · Vite",
       "category": "active",
@@ -595,7 +588,6 @@
     {
       "id": "tests-quiz-plateformes",
       "name": "Tests de quiz dans les plateformes",
-      "alias": "TestsQuiz",
       "desc": "Tests fonctionnels des quiz sur les plateformes Training V7 et Examens V7.",
       "stack": "Markdown · Tests fonctionnels",
       "category": "active",
@@ -728,7 +720,6 @@
     {
       "id": "notification-front",
       "name": "Notification Front",
-      "alias": "NotifFront",
       "desc": "Page de statut « À mon attention aujourd'hui » — agrégation Front (compartiments + Subscribed + Assigné) et Google Drive, alimentée par un artifact Cowork et une tâche planifiée 30 min en lecture seule.",
       "stack": "HTML · JS vanilla · Cowork artifact · Tâche planifiée",
       "category": "active",
@@ -817,6 +808,118 @@
               "status": "done",
               "charge": 0.0,
               "raf": 0.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "projet-alpha",
+      "name": "Projet Alpha",
+      "desc": "Projet de test.",
+      "stack": "Python",
+      "category": "active",
+      "folder": "",
+      "docs": [
+        {
+          "id": "doc-existant",
+          "file": "projet-alpha/SPEC-EXISTANT.md",
+          "title": "Spec existante",
+          "desc": "Une spec déjà dans le catalogue.",
+          "type": "spec",
+          "status": "final",
+          "date": "2026-05-10",
+          "subproject": "sp-existant"
+        },
+        {
+          "id": "doc-no-sp",
+          "file": "projet-alpha/NOUVEAU-DOC.md",
+          "title": "Notes projet sans SP",
+          "type": "notes",
+          "status": "draft",
+          "subproject": null
+        },
+        {
+          "id": "doc-orphan",
+          "file": "projet-alpha/AUTRE-DOC.md",
+          "title": "Audit orphelin",
+          "type": "audit",
+          "status": "draft",
+          "subproject": "sp-fantome"
+        }
+      ],
+      "subprojects": [
+        {
+          "id": "sp-existant",
+          "name": "Sous-projet existant",
+          "titre": "Description courte.",
+          "status": "wip",
+          "qualif": "P1",
+          "target": "2026-05-16",
+          "owner": null,
+          "charge": 8.0,
+          "raf": 4.0,
+          "steps": [
+            {
+              "name": "Spécification",
+              "status": "done",
+              "charge": 2.0,
+              "raf": 0
+            },
+            {
+              "name": "Développement",
+              "status": "wip",
+              "charge": 4.0,
+              "raf": 4.0
+            },
+            {
+              "name": "Tests",
+              "status": "todo",
+              "charge": 1.5,
+              "raf": 1.5
+            },
+            {
+              "name": "Mis en ligne",
+              "status": "todo",
+              "charge": 0.5,
+              "raf": 0.5
+            }
+          ]
+        },
+        {
+          "id": "sp-existant",
+          "name": "Sous-projet existant",
+          "titre": "Description courte.",
+          "status": "wip",
+          "qualif": "P1",
+          "target": "2026-05-16",
+          "owner": null,
+          "charge": 8.0,
+          "raf": 4.0,
+          "steps": [
+            {
+              "name": "Spécification",
+              "status": "done",
+              "charge": 2.0,
+              "raf": 0
+            },
+            {
+              "name": "Développement",
+              "status": "wip",
+              "charge": 4.0,
+              "raf": 4.0
+            },
+            {
+              "name": "Tests",
+              "status": "todo",
+              "charge": 1.5,
+              "raf": 1.5
+            },
+            {
+              "name": "Mis en ligne",
+              "status": "todo",
+              "charge": 0.5,
+              "raf": 0.5
             }
           ]
         }

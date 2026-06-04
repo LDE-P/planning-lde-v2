@@ -512,7 +512,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
         if not proj:
             self._json_error('Projet introuvable', 404)
             return
-        for field in ('alias', 'name', 'desc', 'stack'):
+        for field in ('name', 'desc', 'stack'):
             if field in payload:
                 proj[field] = payload[field]
         _save_data(data)
@@ -601,7 +601,6 @@ class Handler(http.server.BaseHTTPRequestHandler):
             arch_proj = {
                 'id': project['id'],
                 'name': project.get('name', ''),
-                'alias': project.get('alias', ''),
                 'desc': project.get('desc', ''),
                 'stack': project.get('stack', ''),
                 'category': project.get('category', 'active'),
@@ -701,7 +700,6 @@ class Handler(http.server.BaseHTTPRequestHandler):
             data_proj = {
                 'id': arch_proj['id'],
                 'name': arch_proj.get('name', ''),
-                'alias': arch_proj.get('alias', ''),
                 'desc': arch_proj.get('desc', ''),
                 'stack': arch_proj.get('stack', ''),
                 'category': arch_proj.get('category', 'active'),
@@ -937,7 +935,6 @@ class Handler(http.server.BaseHTTPRequestHandler):
         project = {
             'id': proj_id,
             'name': name,
-            'alias': payload.get('alias', ''),
             'desc': payload.get('desc', ''),
             'stack': payload.get('stack', ''),
             'category': payload.get('category', 'active'),
