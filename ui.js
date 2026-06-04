@@ -1808,8 +1808,8 @@ export function init(state) {
 
   renderAll();
 
-  // Panneau latéral docs — état initial selon résolution
-  setSidebarOpen(isSidebarResolution());
+  // Panneau latéral docs — ouvert par défaut
+  setSidebarOpen(true);
 
   document.getElementById('docs-sidebar-tab').addEventListener('click', () => {
     setSidebarOpen(!_sidebarOpen);
