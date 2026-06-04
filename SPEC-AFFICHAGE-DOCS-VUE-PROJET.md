@@ -105,7 +105,8 @@ Structure HTML produite :
 
 ### 3.2 — Affichage docs dans le panneau SP
 
-Dans `renderSubproject(projectId, sp)`, **après** `stepsPanel.appendChild(...)` des étapes et **avant** `main.appendChild(stepsPanel)` :
+Dans `renderSubproject(projectId, sp)`, **après** la boucle qui ajoute les étapes dans `stepsPanel` (ligne `(sp.steps || []).forEach(...)`) et **avant** que `stepsPanel` ne soit appendé à `main`.
+En pratique : `docsSection` est ajouté en dernier enfant de `stepsPanel` — il s'affiche donc après les lignes d'étapes et est masqué/visible par le même toggle ▶/▼ qui contrôle le panneau.
 
 ```js
 // Docs du SP (lecture seule, inline dans le panneau détail)
@@ -214,7 +215,7 @@ if (docsBlock) card.appendChild(docsBlock);
 
 ### 3.5 — Intégration dans la Vue Archives
 
-La Vue Archives a ses propres fonctions de rendu (à partir de ~ligne 892 dans `ui.js`). Localiser la fonction qui construit la carte d'un projet archivé et ajouter :
+La Vue Archives a ses propres fonctions de rendu. Localiser `renderArchivedProject(proj)` dans `ui.js` (chercher `function renderArchivedProject`) et ajouter :
 
 ```js
 const docsBlock = renderProjectDocsBlock(archivedProj, true);
@@ -225,7 +226,28 @@ if (docsBlock) card.appendChild(docsBlock);
 
 > **Avant d'implémenter :** lire les fonctions de rendu Archives pour identifier le bon point d'insertion. Appliquer la Règle 4.
 
-### 3.6 — CSS à ajouter dans `DASHBOARD-V2.html`
+### 3.6 — Cas limite : `_archivesLoaded` et rendu initial
+
+`_archivesState` est chargé en fire-and-forget dans `init()` (appel `fetchArchives()`). Lors du premier `renderAll()` (synchrone, avant la réponse HTTP), `_archivesState.projects` est vide.
+
+**Conséquence sans précaution :** `renderProjectDocsBlock` construit un `archivedSpIds` vide → un doc lié à un SP archivé est traité comme orphelin et affiché en rouge dans Vue Projets jusqu'au retour de la réponse archives.
+
+**Correction à implémenter :** dans le callback `fetchArchives().then(...)` de `init()`, ajouter `renderAll()` **après** `updateArchivesCountBadge()` :
+
+```js
+fetchArchives()
+  .then(a => {
+    _archivesState = a || { projects: [] };
+    _archivesLoaded = true;
+    updateArchivesCountBadge();
+    renderAll();   // ← nouveau : corrige l'affichage des docs liés à des SP archivés
+  })
+  .catch(() => { /* archives indisponibles : badge reste vide */ });
+```
+
+> **Note :** ce `renderAll()` supplémentaire n'est déclenché qu'une seule fois au chargement (archives chargées une fois pour toute la session). Il est sans impact sur les performances habituelles.
+
+### 3.7 — CSS à ajouter dans `DASHBOARD-V2.html`
 
 ```css
 /* ── Docs inline dans SP panel ──────────────────────────────── */
@@ -404,6 +426,122 @@ Aucune modification de `serve-v2.py`, `api.js`, `data.json`.
 ## 9. Prompt de démarrage Claude Code
 
 > Implémente la spec `planning-lde-v2/SPEC-AFFICHAGE-DOCS-VUE-PROJET.md`. Commence par lire ce fichier, `planning-lde-v2/CLAUDE.md` et `GIT/CLAUDE.md`. Puis lis `ui.js` en entier avant d'écrire quoi que ce soit.
+>
+> Points d'attention :
+> (6) Race condition `_archivesLoaded` : ajouter `renderAll()` dans le callback `fetchArchives().then(...)` de `init()` (voir §3.6).
+
+---
+
+## 10. Scénarios de tests fonctionnels
+
+Tests à exécuter manuellement après implémentation. Pré-requis : dashboard lancé (`python3 serve-v2.py`), `data.json` contenant les données nécessaires.
+
+### 10.1 — Docs dans le panneau SP
+
+| # | Donnée | Action | Résultat attendu |
+|---|--------|--------|-----------------|
+| T1 | SP avec 1 doc lié (`doc.subproject === sp.id`) | Ouvrir le panneau du SP (clic ▶) | Section `.sp-docs-section` présente après les étapes, avec le label « 📄 Docs (1) » et une ligne doc |
+| T2 | SP sans doc associé | Ouvrir le panneau du SP | Aucune section `.sp-docs-section` dans le panneau |
+| T3 | SP avec 2 docs liés | Ouvrir le panneau | Label « 📄 Docs (2) », 2 lignes docs |
+| T4 | Fermer le panneau (▼ → ▶) | Clic sur ▶ du même SP | Les étapes ET les docs disparaissent ensemble |
+| T5 | Doc avec `type: "spec"` et `status: "final"` | Ouvrir panneau | Badge type « SPEC » + badge statut « Final » visibles |
+| T6 | Lien TextMate sur chaque ligne doc | Inspecter le HTML | `href` commence par `txmt://open?url=file://` + chemin absolu |
+| T7 | Bouton Finder sur chaque ligne doc | Présent sur la ligne | Bouton `📁 Finder` visible |
+
+### 10.2 — Bloc docs au niveau projet (Vue Projets)
+
+| # | Donnée | Action | Résultat attendu |
+|---|--------|--------|-----------------|
+| T8 | Projet avec 1 doc sans SP (`subproject: null`) | Ouvrir la carte projet | Bouton `.docs-inline-toggle` visible en bas de carte, libellé « ▶ 📄 Docs (1) » |
+| T9 | Bloc projet fermé par défaut | Charger la page | `.docs-inline-list` a la classe `collapsed` (contenu masqué) |
+| T10 | Clic sur le toggle | Clic sur « ▶ 📄 Docs (1) » | Liste s'ouvre, flèche passe à « ▼ » |
+| T11 | Deuxième clic | Clic sur « ▼ 📄 Docs (1) » | Liste se ferme, flèche repasse à « ▶ » |
+| T12 | Projet sans doc de niveau projet (tous docs ont un SP actif) | Observer la carte | Aucun bouton `.docs-inline-toggle` |
+| T13 | Projet sans aucun doc | Observer la carte | Aucun bouton `.docs-inline-toggle` |
+| T14 | Doc orphelin (`subproject: "sp-inconnu"`) | Ouvrir le bloc projet | Ligne présente avec `.orphan` en rouge : « SP : sp-inconnu (orphelin) » |
+| T15 | Doc lié à SP archivé | Vue Projets ouverte | Doc **absent** du bloc projet (SP archivé → masqué en Vue Projets) |
+
+### 10.3 — Vue Archives
+
+| # | Donnée | Action | Résultat attendu |
+|---|--------|--------|-----------------|
+| T16 | Projet archivé avec un doc sans SP | Ouvrir Vue Archives, ouvrir la carte | Bloc `.docs-inline-block` présent, doc affiché normalement |
+| T17 | Projet archivé avec un doc lié à un SP archivé | Ouvrir Vue Archives | Doc présent dans le bloc projet, avec mention « SP archivé » en italique atténué (`.sp-archived`) |
+| T18 | Projet archivé avec un doc orphelin | Ouvrir Vue Archives | Doc présent avec mention rouge `.orphan` |
+| T19 | Projet archivé sans docs | Ouvrir Vue Archives | Aucun bloc `.docs-inline-block` |
+
+### 10.4 — Rendu initial (race condition §3.6)
+
+| # | Scénario | Résultat attendu |
+|---|----------|-----------------|
+| T20 | Projet actif avec un doc lié à un SP archivé, chargement initial | Après le premier rendu (< 1 s), le doc ne doit **pas** apparaître comme orphelin en rouge dans Vue Projets. Il doit être absent (cas normal : SP archivé → masqué). Si le `renderAll()` du §3.6 n'est pas implémenté, ce test échouera pendant la fenêtre de chargement. |
+
+### 10.5 — Données de test recommandées pour `data.json`
+
+Pour couvrir T1–T20, `projet-alpha` doit contenir :
+
+```json
+"docs": [
+  {
+    "id": "doc-sp-actif",
+    "file": "projet-alpha/SPEC-EXISTANT.md",
+    "title": "Spec SP actif",
+    "type": "spec",
+    "status": "final",
+    "subproject": "sp-existant"
+  },
+  {
+    "id": "doc-no-sp",
+    "file": "projet-alpha/NOTES.md",
+    "title": "Notes projet",
+    "type": "notes",
+    "status": "draft",
+    "subproject": null
+  },
+  {
+    "id": "doc-orphan",
+    "file": "projet-alpha/AUDIT.md",
+    "title": "Audit orphelin",
+    "type": "audit",
+    "status": "draft",
+    "subproject": "sp-fantome"
+  }
+]
+```
+
+Pour T16–T18, `data-archives.json` doit contenir un projet avec un doc lié à un SP archivé :
+
+```json
+{
+  "projects": [
+    {
+      "id": "projet-gamma",
+      "name": "Projet Gamma (archivé)",
+      "docs": [
+        {
+          "id": "doc-gamma-no-sp",
+          "file": "projet-gamma/BILAN.md",
+          "title": "Bilan",
+          "type": "bilan",
+          "status": "final",
+          "subproject": null
+        },
+        {
+          "id": "doc-gamma-sp-arch",
+          "file": "projet-gamma/SPEC.md",
+          "title": "Spec SP archivé",
+          "type": "spec",
+          "status": "final",
+          "subproject": "sp-gamma"
+        }
+      ],
+      "subprojects": [
+        { "id": "sp-gamma", "name": "SP Gamma", "status": "done" }
+      ]
+    }
+  ]
+}
+```
 >
 > Points d'attention :
 > (1) Les docs SP s'insèrent dans `stepsPanel` de `renderSubproject()`, après les étapes — pas dans un bloc séparé avec son propre toggle, la même commande ▶/▼ contrôle tout.
