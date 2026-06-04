@@ -709,6 +709,91 @@
       font-size: 12px;
       text-align: center;
     }
+
+    /* ── Docs inline dans SP panel ──────────────────────────────── */
+    .sp-docs-section {
+      margin-top: 6px;
+      padding-top: 4px;
+      border-top: 1px dashed var(--border);
+    }
+
+    .sp-docs-label {
+      font-size: 11px;
+      color: var(--text-dim);
+      font-weight: 500;
+      padding: 2px 0 3px 2px;
+    }
+
+    /* ── Bloc docs inline au niveau projet ──────────────────────── */
+    .docs-inline-block {
+      margin: 4px 8px 8px 8px;
+      border-top: 1px solid var(--border);
+    }
+
+    .docs-inline-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px 8px;
+      font-size: 12px;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .docs-inline-toggle:hover { color: var(--text); }
+
+    .docs-inline-list { padding: 0 4px 4px 4px; }
+    .docs-inline-list.collapsed { display: none; }
+
+    /* ── Ligne doc commune aux deux niveaux ─────────────────────── */
+    .doc-inline-row {
+      padding: 3px 4px;
+      border-bottom: 1px solid var(--border);
+      font-size: 12px;
+    }
+    .doc-inline-row:last-child { border-bottom: none; }
+
+    .doc-inline-title-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .doc-inline-title {
+      flex: 1;
+      font-weight: 500;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .doc-inline-link {
+      font-size: 11px;
+      color: var(--accent);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .doc-inline-link:hover { text-decoration: underline; }
+
+    .doc-inline-finder {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 11px;
+      padding: 0;
+      color: var(--text-dim);
+    }
+    .doc-inline-finder:hover { color: var(--text); }
+
+    .doc-inline-sp {
+      font-size: 11px;
+      margin-left: 4px;
+      margin-top: 1px;
+    }
+    .doc-inline-sp .orphan { color: var(--blocked); }
+    .doc-inline-sp .sp-archived { color: var(--text-dim); font-style: italic; }
   </style>
 </head>
 <body>

@@ -94,6 +94,147 @@ function makeBadge(status, cls = 'status-badge') {
   return span;
 }
 
+// ── Doc inline helpers ─────────────────────────────────────────────────────────
+
+/**
+ * Crée une ligne doc compacte (format inline).
+ * @param {Object} doc - objet doc de data.json
+ * @param {string} absFile - chemin absolu vers le fichier (git_root + doc.file)
+ * @param {Object} [options]
+ * @param {string} [options.orphanSpId] - si défini, affiche la mention orphelin (rouge)
+ * @param {boolean} [options.spArchived] - si true, affiche la mention "SP archivé" (atténué)
+ * @returns {HTMLElement}
+ */
+function renderDocInlineRow(doc, absFile, options = {}) {
+  const row = document.createElement('div');
+  row.className = 'doc-inline-row';
+
+  const titleRow = document.createElement('div');
+  titleRow.className = 'doc-inline-title-row';
+
+  const typeBadge = document.createElement('span');
+  typeBadge.className = `doc-type-badge doc-type-${doc.type}`;
+  typeBadge.textContent = DOC_TYPE_LABELS[doc.type] || (doc.type || '').toUpperCase();
+  titleRow.appendChild(typeBadge);
+
+  const titleEl = document.createElement('span');
+  titleEl.className = 'doc-inline-title';
+  titleEl.textContent = doc.title || '(sans titre)';
+  titleRow.appendChild(titleEl);
+
+  const statusBadge = document.createElement('span');
+  statusBadge.className = `doc-status-badge doc-status-${doc.status}`;
+  statusBadge.textContent = DOC_STATUS_LABELS[doc.status] || doc.status;
+  titleRow.appendChild(statusBadge);
+
+  const tmLink = document.createElement('a');
+  tmLink.href = `txmt://open?url=file://${encodeURI(absFile)}`;
+  tmLink.className = 'doc-inline-link';
+  tmLink.title = 'Ouvrir dans TextMate';
+  tmLink.textContent = '↗ TextMate';
+  titleRow.appendChild(tmLink);
+
+  const finderBtn = document.createElement('button');
+  finderBtn.className = 'doc-inline-finder';
+  finderBtn.title = 'Révéler dans le Finder';
+  finderBtn.textContent = '📁 Finder';
+  finderBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    openFile(doc.file)
+      .then(() => toast('Finder ouvert.'))
+      .catch(err => toast(err.message, 'error'));
+  });
+  titleRow.appendChild(finderBtn);
+
+  row.appendChild(titleRow);
+
+  if (options.orphanSpId) {
+    const spLine = document.createElement('div');
+    spLine.className = 'doc-inline-sp';
+    const orphan = document.createElement('span');
+    orphan.className = 'orphan';
+    orphan.textContent = `SP : ${options.orphanSpId} (orphelin)`;
+    spLine.appendChild(orphan);
+    row.appendChild(spLine);
+  } else if (options.spArchived) {
+    const spLine = document.createElement('div');
+    spLine.className = 'doc-inline-sp';
+    const archived = document.createElement('span');
+    archived.className = 'sp-archived';
+    archived.textContent = 'SP archivé';
+    spLine.appendChild(archived);
+    row.appendChild(spLine);
+  }
+
+  return row;
+}
+
+/**
+ * Crée le bloc dépliable "Docs" au niveau projet.
+ * Vue Projets : inclut sans-SP + orphelins. Exclut SP actif et SP archivé.
+ * Vue Archives : inclut sans-SP + orphelins + SP archivé (avec classe sp-archived).
+ * @param {Object} proj - projet (actif ou archivé)
+ * @param {boolean} [isArchive=false]
+ * @returns {HTMLElement|null} - null si aucun doc de niveau projet
+ */
+function renderProjectDocsBlock(proj, isArchive = false) {
+  const allDocs = (proj.docs || []).filter(d => d && typeof d === 'object');
+  if (allDocs.length === 0) return null;
+
+  // SP actifs du projet (vide en Vue Archives — tous archivés)
+  const activeSpIds = isArchive
+    ? new Set()
+    : new Set((proj.subprojects || []).map(s => s.id));
+
+  // SP archivés du projet
+  const archProj = _archivesState.projects.find(p => p.id === proj.id);
+  const archivedSpIds = new Set((archProj?.subprojects || []).map(s => s.id));
+
+  const projectDocs = allDocs
+    .filter(d => {
+      if (!d.subproject) return true;                          // pas de SP → niveau projet
+      if (activeSpIds.has(d.subproject)) return false;         // SP actif → affiché dans le SP
+      if (archivedSpIds.has(d.subproject)) return isArchive;   // SP archivé → Archives seulement
+      return true;                                             // vrai orphelin → niveau projet
+    })
+    .map(d => ({
+      ...d,
+      _spArchived: !!d.subproject && archivedSpIds.has(d.subproject),
+    }));
+
+  if (projectDocs.length === 0) return null;
+
+  const block = document.createElement('div');
+  block.className = 'docs-inline-block';
+
+  const toggle = document.createElement('button');
+  toggle.className = 'docs-inline-toggle';
+  toggle.innerHTML = `▶ 📄 Docs (${projectDocs.length})`;
+  block.appendChild(toggle);
+
+  const list = document.createElement('div');
+  list.className = 'docs-inline-list collapsed';
+  block.appendChild(list);
+
+  const gitRoot = _state.git_root || '';
+  projectDocs.forEach(doc => {
+    const absFile = gitRoot ? `${gitRoot}/${doc.file}` : doc.file;
+    const isOrphan = !!doc.subproject && !doc._spArchived;
+    list.appendChild(renderDocInlineRow(doc, absFile, {
+      ...(isOrphan        ? { orphanSpId: doc.subproject } : {}),
+      ...(doc._spArchived ? { spArchived: true }           : {}),
+    }));
+  });
+
+  toggle.addEventListener('click', e => {
+    e.stopPropagation();
+    const collapsed = list.classList.toggle('collapsed');
+    toggle.innerHTML = `${collapsed ? '▶' : '▼'} 📄 Docs (${projectDocs.length})`;
+  });
+
+  return block;
+}
+
 // ── Project card ───────────────────────────────────────────────────────────────
 
 function renderProject(proj) {
@@ -208,6 +349,10 @@ function renderProject(proj) {
   }
 
   card.appendChild(list);
+
+  const docsBlock = renderProjectDocsBlock(proj, false);
+  if (docsBlock) card.appendChild(docsBlock);
+
   return card;
 }
 
@@ -408,6 +553,26 @@ function renderSubproject(projectId, sp) {
   (sp.steps || []).forEach(step => {
     stepsPanel.appendChild(renderStep(projectId, sp, step));
   });
+
+  // Docs du SP (lecture seule, inline dans le panneau détail)
+  const projDocs = _state.projects.find(p => p.id === projectId)?.docs || [];
+  const spDocs = projDocs.filter(d => d && typeof d === 'object' && d.subproject === sp.id);
+  if (spDocs.length > 0) {
+    const gitRoot = _state.git_root || '';
+    const docsSection = document.createElement('div');
+    docsSection.className = 'sp-docs-section';
+
+    const label = document.createElement('div');
+    label.className = 'sp-docs-label';
+    label.textContent = `📄 Docs (${spDocs.length})`;
+    docsSection.appendChild(label);
+
+    spDocs.forEach(doc => {
+      const absFile = gitRoot ? `${gitRoot}/${doc.file}` : doc.file;
+      docsSection.appendChild(renderDocInlineRow(doc, absFile));
+    });
+    stepsPanel.appendChild(docsSection);
+  }
 
   main.appendChild(stepsPanel);
   row.appendChild(main);
@@ -1063,6 +1228,10 @@ function renderArchivedProject(proj) {
     sps.forEach(sp => list.appendChild(renderArchivedSubproject(proj.id, sp)));
   }
   card.appendChild(list);
+
+  const docsBlock = renderProjectDocsBlock(proj, true);
+  if (docsBlock) card.appendChild(docsBlock);
+
   return card;
 }
 
@@ -1525,11 +1694,13 @@ export function init(state) {
   document.getElementById('modal-doc-save').addEventListener('click', submitDocModal);
 
   // Chargement initial des archives (fire-and-forget) — initialise le badge
+  // Le renderAll() final corrige l'affichage des docs liés à des SP archivés (§3.6 spec).
   fetchArchives()
     .then(a => {
       _archivesState = a || { projects: [] };
       _archivesLoaded = true;
       updateArchivesCountBadge();
+      renderAll();
     })
     .catch(() => { /* archives indisponibles : badge reste vide */ });
 
