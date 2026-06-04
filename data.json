@@ -1167,7 +1167,7 @@
           "id": "convertisseur-wpproquiz",
           "name": "Convertisseur WpProQuiz (XML)",
           "titre": "Outil de conversion de quiz vers le format WpProQuiz.",
-          "status": "blocked",
+          "status": "wip",
           "qualif": "P2",
           "target": "08/05/2026",
           "owner": "laurent",
@@ -1182,7 +1182,7 @@
             },
             {
               "name": "Développement",
-              "status": "wip",
+              "status": "done",
               "charge": 0.0,
               "raf": 0.0
             },
