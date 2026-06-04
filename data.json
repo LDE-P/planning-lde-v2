@@ -2588,6 +2588,16 @@
           "subproject": "passe-polish-post-audit"
         },
         {
+          "id": "rapport-deploiement-prod-training",
+          "title": "Rapport déploiement PROD Training — 2026-06-02",
+          "desc": "Rapport MHO/Claude Code : code review adversariale (3 patches dont P2 AND online=1), vérification MD5 895/895 byte-perfect LOCAL+PROD, déploiement atomique 895 UPDATE sans warning.",
+          "file": "dashbord-datamart-V1/doc-mises-en-prod-sql/RAPPORT-deploiement-prod-training-2026-06-02.md",
+          "type": "bilan",
+          "status": "final",
+          "date": "2026-06-02",
+          "subproject": "maj-quiz-source-training-sql"
+        },
+        {
           "id": "bilan-passe-amelioration-training",
           "title": "Bilan passe d'amélioration Training V7",
           "desc": "Bilan chiffré complet : 895 questions · 3 183 champs modifiés/créés · 1 460 créations ex nihilo (indices, corrigés si juste/faux). Détail par quiz et par type de champ.",
@@ -2785,12 +2795,12 @@
         {
           "id": "maj-quiz-source-training-sql",
           "name": "Mise à jour quiz source TRAINING via SQL",
-          "status": "wip",
+          "status": "done",
           "qualif": "P1",
           "target": "",
           "owner": "laurent",
           "charge": 1.0,
-          "raf": 0.2,
+          "raf": 0.0,
           "titre": "Script Python + SQL : maj textes question/réponses quiz source Training (passe FALC) — adapté de l Examen",
           "commentaire": "Passe polish en cours (DA PUSH CSV FALC TRAINING SQL). Import test après finalisation arbitrage corrections.",
           "steps": [
@@ -2861,7 +2871,7 @@
         {
           "id": "passe-polish-post-audit",
           "name": "Passe de polish post-audit persona",
-          "status": "review",
+          "status": "done",
           "qualif": "P1",
           "target": "",
           "owner": "laurent",
