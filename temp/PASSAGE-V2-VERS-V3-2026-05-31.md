@@ -1,5 +1,11 @@
 # Passage de relais — Planning LDE V2 → nouvelle session « PLANNING LDE V3 »
 
+> **🛑 DOC LARGEMENT OBSOLÈTE (2026-06-04)** — la synchronisation GSheet a été
+> **définitivement abandonnée et supprimée du code** le 2026-06-03 (découplage total).
+> Les sections §2 (statut `fail` : FAIT), §3.2 (boutons : supprimés), §3.3 (OAuth : supprimé),
+> §5 (bugs push/pull : sans objet) et §8 ne doivent **plus être exécutées**.
+> → Lire à la place : **`temp/PASSAGE-RELAIS-MAINTENANCE-2026-06-04.md`**
+
 **Date du passage** : 2026-05-31 (dimanche, ~15h15 Europe/Paris)
 **Modèle source** : claude-opus-4-7 (Cowork)
 **Modèle cible** : nouvelle session (changement de modèle Claude par LDE)

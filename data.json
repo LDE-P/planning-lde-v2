@@ -1952,6 +1952,15 @@
           "status": "final",
           "date": "2026-05-15",
           "subproject": "mise-en-place-operationnelle"
+        },
+        {
+          "id": "spec-decouplage-gsheet",
+          "file": "planning-lde-v2/SPEC-DECOUPLAGE-GSHEET.md",
+          "title": "Découplage total Dashboard ↔ GSheet",
+          "desc": "Abandon définitif de la sync Google Sheets (2026-06-03) : décisions de périmètre, code supprimé, statut fail ajouté, specs archivées dans archive-gsheet/.",
+          "type": "spec",
+          "status": "final",
+          "date": "2026-06-03"
         }
       ],
       "subprojects": [
