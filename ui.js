@@ -252,11 +252,9 @@ function renderProject(proj) {
   // Header
   const hdr = document.createElement('div');
   hdr.className = 'project-header';
-  const alias = proj.alias || '';
   hdr.innerHTML = `
     <span class="project-toggle">▶</span>
     <span class="project-name">${esc(proj.name)}</span>
-    ${alias ? `<span class="proj-alias">${esc(alias)}</span>` : ''}
     <span class="project-stack">${esc(proj.stack || '')}</span>
     <div class="project-progress">
       <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
@@ -265,7 +263,7 @@ function renderProject(proj) {
     <div class="project-actions">
       <button class="icon-btn btn-open-folder" title="Ouvrir le dossier">📁</button>
       <button class="icon-btn btn-add-sp" title="Nouveau sous-projet">＋</button>
-      <button class="icon-btn btn-rename-alias" title="Renommer l'alias">✎</button>
+      <button class="icon-btn btn-rename-proj" title="Renommer le projet">✎</button>
       <button class="icon-btn btn-archive-proj" title="Archiver le projet">🗃</button>
       <button class="icon-btn icon-btn-danger btn-del-proj" title="Supprimer le projet">🗑</button>
     </div>
@@ -282,9 +280,16 @@ function renderProject(proj) {
     openAddSpModal(proj.id);
   });
 
-  hdr.querySelector('.btn-rename-alias').addEventListener('click', e => {
+  hdr.querySelector('.btn-rename-proj').addEventListener('click', e => {
     e.stopPropagation();
-    openRenameAliasModal(proj);
+    const nameEl = hdr.querySelector('.project-name');
+    startInlineEdit(nameEl, proj.name, newName => {
+      proj.name = newName;
+      nameEl.textContent = newName;
+      saveProject({ projectId: proj.id, name: newName })
+        .then(() => toast('Projet renommé.'))
+        .catch(err => toast(err.message, 'error'));
+    });
   });
 
   hdr.querySelector('.btn-archive-proj').addEventListener('click', e => {
@@ -805,29 +810,6 @@ function startInlineEditCharges(el, sp, projectId, renderCharges) {
 
 // ── Modals ─────────────────────────────────────────────────────────────────────
 
-function openRenameAliasModal(proj) {
-  document.getElementById('modal-rename-alias-desc').textContent = `Projet : ${proj.name}`;
-  const input = document.getElementById('modal-rename-alias-input');
-  input.value = proj.alias || proj.name;
-  document.getElementById('modal-rename-alias').classList.add('open');
-  input.focus();
-  input.select();
-
-  const saveBtn = document.getElementById('modal-rename-alias-save');
-  const clone = saveBtn.cloneNode(true);
-  saveBtn.replaceWith(clone);
-  clone.addEventListener('click', () => {
-    const newAlias = input.value.trim();
-    if (!newAlias) return;
-    document.getElementById('modal-rename-alias').classList.remove('open');
-    proj.alias = newAlias;
-    saveProject({ projectId: proj.id, alias: newAlias })
-      .then(() => { toast('Alias mis à jour.'); renderAll(); })
-      .catch(err => toast(err.message, 'error'));
-  }, { once: true });
-  document.getElementById('modal-rename-alias-cancel').onclick = () =>
-    document.getElementById('modal-rename-alias').classList.remove('open');
-}
 
 function openAddSpModal(projectId) {
   document.getElementById('modal-sp-project-id').value = projectId;
@@ -845,7 +827,6 @@ function closeAddSpModal() {
 
 function openAddProjModal() {
   document.getElementById('modal-proj-name').value = '';
-  document.getElementById('modal-proj-alias').value = '';
   document.getElementById('modal-proj-desc').value = '';
   document.getElementById('modal-proj-stack').value = '';
   document.getElementById('modal-add-proj').classList.add('open');
@@ -940,11 +921,9 @@ function renderDocsView() {
 
     const hdr = document.createElement('div');
     hdr.className = 'project-header';
-    const alias = proj.alias || '';
     hdr.innerHTML = `
       <span class="project-toggle">▶</span>
       <span class="project-name">${esc(proj.name)}</span>
-      ${alias ? `<span class="proj-alias">${esc(alias)}</span>` : ''}
       <span class="project-stack">${allDocs.length} doc${allDocs.length > 1 ? 's' : ''}</span>
       <div style="flex:1"></div>
       <div class="project-actions">
@@ -1169,11 +1148,9 @@ function renderArchivedProject(proj) {
 
   const hdr = document.createElement('div');
   hdr.className = 'project-header';
-  const alias = proj.alias || '';
   hdr.innerHTML = `
     <span class="project-toggle">▶</span>
     <span class="project-name">${esc(proj.name)}</span>
-    ${alias ? `<span class="proj-alias">${esc(alias)}</span>` : ''}
     <span class="project-stack">${sps.length} SP archivé${sps.length > 1 ? 's' : ''}</span>
     <div style="flex:1"></div>
     <div class="project-actions">
@@ -1644,15 +1621,6 @@ export function init(state) {
     _openProjects.clear();
   });
 
-  // Rename alias modal
-  document.getElementById('modal-rename-alias').addEventListener('click', e => {
-    if (e.target === e.currentTarget) document.getElementById('modal-rename-alias').classList.remove('open');
-  });
-  document.getElementById('modal-rename-alias-input').addEventListener('keydown', e => {
-    if (e.key === 'Enter') document.getElementById('modal-rename-alias-save').click();
-    if (e.key === 'Escape') document.getElementById('modal-rename-alias').classList.remove('open');
-  });
-
   // Add project button
   document.getElementById('add-project-btn').addEventListener('click', openAddProjModal);
 
@@ -1704,16 +1672,15 @@ export function init(state) {
 
   document.getElementById('modal-proj-save').addEventListener('click', async () => {
     const name = document.getElementById('modal-proj-name').value.trim();
-    const alias = document.getElementById('modal-proj-alias').value.trim();
     const desc = document.getElementById('modal-proj-desc').value.trim();
     const stack = document.getElementById('modal-proj-stack').value.trim();
 
     if (!name) { toast('Le nom est obligatoire.', 'error'); return; }
 
     try {
-      const r = await addProject({ name, alias, desc, stack });
+      const r = await addProject({ name, desc, stack });
       closeAddProjModal();
-      _state.projects.push({ id: r.id, name, alias, desc, stack, category: 'active', subprojects: [] });
+      _state.projects.push({ id: r.id, name, desc, stack, category: 'active', subprojects: [] });
       toast(`Projet "${name}" créé.`);
       renderAll();
     } catch (err) {

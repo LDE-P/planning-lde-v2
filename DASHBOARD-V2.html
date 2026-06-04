@@ -153,15 +153,6 @@
       color: var(--text-dim);
     }
 
-    .proj-alias {
-      font-size: 10px;
-      padding: 1px 6px;
-      border-radius: 3px;
-      background: var(--bg3);
-      color: var(--text-dim);
-      border: 1px solid var(--border);
-      white-space: nowrap;
-    }
 
     .project-progress {
       display: flex;
@@ -1044,10 +1035,6 @@
       <input type="text" id="modal-proj-name" placeholder="ex : Nouveau Projet" autocomplete="off">
     </div>
     <div class="form-group">
-      <label>Alias (nom court)</label>
-      <input type="text" id="modal-proj-alias" placeholder="ex : NvProjet" autocomplete="off">
-    </div>
-    <div class="form-group">
       <label>Description</label>
       <input type="text" id="modal-proj-desc" placeholder="Description courte." autocomplete="off">
     </div>
@@ -1075,20 +1062,6 @@
 </div>
 
 <!-- Modal: Renommer alias projet -->
-<div class="modal-overlay" id="modal-rename-alias">
-  <div class="modal">
-    <h2>Renommer l'alias</h2>
-    <p id="modal-rename-alias-desc" style="font-size:12px;color:var(--text-dim);margin-bottom:12px"></p>
-    <div class="form-group">
-      <label>Alias (nom court affiché dans le dashboard)</label>
-      <input type="text" id="modal-rename-alias-input" autocomplete="off">
-    </div>
-    <div class="modal-actions">
-      <button class="btn" id="modal-rename-alias-cancel">Annuler</button>
-      <button class="btn primary" id="modal-rename-alias-save">Enregistrer</button>
-    </div>
-  </div>
-</div>
 
 <!-- Modal: Add / Edit doc -->
 <div class="modal-overlay" id="modal-doc">
