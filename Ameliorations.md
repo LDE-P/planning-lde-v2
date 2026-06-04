@@ -17,6 +17,8 @@
 - [ ] **Lire les conditions de calibration avant de recréer un serveur/harnais de banc** (session Banc de tests, 2026-06-03) : `serve-lot20.py` a été livré 3× imparfait (URL racine, 404 parasites, méta-fuite « Contenu simulé ») faute d'avoir lu d'emblée le `serve.py` anti-tatillon d'origine sous lequel l'oracle avait été calibré. Pour tout banc aveugle : lire l'existant et répliquer fidèlement les conditions avant d'écrire un nouveau serveur.
 - [ ] **Checklist anti-fuite élargie pour bancs aveugles** (session Banc de tests, 2026-06-03) : ne pas se limiter au verdict dans les slugs — couvrir aussi (1) l'identité de règle dans les chemins (R-id → slugs opaques), (2) les noms de fixture (`specimens/`, `_ab`, `_parcours`…), (3) les méta-textes des pages générées (« simulé », « factice », « 404 », « test »). Le mapping URL→règle vit côté oracle, jamais servi.
 - [ ] **Pattern de packaging sandbox-safe** (session Banc de tests, 2026-06-03) : le montage refuse `rm -rf` et le remplacement atomique de `zip` (« Operation not permitted »). Pattern fiable : staging + zip dans `/tmp`, puis copie du seul artefact vers le montage. Documenter pour éviter de re-déboguer à chaque build.
+- [ ] **`git status` en début de session** (session Todo-list LDE, 2026-06-04) : `serve-todo.py` était modifié et non commité depuis une session précédente, découvert seulement à la clôture. Vérifier l'état git dès le lancement d'une session de code pour distinguer l'héritage des modifications de la session courante.
+- [ ] **Locators E2E robustes par défaut** (session Todo-list LDE, 2026-06-04) : un `text=Paragraphe` a matché à la fois le bouton et l'aide clavier (strict mode violation Playwright). Pour les éléments d'UI dont le libellé peut apparaître ailleurs, utiliser d'emblée `title`/`role` plutôt que `text=`.
 
 ## UI Dashboard
 
@@ -93,3 +95,16 @@
 
 - [ ] **Vérif post-copie/consolidation** : après toute copie/assemblage de fichiers, compter attendu vs obtenu (le bug « dossiers R119/R126 vides » lors de la consolidation du corpus durci serait passé inaperçu sans le différentiel).
 - [ ] **Audits IA = intervalles + vote majoritaire** : tout audit IA non déterministe se mesure sur ≥ 3 runs (moyenne + écart-type), verdict d'une unité borderline = vote majoritaire. Ne pas rapporter un point unique (mesuré : ~23 % d'unités borderline oscillent). Intégré aux principes du banc.
+
+## Process (session Composeur POC) — 2026-06-03
+
+- [ ] **Vérifier l'état git réel en début de tâche d'implémentation** : `git rev-parse --show-toplevel` + `.gitignore` plutôt que se fier au CLAUDE.md — la note racine « la racine GIT n'a pas de dépôt git » est **inexacte** (un dépôt existe, `banc-de-tests/*` gitignoré sauf `generation-snippets-v2/`). À corriger une fois le verrou git levé.
+- [ ] **Propager immédiatement une contrainte nouvellement énoncée par LDE à TOUS les docs déjà produits dans la session** : le verrou git annoncé en cours de session contredisait une reco « committer le référentiel » laissée dans `REVUE-Claude-Code-spec-poc.md` — corrigée seulement après relecture.
+- [ ] **Signaler les modifications d'environnement au moment où elles sont faites** (ex. `pip install pytest` pendant le POC Composeur), pas seulement dans le rapport final.
+
+## Déploiement SQL quiz (training/examen) — 2026-06-01
+
+- [ ] **Propager un correctif aux scripts jumeaux** : le bug critique `_mysql_escape_str` (n'échappait pas `\n`/`\r`/`\0`/`\x1a` → casse l'import phpMyAdmin) corrigé par MHO sur `update-source-quiz.py` n'avait jamais été porté à `update-training-quiz.py` (≈ 90 % de code commun). Découvert tardivement. → corriger les jumeaux le jour même.
+- [ ] **Horodater/revérifier les chiffres d'un handoff** : le handoff Cowork affirmait 892 UIDs / 3 corrections manuelles / examen PROD « en attente » — toutes périmées (réel : 895 / 0 / PROD fait le 28/05). Préconiser « vérifié contre DB le {date} » et revérifier contre la source avant toute décision.
+- [ ] **Conserver les artefacts générés avant régénération** (SQL, exports) pour permettre un diff a posteriori — un diff inattendu a dû être diagnostiqué par requêtes DB faute d'avoir gardé la version précédente.
+- [ ] **SQL de déploiement = générer depuis l'environnement de référence** : les blobs `answer_data` embarquent la structure de la DB source (flags `_correct`, slots). Toujours générer depuis LOCAL/PROD (jamais depuis un env qui a divergé) ; documenter dans le guide MHO que la voie sûre absolue est de lancer le script contre la cible.
