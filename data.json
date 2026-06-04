@@ -1033,7 +1033,7 @@
         {
           "id": "uid-quiz-source-deploiement",
           "name": "UIDs quiz source + chaîne déploiement examen",
-          "status": "wip",
+          "status": "blocked",
           "qualif": "P1",
           "target": null,
           "owner": "laurent",
