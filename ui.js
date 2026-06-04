@@ -1385,9 +1385,6 @@ function focusSubproject(projectId, spId) {
 
 let _sidebarOpen = false;
 
-function isSidebarResolution() {
-  return window.innerWidth >= 1600 && window.innerHeight >= 900;
-}
 
 function setSidebarOpen(open) {
   _sidebarOpen = open;
