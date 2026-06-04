@@ -4655,12 +4655,12 @@
           "id": "refactorisation-v2",
           "name": "Refactorisation V2",
           "titre": "Chantier de refactorisation du simulateur dans un répertoire dédié (port 8091). Bascule V1→V2 uniquement après validation complète en parallèle.",
-          "status": "wip",
+          "status": "done",
           "qualif": "P2",
           "target": "",
           "owner": "laurent",
           "charge": 6.0,
-          "raf": 0.5,
+          "raf": 0.0,
           "steps": [
             {
               "name": "Nettoyage tests — viser 346/346 verts (11 fails préexistants + 4 miroirs mai + 2 DR obsolètes)",
@@ -4700,7 +4700,7 @@
             },
             {
               "name": "Suppression V1 (après validation parallèle)",
-              "status": "todo",
+              "status": "done",
               "charge": 0.0,
               "raf": 0.0
             },
@@ -4717,7 +4717,7 @@
               "raf": 0.0
             }
           ],
-          "commentaire": "Refactoring autonome Claude Code terminé et validé 2026-05-30 (346/346 tests verts sur Mac). 6 phases : baseline fixture figée, serve-simu.py factorisé, MONTHS_FR unique, migrations extraites de loadAllData, renderers next/auto unifiés (renderEditableGroupBlock), code mort retiré. Comportement strictement préservé. Dédup résiduelle next/auto + CSS variables + modularisation ESM reportés (§ 8 SPEC-REFACTOR-V2.md). Session 2026-06-01 : V2 retenue comme focus principal de développement (V1 conservée intacte). Correctifs garde-fou + --no-browser répliqués en V2. NEXT-IMPORT-TRANSFER : au premier import d'un mois M si next.month===M, previsions et autresRevenus transférés automatiquement (serve-simu.py d4f7b61). CLAUDE.md V2 complété (NEXT-TRANSFER, groupes V3 10→corrigé, paths corrects). Bascule juin 2026-06-01 : entrée MIRROR_DEFS_BY_MONTH['2026-06'] (salaire lu depuis mouvements en historique, salaryAlertEnabled:false) ; tests reverdis 390/390 (346 JS + 44 PY) via pin de l'horloge de boot à 2026-05 dans helpers.mjs (cause : franchissement réel de date déclenchait bascule/auto-current au boot → crash updateGroupToggles + mai en historique).",
+          "commentaire": "Refactoring autonome Claude Code terminé et validé 2026-05-30 (346/346 tests verts sur Mac). 6 phases : baseline fixture figée, serve-simu.py factorisé, MONTHS_FR unique, migrations extraites de loadAllData, renderers next/auto unifiés (renderEditableGroupBlock), code mort retiré. Comportement strictement préservé. Dédup résiduelle next/auto + CSS variables + modularisation ESM reportés (§ 8 SPEC-REFACTOR-V2.md). Session 2026-06-01 : V2 retenue comme focus principal de développement (V1 conservée intacte). Correctifs garde-fou + --no-browser répliqués en V2. NEXT-IMPORT-TRANSFER : au premier import d'un mois M si next.month===M, previsions et autresRevenus transférés automatiquement (serve-simu.py d4f7b61). CLAUDE.md V2 complété (NEXT-TRANSFER, groupes V3 10→corrigé, paths corrects). Bascule juin 2026-06-01 : entrée MIRROR_DEFS_BY_MONTH['2026-06'] (salaire lu depuis mouvements en historique, salaryAlertEnabled:false) ; tests reverdis 390/390 (346 JS + 44 PY) via pin de l'horloge de boot à 2026-05 dans helpers.mjs (cause : franchissement réel de date déclenchait bascule/auto-current au boot → crash updateGroupToggles + mai en historique). Bascule V1→V2 effectuée 2026-06-04 : V1 supprimée, répertoire V2 renommé en gestion-compte-personnel/, CLAUDE.md nettoyé.",
           "type": "Feature"
         }
       ]
