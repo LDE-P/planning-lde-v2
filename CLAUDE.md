@@ -93,12 +93,22 @@ Les tests se trouvent dans `tests-e2e-python/planning-lde/` (style pytest, port 
     {
       "id": "...",
       "name": "...",
-      "alias": "...",
       "desc": "...",
       "stack": "...",
       "category": "active|infra|legacy|editorial",
       "folder": "...",
-      "docs": ["..."],
+      "docs": [
+        {
+          "id": "...",
+          "file": "chemin/relatif/depuis/GIT_ROOT.md",
+          "title": "...",
+          "desc": "...",
+          "type": "spec|audit|tests|bilan|notes|autre",
+          "status": "draft|final|archived",
+          "date": "YYYY-MM-DD",
+          "subproject": "id-du-sp|null"
+        }
+      ],
       "subprojects": [
         {
           "id": "...",
@@ -123,7 +133,8 @@ Les tests se trouvent dans `tests-e2e-python/planning-lde/` (style pytest, port 
 ```
 
 Notes :
-- `type` et `commentaire` sont des champs **locaux** (édités via le dashboard) — vestiges de l'ancienne sync GSheet, ils restent dans le schéma.
+- Le champ `alias` a été **supprimé** de tous les projets (2026-06-04, commit `f029467`). Ne pas le réintroduire.
+- `type` et `commentaire` (sur les SP) sont des champs **locaux** — vestiges de l'ancienne sync GSheet, ils restent dans le schéma.
 - `folder` et `docs` peuvent être absents pour certains projets (initialisés à vide).
 
 ## Correspondance statuts

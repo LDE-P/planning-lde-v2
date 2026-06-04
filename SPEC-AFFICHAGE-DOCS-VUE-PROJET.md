@@ -2,9 +2,9 @@
 
 **Projet :** Planning LDE V2
 **Sous-projet :** `affichage-docs-vue-projet`
-**Statut :** SPEC — prête pour implémentation (arbitrages ping-pong validés 2026-05-23)
-**Auteur :** LDE + Cowork
-**Date :** 2026-05-20
+**Statut :** LIVRÉ — implémenté le 2026-06-04 (commits `7df71aa`…`2e7963b`)
+**Auteur :** LDE + Cowork + Claude Sonnet 4.6
+**Date spec :** 2026-05-20 · **Date livraison :** 2026-06-04
 
 ---
 
@@ -384,10 +384,12 @@ Les vrais orphelins (id SP totalement inconnu, ni actif ni archivé) restent sig
 
 | Fichier | Modification |
 |---------|-------------|
-| `ui.js` | `renderDocInlineRow()` + `renderProjectDocsBlock()` + intégration dans `renderSubproject()` (docs SP) + `renderProject()` + Vue Archives |
-| `DASHBOARD-V2.html` | Règles CSS `.sp-docs-*` + `.docs-inline-*` + `.doc-inline-*` |
+| `ui.js` | `renderDocInlineRow()` + `renderProjectDocsBlock()` + intégration dans `renderSubproject()` (docs SP) + `renderProject()` + Vue Archives + `renderDocsSidebar()` + `makeSidebarSection()` + `setSidebarOpen()` |
+| `DASHBOARD-V2.html` | CSS `.sp-docs-*` + `.docs-inline-*` + `.doc-inline-*` + HTML/CSS panneau `#docs-sidebar` |
 
 Aucune modification de `serve-v2.py`, `api.js`, `data.json`.
+
+> **Features supplémentaires livrées hors scope initial** : panneau latéral docs (§11.1) et suppression du champ alias projet (§11.2). Voir section 11.
 
 ---
 
@@ -543,10 +545,63 @@ Pour T16–T18, `data-archives.json` doit contenir un projet avec un doc lié à
 }
 ```
 >
-> Points d'attention :
-> (1) Les docs SP s'insèrent dans `stepsPanel` de `renderSubproject()`, après les étapes — pas dans un bloc séparé avec son propre toggle, la même commande ▶/▼ contrôle tout.
-> (2) `renderProjectDocsBlock()` filtre soigneusement : SP actif → exclu (déjà dans le SP) ; SP archivé → exclu en Vue Projets, **inclus avec flag `_spArchived: true`** en Vue Archives (affichés en italique atténué, `class="sp-archived"`) ; pas de SP ou SP orphelin → inclus dans les deux vues.
-> (3) Dans `renderSubproject()`, les docs sont récupérés via `_state.projects.find(p => p.id === projectId)?.docs || []` — pas passés en paramètre.
-> (4) Les CSS doivent utiliser les variables existantes (`var(--border)`, `var(--text-secondary)`, `var(--blocked)`…) — ne pas introduire de valeurs brutes.
-> (5) Aucune modification de `serve-v2.py` ou `api.js` — tout est dans `ui.js` et `DASHBOARD-V2.html`.
-> (6) Lire les fonctions de rendu Archives (~ligne 892) avant d'y intégrer quoi que ce soit — appliquer la Règle 4.
+> *(Prompt conservé à titre historique — feature livrée le 2026-06-04.)*
+
+---
+
+## 11. Features supplémentaires livrées lors de l'implémentation
+
+Lors de l'implémentation du 2026-06-04, deux features hors-scope initial ont été ajoutées par Claude Code (commits séparés, co-signés LDE).
+
+### 11.1 — Panneau latéral docs (slide-in fixe droite)
+
+**Commits :** `0e68b5a` (ajout), `508603c` (polish), `be793a3` (ouverture par défaut), `2e7963b` (nettoyage)
+
+**Description :** panneau fixe de 320 px sur le bord droit de la fenêtre, visible en permanence via un onglet tab. S'ouvre au clic sur le header d'un projet ouvert et affiche tous les docs de ce projet regroupés par SP.
+
+**Composants :**
+- `#docs-sidebar` (HTML + CSS dans `DASHBOARD-V2.html`) : position fixe, slide CSS, bouton tab toujours visible sur le bord droit, bouton ✕ pour fermer
+- `renderDocsSidebar(proj)` (`ui.js`) : remplit le panneau pour le projet passé en paramètre
+- `makeSidebarSection(label, docs, gitRoot, archivedSpIds)` (`ui.js`) : crée une section dépliable avec toggle ▶/▼ ; réutilise `renderDocInlineRow()`
+- `setSidebarOpen(open)` + `_sidebarOpen` (`ui.js`) : contrôle CSS de l'état ouvert/fermé
+- `isSidebarResolution()` — **supprimée** (commit `2e7963b`) après décision d'ouvrir le panneau par défaut sans condition de résolution
+
+**Comportement :**
+- Panneau ouvert par défaut au chargement
+- Mis à jour à chaque clic sur le header d'un projet (qui ouvre la carte projet)
+- Structure du panneau : section « 📄 Notes projet » (docs sans SP + orphelins) puis une section par SP ayant des docs
+- Sections dépliables individuellement (toggle ▶/▼ par section), ouvertes par défaut
+- Réutilise `renderDocInlineRow()` → même format que le bloc inline
+
+**Logique de filtrage dans `renderDocsSidebar`** — légèrement différente du bloc inline de Vue Projets :
+- Les docs liés à un SP archivé sont inclus dans la section « Notes projet » (pas exclus comme en Vue Projets inline) — le panneau latéral vise à être exhaustif
+
+### 11.2 — Suppression du champ `alias` projet + renommage inline
+
+**Commits :** `909a287` (feature), `f029467` (nettoyage data.json + serve-v2.py)
+
+**Contexte :** l'alias était affiché comme un chip coloré à côté du nom projet dans les vues Projets, Docs et Archives. Il n'était plus synchronisé vers la GSheet (supprimée) et apportait peu de valeur.
+
+**Changements :**
+- Chip `.proj-alias` retiré des templates HTML dans `renderProject()`, `renderDocsView()`, `renderArchivedProject()`
+- Modale `#modal-rename-alias` retirée de `DASHBOARD-V2.html`
+- `openRenameAliasModal()` supprimée de `ui.js`
+- Champ `alias` retiré de la modale « Ajouter un projet »
+- Bouton ✎ ajouté sur `.project-name` → édition inline du **nom** projet (même pattern que les SP)
+- `serve-v2.py` : `alias` retiré de `save-project`, `archive`, `restore`, `add-project`
+- `data.json` et `data-archives.json` : champ `alias` supprimé de tous les projets
+
+**Schéma `data.json` après suppression :**
+```json
+{
+  "id": "...",
+  "name": "...",
+  "desc": "...",
+  "stack": "...",
+  "category": "active|infra|legacy|editorial",
+  "folder": "...",
+  "docs": [...],
+  "subprojects": [...]
+}
+```
+Le champ `alias` n'existe plus ni dans `data.json`, ni dans `data-archives.json`, ni dans les réponses API.
