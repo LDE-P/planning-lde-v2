@@ -5478,7 +5478,7 @@
         {
           "id": "init-bloc-notes",
           "name": "Initialisation bloc-notes",
-          "status": "wip",
+          "status": "done",
           "steps": [
             {
               "name": "Serveur HTTP + endpoints (GET/POST state)",
@@ -5506,9 +5506,9 @@
             },
             {
               "name": "Fine tuning (UX, fonctionnalités)",
-              "status": "wip",
+              "status": "done",
               "charge": 0.1,
-              "raf": 0.3
+              "raf": 0.0
             }
           ],
           "titre": "Bloc-notes structuré — serveur Python, écriture atomique, backups, intégration hub",
@@ -5516,7 +5516,7 @@
           "target": null,
           "owner": "laurent",
           "charge": 1.0,
-          "raf": 0.3,
+          "raf": 0.0,
           "type": "Feature",
           "commentaire": "Implémentation initiale livrée (commit 120ce88). Fine tuning restant avant done."
         }
