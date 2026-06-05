@@ -1822,15 +1822,6 @@
           "subproject": "affichage-docs-vue-projet"
         },
         {
-          "id": "inventaire-git",
-          "file": "inventaire-GIT.html",
-          "title": "Inventaire GIT — Réorganisation 2026-05-19",
-          "desc": "Tableau complet des fichiers et répertoires GIT root : type, projet associé, déplaçabilité, orphelins. Toutes les actions de nettoyage tracées.",
-          "type": "audit",
-          "status": "final",
-          "date": "2026-05-19"
-        },
-        {
           "id": "spec-planning-v2",
           "file": "planning-lde-v2/SPEC-PLANNING-V2.md",
           "title": "Spécification Planning LDE V2",
@@ -3104,7 +3095,7 @@
         },
         {
           "id": "spec-mini-serveur-minisite",
-          "file": "banc-de-tests/2-retire-a-archiver/mini-serveur-minisite/SPEC.md",
+          "file": "banc-de-tests/archives/mini-serveur-minisite/SPEC.md",
           "title": "SPEC — Mini-site martyr (Phase 2)",
           "desc": "Spécification du générateur de mini-site réaliste pour audit de règles de portée globale : échantillonnage 20 règles (stratifié), structure 4 pages, architecture build_minisite.py autonome, oracle machine-lisible, garde-fous (test_minisite.py).",
           "type": "spec",
@@ -3114,7 +3105,7 @@
         },
         {
           "id": "spec-mini-serveur-minisite-full",
-          "file": "banc-de-tests/2-retire-a-archiver/mini-serveur-minisite-full/SPEC.md",
+          "file": "banc-de-tests/archives/mini-serveur-minisite-full/SPEC.md",
           "title": "SPEC — Mini-site full (245 règles)",
           "desc": "Spécification du générateur de mini-site couvrant les 245 règles Opquast : intégration moteur composeur-v2, 25 RulePacks existants + 220 mocks, validation formelle S2==oracle avant génération, manifest complet.",
           "type": "spec",
@@ -4898,7 +4889,7 @@
       "docs": [
         {
           "id": "the-fucking-manual-devcontainer",
-          "file": "the_fucking-Manual-devcontaner.md",
+          "file": "da-fucking manuals/the_fucking-Manual-devcontaner.md",
           "title": "The Fucking Manual — Devcontainer & Workflow Git Opquast",
           "desc": "Guide personnel : fonctionnement du devcontainer, synchronisation prod, workflow git feature branch → DEV → PROD.",
           "type": "notes",
@@ -4908,7 +4899,7 @@
         },
         {
           "id": "the-fucking-manual-docker",
-          "file": "the_fucking-Manual-docker.md",
+          "file": "da-fucking manuals/the_fucking-Manual-docker.md",
           "title": "The Fucking Manual — Docker Desktop sur le Mac de LDE",
           "desc": "Guide personnel : gestion de Docker Desktop (procédures pré-reboot, récupération post-crash, diagnostic disque plein vs corruption containerd, commandes utiles palette VS Code, historique des incidents).",
           "type": "notes",
