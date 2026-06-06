@@ -3707,11 +3707,22 @@
         {
           "id": "spec-persistance-serveur-poids",
           "title": "SPEC — Persistance serveur robuste",
-          "path": "perso/POIDS/SPEC-PERSISTANCE-SERVEUR.md",
-          "description": "Plan d’implémentation Option A : poids_data.json écrit par le serveur (atomique + garde anti-wipe + backups), FS Access API retirée.",
+          "file": "perso/POIDS/SPEC-PERSISTANCE-SERVEUR.md",
+          "desc": "Plan d’implémentation Option A : poids_data.json écrit par le serveur (atomique + garde anti-wipe + backups), FS Access API retirée.",
           "type": "spec",
           "status": "final",
+          "date": "2026-06-02",
           "subproject": "persistance-serveur"
+        },
+        {
+          "id": "spec-robustesse-poids-2026-06-06",
+          "title": "SPEC — Robustesse couche données (R1-R5)",
+          "file": "perso/POIDS/SPEC-ROBUSTESSE-2026-06-06.md",
+          "desc": "Durcissement de la couche données : R1 réconciliation par fraîcheur (updatedAt + reconcileStores pur), R2 contrat de comptage unifié client/serveur, R3 validation/quarantaine du store, R4 surfaçage des échecs silencieux, R5 quick wins. R6/R7 reportés.",
+          "type": "spec",
+          "status": "final",
+          "date": "2026-06-06",
+          "subproject": "robustesse-donnees-tests"
         }
       ],
       "subprojects": [
@@ -3758,6 +3769,45 @@
               "charge": 0,
               "raf": 0
             }
+          ]
+        },
+        {
+          "id": "robustesse-donnees-tests",
+          "name": "Robustesse données & tests",
+          "titre": "Fix datalabels + suite de tests étendue (84→153) + durcissement couche données (R1-R5)",
+          "status": "done",
+          "qualif": "P1",
+          "target": "2026-06-06",
+          "owner": "laurent",
+          "charge": 0,
+          "raf": 0,
+          "type": "Feature",
+          "commentaire": "Session 2026-06-06. Bug datalabels (plugin non enregistré) corrigé ; étiquettes retirées de la courbe mesurée, point cible plein vert, tooltip unique. Suite de tests étendue 84→153 (P1 rendu/plugin, P2 cible, P3 vues courtes, P4 serveur Python, P5 utilitaires). Robustesse R1-R5. Détail : SPEC-ROBUSTESSE-2026-06-06.md. Projet gitignoré → pas de commit.",
+          "steps": [
+            { "name": "Fix : enregistrement plugin chartjs-plugin-datalabels", "status": "done", "charge": 0, "raf": 0 },
+            { "name": "Étiquettes retirées courbe bleue ; cible plein vert ; tooltip unique", "status": "done", "charge": 0, "raf": 0 },
+            { "name": "Suite de tests 84→153 (P1-P5 + serveur pytest)", "status": "done", "charge": 0, "raf": 0 },
+            { "name": "R1 réconciliation par fraîcheur (updatedAt + reconcileStores)", "status": "done", "charge": 0, "raf": 0 },
+            { "name": "R2 contrat de comptage unifié + tests croisés", "status": "done", "charge": 0, "raf": 0 },
+            { "name": "R3 validation/quarantaine du store + R4 surfaçage échecs", "status": "done", "charge": 0, "raf": 0 },
+            { "name": "R5 quick wins (storeSetTarget, message, param mort)", "status": "done", "charge": 0, "raf": 0 }
+          ]
+        },
+        {
+          "id": "robustesse-r6-r7",
+          "name": "Robustesse — R6 + R7",
+          "titre": "Garde serveur anti-chute partielle (R6) + extraction poids.js (R7)",
+          "status": "todo",
+          "qualif": "P2",
+          "target": "",
+          "owner": "laurent",
+          "charge": 0,
+          "raf": 0,
+          "type": "Feature",
+          "commentaire": "Reporté de la session 2026-06-06 (R1-R5 faits). R6 = seuil anti-chute partielle dans serve-poids.py (refuser si nouvelle taille < X % de l'ancienne, ex. 478→2) + tests pytest. R7 = extraction du JS de Poids.html dans poids.js (meilleure testabilité, réduit le risque « ligne perdue dans un fichier géant » — ARBITRAGE : rompt l'autonomie un seul fichier, à trancher par LDE). Détail : SPEC-ROBUSTESSE-2026-06-06.md.",
+          "steps": [
+            { "name": "R6 : garde anti-chute partielle (serve-poids.py) + tests pytest", "status": "todo", "charge": 0, "raf": 0 },
+            { "name": "R7 : extraction poids.js (arbitrage autonomie fichier unique)", "status": "todo", "charge": 0, "raf": 0 }
           ]
         }
       ]
@@ -5720,6 +5770,80 @@
           "status": "final",
           "date": "2026-05-21",
           "subproject": "validation-automatique-parcours-training"
+        }
+      ]
+    },
+    {
+      "id": "backup-documents",
+      "name": "Backup Documents",
+      "desc": "Sauvegarde quotidienne des données perso sans remote git vers une clé USB INTENSO (APFS).",
+      "stack": "Bash · launchd · rsync · APFS",
+      "category": "perso",
+      "folder": "perso/backup-scripts/",
+      "docs": [],
+      "subprojects": [
+        {
+          "id": "cle-usb",
+          "name": "Clé USB",
+          "status": "done",
+          "qualif": "P2",
+          "target": null,
+          "owner": "laurent",
+          "charge": 0.5,
+          "raf": 0.0,
+          "titre": "Backup daté 7 jours glissants vers clé INTENSO (APFS) via launchd 03h00",
+          "type": "Feature",
+          "commentaire": "Opérationnel 2026-06-05. Backup auto 03h00 validé de bout en bout (run launchd exit 0, FDA /bin/bash OK, snapshot ~78 Mo, 7/7 sources). Snapshots datés 7 jours glissants. Reste seulement : transmettre temp/prompt-hub.md à la session hub (bouton manuel, optionnel).",
+          "steps": [
+            {
+              "name": "Analyse plan Antigravity + design (exFAT→APFS, sources sans remote, 7 jours glissants)",
+              "status": "done",
+              "charge": 0.1,
+              "raf": 0.0
+            },
+            {
+              "name": "Script backup_intenso.sh (snapshots datés + purge fenêtre 7j)",
+              "status": "done",
+              "charge": 0.15,
+              "raf": 0.0
+            },
+            {
+              "name": "Plist launchd com.lde.backup.intenso (03h00 quotidien)",
+              "status": "done",
+              "charge": 0.05,
+              "raf": 0.0
+            },
+            {
+              "name": "Doc de transmission hub (temp/prompt-hub.md)",
+              "status": "done",
+              "charge": 0.05,
+              "raf": 0.0
+            },
+            {
+              "name": "Reformatage APFS clé INTENSO + 1er backup manuel (79 Mo, 7/7 OK)",
+              "status": "done",
+              "charge": 0.05,
+              "raf": 0.0
+            },
+            {
+              "name": "Tâche launchd chargée (bootstrap gui/501, 03h00) + test kickstart",
+              "status": "done",
+              "charge": 0.05,
+              "raf": 0.0
+            },
+            {
+              "name": "FDA /bin/bash + validation run launchd de bout en bout (exit 0)",
+              "status": "done",
+              "charge": 0.05,
+              "raf": 0.0
+            },
+            {
+              "name": "Intégration bouton hub (session hub dédiée — optionnel)",
+              "status": "todo",
+              "charge": 0.05,
+              "raf": 0.05
+            }
+          ]
         }
       ]
     }
