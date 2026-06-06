@@ -108,3 +108,15 @@
 - [ ] **Horodater/revérifier les chiffres d'un handoff** : le handoff Cowork affirmait 892 UIDs / 3 corrections manuelles / examen PROD « en attente » — toutes périmées (réel : 895 / 0 / PROD fait le 28/05). Préconiser « vérifié contre DB le {date} » et revérifier contre la source avant toute décision.
 - [ ] **Conserver les artefacts générés avant régénération** (SQL, exports) pour permettre un diff a posteriori — un diff inattendu a dû être diagnostiqué par requêtes DB faute d'avoir gardé la version précédente.
 - [ ] **SQL de déploiement = générer depuis l'environnement de référence** : les blobs `answer_data` embarquent la structure de la DB source (flags `_correct`, slots). Toujours générer depuis LOCAL/PROD (jamais depuis un env qui a divergé) ; documenter dans le guide MHO que la voie sûre absolue est de lancer le script contre la cible.
+
+## Process / outillage (session Backup Documents — Clé USB) — 2026-06-05
+
+- [ ] **launchd depuis le sandbox Claude Code** : `launchctl load` échoue en `Input/output error` (hors session Aqua). Utiliser `launchctl bootstrap gui/$UID <plist>` et `launchctl kickstart -k gui/$UID/<label>`. À documenter dans le CLAUDE.md racine au même titre que la limite `localhost`.
+- [ ] **Lire l'exit code launchd seulement après `state = not running`** : lu pendant un run actif, `last exit code` renvoie le code du run précédent (a fait conclure à tort à un échec persistant ×2). Vider aussi `StandardErrorPath` avant un test pour éviter les lignes périmées.
+- [ ] **Backups perso** : envisager une exclusion `node_modules`/`.venv` si le volume grossit (POIDS + gestion-compte = ~45 Mo de node_modules recréables sur 78 Mo).
+
+## Process / méthode (session Feature Anticipé ABANDONNÉE — gestion-compte) — 2026-06-06
+
+- [ ] **Tâches à dominante visuelle (CSS/layout/alignement) = canal de vérification visuelle OBLIGATOIRE dès le départ.** Le sandbox Claude Code ne peut pas atteindre `localhost` → aucune visu du rendu. Un chantier layout sans Claude in Chrome / MCP preview / boucle de captures courte = à refuser ou à signaler comme bloquant AVANT de s'engager. (Cause de l'échec : split multi-tables itéré à l'aveugle, ~3 passes CSS infructueuses, abandon.)
+- [ ] **Garde-fou anti-boucle** : après 2 correctifs visuels sans feedback direct qui ne convergent pas, STOP + changement d'approche (ou demande d'accès visuel), pas de 3ᵉ tentative.
+- [ ] **Réflexe « solution minimale d'abord »** : débordement localisé → élargir/réorganiser dans l'existant avant toute refonte structurelle (ici le split en 5 `<table>` était une réponse lourde au besoin réel = place pour les contrôles Anticipé sur les revenus).

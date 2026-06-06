@@ -3784,13 +3784,48 @@
           "type": "Feature",
           "commentaire": "Session 2026-06-06. Bug datalabels (plugin non enregistré) corrigé ; étiquettes retirées de la courbe mesurée, point cible plein vert, tooltip unique. Suite de tests étendue 84→153 (P1 rendu/plugin, P2 cible, P3 vues courtes, P4 serveur Python, P5 utilitaires). Robustesse R1-R5. Détail : SPEC-ROBUSTESSE-2026-06-06.md. Projet gitignoré → pas de commit.",
           "steps": [
-            { "name": "Fix : enregistrement plugin chartjs-plugin-datalabels", "status": "done", "charge": 0, "raf": 0 },
-            { "name": "Étiquettes retirées courbe bleue ; cible plein vert ; tooltip unique", "status": "done", "charge": 0, "raf": 0 },
-            { "name": "Suite de tests 84→153 (P1-P5 + serveur pytest)", "status": "done", "charge": 0, "raf": 0 },
-            { "name": "R1 réconciliation par fraîcheur (updatedAt + reconcileStores)", "status": "done", "charge": 0, "raf": 0 },
-            { "name": "R2 contrat de comptage unifié + tests croisés", "status": "done", "charge": 0, "raf": 0 },
-            { "name": "R3 validation/quarantaine du store + R4 surfaçage échecs", "status": "done", "charge": 0, "raf": 0 },
-            { "name": "R5 quick wins (storeSetTarget, message, param mort)", "status": "done", "charge": 0, "raf": 0 }
+            {
+              "name": "Fix : enregistrement plugin chartjs-plugin-datalabels",
+              "status": "done",
+              "charge": 0,
+              "raf": 0
+            },
+            {
+              "name": "Étiquettes retirées courbe bleue ; cible plein vert ; tooltip unique",
+              "status": "done",
+              "charge": 0,
+              "raf": 0
+            },
+            {
+              "name": "Suite de tests 84→153 (P1-P5 + serveur pytest)",
+              "status": "done",
+              "charge": 0,
+              "raf": 0
+            },
+            {
+              "name": "R1 réconciliation par fraîcheur (updatedAt + reconcileStores)",
+              "status": "done",
+              "charge": 0,
+              "raf": 0
+            },
+            {
+              "name": "R2 contrat de comptage unifié + tests croisés",
+              "status": "done",
+              "charge": 0,
+              "raf": 0
+            },
+            {
+              "name": "R3 validation/quarantaine du store + R4 surfaçage échecs",
+              "status": "done",
+              "charge": 0,
+              "raf": 0
+            },
+            {
+              "name": "R5 quick wins (storeSetTarget, message, param mort)",
+              "status": "done",
+              "charge": 0,
+              "raf": 0
+            }
           ]
         },
         {
@@ -3806,8 +3841,108 @@
           "type": "Feature",
           "commentaire": "Reporté de la session 2026-06-06 (R1-R5 faits). R6 = seuil anti-chute partielle dans serve-poids.py (refuser si nouvelle taille < X % de l'ancienne, ex. 478→2) + tests pytest. R7 = extraction du JS de Poids.html dans poids.js (meilleure testabilité, réduit le risque « ligne perdue dans un fichier géant » — ARBITRAGE : rompt l'autonomie un seul fichier, à trancher par LDE). Détail : SPEC-ROBUSTESSE-2026-06-06.md.",
           "steps": [
-            { "name": "R6 : garde anti-chute partielle (serve-poids.py) + tests pytest", "status": "todo", "charge": 0, "raf": 0 },
-            { "name": "R7 : extraction poids.js (arbitrage autonomie fichier unique)", "status": "todo", "charge": 0, "raf": 0 }
+            {
+              "name": "R6 : garde anti-chute partielle (serve-poids.py) + tests pytest",
+              "status": "todo",
+              "charge": 0,
+              "raf": 0
+            },
+            {
+              "name": "R7 : extraction poids.js (arbitrage autonomie fichier unique)",
+              "status": "todo",
+              "charge": 0,
+              "raf": 0
+            }
+          ]
+        },
+        {
+          "id": "volet-weight-watchers-v1",
+          "name": "Volet Weight Watchers V1",
+          "titre": "Onglet WW : constructeur de repas, estimation Claude API, historique",
+          "status": "in_progress",
+          "qualif": "P1",
+          "target": "",
+          "owner": "laurent",
+          "charge": 0,
+          "raf": 0,
+          "type": "Feature",
+          "commentaire": "Session 2026-06-06. Implémentation V1 complète sauf export/import base ingrédients. Onglets Poids/WW, ~70 ingrédients pré-chargés, constructeur de repas (autocomplete + totaux running option B), endpoint /api/estimate (claude-haiku-3-5 via urllib), historique avec suppression. 151 JS + 17 Python verts. ANTHROPIC_API_KEY requise pour l estimation. Export/import base ingrédients reporté.",
+          "steps": [
+            {
+              "name": "Onglets Poids / Weight Watchers (header)",
+              "status": "done",
+              "charge": 0,
+              "raf": 0
+            },
+            {
+              "name": "Base ~50 ingrédients intégrée (ZeroPoint + points réels)",
+              "status": "done",
+              "charge": 0,
+              "raf": 0
+            },
+            {
+              "name": "Constructeur de repas (autocomplete + quantité + total running)",
+              "status": "done",
+              "charge": 0,
+              "raf": 0
+            },
+            {
+              "name": "Affichage option B (0 pt WW + ≈X pts réels)",
+              "status": "done",
+              "charge": 0,
+              "raf": 0
+            },
+            {
+              "name": "POST /api/estimate dans serve-poids.py (Anthropic API)",
+              "status": "done",
+              "charge": 0,
+              "raf": 0
+            },
+            {
+              "name": "Historique des repas (liste + suppression)",
+              "status": "done",
+              "charge": 0,
+              "raf": 0
+            },
+            {
+              "name": "Export/import base ingrédients",
+              "status": "todo",
+              "charge": 0,
+              "raf": 0
+            }
+          ]
+        },
+        {
+          "id": "faire-parler-appli-ww",
+          "name": "Faire parler l’appli WW",
+          "titre": "Exploration : extraction des données de l’app WW mobile",
+          "status": "todo",
+          "qualif": "P2",
+          "target": "",
+          "owner": "laurent",
+          "charge": 0,
+          "raf": 0,
+          "type": "Research",
+          "commentaire": "Explorer ce qu’on peut extraire de l’app WW : export de données (CSV, email, partage), API non officielle, interface web WW. Objectif : récupérer l’historique des repas et/ou la base d’ingrédients. À traiter après WW V1. Résultat attendu : compte rendu d’exploration avec ce qui est récupérable ou non.",
+          "steps": [
+            {
+              "name": "Explorer options d’export de l’app (CSV, partage, email)",
+              "status": "todo",
+              "charge": 0,
+              "raf": 0
+            },
+            {
+              "name": "Vérifier l’interface web WW (API, données accessibles)",
+              "status": "todo",
+              "charge": 0,
+              "raf": 0
+            },
+            {
+              "name": "Compte rendu d’exploration + recommandation",
+              "status": "todo",
+              "charge": 0,
+              "raf": 0
+            }
           ]
         }
       ]
@@ -4734,6 +4869,20 @@
             }
           ],
           "commentaire": "Refactoring autonome Claude Code terminé et validé 2026-05-30 (346/346 tests verts sur Mac). 6 phases : baseline fixture figée, serve-simu.py factorisé, MONTHS_FR unique, migrations extraites de loadAllData, renderers next/auto unifiés (renderEditableGroupBlock), code mort retiré. Comportement strictement préservé. Dédup résiduelle next/auto + CSS variables + modularisation ESM reportés (§ 8 SPEC-REFACTOR-V2.md). Session 2026-06-01 : V2 retenue comme focus principal de développement (V1 conservée intacte). Correctifs garde-fou + --no-browser répliqués en V2. NEXT-IMPORT-TRANSFER : au premier import d'un mois M si next.month===M, previsions et autresRevenus transférés automatiquement (serve-simu.py d4f7b61). CLAUDE.md V2 complété (NEXT-TRANSFER, groupes V3 10→corrigé, paths corrects). Bascule juin 2026-06-01 : entrée MIRROR_DEFS_BY_MONTH['2026-06'] (salaire lu depuis mouvements en historique, salaryAlertEnabled:false) ; tests reverdis 390/390 (346 JS + 44 PY) via pin de l'horloge de boot à 2026-05 dans helpers.mjs (cause : franchissement réel de date déclenchait bascule/auto-current au boot → crash updateGroupToggles + mai en historique). Bascule V1→V2 effectuée 2026-06-04 : V1 supprimée, répertoire V2 renommé en gestion-compte-personnel/, CLAUDE.md nettoyé.",
+          "type": "Feature"
+        },
+        {
+          "id": "feature-anticipe-abandonnee",
+          "name": "Feature Anticipé (revenus + dépenses prévues) — ABANDONNÉE",
+          "titre": "Champ Anticipé + bascule →/← sur revenus et dépenses prévues, avec split du rendu mensuel en tables séparées.",
+          "status": "fail",
+          "qualif": "P2",
+          "target": "",
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "steps": [],
+          "commentaire": "Tentée le 2026-06-06 puis ABANDONNÉE (rollback total). Étape 1 — session Cowork « COMPTE LDE » : Anticipé sur revenus prévus + Autres revenus (commits 8c663df/1b58698/10b7ec3, tests IA-T1..T12). Étape 2 — session Claude Code : extension Anticipé aux dépenses prévues + isolation Revenus/Prévues en tables séparées (split multi-tables) + refacto classifyMonth/isFeatureMonth + feature sur le mois courant importé (commits 7632528→8375ecb, 401 tests verts). La LOGIQUE fonctionnait (tests verts) mais le LAYOUT multi-tables n'a pas pu être stabilisé visuellement (alignements + rognage des montants), itéré à l'aveugle (sandbox sans accès localhost). LDE a demandé le rollback total des deux sessions → retour à l'état 8164f2d (commits revert 69f0518 + cf453c2, simulateur sans aucune trace 'anticipe', 370 tests verts). TOUS les commits feature restent dans l'historique git → recouvrables. Reprise éventuelle : NE PAS refaire le split multi-tables sans accès visuel direct ; points durs = débordement intra-cellule (min-width:80px des inputs montant + boutons ←/→ dans des colonnes étroites) et alignement de la colonne Montant entre tables. La refacto classifyMonth/isFeatureMonth (séparation store/présentation) était saine et réutilisable isolément. Détails : temp/PLAN-ANTICIPE-PREVUES.md + temp/PLAN-REFACTO-MOIS-COURANT.md (annotés ABANDONNÉ).",
           "type": "Feature"
         }
       ]
