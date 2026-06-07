@@ -5108,7 +5108,7 @@
         },
         {
           "id": "signalement-bug-mcp-opquast",
-          "file": "signalements-mho/bug-mcp-opquast-pour-mho.md",
+          "file": "transmissions-mho/bug-mcp-opquast-pour-mho.md",
           "title": "Bug MCP Opquast — Signalement pour MHO",
           "desc": "Signalement des deux symptômes du serveur MCP Opquast : (1) timeout du flow de ré-auth OAuth (token ~1 h, callback localhost éphémère) ; (2) fallback API + champs étendus refusés. Pistes de correction.",
           "type": "autre",
@@ -5188,7 +5188,7 @@
           "owner": "micka",
           "charge": 0.0,
           "raf": 0.0,
-          "commentaire": "Fix côté serveur Opquast (login.opquast.com / proxy MCP). Doc : signalements-mho/bug-mcp-opquast-pour-mho.md",
+          "commentaire": "Fix côté serveur Opquast (login.opquast.com / proxy MCP). Doc : transmissions-mho/bug-mcp-opquast-pour-mho.md",
           "type": "BugFix",
           "steps": [
             {
