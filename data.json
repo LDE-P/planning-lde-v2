@@ -6087,6 +6087,158 @@
           "steps": []
         }
       ]
+    },
+    {
+      "id": "simulation-retraite",
+      "name": "Simulation Retraite",
+      "desc": "Projet personnel — stratégie de transition retraite pour inaptitude (objectif : novembre 2026, 62 ans). Scénario : CARSAT + Rupture Conventionnelle + désendettement + consulting.",
+      "stack": "Markdown · DOCX · PDF",
+      "category": "perso",
+      "folder": "perso/SIMULATION-RETRAITE/",
+      "docs": [
+        {
+          "id": "passage-relais-retraite",
+          "title": "Passage de relais — Projet Retraite",
+          "file": "perso/SIMULATION-RETRAITE/PASSAGE-RELAIS-RETRAITE.md",
+          "desc": "Document de transmission inter-agents : état de la stratégie globale, actions réalisées, prochaines étapes.",
+          "type": "notes",
+          "status": "final",
+          "date": "2026-06-07",
+          "subproject": null
+        },
+        {
+          "id": "position-nego-opquast",
+          "title": "Position de négociation — Opquast",
+          "file": "perso/SIMULATION-RETRAITE/position_nego_opquast.md",
+          "desc": "Mémo de stratégie de négociation pour la Rupture Conventionnelle avec Opquast.",
+          "type": "notes",
+          "status": "final",
+          "date": "2026-06-07",
+          "subproject": "negociation-rc-opquast"
+        }
+      ],
+      "subprojects": [
+        {
+          "id": "dossier-carsat-inaptitude",
+          "name": "Dossier CARSAT — retraite pour inaptitude",
+          "titre": "Obtenir la retraite pour inaptitude à taux plein dès fin novembre 2026",
+          "status": "wip",
+          "qualif": "P0",
+          "target": "2026-11-28",
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "type": "Autre",
+          "commentaire": "ALD valide jusqu’en 2033. 62 ans le 28/11/2026. RDV médecin traitant fixé 26 juin pour certificat d’inaptitude CARSAT. E-mail SSTi03 envoyé, date en attente.",
+          "steps": [
+            {
+              "name": "RDV médecin traitant (26 juin) — certificat inaptitude CARSAT",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "RDV médecine du travail SSTi03 — date en attente",
+              "status": "wip",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Dépôt dossier CARSAT",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ]
+        },
+        {
+          "id": "archives-anciennete-2006",
+          "name": "Archives — avenant transfert contrat 2014",
+          "titre": "URGENCE : retrouver l’avenant Temesis → Opquast (2014) pour prouver l’ancienneté 2006",
+          "status": "todo",
+          "qualif": "P0",
+          "target": "",
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "type": "Autre",
+          "commentaire": "Sans ce document, le rattachement de l’ancienneté à 2006 sera très difficile à prouver lors de la RC.",
+          "steps": [
+            {
+              "name": "Rechercher avenant Temesis → Opquast dans les archives physiques/numériques",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Sécuriser le document (scan + backup)",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ]
+        },
+        {
+          "id": "negociation-rc-opquast",
+          "name": "Négociation RC — Opquast",
+          "titre": "Rupture Conventionnelle : ~27 800 € indemnité (ancienneté 2006)",
+          "status": "todo",
+          "qualif": "P1",
+          "target": "2026-09-01",
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "type": "Autre",
+          "commentaire": "Ne pas évoquer proactivement l’ancienneté 2006 — laisser faire la fiche de paie. Aborder quand CARSAT est sécurisé.",
+          "steps": [
+            {
+              "name": "Sécuriser dossier CARSAT avant d’aborder la direction",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Aborder la direction pour la RC",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Signature RC + dépôt DREETS",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ]
+        },
+        {
+          "id": "desendettement",
+          "name": "Désendettement crédit",
+          "titre": "Solder le crédit (~15 k€) avec l’indemnité RC",
+          "status": "todo",
+          "qualif": "P1",
+          "target": "",
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "type": "Autre",
+          "commentaire": "Conditionné à la RC. ALD bloque l’assurance d’un regroupement de crédits.",
+          "steps": [
+            {
+              "name": "Recevoir indemnité RC",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Solder le crédit",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ]
+        }
+      ]
     }
   ]
 }
