@@ -5105,6 +5105,16 @@
           "status": "draft",
           "date": "2026-05-28",
           "subproject": "prise-en-main"
+        },
+        {
+          "id": "signalement-bug-mcp-opquast",
+          "file": "signalements-mho/bug-mcp-opquast-pour-mho.md",
+          "title": "Bug MCP Opquast — Signalement pour MHO",
+          "desc": "Signalement des deux symptômes du serveur MCP Opquast : (1) timeout du flow de ré-auth OAuth (token ~1 h, callback localhost éphémère) ; (2) fallback API + champs étendus refusés. Pistes de correction.",
+          "type": "autre",
+          "status": "draft",
+          "date": "2026-06-07",
+          "subproject": "bug-mcp-opquast"
         }
       ],
       "subprojects": [
@@ -5163,6 +5173,39 @@
             {
               "name": "Mise en place The fucking Manual",
               "status": "wip",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ]
+        },
+        {
+          "id": "bug-mcp-opquast",
+          "name": "Bug MCP Opquast (auth récurrente)",
+          "titre": "Token OAuth MCP qui expire (~1 h) + flow de ré-auth localhost qui timeout — quasi quotidien. Signalement et suivi pour MHO.",
+          "status": "récurrent",
+          "qualif": "P2",
+          "target": "",
+          "owner": "micka",
+          "charge": 0.0,
+          "raf": 0.0,
+          "commentaire": "Fix côté serveur Opquast (login.opquast.com / proxy MCP). Doc : signalements-mho/bug-mcp-opquast-pour-mho.md",
+          "type": "BugFix",
+          "steps": [
+            {
+              "name": "Documentation pour MHO",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Transmission MHO",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Fix serveur (MHO)",
+              "status": "todo",
               "charge": 0.0,
               "raf": 0.0
             }
