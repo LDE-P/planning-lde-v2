@@ -6057,6 +6057,34 @@
           "type": "Feature",
           "commentaire": "",
           "steps": []
+        },
+        {
+          "id": "compte-x-franc-aller-x",
+          "name": "Compte X — Franc-Aller",
+          "titre": "Compte X — Franc-Aller (publication)",
+          "status": "todo",
+          "qualif": "P1",
+          "target": "",
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "type": "Feature",
+          "commentaire": "",
+          "steps": []
+        },
+        {
+          "id": "compte-x-papa-ronchon",
+          "name": "Compte X — Papa Ronchon",
+          "titre": "Compte X — Papa Ronchon (suivi)",
+          "status": "todo",
+          "qualif": "P1",
+          "target": "",
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "type": "Feature",
+          "commentaire": "",
+          "steps": []
         }
       ]
     }
