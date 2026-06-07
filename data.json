@@ -5566,10 +5566,30 @@
           "commentaire": "macOS TCC bloque launchd quand StandardOutPath/Err pointe vers ~/Documents/. Python enfant peut écrire dans ~/Documents/, pas launchd lui-même. Fix : logs dans ~/Library/Logs/com.lde.local-hub.log. Ajout ThrottleInterval=10. CLAUDE.md mis à jour.",
           "type": "BugFix",
           "steps": [
-            { "name": "Diagnostic : Python ne démarrait pas du tout (log jamais écrit)", "status": "done", "charge": 0, "raf": 0 },
-            { "name": "Isolation : StandardOutPath dans ~/Documents/ bloqué par TCC launchd", "status": "done", "charge": 0, "raf": 0 },
-            { "name": "Fix plist : logs → ~/Library/Logs/com.lde.local-hub.log", "status": "done", "charge": 0, "raf": 0 },
-            { "name": "CLAUDE.md hub : commande tail + note TCC explicative", "status": "done", "charge": 0, "raf": 0 }
+            {
+              "name": "Diagnostic : Python ne démarrait pas du tout (log jamais écrit)",
+              "status": "done",
+              "charge": 0,
+              "raf": 0
+            },
+            {
+              "name": "Isolation : StandardOutPath dans ~/Documents/ bloqué par TCC launchd",
+              "status": "done",
+              "charge": 0,
+              "raf": 0
+            },
+            {
+              "name": "Fix plist : logs → ~/Library/Logs/com.lde.local-hub.log",
+              "status": "done",
+              "charge": 0,
+              "raf": 0
+            },
+            {
+              "name": "CLAUDE.md hub : commande tail + note TCC explicative",
+              "status": "done",
+              "charge": 0,
+              "raf": 0
+            }
           ]
         }
       ]
@@ -6012,6 +6032,31 @@
               "raf": 0.05
             }
           ]
+        }
+      ]
+    },
+    {
+      "id": "compte-x-franc-aller",
+      "name": "Compte X Franc-Aller",
+      "desc": "Projet personnel — Franc-Aller.",
+      "stack": "",
+      "category": "perso",
+      "folder": "perso/compte-x-franc-aller/",
+      "docs": [],
+      "subprojects": [
+        {
+          "id": "telechargement-bing-dalle-e3",
+          "name": "Téléchargement BING DALLE · E-3",
+          "titre": "Téléchargement BING DALLE · E-3",
+          "status": "todo",
+          "qualif": "P1",
+          "target": "",
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "type": "Feature",
+          "commentaire": "",
+          "steps": []
         }
       ]
     }
