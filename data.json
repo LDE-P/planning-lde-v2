@@ -2939,8 +2939,8 @@
         {
           "id": "j2-deck-pptx",
           "title": "Deck Formation J2 eServices Manager (PPTX)",
-          "file": "formations-opquast/formation-referents-j2/livrables/SF_RQN-OPQUAST_202606-J2-v2.pptx",
-          "desc": "Deck J2 refonte Opquast v2 — 13 slides, programme allégé validé. Correction charte visuelle (titre) en cours via session Opus.",
+          "file": "formations-opquast/formation-referents-j2/livrables/Formation_J2_eServices_Manager_CHARTE-v3.pptx",
+          "desc": "Deck J2 charte Opquast — v3 : 14 slides (programme allégé + slide A→F seuils 85/70/55/40/25 corrigés). V4 en cours (slide checklist + captures).",
           "type": "autre",
           "status": "draft",
           "date": "2026-06-08",
@@ -3175,6 +3175,16 @@
           "status": "final",
           "date": "2026-06-08",
           "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-transmission-v2",
+          "title": "Transmission — corrections v1 → v2 deck J2",
+          "file": "formations-opquast/formation-referents-j2/TRANSMISSION-J2-V2.md",
+          "desc": "Spec des corrections factuelles (CSV→xlsx, 240→245 règles) et des 2 slides ajoutés (Avant J2, Accès ESM) pour produire le v2 depuis le v1 de LDE.",
+          "type": "notes",
+          "status": "final",
+          "date": "2026-06-08",
+          "subproject": "formation-referents-paris"
         }
       ],
       "subprojects": [
@@ -3187,7 +3197,7 @@
           "target": "29/05/2026",
           "owner": null,
           "charge": 7.0,
-          "raf": 3.0,
+          "raf": 1.5,
           "steps": [
             {
               "name": "Prise en main via le dépôt (session Claude Code)",
@@ -3209,7 +3219,7 @@
             },
             {
               "name": "Refonte deck J2 (après installation polices Geograph)",
-              "status": "wip",
+              "status": "done",
               "charge": 0.0,
               "raf": 0.0
             },
