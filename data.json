@@ -3028,7 +3028,32 @@
           "owner": null,
           "charge": 7.0,
           "raf": 5.0,
-          "steps": [],
+          "steps": [
+            {
+              "name": "Prise en main via le dépôt (session Claude Code)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Exploration visuelle interface Chrome (session Cowork)",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Cartographie + How-to livrable",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Refonte deck J2 (après installation polices Geograph)",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
           "type": "Autre"
         }
       ]
