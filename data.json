@@ -2965,6 +2965,16 @@
           "status": "final",
           "date": "2026-06-08",
           "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-keynote-avant-refonte",
+          "title": "Keynote Formation J2 — version avant refonte",
+          "file": "formations-opquast/formation-referents-j2/livrables/SF_RQN-OPQUAST_202606-avant-refonte-J2.key",
+          "desc": "Keynote de la formation J2 actuelle (juin 2026), conservé comme référence avant la refonte.",
+          "type": "autre",
+          "status": "final",
+          "date": "2026-06-08",
+          "subproject": "formation-referents-paris"
         }
       ],
       "subprojects": [
