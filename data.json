@@ -2939,10 +2939,10 @@
         {
           "id": "j2-deck-pptx",
           "title": "Deck Formation J2 eServices Manager (PPTX)",
-          "file": "formations-opquast/formation-referents-j2/Formation_J2_eServices_Manager.pptx",
-          "desc": "Présentation PowerPoint de la formation J2.",
+          "file": "formations-opquast/formation-referents-j2/livrables/SF_RQN-OPQUAST_202606-J2-v2.pptx",
+          "desc": "Deck J2 refonte Opquast v2 — 13 slides, programme allégé validé. Correction charte visuelle (titre) en cours via session Opus.",
           "type": "autre",
-          "status": "final",
+          "status": "draft",
           "date": "2026-06-08",
           "subproject": "formation-referents-paris"
         },
@@ -3165,6 +3165,16 @@
           "status": "final",
           "date": "2026-06-08",
           "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-relais-refonte",
+          "title": "Relais session Opus — correction charte graphique deck J2",
+          "desc": "Document de transmission pour la session Cowork Opus : diagnostic charte graphique (title_placeholder color noir), fix à appliquer, structure des 13 slides, scripts.",
+          "file": "formations-opquast/formation-referents-j2/RELAIS-REFONTE-J2.md",
+          "type": "notes",
+          "status": "final",
+          "date": "2026-06-08",
+          "subproject": "formation-referents-paris"
         }
       ],
       "subprojects": [
@@ -3193,13 +3203,13 @@
             },
             {
               "name": "Guides J2 v2 (aide-mémoire + formateur, libellés vérifiés sur ESM réel)",
-              "status": "wip",
+              "status": "done",
               "charge": 0.0,
               "raf": 0.0
             },
             {
               "name": "Refonte deck J2 (après installation polices Geograph)",
-              "status": "todo",
+              "status": "wip",
               "charge": 0.0,
               "raf": 0.0
             },
