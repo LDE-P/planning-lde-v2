@@ -2975,6 +2975,46 @@
           "status": "final",
           "date": "2026-06-08",
           "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-prise-en-main-cartographie",
+          "title": "Cartographie fonctionnelle eServices Manager (depuis le dépôt)",
+          "file": "formations-opquast/formation-referents-j2/prise-en-main-depot/CARTOGRAPHIE-FONCTIONNELLE.md",
+          "desc": "Référence fonctionnelle de l’application ESM tirée du code (routes, rôles, parcours audit, paramètres) pour la prise en main via l’interface.",
+          "type": "autre",
+          "status": "final",
+          "date": "2026-06-08",
+          "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-prise-en-main-transmission",
+          "title": "Transmission session Chrome — cartographie ESM",
+          "file": "formations-opquast/formation-referents-j2/prise-en-main-depot/TRANSMISSION-SESSION-CHROME.md",
+          "desc": "Brief opérationnel pour la session Cowork + Claude in Chrome : accès, garde-fous prod, scénario de clics et captures à produire.",
+          "type": "notes",
+          "status": "final",
+          "date": "2026-06-08",
+          "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-scanner-cartographie",
+          "title": "Cartographie fonctionnelle eService Scanner (depuis le dépôt)",
+          "file": "formations-opquast/formation-referents-j2/prise-en-main-depot/CARTOGRAPHIE-FONCTIONNELLE-SCANNER.md",
+          "desc": "Référence fonctionnelle du backoffice du robot scanner (organisations, tokens API, quotas, scans, référentiels) tirée du code.",
+          "type": "autre",
+          "status": "final",
+          "date": "2026-06-08",
+          "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-scanner-transmission",
+          "title": "Transmission session Chrome — backoffice eService Scanner",
+          "file": "formations-opquast/formation-referents-j2/prise-en-main-depot/TRANSMISSION-SESSION-CHROME-SCANNER.md",
+          "desc": "Brief opérationnel pour la session Cowork + Claude in Chrome sur le backoffice scanner : accès, garde-fous prod, scénario de clics, captures.",
+          "type": "notes",
+          "status": "final",
+          "date": "2026-06-08",
+          "subproject": "formation-referents-paris"
         }
       ],
       "subprojects": [
@@ -2982,38 +3022,13 @@
           "id": "formation-referents-paris",
           "name": "Formation Référents - Préparation J2",
           "titre": "Mise à Jour J2 IA / IA",
-          "status": "todo",
+          "status": "wip",
           "qualif": "",
           "target": "29/05/2026",
           "owner": null,
           "charge": 7.0,
           "raf": 5.0,
-          "steps": [
-            {
-              "name": "Spécification",
-              "status": "todo",
-              "charge": 0.0,
-              "raf": 0.0
-            },
-            {
-              "name": "Développement",
-              "status": "todo",
-              "charge": 0.0,
-              "raf": 0.0
-            },
-            {
-              "name": "Tests",
-              "status": "todo",
-              "charge": 0.0,
-              "raf": 0.0
-            },
-            {
-              "name": "Mis en ligne",
-              "status": "todo",
-              "charge": 0.0,
-              "raf": 0.0
-            }
-          ],
+          "steps": [],
           "type": "Autre"
         }
       ]
