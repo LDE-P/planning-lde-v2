@@ -3085,6 +3085,26 @@
           "status": "final",
           "date": "2026-06-08",
           "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-script-checklist-criteres",
+          "title": "Script association critères Checklist J2 + diagnostic",
+          "file": "formations-opquast/formation-referents-j2/SCRIPT-CHECKLIST-J2-CRITERES.md",
+          "desc": "Diagnostic du bug /structure + script console pour associer les critères à la Checklist Spéciale J2 (option A : à plat via PUT /control-lists/{id}/controls).",
+          "type": "notes",
+          "status": "final",
+          "date": "2026-06-08",
+          "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-bug-001-checklist-structure",
+          "title": "BUG-001 — Checklist /structure n’associe pas les critères",
+          "file": "formations-opquast/formation-referents-j2/prise-en-main-depot/retours-devs/BUG-001-checklist-structure-criteres-non-associes.md",
+          "desc": "Fiche bug détaillée (repro, cause racine schéma criteria vs handler controls, correctif 1 ligne, contournement, test) — ESM, touche org + checklists natives.",
+          "type": "audit",
+          "status": "final",
+          "date": "2026-06-08",
+          "subproject": "formation-referents-paris"
         }
       ],
       "subprojects": [
