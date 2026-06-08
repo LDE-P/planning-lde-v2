@@ -3052,6 +3052,12 @@
               "status": "todo",
               "charge": 0.0,
               "raf": 0.0
+            },
+            {
+              "name": "Analyse UX/pédagogie critique + recommandations (post J2 finalisée)",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
             }
           ],
           "type": "Autre"
