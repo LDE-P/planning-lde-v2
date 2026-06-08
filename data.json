@@ -3025,6 +3025,46 @@
           "status": "final",
           "date": "2026-06-08",
           "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-aide-memoire-stagiaires",
+          "title": "Aide-mémoire stagiaires J2 (guide de survie ESM)",
+          "file": "formations-opquast/formation-referents-j2/AIDE-MEMOIRE-STAGIAIRES-J2.md",
+          "desc": "Guide de survie orienté stagiaire pour les ateliers J2 (parcours d’audit, 6 résultats, note A→F, tableau « au secours »). v1 tirée du code.",
+          "type": "autre",
+          "status": "draft",
+          "date": "2026-06-08",
+          "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-guide-survie-formateur",
+          "title": "Guide de survie formateur J2 (ESM + Scanner)",
+          "file": "formations-opquast/formation-referents-j2/GUIDE-SURVIE-FORMATEUR-J2.md",
+          "desc": "Guide formateur découvrant l’app : prépa de la veille (BU/zones, comptes, import xlsx, robots), animation, dépannage ESM + scanner. v1 tirée du code.",
+          "type": "autre",
+          "status": "draft",
+          "date": "2026-06-08",
+          "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-transmission-relais-guides",
+          "title": "Transmission relais — vérif/illustration des 2 guides J2",
+          "file": "formations-opquast/formation-referents-j2/TRANSMISSION-RELAIS-GUIDES-J2.md",
+          "desc": "Brief pour la session Chrome qui reprend les 2 guides : libellés à confirmer, plan de captures, trous à combler, affirmations code à valider.",
+          "type": "notes",
+          "status": "final",
+          "date": "2026-06-08",
+          "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-constats-devs",
+          "title": "Constats pour les développeurs ESM/ESS",
+          "file": "formations-opquast/formation-referents-j2/prise-en-main-depot/CONSTATS-POUR-DEVS.md",
+          "desc": "Journal des écarts/incohérences/pistes repérés par analyse du code (import xlsx-only, BU/zone obligatoires, pas de dédup, secret admin unique…), à transmettre aux devs.",
+          "type": "notes",
+          "status": "draft",
+          "date": "2026-06-08",
+          "subproject": "formation-referents-paris"
         }
       ],
       "subprojects": [
