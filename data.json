@@ -2898,44 +2898,6 @@
       "docs": [],
       "subprojects": [
         {
-          "id": "formation-referent",
-          "name": "Formation Référent : Paris",
-          "titre": "Paris - 9 au 11 Juin 2026",
-          "status": "todo",
-          "qualif": "P2",
-          "target": "09/06/2026",
-          "owner": null,
-          "charge": 21.0,
-          "raf": 0.0,
-          "steps": [
-            {
-              "name": "Spécification",
-              "status": "todo",
-              "charge": 0.0,
-              "raf": 0.0
-            },
-            {
-              "name": "Développement",
-              "status": "todo",
-              "charge": 0.0,
-              "raf": 0.0
-            },
-            {
-              "name": "Tests",
-              "status": "todo",
-              "charge": 0.0,
-              "raf": 0.0
-            },
-            {
-              "name": "Mis en ligne",
-              "status": "na",
-              "charge": 0.0,
-              "raf": 0.0
-            }
-          ],
-          "type": "Autre"
-        },
-        {
           "id": "formation-referents-paris",
           "name": "Formation Référents - Préparation J2",
           "titre": "Mise à Jour J2 IA / IA",
