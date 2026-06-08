@@ -2892,10 +2892,81 @@
       "id": "formations-opquast",
       "name": "Formations Opquast",
       "desc": "Formations Référents, Formateurs, Experts",
-      "stack": "",
+      "stack": "Markdown · PPTX · HTML · CSV",
       "category": "active",
-      "folder": "",
-      "docs": [],
+      "folder": "formations-opquast/",
+      "docs": [
+        {
+          "id": "j2-programme",
+          "title": "Programme Formation J2 eServices Manager",
+          "file": "formations-opquast/formation-referents-j2/Formation-J2-Programme.md",
+          "desc": "Programme détaillé de la journée J2 pour les référents eServices Manager.",
+          "type": "spec",
+          "status": "final",
+          "date": "2026-06-08",
+          "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-cheat-sheet",
+          "title": "Cheat Sheet Audit J2",
+          "file": "formations-opquast/formation-referents-j2/2-cheat-sheet-audit.md",
+          "desc": "Aide-mémoire audit pour les participants J2.",
+          "type": "autre",
+          "status": "final",
+          "date": "2026-06-08",
+          "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-qcm",
+          "title": "QCM de validation J2",
+          "file": "formations-opquast/formation-referents-j2/3-qcm-validation.md",
+          "desc": "QCM de validation des acquis J2.",
+          "type": "autre",
+          "status": "final",
+          "date": "2026-06-08",
+          "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-checklists",
+          "title": "Checklists d'entraînement J2",
+          "file": "formations-opquast/formation-referents-j2/4-checklists-entrainement.md",
+          "desc": "Checklists d'entraînement pour les participants J2.",
+          "type": "autre",
+          "status": "final",
+          "date": "2026-06-08",
+          "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-deck-pptx",
+          "title": "Deck Formation J2 eServices Manager (PPTX)",
+          "file": "formations-opquast/formation-referents-j2/Formation_J2_eServices_Manager.pptx",
+          "desc": "Présentation PowerPoint de la formation J2.",
+          "type": "autre",
+          "status": "final",
+          "date": "2026-06-08",
+          "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-presentation-html",
+          "title": "Présentation J2 interactive (HTML)",
+          "file": "formations-opquast/formation-referents-j2/Presentation_J2_Interactive.html",
+          "desc": "Version HTML interactive de la présentation J2.",
+          "type": "autre",
+          "status": "final",
+          "date": "2026-06-08",
+          "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-template-csv",
+          "title": "Template import services (CSV)",
+          "file": "formations-opquast/formation-referents-j2/1-template-import-services.csv",
+          "desc": "Template CSV pour import des services lors de la formation J2.",
+          "type": "autre",
+          "status": "final",
+          "date": "2026-06-08",
+          "subproject": "formation-referents-paris"
+        }
+      ],
       "subprojects": [
         {
           "id": "formation-referents-paris",
