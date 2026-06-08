@@ -3105,6 +3105,66 @@
           "status": "final",
           "date": "2026-06-08",
           "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-bug-002",
+          "title": "BUG-002 — Import CSV refusé sans message",
+          "file": "formations-opquast/formation-referents-j2/prise-en-main-depot/retours-devs/BUG-002-import-csv-refuse-sans-message.md",
+          "desc": "ESM : import accepte seulement .xlsx, CSV rejeté sans message clair (C1).",
+          "type": "audit",
+          "status": "final",
+          "date": "2026-06-08",
+          "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-bug-003",
+          "title": "BUG-003 — Import BU/Zone obligatoires ≠ formulaire",
+          "file": "formations-opquast/formation-referents-j2/prise-en-main-depot/retours-devs/BUG-003-import-bu-zone-obligatoires-vs-formulaire.md",
+          "desc": "ESM : BU + Zone géo obligatoires à l’import mais facultatives au formulaire, peut bloquer 100% de l’import (C2).",
+          "type": "audit",
+          "status": "final",
+          "date": "2026-06-08",
+          "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-bug-004",
+          "title": "BUG-004 — Import sans déduplication",
+          "file": "formations-opquast/formation-referents-j2/prise-en-main-depot/retours-devs/BUG-004-import-pas-de-deduplication.md",
+          "desc": "ESM : ré-import recrée des doublons silencieusement, pas d’upsert (C3).",
+          "type": "audit",
+          "status": "final",
+          "date": "2026-06-08",
+          "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-bug-005",
+          "title": "BUG-005 — Import en-têtes strictement positionnels",
+          "file": "formations-opquast/formation-referents-j2/prise-en-main-depot/retours-devs/BUG-005-import-entetes-positionnels.md",
+          "desc": "ESM : validation des 7 en-têtes par position, tout le fichier rejeté si réordonné (C4).",
+          "type": "audit",
+          "status": "final",
+          "date": "2026-06-08",
+          "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-bug-006",
+          "title": "BUG-006 — Import URL facultative pour types web",
+          "file": "formations-opquast/formation-referents-j2/prise-en-main-depot/retours-devs/BUG-006-import-url-facultative-types-web.md",
+          "desc": "ESM : URL non requise à l’import même pour types web → robot ne peut scanner, échec silencieux (C5).",
+          "type": "audit",
+          "status": "final",
+          "date": "2026-06-08",
+          "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-bug-007",
+          "title": "BUG-007 — Scanner secret admin unique",
+          "file": "formations-opquast/formation-referents-j2/prise-en-main-depot/retours-devs/BUG-007-scanner-secret-admin-unique.md",
+          "desc": "ESS : backoffice protégé par ADMIN_SECRET unique partagé, aucune traçabilité des actions admin (C7).",
+          "type": "audit",
+          "status": "final",
+          "date": "2026-06-08",
+          "subproject": "formation-referents-paris"
         }
       ],
       "subprojects": [
