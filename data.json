@@ -2957,16 +2957,6 @@
           "subproject": "formation-referents-paris"
         },
         {
-          "id": "j2-template-csv",
-          "title": "Template import services (CSV)",
-          "file": "formations-opquast/formation-referents-j2/1-template-import-services.csv",
-          "desc": "Template CSV pour import des services lors de la formation J2.",
-          "type": "autre",
-          "status": "final",
-          "date": "2026-06-08",
-          "subproject": "formation-referents-paris"
-        },
-        {
           "id": "j2-keynote-avant-refonte",
           "title": "Keynote Formation J2 — version avant refonte",
           "file": "formations-opquast/formation-referents-j2/livrables/SF_RQN-OPQUAST_202606-avant-refonte-J2.key",
@@ -3012,6 +3002,26 @@
           "file": "formations-opquast/formation-referents-j2/prise-en-main-depot/TRANSMISSION-SESSION-CHROME-SCANNER.md",
           "desc": "Brief opérationnel pour la session Cowork + Claude in Chrome sur le backoffice scanner : accès, garde-fous prod, scénario de clics, captures.",
           "type": "notes",
+          "status": "final",
+          "date": "2026-06-08",
+          "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-import-format-services",
+          "title": "Format d’import des services ESM (.xlsx)",
+          "file": "formations-opquast/formation-referents-j2/IMPORT-CSV-SERVICES-ESM.md",
+          "desc": "Format exact attendu par ESM pour l’import de services (xlsx, colonnes, validations, pièges) — tiré du code. Le CSV n’est pas accepté.",
+          "type": "spec",
+          "status": "final",
+          "date": "2026-06-08",
+          "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-template-import-xlsx",
+          "title": "Template import services ESM (.xlsx)",
+          "file": "formations-opquast/formation-referents-j2/template-import-services-ESM.xlsx",
+          "desc": "Classeur Excel prêt à remplir pour l’import de services dans ESM (feuilles Services + Reference). Remplace l’ancien template CSV inutilisable.",
+          "type": "autre",
           "status": "final",
           "date": "2026-06-08",
           "subproject": "formation-referents-paris"
