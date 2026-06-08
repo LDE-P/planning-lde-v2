@@ -3065,6 +3065,26 @@
           "status": "draft",
           "date": "2026-06-08",
           "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-relais-rouvrir-audits",
+          "title": "Relais + script — Rouvrir les audits finalisés ESM",
+          "file": "formations-opquast/formation-referents-j2/RELAIS-ROUVRIR-AUDITS-ESM.md",
+          "desc": "Transmission Cowork → Claude Code pour l'API reopen (CDP freeze) + réponse avec script JS console (Bearer JWT, POST /api/audits/{id}/reopen). 5 audits de l'org Opquast LDE rouverts.",
+          "type": "notes",
+          "status": "final",
+          "date": "2026-06-08",
+          "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-script-rouvrir-audits",
+          "title": "Script console — Rouvrir audits finalisés ESM",
+          "file": "formations-opquast/formation-referents-j2/SCRIPT-ROUVRIR-AUDITS-ESM.md",
+          "desc": "Snippet JS prêt à coller dans la console Chrome pour rouvrir les audits finalisés via l'API ESM (JWT Bearer, liste + reopenAll()). Fourni par Claude Code après analyse du dépôt.",
+          "type": "notes",
+          "status": "final",
+          "date": "2026-06-08",
+          "subproject": "formation-referents-paris"
         }
       ],
       "subprojects": [
@@ -3077,7 +3097,7 @@
           "target": "29/05/2026",
           "owner": null,
           "charge": 7.0,
-          "raf": 5.0,
+          "raf": 3.0,
           "steps": [
             {
               "name": "Prise en main via le dépôt (session Claude Code)",
@@ -3092,8 +3112,8 @@
               "raf": 0.0
             },
             {
-              "name": "Cartographie + How-to livrable",
-              "status": "todo",
+              "name": "Guides J2 v2 (aide-mémoire + formateur, libellés vérifiés sur ESM réel)",
+              "status": "wip",
               "charge": 0.0,
               "raf": 0.0
             },
