@@ -2899,10 +2899,10 @@
         {
           "id": "j2-programme",
           "title": "Programme Formation J2 eServices Manager",
-          "file": "formations-opquast/formation-referents-j2/Formation-J2-Programme.md",
-          "desc": "Programme détaillé de la journée J2 pour les référents eServices Manager.",
+          "file": "formations-opquast/formation-referents-j2/livrables/:temp/Formation-J2-Programme.md",
+          "desc": "Programme détaillé J2 — déplacé en :temp/ (contenu repris dans deck + guides). Exercices par profil extraits dans exercices-par-profils-stagiaires.md.",
           "type": "spec",
-          "status": "final",
+          "status": "draft",
           "date": "2026-06-08",
           "subproject": "formation-referents-paris"
         },
@@ -3211,6 +3211,16 @@
           "title": "Pack assistant ESM pour Claude in Chrome (HTML / WordPress)",
           "file": "formations-opquast/formation-referents-j2/livrables/docs-esm-claude/ASSISTANT-CLAUDE-IN-CHROME-ESM-WP.html",
           "desc": "Version HTML du pack assistant, prête à coller dans l’éditeur classique WP (onglet Texte) pour publier une page lisible par Claude in Chrome. 3e jumelle (copié-collé / Google Doc / WP).",
+          "type": "autre",
+          "status": "final",
+          "date": "2026-06-09",
+          "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-exercices-profils",
+          "title": "Exercices par profil stagiaire (Tech / UX / Pilotage)",
+          "file": "formations-opquast/formation-referents-j2/exercices-par-profils-stagiaires.md",
+          "desc": "Consignes d'audit par profil (Tech, UX/UI, Pilotage/Éditorial) + framework de priorisation P1/P2/P3. Extrait de Formation-J2-Programme.md.",
           "type": "autre",
           "status": "final",
           "date": "2026-06-09",
