@@ -3245,6 +3245,16 @@
           "status": "final",
           "date": "2026-06-09",
           "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-relais-captures-2-admin",
+          "title": "Relais captures LOT 2 — écrans admin/PARAMÈTRES (vue org-admin)",
+          "file": "formations-opquast/formation-referents-j2/RELAIS-CAPTURES-2-ADMIN-PARAMETRES.md",
+          "desc": "Runbook détaillé de la 2e passe de captures (#15–21) en vue ORG-ADMIN : écrans PARAMÈTRES, où aller, noms de fichiers, vérif des libellés, intégration guides. Suite du lot 1 (super-admin).",
+          "type": "notes",
+          "status": "final",
+          "date": "2026-06-09",
+          "subproject": "formation-referents-paris"
         }
       ],
       "subprojects": [
