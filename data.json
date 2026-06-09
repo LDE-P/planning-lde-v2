@@ -3205,6 +3205,16 @@
           "status": "final",
           "date": "2026-06-09",
           "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-assistant-claude-chrome-wp",
+          "title": "Pack assistant ESM pour Claude in Chrome (HTML / WordPress)",
+          "file": "formations-opquast/formation-referents-j2/livrables/docs-esm-claude/ASSISTANT-CLAUDE-IN-CHROME-ESM-WP.html",
+          "desc": "Version HTML du pack assistant, prête à coller dans l’éditeur classique WP (onglet Texte) pour publier une page lisible par Claude in Chrome. 3e jumelle (copié-collé / Google Doc / WP).",
+          "type": "autre",
+          "status": "final",
+          "date": "2026-06-09",
+          "subproject": "formation-referents-paris"
         }
       ],
       "subprojects": [
