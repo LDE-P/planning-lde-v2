@@ -3304,6 +3304,12 @@
               "status": "done",
               "charge": 0.0,
               "raf": 0.0
+            },
+            {
+              "name": "Régler quotas LLM 15€/jour + 15€/mois sur les 5 orgs (ESS)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
             }
           ],
           "type": "Autre"
