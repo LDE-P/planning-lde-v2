@@ -3225,6 +3225,16 @@
           "status": "final",
           "date": "2026-06-09",
           "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-runbook-5-orgs",
+          "title": "Runbook super-admin — créer les 5 orgs stagiaires + robot",
+          "file": "formations-opquast/formation-referents-j2/livrables/docs-esm-claude/RUNBOOK-CREATION-5-ORGS-STAGIAIRES.md",
+          "desc": "Pas-à-pas super-admin pour créer une org par stagiaire (+ compte admin en une étape), connecter le robot (token auto), régler les quotas, tester de bout en bout. Libellés vérifiés code.",
+          "type": "autre",
+          "status": "final",
+          "date": "2026-06-09",
+          "subproject": "formation-referents-paris"
         }
       ],
       "subprojects": [
