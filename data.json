@@ -3185,6 +3185,26 @@
           "status": "final",
           "date": "2026-06-08",
           "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-assistant-claude-chrome",
+          "title": "Pack assistant ESM pour Claude in Chrome (copié-collé)",
+          "file": "formations-opquast/formation-referents-j2/ASSISTANT-CLAUDE-IN-CHROME-ESM.md",
+          "desc": "Base de connaissances ESM (vue stagiaire) à coller dans Claude in Chrome pour en faire un assistant d’atelier : cadrage + garde-fous + parcours + dépannage + FAQ. Validé en test.",
+          "type": "autre",
+          "status": "final",
+          "date": "2026-06-09",
+          "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-assistant-claude-chrome-web",
+          "title": "Pack assistant ESM pour Claude in Chrome (Google Doc / web)",
+          "file": "formations-opquast/formation-referents-j2/ASSISTANT-CLAUDE-IN-CHROME-ESM-WEB.md",
+          "desc": "Version jumelle du pack assistant, en-tête adapté à un Google Doc « publié sur le web » (le stagiaire ouvre le lien et demande à Claude de lire la page). Lecture validée en test.",
+          "type": "autre",
+          "status": "final",
+          "date": "2026-06-09",
+          "subproject": "formation-referents-paris"
         }
       ],
       "subprojects": [
