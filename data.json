@@ -3255,6 +3255,16 @@
           "status": "final",
           "date": "2026-06-09",
           "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-gestion-utilisateurs",
+          "title": "ESM — Pages de gestion des utilisateurs (référence)",
+          "file": "formations-opquast/formation-referents-j2/livrables/docs-esm-claude/GESTION-UTILISATEURS-ESM.md",
+          "desc": "Référence précise des 3 écrans « gens » (Personnes /teams · Utilisateurs org /settings/users · Utilisateurs plateforme /admin/users) : qui fait quoi, où créer/modifier/supprimer un compte, piège orphelin, cas pratiques (typo email, retrait org démo).",
+          "type": "autre",
+          "status": "final",
+          "date": "2026-06-09",
+          "subproject": "formation-referents-paris"
         }
       ],
       "subprojects": [
