@@ -3298,6 +3298,12 @@
               "status": "todo",
               "charge": 0.0,
               "raf": 0.0
+            },
+            {
+              "name": "Créer les 5 orgs stagiaires (CPAM Gironde · Scaledev · GPSEO · BdF · ASP) + connecter le robot",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
             }
           ],
           "type": "Autre"
