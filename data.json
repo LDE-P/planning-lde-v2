@@ -2890,7 +2890,7 @@
     },
     {
       "id": "formations-opquast",
-      "name": "Formations Opquast",
+      "name": "Formations Opquast (e-Services Manager, Certification, etc.)",
       "desc": "Formations Référents, Formateurs, Experts",
       "stack": "Markdown · PPTX · HTML · CSV",
       "category": "active",
@@ -3291,6 +3291,45 @@
             }
           ],
           "type": "Autre"
+        },
+        {
+          "id": "assistant-claude-in-chrome-esm",
+          "name": "Assistant Claude in Chrome eServices Manager",
+          "titre": "Pack de connaissances ESM pour Claude in Chrome (assistant stagiaire)",
+          "status": "wip",
+          "qualif": "",
+          "target": "",
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "type": "Autre",
+          "commentaire": "Docs actuellement dans le SP « Formation Référents - Préparation J2 » : formations-opquast/formation-referents-j2/livrables/docs-esm-claude/ASSISTANT-CLAUDE-IN-CHROME-ESM(.md/-WEB.md/-WP.html). 3 versions jumelles à synchroniser. CLAUDE.md du SP : formations-opquast/assistant-claude-in-chrome-esm/CLAUDE.md",
+          "steps": [
+            {
+              "name": "Pack assistant — 3 versions (copié-collé / Google Doc / WP HTML)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Validation lecture par Claude in Chrome (3 canaux)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Mise en ligne (Google Doc publié / page WP)",
+              "status": "wip",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Maintenance & synchro des 3 versions",
+              "status": "wip",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ]
         }
       ]
     },
