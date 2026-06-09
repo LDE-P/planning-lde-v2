@@ -3235,6 +3235,16 @@
           "status": "final",
           "date": "2026-06-09",
           "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-manuel-secours-super-admin",
+          "title": "Manuel de secours super-admin (ESM + Scanner)",
+          "file": "formations-opquast/formation-referents-j2/livrables/docs-esm-claude/MANUEL-SECOURS-SUPER-ADMIN-ESM.md",
+          "desc": "Manuel de dépannage côté super-admin : repères plateforme/org, super-pouvoirs /admin/*, backoffice ESS, scénarios de secours (robot/quota/token/mdp/audit/checklist/import), actions dangereuses, antisèche URLs.",
+          "type": "autre",
+          "status": "final",
+          "date": "2026-06-09",
+          "subproject": "formation-referents-paris"
         }
       ],
       "subprojects": [
