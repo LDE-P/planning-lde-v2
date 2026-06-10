@@ -2938,12 +2938,12 @@
         },
         {
           "id": "j2-deck-pptx",
-          "title": "Deck Formation J2 eServices Manager (PPTX)",
-          "file": "formations-opquast/formation-referents-j2/livrables/Formation_J2_eServices_Manager_CHARTE-v3.pptx",
-          "desc": "Deck J2 charte Opquast — v3 : 14 slides (programme allégé + slide A→F seuils 85/70/55/40/25 corrigés). V4 en cours (slide checklist + captures).",
+          "title": "Deck Formation J2 — canonique (PPTX)",
+          "file": "formations-opquast/formation-referents-j2/livrables/J2-doc-canonique.pptx",
+          "desc": "Deck J2 canonique — 25 slides sur master Opquast (charte validée : Geograph Medium 42pt, navy #2B404E, barre teal #226F78, pied « Formation - Page N », puces rondes, timelines d’avancement). Reconstruit à la main par LDE. ⛔ INTOUCHABLE par l’IA — LDE seul dans PowerPoint.",
           "type": "autre",
-          "status": "draft",
-          "date": "2026-06-08",
+          "status": "final",
+          "date": "2026-06-09",
           "subproject": "formation-referents-paris"
         },
         {
