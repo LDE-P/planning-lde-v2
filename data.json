@@ -1639,6 +1639,12 @@
               "status": "todo",
               "charge": 4.0,
               "raf": 4.0
+            },
+            {
+              "name": "Mode pédagogique — SPEC rev.3 close (décisions A–C/P/Q1–Q6) + Ping-Pong Cowork↔Claude Code clos (Tours 1–3) + Bloc 0 FAIT (format manifest verdicts.{rule_id}, 5 lecteurs migrés, 61 verts ; commits 68099a3 + correctif build.py/playwright c97d570). Reste : Bloc A → Bloc C → pilote R069 bout-en-bout → 19 rule-packs",
+              "status": "done",
+              "charge": 0.5,
+              "raf": 0.0
             }
           ]
         },
