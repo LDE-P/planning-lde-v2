@@ -1160,6 +1160,15 @@
           "status": "draft",
           "date": "2026-06-03",
           "subproject": "cas-pratiques-issus-du-banc"
+        },
+        {
+          "id": "spec-adaptateur-pedagogique",
+          "title": "SPEC — Adaptateur pédagogique du Composeur (mode pédagogique)",
+          "path": "banc-de-tests/3-produit/composeur/SPEC-adaptateur-pedagogique.md",
+          "type": "spec",
+          "status": "draft",
+          "subproject": "generation-snippets-cas-pratiques-v2",
+          "description": "Spec Ping-Pong tour 1 : format manifest verdicts{}, squelette pédago iframe, 20 rule-packs, adaptateur CSV WpProQuiz ;-séparé. Toutes décisions closes (A1/A2/B1/B2/C1/C2/P1/P2/P3 + option anticipatrice multi-règles)."
         }
       ],
       "subprojects": [
@@ -3779,6 +3788,10 @@
               "status": "todo",
               "charge": 0.0,
               "raf": 0.0
+            },
+            {
+              "name": "Échantillon 20 sites réels capturés (audit 245 règles) — ACTÉ 2026-06-03, étape INTERCALÉE avant la BASCULE. Sites capturés par MHO sur serveur dédié (avec nos specimens), audités en aveugle par le robot MCP. Critères : sélection par probabilité + panel divers + garde-fous conditionnels (e-commerce, multilingue/i18n, newsletter, audio/vidéo, données perso/compte, UGC) ; capturabilité non éliminatoire (2e passe MHO) ; zones compte INCLUSES (comptes de test MHO) ; PAS d'oracle préalable (LDE fait l'audit de l'audit). Pérennité écartée : un 2e échantillon de sites DIFFÉRENTS (non capturés) éprouvera ensuite le MCP. FAIT cette session : liste élargie ~38 candidats + panel-20 (★) → docs/candidats-sites-captures.md. RESTE : figer le panel-20 + grille de transmission MHO (capturabilité + comptes de test).",
+              "status": "done"
             }
           ]
         }
