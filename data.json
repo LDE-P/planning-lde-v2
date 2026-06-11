@@ -2864,17 +2864,17 @@
           "charge": 0.0,
           "raf": 0.0,
           "type": "Recurrent",
-          "commentaire": "Feedbacks à traiter au fil de l’eau. Deadline : lundi 09/06/2026. Source : https://bo.opquast.com/survey/answerdata/?professional_situation=Professionnel+en+poste",
+          "commentaire": "Feedbacks à traiter au fil de l’eau. Deadline : lundi 09/06/2026. 1ère et 2ème passes effectuées (11/06). Reste 3ème passe (édition quiz). Source : https://bo.opquast.com/survey/answerdata/?professional_situation=Professionnel+en+poste",
           "steps": [
             {
               "name": "Analyser les feedbacks en attente",
-              "status": "todo",
+              "status": "done",
               "charge": 0.0,
               "raf": 0.0
             },
             {
               "name": "Déterminer le traitement pour chaque feedback",
-              "status": "todo",
+              "status": "wip",
               "charge": 0.0,
               "raf": 0.0
             },
