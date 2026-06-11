@@ -178,6 +178,7 @@ POST (corps JSON) :
 ## Règles de développement
 
 - `data.json` / `data-archives.json` : lecture via `_load_data()`/`_load_archives()` ; **écriture atomique** via `_save_data()`/`_save_archives()` → `_atomic_write_json()` (blindage 2026-05-31). Garanties : écriture `tmp` + `fsync` → `os.replace` (rename atomique) → `fsync` du dossier ; **garde anti-wipe** (refuse de remplacer un état à N>0 projets par 0 projet → `WipeRefused` → HTTP 409, payload refusé conservé) ; **backups** `.prev` (1 cran, chaque save) + horodatés rotatifs dans `backups-data/` (throttle 10 min, 10 gardés). `.prev`/`.tmp`/`backups-data/` sont gitignorés ; `data.json` reste versionné.
+- **⚠️ Édition concurrente de `data.json` (incident 2026-06-11)** : le serveur (et d'autres sessions) réécrivent `data.json` en continu. **Ne pas l'éditer via l'outil fichier Read/Edit** (copie potentiellement périmée → un commit peut écraser le travail d'une autre session). Éditer en bash dans une seule passe (relecture disque → script Python → `git add`/`commit` immédiat), et **vérifier avant push** que le nombre de projets/SP n'a pas régressé vs `git show HEAD:data.json`. Détail dans le `CLAUDE.md` racine, section « `data.json` — copie périmée via l'outil fichier ».
 - CORS : tous les endpoints renvoient `Access-Control-Allow-Origin: *`
 - Payload max : 1 Mo (413 si dépassé)
 - **Aucune dépendance externe** : le serveur n'utilise que la bibliothèque standard Python. La synchronisation Google Sheets a été retirée (2026-06-03, voir `SPEC-DECOUPLAGE-GSHEET.md`).
