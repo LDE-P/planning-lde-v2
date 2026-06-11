@@ -21,6 +21,7 @@ HTML_FILE = BASE_DIR / 'DASHBOARD-V2.html'
 DATA_FILE = BASE_DIR / 'data.json'
 ARCHIVES_FILE = BASE_DIR / 'data-archives.json'
 HISTORY_FILE = BASE_DIR / 'history.jsonl'
+LOCK_FILE    = BASE_DIR / '.data-json.lock'
 
 MAX_PAYLOAD = 1_000_000  # 1 Mo
 PORT = 8001
@@ -286,7 +287,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
     def do_OPTIONS(self):
         self.send_response(200)
         self.send_header('Access-Control-Allow-Origin', '*')
-        self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+        self.send_header('Access-Control-Allow-Methods', 'GET, POST, DELETE, OPTIONS')
         self.send_header('Access-Control-Allow-Headers', 'Content-Type')
         self.end_headers()
 
@@ -305,6 +306,8 @@ class Handler(http.server.BaseHTTPRequestHandler):
             self._handle_local_folders()
         elif path == '/api/archives':
             self._handle_archives()
+        elif path == '/api/lock':
+            self._handle_get_lock()
         else:
             self._json_error('Not Found', 404)
 
@@ -351,11 +354,17 @@ class Handler(http.server.BaseHTTPRequestHandler):
             self._handle_delete_archive_subproject()
         elif path == '/api/delete-archive-project':
             self._handle_delete_archive_project()
+        elif path == '/api/lock':
+            self._handle_post_lock()
         else:
             self._json_error('Not Found', 404)
 
     def do_DELETE(self):
-        self._json_error('Method Not Allowed', 405)
+        path = self.path.split('?')[0]
+        if path == '/api/lock':
+            self._handle_delete_lock()
+        else:
+            self._json_error('Method Not Allowed', 405)
 
     def do_PUT(self):
         self._json_error('Method Not Allowed', 405)
@@ -432,6 +441,45 @@ class Handler(http.server.BaseHTTPRequestHandler):
             self._json_error(str(e), 500)
         except Exception as e:
             self._json_error(str(e), 500)
+
+    # ── Lock handlers (/api/lock) ─────────────────────────────────────────────
+
+    def _handle_get_lock(self):
+        """GET /api/lock — état du verrou data.json."""
+        if LOCK_FILE.exists():
+            try:
+                info = json.loads(LOCK_FILE.read_text(encoding='utf-8'))
+                self._json_ok({'locked': True,
+                               'by':    info.get('by', '?'),
+                               'since': info.get('since', '?')})
+            except Exception:
+                self._json_ok({'locked': True, 'by': '?', 'since': '?'})
+        else:
+            self._json_ok({'locked': False})
+
+    def _handle_post_lock(self):
+        """POST /api/lock — pose le verrou."""
+        try:
+            payload = self._read_json_body()
+        except (OverflowError, json.JSONDecodeError, UnicodeDecodeError) as e:
+            self._json_error(str(e), 400)
+            return
+        by = str(payload.get('by', 'session inconnue'))[:120]
+        since = str(payload.get('since', datetime.now().isoformat()))
+        LOCK_FILE.write_text(
+            json.dumps({'by': by, 'since': since}, ensure_ascii=False),
+            encoding='utf-8')
+        self._json_ok({'locked': True, 'by': by, 'since': since})
+
+    def _handle_delete_lock(self):
+        """DELETE /api/lock — lève le verrou."""
+        if LOCK_FILE.exists():
+            try:
+                LOCK_FILE.unlink()
+            except OSError as e:
+                self._json_error(str(e), 500)
+                return
+        self._json_ok({'locked': False})
 
     # ── POST handlers — Phase 1 ───────────────────────────────────────────────
 

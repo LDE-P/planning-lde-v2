@@ -70,6 +70,23 @@ export async function openFile(file) {
   return _post('/api/open-file', { file });
 }
 
+// ── Verrou data.json ───────────────────────────────────────────────────────────
+
+export async function getLock() {
+  return _get('/api/lock');
+}
+
+export async function setLock(by) {
+  return _post('/api/lock', { by, since: new Date().toISOString() });
+}
+
+export async function deleteLock() {
+  const r = await fetch('/api/lock', { method: 'DELETE' });
+  const data = await r.json();
+  if (!r.ok) throw new Error(data.error || `HTTP ${r.status}`);
+  return data;
+}
+
 // ── Archives (SPEC-ARCHIVAGE.md §7) ────────────────────────────────────────────
 
 export async function fetchArchives() {
