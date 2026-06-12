@@ -134,3 +134,10 @@
 - [ ] **Garde-fou anti-régression `data.json` à scripter** : un petit `check-data-regression.py` (compare proj/SP count vs `git show HEAD:data.json`, alerte si baisse) à appeler avant chaque commit de `data.json` — voire en hook pre-commit du repo planning.
 - [x] **Clock sandbox non fiable au boot** : `date` a renvoyé 2026-06-03 au lieu de 2026-06-11 → livrables mal datés (corrigés). → Acté `CLAUDE.md` racine : recouper `date` avec `<env>` / timestamps fichiers / bilans existants.
 - [ ] **Recherche web indisponible dans certaines sessions Cowork** : prévoir un repli explicite (demander à LDE de fournir/valider les URLs, ou marquer « à confirmer à la capture ») quand une tâche nécessite de nommer des ressources web réelles.
+
+## Process / outillage (session Analyse V2 — Dashboard Datamart) — 2026-06-12
+
+- [ ] **Implémenter `/api/lock` dans `serve-v2.py`** (ou amender la convention du CLAUDE.md racine, commit `22c5d3e`) : le serveur qui tournait sur 8001 répond `Not Found` sur `POST /api/lock` — la convention de verrou `data.json` est inopérante en l'état. Le repli passe-unique (relecture → édition bash → commit immédiat + contrôle anti-régression) a été appliqué et a suffi.
+- [ ] **Nuancer la limite « sandbox ne joint pas localhost » dans le CLAUDE.md racine** : vérifié ce jour, le bash de Claude Code natif Mac **atteint** `localhost:8001` (le serveur a répondu). La limite documentée vaut pour le sandbox Cowork. À valider par LDE avant édition (fichier d'infrastructure).
+- [ ] **Contre-vérifier tout constat « critique » d'un sous-agent avant inscription dans un livrable** : deux cas cette session — faux positif « path traversal » (écarté par lecture du routage réel) et « cas pratiques : zéro impact » (corrigé par LDE, l'iframe snippet était dans la spec). Pour les analyses multi-specs, demander aux agents de lister les sections non couvertes des documents cités.
+- [x] **`poppler` installé via Homebrew** (pdftotext/pdftoppm) — l'extraction de PDF (présentations Gamma comprises) est désormais disponible pour toutes les sessions.
