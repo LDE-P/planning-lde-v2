@@ -19,10 +19,21 @@ async function checkLock() {
   } catch (e) { /* serveur injoignable — pas de bannière */ }
 }
 
+function sortByActivity(state) {
+  if (!state || !Array.isArray(state.projects)) return state;
+  state.projects = [...state.projects].sort((a, b) => {
+    if (!a.updatedAt && !b.updatedAt) return 0;
+    if (!a.updatedAt) return 1;
+    if (!b.updatedAt) return -1;
+    return b.updatedAt < a.updatedAt ? -1 : b.updatedAt > a.updatedAt ? 1 : 0;
+  });
+  return state;
+}
+
 async function main() {
   try {
     const state = await fetchState();
-    init(state);
+    init(sortByActivity(state));
     setFetchStateCallback(fetchState);
     // Vérification verrou initiale + polling toutes les 30s
     checkLock();

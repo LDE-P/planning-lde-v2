@@ -171,6 +171,13 @@ def _save_data(data: dict):
     _atomic_write_json(DATA_FILE, data)
 
 
+def _touch_project(data: dict, project_id: str):
+    """Met à jour updatedAt (UTC ISO) sur le projet identifié."""
+    proj = next((p for p in data.get('projects', []) if p['id'] == project_id), None)
+    if proj is not None:
+        proj['updatedAt'] = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
+
+
 def _load_archives() -> dict:
     if not ARCHIVES_FILE.exists():
         return {'projects': []}
@@ -541,6 +548,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
                 else:
                     sp['steps'].append(dict(step))
 
+        _touch_project(data, project_id)
         _save_data(data)
         _log([{'action': 'save-subproject', 'project': project_id, 'subproject': sp_id}])
         self._json_ok()
@@ -563,6 +571,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
         for field in ('name', 'desc', 'stack'):
             if field in payload:
                 proj[field] = payload[field]
+        _touch_project(data, project_id)
         _save_data(data)
         self._json_ok({'ok': True})
 
@@ -587,6 +596,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
         if len(proj['subprojects']) == before:
             self._json_error('Sous-projet introuvable', 404)
             return
+        _touch_project(data, project_id)
         _save_data(data)
         self._json_ok({'ok': True})
 
@@ -662,6 +672,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
         project['subprojects'] = [s for s in project.get('subprojects', []) if s['id'] != sp_id]
         project_empty = len(project.get('subprojects', [])) == 0
 
+        _touch_project(data, project_id)
         _save_data(data)
         _save_archives(archives)
         _log([{'action': 'archive-subproject', 'project': project_id, 'subproject': sp_id}])
@@ -763,6 +774,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
         if not arch_proj.get('subprojects'):
             archives['projects'] = [p for p in archives.get('projects', []) if p['id'] != project_id]
 
+        _touch_project(data, project_id)
         _save_data(data)
         _save_archives(archives)
         _log([{'action': 'restore-subproject', 'project': project_id, 'subproject': sp_id}])
@@ -802,6 +814,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
         data['projects'].append(arch_proj)
         archives['projects'] = [p for p in archives.get('projects', []) if p['id'] != project_id]
 
+        _touch_project(data, project_id)
         _save_data(data)
         _save_archives(archives)
         _log([{'action': 'restore-project', 'project': project_id}])
@@ -945,6 +958,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
         }
 
         project.setdefault('subprojects', []).append(sp)
+        _touch_project(data, project_id)
         _save_data(data)
         _log([{'action': 'add-subproject', 'project': project_id, 'id': sp_id, 'name': name}])
         self._json_ok({'ok': True, 'id': sp_id})
@@ -991,6 +1005,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
             'subprojects': [],
         }
 
+        project['updatedAt'] = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
         data['projects'].append(project)
         _save_data(data)
         _log([{'action': 'add-project', 'id': proj_id, 'name': name}])
@@ -1129,6 +1144,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
             new_doc['subproject'] = doc['subproject']
 
         docs_list.append(new_doc)
+        _touch_project(data, project_id)
         _save_data(data)
         _log([{'action': 'add-doc', 'project': project_id, 'id': doc_id, 'file': file_rel}])
         self._json_ok({'ok': True, 'doc': new_doc})
@@ -1202,6 +1218,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
             if field in patch:
                 doc[field] = patch[field]
 
+        _touch_project(data, project_id)
         _save_data(data)
         _log([{'action': 'save-doc', 'project': project_id, 'doc': doc_id}])
         self._json_ok({'ok': True})
@@ -1247,6 +1264,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
             self._json_error(f'doc_id inconnu dans ce projet : {doc_id!r}', 400)
             return
 
+        _touch_project(data, project_id)
         _save_data(data)
         _log([{'action': 'remove-doc', 'project': project_id, 'doc': doc_id}])
         self._json_ok({'ok': True})
