@@ -65,6 +65,16 @@
           "status": "final",
           "date": "2026-06-12",
           "subproject": "analyse-v2"
+        },
+        {
+          "id": "projet-api-wordpress",
+          "file": "dashbord-datamart-V1/dashboard-datamart/PROJET-API-WORDPRESS.md",
+          "title": "PROJET-API-WORDPRESS — architecture bridge → Phase 2",
+          "desc": "Document projet de l’API WordPress : mode direct encadré pipeline DEV→PROD, CORS whitelist étendue au proxy, bridge transitoire remplacé par Phase 2. Révisé par la session Fable Analyse V2.",
+          "type": "spec",
+          "status": "final",
+          "date": "2026-06-12",
+          "subproject": "analyse-v2"
         }
       ],
       "subprojects": [
