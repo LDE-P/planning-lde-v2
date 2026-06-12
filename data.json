@@ -3454,7 +3454,7 @@
           "id": "formation-referents-paris",
           "name": "Formation Référents - Préparation J2",
           "titre": "Mise à Jour J2 IA / IA",
-          "status": "wip",
+          "status": "done",
           "qualif": "",
           "target": "29/05/2026",
           "owner": null,
@@ -3546,7 +3546,7 @@
           ]
         }
       ],
-      "updatedAt": "2026-06-12T15:47:11Z"
+      "updatedAt": "2026-06-12T15:49:01Z"
     },
     {
       "id": "sites-martyrs",
