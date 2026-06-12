@@ -1719,6 +1719,18 @@
               "status": "done",
               "charge": 0.5,
               "raf": 0.0
+            },
+            {
+              "name": "Mode pédagogique — infra (Bloc A généralisation + Bloc C squelette/io) + pilote R069 (interception modale, responsive, carte allégée, validé visuellement) + LOT CLAIR 11 règles (R004,R014,R065,R114,R132,R134,R136,R164,R184,R186,R236) depuis checklist-v5-final.md → corpus 30 fragments + CSV cumulé, 120 verts. Commits 166fa1c/9b3382a/f278d4f/142ec2a/9fcab97",
+              "status": "done",
+              "charge": 2.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Mode pédagogique V2 — instruments (inspecteur code, synthèse vocale, nav clavier, copier-coller, mesure cibles) + niveaux de difficulté (débutant→expert). Cadré dans IDEES-INSTRUMENTS-ET-NIVEAUX.md. + trancher R071 (discordance déf.) + 7 règles difficiles reportées",
+              "status": "todo",
+              "charge": 3.0,
+              "raf": 3.0
             }
           ]
         },
