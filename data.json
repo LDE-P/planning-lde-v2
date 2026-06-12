@@ -481,6 +481,39 @@
           ],
           "commentaire": "Menée le 2026-06-12 avec Claude Code. Recommandation : from scratch architecturé avec réutilisation ciblée. Voir ANALYSE-V2.md.",
           "type": "Autre"
+        },
+        {
+          "id": "v2-spec-tests-note-mho",
+          "name": "V2 : Spécification / Tests / Note MHO",
+          "desc": "Suite de Analyse V2, à partir des docs de celle-ci",
+          "status": "todo",
+          "qualif": "P1",
+          "target": null,
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "type": "Feature",
+          "commentaire": "Suite directe du SP Analyse V2 — spec de la refonte, tests, note pour MHO.",
+          "steps": [
+            {
+              "name": "Spec",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tests",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Note MHO",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ]
         }
       ]
     },
