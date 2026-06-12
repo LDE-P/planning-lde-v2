@@ -3387,6 +3387,56 @@
           "status": "final",
           "date": "2026-06-09",
           "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-synthese-retours-devs",
+          "title": "Synthèse priorisée des retours devs eSM/eSS (grille de rejeu)",
+          "file": "formations-opquast/formation-referents-j2/prise-en-main-depot/SYNTHESE-RETOURS-DEVS-eSM.md",
+          "desc": "Grille consolidée et priorisée (P0/P1/P2) des 59 constats + 8 fiches BUG, avec statut de vérif issu du rejeu live 2026-06-12 (3 corrigés C25/C27/C34 ; confirmations C19/C50/C52…). Double usage : script de rejeu + livrable de transmission devs.",
+          "type": "notes",
+          "status": "draft",
+          "date": "2026-06-12",
+          "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-bug-008",
+          "title": "BUG-008 — Import résultats inopérant pour Opquast (critères sans shortCode)",
+          "file": "formations-opquast/formation-referents-j2/prise-en-main-depot/retours-devs/BUG-008-import-resultats-opquast-shortcode.md",
+          "desc": "Fiche : l'import de résultats d'audit (/audits/import) matche par shortCode, or les critères Opquast et les users n'en ont pas en prod → import inutilisable pour Opquast. Besoin métier + 3 correctifs + contournement API par IDs (PUT /audits/:id/results).",
+          "type": "audit",
+          "status": "draft",
+          "date": "2026-06-11",
+          "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-checklist-exploration-exploitation",
+          "title": "Checklist exploration & exploitation des audits eSM (Livrable 3)",
+          "file": "formations-opquast/formation-referents-j2/livrables/docs-esm-claude/CHECKLIST-EXPLORATION-EXPLOITATION-AUDITS.md",
+          "desc": "Cadre le pas-à-pas stagiaire sur la partie exploitation/pilotage d'eSM : écrans à explorer/capturer (Dashboard, Conformité, Tendances, Comparaison…) et données de démo à préparer pour que les vues soient parlantes.",
+          "type": "notes",
+          "status": "draft",
+          "date": "2026-06-10",
+          "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-import-resultats-audit",
+          "title": "Importer des résultats d'audit dans eSM (format + contournement API)",
+          "file": "formations-opquast/formation-referents-j2/livrables/docs-esm-claude/IMPORT-RESULTATS-AUDIT-ESM.md",
+          "desc": "Format d'import de résultats d'audit (POST /api/audits/import, validate→execute) et distinction avec les imports services/pages ; contournement par IDs (PUT /audits/:id/results) faute de shortCodes Opquast (cf. BUG-008). Testé en réel sur l'audit ASP.",
+          "type": "notes",
+          "status": "draft",
+          "date": "2026-06-10",
+          "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-parcours-pas-a-pas",
+          "title": "Parcours stagiaire pas-à-pas eSM (J2)",
+          "file": "formations-opquast/formation-referents-j2/parcours-stagiaire-pas-a-pas.md",
+          "desc": "Déroulé live du parcours réel d'un stagiaire (créer service → pages → audit manuel & robot → résultats) dans l'org démo : questions Q1–Q10, candidats constats, synthèse des 2 parcours d'audit, plan de journée J2.",
+          "type": "notes",
+          "status": "draft",
+          "date": "2026-06-10",
+          "subproject": "formation-referents-paris"
         }
       ],
       "subprojects": [
