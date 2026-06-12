@@ -3437,6 +3437,16 @@
           "status": "draft",
           "date": "2026-06-10",
           "subproject": "formation-referents-paris"
+        },
+        {
+          "id": "j2-transmission-devs",
+          "title": "Transmission devs eSM/eSS — retours priorisés (J2)",
+          "file": "formations-opquast/formation-referents-j2/livrables/TRANSMISSION-DEVS-ESM-2026-06-12.md",
+          "desc": "Document autonome à transmettre aux devs (MHO/BHA) : 59 constats priorisés P0/P1/P2, eSM/eSS séparés, 3 déjà corrigés écartés, fiches BUG-001…008 liées, statut de vérif par constat (live/code/à confirmer). Issu du rejeu de validation 2026-06-12.",
+          "type": "notes",
+          "status": "draft",
+          "date": "2026-06-12",
+          "subproject": "formation-referents-paris"
         }
       ],
       "subprojects": [
