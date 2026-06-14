@@ -6236,6 +6236,12 @@
           "commentaire": "HTML/CSS/JS vanilla compatible Safari iOS 10.3.3. HTTP local. PWA légère. Brief : perso/recettes-ipad/BRIEF-RECETTES-IPAD.md",
           "steps": [
             {
+              "name": "Consolidation des fils d'idées (LDE) — brief final à valider",
+              "status": "wip",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
               "name": "Brief validé + choix du port",
               "status": "spec",
               "charge": 0.0,
