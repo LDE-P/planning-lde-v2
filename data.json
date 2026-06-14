@@ -3972,6 +3972,161 @@
       ]
     },
     {
+      "id": "gt-formations",
+      "name": "GT formations",
+      "desc": "Groupe de travail G2 — formations complémentaires Opquast par familles de métiers.",
+      "stack": "Markdown · DOCX · PPTX · Éditorial",
+      "category": "active",
+      "folder": "groupe-travail-G2-formations",
+      "docs": [],
+      "subprojects": [
+        {
+          "id": "transfert-git",
+          "name": "Transfert vers GIT",
+          "titre": "Déplacement du projet dans le dossier GIT et initialisation du dépôt.",
+          "status": "done",
+          "qualif": "P1",
+          "target": "12/05/2026",
+          "owner": "laurent",
+          "charge": 0.5,
+          "raf": 0.0,
+          "steps": [
+            {
+              "name": "Transfert fichiers vers groupe-travail-G2-formations/",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Initialisation dépôt git + .gitignore",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Initial commit",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "commentaire": "",
+          "type": "Autre"
+        },
+        {
+          "id": "expression-de-besoins",
+          "name": "Expression de besoins",
+          "titre": "Document formel d'expression de besoins pour le comité de direction (2 versions : rédigée et synthétique).",
+          "status": "done",
+          "qualif": "P1",
+          "target": "12/05/2026",
+          "owner": "laurent",
+          "charge": 1.0,
+          "raf": 0.0,
+          "steps": [
+            {
+              "name": "Version rédigée (V1)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Version synthétique bullet-points (V2)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "commentaire": "Livrables : Expression_de_besoins_Opquast.docx + _v2.docx (dans Downloads)",
+          "type": "Autre"
+        },
+        {
+          "id": "presentation-gamma",
+          "name": "Présentation Gamma G2",
+          "titre": "Présentation 29 slides pour les membres du GT G2, optimisée pour import Gamma.",
+          "status": "done",
+          "qualif": "P0",
+          "target": "12/05/2026",
+          "owner": "laurent",
+          "charge": 2.0,
+          "raf": 0.0,
+          "steps": [
+            {
+              "name": "Création structure 29 slides",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Remplacement pourcentages par nombres bruts",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Ajout sources et slide questions",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Enrichissement focus contributeurs éditoriaux",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "commentaire": "Livrable : Presentation_G2_source_Gamma.md",
+          "type": "Autre"
+        },
+        {
+          "id": "synthese-document-consolide",
+          "name": "Document consolidé G2",
+          "titre": "Consolidation de tous les documents du GT G2 en un document structuré unique (7 parties : constats, enquêtes, orientations, catalogue, focus métiers, benchmark, prochaines étapes).",
+          "status": "done",
+          "qualif": "P0",
+          "target": "12/05/2026",
+          "owner": "laurent",
+          "charge": 3.0,
+          "raf": 0.0,
+          "steps": [
+            {
+              "name": "Analyse enquête certification (2 vagues, 40 répondants)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Intégration CR séance 3 + notes séance 4",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Intégration analyse Perplexity (benchmark + catalogue)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Intégration cas tamo.bzh + prérequis PO IA",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Conversion Word (.docx)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ],
+          "commentaire": "Livrables : Synthese_G2_document_consolide.md + .docx",
+          "type": "Autre"
+        }
+      ]
+    },
+    {
       "id": "livre-oq",
       "name": "Livre OQ",
       "desc": "Relecture et contributions au livre Qualité & Conformité des services numériques (Eyrolles).",
@@ -6133,6 +6288,185 @@
       ]
     },
     {
+      "id": "gsheet-datamart",
+      "name": "GSheet Datamart",
+      "desc": "Vue simplifiée du suivi Dashboard Datamart pour la Gsheet",
+      "stack": "",
+      "category": "active",
+      "folder": "",
+      "docs": [],
+      "subprojects": [
+        {
+          "id": "feedback",
+          "name": "FeedBack",
+          "status": "récurrent",
+          "qualif": "P1",
+          "target": "01/06/2026",
+          "owner": "laurent",
+          "charge": 2.0,
+          "raf": 2.0,
+          "titre": "Feedbaks training / Exam",
+          "type": "Récurrent",
+          "commentaire": "",
+          "steps": []
+        },
+        {
+          "id": "validation-certif",
+          "name": "Validation Certif.",
+          "status": "récurrent",
+          "qualif": "P1",
+          "target": "01/06/2026",
+          "owner": "laurent",
+          "charge": 2.0,
+          "raf": 2.0,
+          "titre": "Validation certifications Smowl",
+          "type": "Récurrent",
+          "commentaire": "",
+          "steps": []
+        },
+        {
+          "id": "livre",
+          "name": "Livre",
+          "status": "done",
+          "qualif": "P1",
+          "target": "27/05/2026",
+          "owner": "laurent",
+          "charge": 1.0,
+          "raf": 0.0,
+          "titre": "Finalisation contenus/épreuves",
+          "type": "Autre",
+          "commentaire": "",
+          "steps": []
+        },
+        {
+          "id": "j2-formation",
+          "name": "J2 Formation",
+          "status": "todo",
+          "qualif": "P1",
+          "target": "05/06/2026",
+          "owner": "laurent",
+          "charge": 7.0,
+          "raf": 0.0,
+          "titre": "Nouvelle version J2 audit/IA",
+          "type": "Feature",
+          "commentaire": "",
+          "steps": []
+        },
+        {
+          "id": "datamart-git",
+          "name": "Datamart Git",
+          "status": "done",
+          "qualif": "P1",
+          "target": "22/05/2026",
+          "owner": "laurent",
+          "charge": 0.5,
+          "raf": 0.0,
+          "titre": "Mettre en place le dépôt distant",
+          "type": "Feature",
+          "commentaire": "",
+          "steps": []
+        },
+        {
+          "id": "datamart-push-sql",
+          "name": "Datamart Push SQL",
+          "status": "wip",
+          "qualif": "P0",
+          "target": "25/05/2026",
+          "owner": "laurent",
+          "charge": 5.0,
+          "raf": 0.0,
+          "titre": "Fallback bug push csv dans WPproquiz",
+          "type": "BugFix",
+          "commentaire": "",
+          "steps": []
+        },
+        {
+          "id": "datamart-api",
+          "name": "Datamart API",
+          "status": "spec",
+          "qualif": "P1",
+          "target": "29/05/2026",
+          "owner": "laurent",
+          "charge": 15.0,
+          "raf": 10.0,
+          "titre": "API push/pull Wpproquiz",
+          "type": "Feature",
+          "commentaire": "",
+          "steps": []
+        },
+        {
+          "id": "datamart-falc-examen",
+          "name": "Datamart Falc examen",
+          "status": "wip",
+          "qualif": "P1",
+          "target": "29/05/2026",
+          "owner": "laurent",
+          "charge": 14.0,
+          "raf": 0.5,
+          "titre": "Passe FALC/Ortho-typo source exam final",
+          "type": "Feature",
+          "commentaire": "",
+          "steps": []
+        },
+        {
+          "id": "datamart-falc-training",
+          "name": "Datamart Falc training",
+          "status": "wip",
+          "qualif": "P1",
+          "target": "29/05/2026",
+          "owner": "laurent",
+          "charge": 14.0,
+          "raf": 0.5,
+          "titre": "Passe FALC/Ortho-typo 13  quiz parcours",
+          "type": "Feature",
+          "commentaire": "",
+          "steps": []
+        },
+        {
+          "id": "cas-pratiques-lot1",
+          "name": "Cas pratiques lot1",
+          "status": "wip",
+          "qualif": "P1",
+          "target": "29/05/2026",
+          "owner": "laurent",
+          "charge": 21.0,
+          "raf": 0.5,
+          "titre": "Nouveaux Cas pratiques test récapitulatif",
+          "type": "Feature",
+          "commentaire": "",
+          "steps": []
+        },
+        {
+          "id": "cas-pratiques-lot2",
+          "name": "Cas pratiques lot2",
+          "status": "wip",
+          "qualif": "P1",
+          "target": "29/05/2026",
+          "owner": "laurent",
+          "charge": 21.0,
+          "raf": 0.5,
+          "titre": "Nouveaux Cas pratiques Exam blanc",
+          "type": "Feature",
+          "commentaire": "",
+          "steps": []
+        },
+        {
+          "id": "cas-pratiques-lot3",
+          "name": "Cas pratiques lot3",
+          "status": "wip",
+          "qualif": "P1",
+          "target": "29/05/2026",
+          "owner": "laurent",
+          "charge": 21.0,
+          "raf": 0.5,
+          "titre": "Nouveaux Cas pratiques Exam final",
+          "type": "Feature",
+          "commentaire": "",
+          "steps": []
+        }
+      ]
+    },
+    {
       "id": "todo-list-lde",
       "name": "Todo-list LDE",
       "desc": "Bloc-notes structuré pour todo-list quotidienne avec sauvegarde continue.",
@@ -6199,7 +6533,7 @@
         {
           "id": "tester-examen-final",
           "name": "Tester un examen final",
-          "status": "todo",
+          "status": "wip",
           "qualif": "P2",
           "target": "20/05/2026",
           "owner": "laurent",
@@ -6256,7 +6590,7 @@
         {
           "id": "maj-quiz-source-examen-sql",
           "name": "Mise à jour quiz SOURCE EXAMEN via SQL",
-          "status": "done",
+          "status": "wip",
           "qualif": "P1",
           "target": null,
           "owner": "laurent",
@@ -6318,8 +6652,81 @@
           "date": "2026-05-21",
           "subproject": "validation-automatique-parcours-training"
         }
-      ],
-      "updatedAt": "2026-06-13T03:24:36Z"
+      ]
+    },
+    {
+      "id": "backup-documents",
+      "name": "Backup Documents",
+      "desc": "Sauvegarde quotidienne des données perso sans remote git vers une clé USB INTENSO (APFS).",
+      "stack": "Bash · launchd · rsync · APFS",
+      "category": "perso",
+      "folder": "perso/backup-scripts/",
+      "docs": [],
+      "subprojects": [
+        {
+          "id": "cle-usb",
+          "name": "Clé USB",
+          "status": "done",
+          "qualif": "P2",
+          "target": null,
+          "owner": "laurent",
+          "charge": 0.5,
+          "raf": 0.0,
+          "titre": "Backup daté 7 jours glissants vers clé INTENSO (APFS) via launchd 03h00",
+          "type": "Feature",
+          "commentaire": "Opérationnel 2026-06-05. Backup auto 03h00 validé de bout en bout (run launchd exit 0, FDA /bin/bash OK, snapshot ~78 Mo, 7/7 sources). Snapshots datés 7 jours glissants. Reste seulement : transmettre temp/prompt-hub.md à la session hub (bouton manuel, optionnel).",
+          "steps": [
+            {
+              "name": "Analyse plan Antigravity + design (exFAT→APFS, sources sans remote, 7 jours glissants)",
+              "status": "done",
+              "charge": 0.1,
+              "raf": 0.0
+            },
+            {
+              "name": "Script backup_intenso.sh (snapshots datés + purge fenêtre 7j)",
+              "status": "done",
+              "charge": 0.15,
+              "raf": 0.0
+            },
+            {
+              "name": "Plist launchd com.lde.backup.intenso (03h00 quotidien)",
+              "status": "done",
+              "charge": 0.05,
+              "raf": 0.0
+            },
+            {
+              "name": "Doc de transmission hub (temp/prompt-hub.md)",
+              "status": "done",
+              "charge": 0.05,
+              "raf": 0.0
+            },
+            {
+              "name": "Reformatage APFS clé INTENSO + 1er backup manuel (79 Mo, 7/7 OK)",
+              "status": "done",
+              "charge": 0.05,
+              "raf": 0.0
+            },
+            {
+              "name": "Tâche launchd chargée (bootstrap gui/501, 03h00) + test kickstart",
+              "status": "done",
+              "charge": 0.05,
+              "raf": 0.0
+            },
+            {
+              "name": "FDA /bin/bash + validation run launchd de bout en bout (exit 0)",
+              "status": "done",
+              "charge": 0.05,
+              "raf": 0.0
+            },
+            {
+              "name": "Intégration bouton hub (session hub dédiée — optionnel)",
+              "status": "todo",
+              "charge": 0.05,
+              "raf": 0.05
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "compte-x-franc-aller",
