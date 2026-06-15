@@ -6948,6 +6948,149 @@
       "folder": "devtools/",
       "docs": [],
       "subprojects": []
+    },
+    {
+      "id": "archeologie-tech",
+      "name": "Archéologie Tech",
+      "desc": "Tri du vieux matériel informatique : bécanes, tablettes, écrans, adaptateurs. Inventaire, test, décision (garder/don/recyclage).",
+      "stack": "Markdown",
+      "category": "perso",
+      "folder": "perso/archeologie-tech/",
+      "docs": [],
+      "subprojects": [
+        {
+          "id": "becanes",
+          "name": "Bécanes",
+          "desc": "Ordinateurs portables et fixes",
+          "status": "wip",
+          "qualif": "P3",
+          "target": null,
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "type": "Autre",
+          "commentaire": "",
+          "steps": [
+            {
+              "name": "Inventaire",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Test / branchement",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Décision",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ]
+        },
+        {
+          "id": "tablettes",
+          "name": "Tablettes",
+          "desc": "iPad, tablettes Android et autres",
+          "status": "todo",
+          "qualif": "P3",
+          "target": null,
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "type": "Autre",
+          "commentaire": "",
+          "steps": [
+            {
+              "name": "Inventaire",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Test / branchement",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Décision",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ]
+        },
+        {
+          "id": "ecrans",
+          "name": "Écrans",
+          "desc": "Moniteurs et écrans externes",
+          "status": "todo",
+          "qualif": "P3",
+          "target": null,
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "type": "Autre",
+          "commentaire": "",
+          "steps": [
+            {
+              "name": "Inventaire",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Test / branchement",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Décision",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ]
+        },
+        {
+          "id": "adaptateurs",
+          "name": "Adaptateurs & câbles",
+          "desc": "Tout le bazar de connectique : DVI, FireWire, Thunderbolt, USB-A/B/C, HDMI, et archéologie diverse",
+          "status": "todo",
+          "qualif": "P3",
+          "target": null,
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "type": "Autre",
+          "commentaire": "",
+          "steps": [
+            {
+              "name": "Inventaire",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tri / identification",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Décision",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ]
+        }
+      ]
     }
   ]
 }
