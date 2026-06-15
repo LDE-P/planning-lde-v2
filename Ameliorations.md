@@ -19,6 +19,7 @@
 - [ ] **Pattern de packaging sandbox-safe** (session Banc de tests, 2026-06-03) : le montage refuse `rm -rf` et le remplacement atomique de `zip` (« Operation not permitted »). Pattern fiable : staging + zip dans `/tmp`, puis copie du seul artefact vers le montage. Documenter pour éviter de re-déboguer à chaque build.
 - [ ] **`git status` en début de session** (session Todo-list LDE, 2026-06-04) : `serve-todo.py` était modifié et non commité depuis une session précédente, découvert seulement à la clôture. Vérifier l'état git dès le lancement d'une session de code pour distinguer l'héritage des modifications de la session courante.
 - [ ] **Locators E2E robustes par défaut** (session Todo-list LDE, 2026-06-04) : un `text=Paragraphe` a matché à la fois le bouton et l'aide clavier (strict mode violation Playwright). Pour les éléments d'UI dont le libellé peut apparaître ailleurs, utiliser d'emblée `title`/`role` plutôt que `text=`.
+- [ ] **Inclure `/perso` dans le dépôt GIT** (todo LDE, session iPad-écran-YouTube, 2026-06-15) : le `.gitignore` racine (liste blanche `*` + exceptions) exclut aujourd'hui tout `perso/` (0 fichier suivi, aucune exception). Décider de versionner `perso/` dans le méta-dépôt — ajouter les exceptions `.gitignore` adéquates (et statuer sur le périmètre : tout `perso/` ou sélectif, vu les projets « pas de remote git » et données perso sensibles). Cas déclencheur : note `perso/ipad-ecran-youtube.md` non commitable sans `git add -f`.
 
 ## UI Dashboard
 
