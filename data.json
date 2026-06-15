@@ -6959,32 +6959,137 @@
       "docs": [],
       "subprojects": [
         {
-          "id": "becanes",
-          "name": "Bécanes",
-          "desc": "Ordinateurs portables et fixes",
+          "id": "ipad-air2-ecran",
+          "name": "iPad Air 2 — Écran supplémentaire",
+          "desc": "Duet Display : iPad Air 2 (iPadOS 15.8) en écran n°4 du Mac via Lightning USB. YouTube/YouTube Music, pilotage trackpad/clavier Mac.",
+          "status": "todo",
+          "qualif": "P2",
+          "target": null,
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "type": "Autre",
+          "commentaire": "Installer Duet Display, tester connexion Lightning.",
+          "steps": [
+            {
+              "name": "Installer Duet Display",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Tester connexion Lightning ↔ USB",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Valider usage YouTube / pilotage Mac",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ]
+        },
+        {
+          "id": "ipad4-recettes",
+          "name": "iPad 4 — Terminal cuisine",
+          "desc": "iPad 4 iOS 10.3.3 comme terminal dédié cuisine. Brief complet dans perso/recettes-ipad/BRIEF-RECETTES-IPAD.md. Serveur HTTP local → Safari iOS 10.",
+          "status": "spec",
+          "qualif": "P2",
+          "target": null,
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "type": "Feature",
+          "commentaire": "Brief prêt dans perso/recettes-ipad/. À implémenter : serveur Python, HTML compatible iOS 10.",
+          "steps": [
+            {
+              "name": "Brief validé (perso/recettes-ipad/)",
+              "status": "done",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Serveur local + structure HTML",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Saisie des recettes",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Test sur iPad 4",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ]
+        },
+        {
+          "id": "videoprojection",
+          "name": "Vidéoprojection occasionnelle",
+          "desc": "Mini projecteur Android existant (WiFi+BT5 Android 11) + écran portable cadre alu pliable 90-100 pouces. YouTube, Prime Video. Pas de Mac obligatoire.",
+          "status": "todo",
+          "qualif": "P3",
+          "target": null,
+          "owner": "laurent",
+          "charge": 0.0,
+          "raf": 0.0,
+          "type": "Autre",
+          "commentaire": "Tester d'abord avec le projecteur existant avant tout achat.",
+          "steps": [
+            {
+              "name": "Tester le projecteur Android existant",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Valider l'usage réel (YouTube, Prime Video)",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Si validé : choisir écran portable 90-100 pouces",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            }
+          ]
+        },
+        {
+          "id": "anciens-mac",
+          "name": "Inventaire anciens Mac",
+          "desc": "Plusieurs MacBook Pro anciens + Mac mini gen 1 probable + CalDigit TS2 Thunderbolt 2. Référence, année, état, batterie, SSD, chargeur. Classer : conserver / remettre en service / cannibaliser / vendre.",
           "status": "wip",
-          "qualif": "P3",
+          "qualif": "P2",
           "target": null,
           "owner": "laurent",
           "charge": 0.0,
           "raf": 0.0,
           "type": "Autre",
-          "commentaire": "",
+          "commentaire": "CalDigit TS2 à conserver jusqu'à inventaire complet.",
           "steps": [
             {
-              "name": "Inventaire",
+              "name": "Sortir et identifier chaque machine",
               "status": "todo",
               "charge": 0.0,
               "raf": 0.0
             },
             {
-              "name": "Test / branchement",
+              "name": "Test de démarrage",
               "status": "todo",
               "charge": 0.0,
               "raf": 0.0
             },
             {
-              "name": "Décision",
+              "name": "Décision par machine",
               "status": "todo",
               "charge": 0.0,
               "raf": 0.0
@@ -6992,32 +7097,38 @@
           ]
         },
         {
-          "id": "tablettes",
-          "name": "Tablettes",
-          "desc": "iPad, tablettes Android et autres",
+          "id": "disques-anciens",
+          "name": "Disques anciens — données",
+          "desc": "G-Drive Mobile 2 To, UnionSine 500 Go, autres à identifier. Priorité : les données ont plus de valeur que les machines. À faire avant remise en route des anciens Mac.",
           "status": "todo",
-          "qualif": "P3",
+          "qualif": "P1",
           "target": null,
           "owner": "laurent",
           "charge": 0.0,
           "raf": 0.0,
           "type": "Autre",
-          "commentaire": "",
+          "commentaire": "Priorité élevée. Identifier → état → contenu → décision.",
           "steps": [
             {
-              "name": "Inventaire",
+              "name": "Identifier tous les disques",
               "status": "todo",
               "charge": 0.0,
               "raf": 0.0
             },
             {
-              "name": "Test / branchement",
+              "name": "Vérifier l'état (montage, S.M.A.R.T.)",
               "status": "todo",
               "charge": 0.0,
               "raf": 0.0
             },
             {
-              "name": "Décision",
+              "name": "Inventorier le contenu",
+              "status": "todo",
+              "charge": 0.0,
+              "raf": 0.0
+            },
+            {
+              "name": "Décision (archiver / recycler / effacer)",
               "status": "todo",
               "charge": 0.0,
               "raf": 0.0
@@ -7025,9 +7136,9 @@
           ]
         },
         {
-          "id": "ecrans",
-          "name": "Écrans",
-          "desc": "Moniteurs et écrans externes",
+          "id": "caisse-cables",
+          "name": "Caisse de câbles",
+          "desc": "USB, FireWire 400/800, Mini DisplayPort, DVI, VGA, HDMI, Thunderbolt 1/2, Lightning, câbles propriétaires divers. Inventaire et classement.",
           "status": "todo",
           "qualif": "P3",
           "target": null,
@@ -7035,55 +7146,22 @@
           "charge": 0.0,
           "raf": 0.0,
           "type": "Autre",
-          "commentaire": "",
+          "commentaire": "Le câble indispensable est toujours celui qui manque.",
           "steps": [
             {
-              "name": "Inventaire",
+              "name": "Sortir et étaler tous les câbles",
               "status": "todo",
               "charge": 0.0,
               "raf": 0.0
             },
             {
-              "name": "Test / branchement",
+              "name": "Identifier et étiqueter",
               "status": "todo",
               "charge": 0.0,
               "raf": 0.0
             },
             {
-              "name": "Décision",
-              "status": "todo",
-              "charge": 0.0,
-              "raf": 0.0
-            }
-          ]
-        },
-        {
-          "id": "adaptateurs",
-          "name": "Adaptateurs & câbles",
-          "desc": "Tout le bazar de connectique : DVI, FireWire, Thunderbolt, USB-A/B/C, HDMI, et archéologie diverse",
-          "status": "todo",
-          "qualif": "P3",
-          "target": null,
-          "owner": "laurent",
-          "charge": 0.0,
-          "raf": 0.0,
-          "type": "Autre",
-          "commentaire": "",
-          "steps": [
-            {
-              "name": "Inventaire",
-              "status": "todo",
-              "charge": 0.0,
-              "raf": 0.0
-            },
-            {
-              "name": "Tri / identification",
-              "status": "todo",
-              "charge": 0.0,
-              "raf": 0.0
-            },
-            {
-              "name": "Décision",
+              "name": "Trier : garder / don / recycler",
               "status": "todo",
               "charge": 0.0,
               "raf": 0.0
