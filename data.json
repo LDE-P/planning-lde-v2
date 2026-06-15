@@ -2663,6 +2663,16 @@
           "status": "final",
           "date": "2026-06-01",
           "subproject": "passe-polish-post-audit"
+        },
+        {
+          "id": "rapport-temoignages-opquast",
+          "file": "referentiels/rapport-temoignages-opquast.pdf",
+          "title": "Rapport témoignages Opquast — 8 ans de formulaires de satisfaction",
+          "desc": "Analyse complète de tous les formulaires de satisfaction remplis depuis 8 ans. Document de référence capital pour l'amélioration des formations.",
+          "type": "audit",
+          "status": "final",
+          "date": "2026-06-15",
+          "subproject": null
         }
       ],
       "subprojects": [
