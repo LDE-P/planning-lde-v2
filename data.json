@@ -3402,10 +3402,10 @@
           "id": "j2-synthese-retours-devs",
           "title": "Synthèse priorisée des retours devs eSM/eSS (grille de rejeu)",
           "file": "formations-opquast/formation-referents-j2/prise-en-main-depot/SYNTHESE-RETOURS-DEVS-eSM.md",
-          "desc": "Grille consolidée et priorisée (P0/P1/P2) des 59 constats + 8 fiches BUG, avec statut de vérif issu du rejeu live 2026-06-12 (3 corrigés C25/C27/C34 ; confirmations C19/C50/C52…). Double usage : script de rejeu + livrable de transmission devs.",
+          "desc": "Grille consolidée et priorisée (P0/P1/P2) des 59 constats + 8 fiches BUG, avec statut de vérif issu du rejeu live 2026-06-19 (3 corrigés C25/C27/C34 ; confirmations C19/C50/C52…). Double usage : script de rejeu + livrable de transmission devs.",
           "type": "notes",
           "status": "draft",
-          "date": "2026-06-12",
+          "date": "2026-06-19",
           "subproject": "formation-referents-paris"
         },
         {
@@ -3451,11 +3451,11 @@
         {
           "id": "j2-transmission-devs",
           "title": "Transmission devs eSM/eSS — retours priorisés (J2)",
-          "file": "formations-opquast/formation-referents-j2/livrables/TRANSMISSION-DEVS-ESM-2026-06-12.md",
-          "desc": "Document autonome à transmettre aux devs (MHO/BHA) : 59 constats priorisés P0/P1/P2, eSM/eSS séparés, 3 déjà corrigés écartés, fiches BUG-001…008 liées, statut de vérif par constat (live/code/à confirmer). Issu du rejeu de validation 2026-06-12.",
+          "file": "formations-opquast/formation-referents-j2/livrables/TRANSMISSION-DEVS-ESM-2026-06-19.md",
+          "desc": "Document autonome à transmettre aux devs (MHO/BHA) : 59 constats priorisés P0/P1/P2, eSM/eSS séparés, 3 déjà corrigés écartés, fiches BUG-001…008 liées, statut de vérif par constat (live/code/à confirmer). Issu du rejeu de validation 2026-06-19.",
           "type": "notes",
           "status": "draft",
-          "date": "2026-06-12",
+          "date": "2026-06-19",
           "subproject": "formation-referents-paris"
         }
       ],
